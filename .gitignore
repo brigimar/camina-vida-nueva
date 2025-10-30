@@ -1,0 +1,16 @@
+*.node
+node_modules/
+.DS_Store
+.env
+dist/
+build/
+.env.local
+*.node
+node_modules/
+.env
+*.key
+*.pem
+*.p12
+*.crt
+dist/
+build/

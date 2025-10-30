@@ -1,0 +1,40 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Estilos personalizados para el proyecto */
+.prose {
+  @apply max-w-none;
+}
+
+.prose img {
+  @apply rounded-lg shadow-md;
+}
+
+.prose h1, .prose h2, .prose h3 {
+  @apply font-bold text-gray-800 mt-6 mb-4;
+}
+
+.prose h1 {
+  @apply text-3xl;
+}
+
+.prose h2 {
+  @apply text-2xl;
+}
+
+.prose p {
+  @apply text-gray-700 leading-relaxed mb-4;
+}
+
+.prose ul, .prose ol {
+  @apply list-disc list-inside mb-4 pl-5;
+}
+
+.prose a {
+  @apply text-blue-600 hover:text-blue-800 underline;
+}
+
+.prose blockquote {
+  @apply border-l-4 border-blue-500 pl-4 italic text-gray-600;
+}
