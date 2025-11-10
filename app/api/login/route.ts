@@ -1,5 +1,4 @@
-// app/api/login/route.ts
-import { NextResponse } from 'next/server';
+﻿import { NextResponse } from "next/server";
 
 export async function POST(request: Request) {
   const body = await request.json();
@@ -10,20 +9,16 @@ export async function POST(request: Request) {
 
   if (user === VALID_USER && pass === VALID_PASS) {
     const response = NextResponse.json({ success: true });
-
-    response.cookies.set('auth', 'true', {
-      path: '/',
+    response.cookies.set("auth", "true", {
+      path: "/",
       httpOnly: true,
-      secure: process.env.NODE_ENV === 'production',
-      sameSite: 'lax',
-      maxAge: 60 * 60 * 24 * 7, // 7 days
+      secure: process.env.NODE_ENV === "production",
+      sameSite: "lax",
+      maxAge: 60 * 60 * 24 * 7,
     });
-
     return response;
   }
-
   return NextResponse.json({ success: false }, { status: 401 });
 }
 
-/* Force Next.js to treat this route as dynamic (optional but safe) */
-export const dynamic = 'force-dynamic';
+export const dynamic = "force-dynamic";
