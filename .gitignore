@@ -1,16 +1,35 @@
-*.node
-node_modules/
-.DS_Store
+# 🧠 Node.js y Next.js
+node_modules
+.next
+out
+dist
+
+# 🧪 Logs y errores
+npm-debug.log*
+yarn-debug.log*
+pnpm-debug.log*
+
+# 🔐 Variables de entorno
 .env
-dist/
-build/
 .env.local
-*.node
-node_modules/
-.env
-*.key
-*.pem
-*.p12
-*.crt
-dist/
-build/
+.env.*.local
+
+# 🧼 Archivos del sistema y editores
+.DS_Store
+.vscode
+.idea
+
+# 🚀 Vercel
+.vercel
+
+# 📦 Builds y artefactos
+*.tgz
+*.zip
+
+# 🧪 Coverage y testing
+coverage
+*.lcov
+
+# 🧑‍💻 Supabase CLI
+supabase/.temp
+supabase/migrations/*/supabase.sql
