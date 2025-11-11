@@ -3,6 +3,7 @@ import { useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
+import LoginButton from './LoginButton'; // 👈 nuevo import
 
 export default function Header() {
   const [menuAbierto, setMenuAbierto] = useState(false);
@@ -21,18 +22,15 @@ export default function Header() {
           {/* Marca con logo PNG */}
           <Link href="/" className="flex items-center gap-3" aria-label="Inicio Camina Vida">
             <div className="relative w-[160px] h-[58px] sm:w-[192px] sm:h-[70px]">
-  <Image
-    src="/images/logo1.png"
-    alt="Logo Camina Vida"
-    fill
-    sizes="(min-width: 640px) 192px, 160px"
-    className="object-contain"
-    priority
-  />
-</div>
-
-
-            
+              <Image
+                src="/images/logo1.png"
+                alt="Logo Camina Vida"
+                fill
+                sizes="(min-width: 640px) 192px, 160px"
+                className="object-contain"
+                priority
+              />
+            </div>
           </Link>
 
           {/* Menú desktop */}
@@ -43,6 +41,8 @@ export default function Header() {
             <button onClick={() => irASeccionHome('#planes')} className="hover:text-verde-oscuro transition">Planes</button>
             <Link href="/nosotros" className="hover:text-verde-oscuro transition">Nosotros</Link>
 
+            {/* Botones de acción */}
+            <LoginButton /> {/* 👈 login azul */}
             <button
               onClick={() => setMostrarModal(true)}
               className="btn btn-small btn-primary"
@@ -71,6 +71,8 @@ export default function Header() {
             <button onClick={() => irASeccionHome('#circuitos')}>Circuitos</button>
             <button onClick={() => irASeccionHome('#planes')}>Planes</button>
             <Link href="/nosotros" onClick={() => setMenuAbierto(false)}>Nosotros</Link>
+
+            <LoginButton /> {/* 👈 también visible en móvil */}
 
             <button
               onClick={() => {
