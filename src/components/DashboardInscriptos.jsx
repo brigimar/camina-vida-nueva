@@ -28,12 +28,12 @@ export default function DashboardInscriptos() {
             estado,
             notificado_director,
             circuito_id,
-            circuitoNombre,
+            circuitonombre,
             localidad,
-            cupoRestante,
+            cuporestante,
             disponible
           `)
-          .order('circuitoNombre', { ascending: true })
+          .order('circuitonombre', { ascending: true })
           .order('id', { ascending: false });
 
         if (error) throw error;
@@ -49,7 +49,7 @@ export default function DashboardInscriptos() {
     cargarInscripciones();
   }, []);
 
-  // Agrupar por circuito
+  // Agrupar por circuito y filtrar por nombre
   const inscriptosPorCircuito = useMemo(() => {
     const filtrados = inscriptos.filter(i =>
       !filtroNombre.trim() || i.nombre?.toLowerCase().includes(filtroNombre.toLowerCase())
@@ -57,10 +57,8 @@ export default function DashboardInscriptos() {
 
     const grupos = {};
     filtrados.forEach(i => {
-      const nombreCircuito = i.circuitoNombre || 'Sin circuito';
-      if (!grupos[nombreCircuito]) {
-        grupos[nombreCircuito] = [];
-      }
+      const nombreCircuito = i.circuitonombre || 'Sin circuito';
+      if (!grupos[nombreCircuito]) grupos[nombreCircuito] = [];
       grupos[nombreCircuito].push(i);
     });
 
@@ -73,7 +71,7 @@ export default function DashboardInscriptos() {
     const mensaje = `Nuevo inscripto:
 Nombre: ${inscripto.nombre ?? '—'}
 Edad: ${inscripto.edad ?? '—'}
-Circuito: ${inscripto.circuitoNombre ?? '—'}
+Circuito: ${inscripto.circuitonombre ?? '—'}
 Día: ${inscripto.dia ?? '—'}
 Horario: ${inscripto.horario ?? '—'}
 WhatsApp: ${inscripto.whatsapp ?? '—'}`;
@@ -82,13 +80,13 @@ WhatsApp: ${inscripto.whatsapp ?? '—'}`;
     window.open(enlaceWhatsApp, '_blank');
 
     try {
-      const { error } = await supabase
+      const { error: errorActualizar } = await supabase
         .from('inscripciones')
         .update({ notificado_director: true })
         .eq('id', inscripto.id);
 
-      if (!error) {
-        const {  nuevosDatos } = await supabase
+      if (!errorActualizar) {
+        const { data: nuevosDatos, error } = await supabase
           .from('vista_inscriptos_dashboard')
           .select(`
             id,
@@ -101,15 +99,15 @@ WhatsApp: ${inscripto.whatsapp ?? '—'}`;
             estado,
             notificado_director,
             circuito_id,
-            circuitoNombre,
+            circuitonombre,
             localidad,
-            cupoRestante,
+            cuporestante,
             disponible
           `)
-          .order('circuitoNombre', { ascending: true })
+          .order('circuitonombre', { ascending: true })
           .order('id', { ascending: false });
 
-        setInscriptos(nuevosDatos || []);
+        if (!error) setInscriptos(nuevosDatos || []);
       }
     } catch (err) {
       console.error('❌ Error en notificación:', err);
@@ -156,24 +154,24 @@ WhatsApp: ${inscripto.whatsapp ?? '—'}`;
         </div>
       ) : (
         <div className="space-y-8">
-          {inscriptosPorCircuito.map(([circuitoNombre, lista]) => (
-            <div key={circuitoNombre} className="bg-white rounded-xl shadow border border-gray-200 overflow-hidden">
+          {inscriptosPorCircuito.map(([circuitonombre, lista]) => (
+            <div key={circuitonombre} className="bg-white rounded-xl shadow border border-gray-200 overflow-hidden">
               <div className="bg-gray-50 px-6 py-3 border-b border-gray-200 flex justify-between items-center">
                 <div>
-                  <h3 className="font-bold text-lg text-gray-800">{circuitoNombre}</h3>
+                  <h3 className="font-bold text-lg text-gray-800">{circuitonombre}</h3>
                   <p className="text-sm text-gray-600">{lista.length} inscripto(s)</p>
                 </div>
-                {typeof lista[0]?.cupoRestante === 'number' && (
+                {typeof lista[0]?.cuporestante === 'number' && (
                   <span
                     className={`px-3 py-1 rounded-full text-xs font-semibold ${
-                      lista[0].cupoRestante <= 0
+                      lista[0].cuporestante <= 0
                         ? 'bg-red-100 text-red-800'
-                        : lista[0].cupoRestante <= 5
+                        : lista[0].cuporestante <= 5
                         ? 'bg-orange-100 text-orange-800'
                         : 'bg-green-100 text-green-800'
                     }`}
                   >
-                    {lista[0].cupoRestante <= 0 ? 'Cupo lleno' : `${lista[0].cupoRestante} cupos`}
+                    {lista[0].cuporestante <= 0 ? 'Cupo lleno' : `${lista[0].cuporestante} cupos`}
                   </span>
                 )}
               </div>
@@ -206,9 +204,7 @@ WhatsApp: ${inscripto.whatsapp ?? '—'}`;
                             >
                               {i.whatsapp}
                             </a>
-                          ) : (
-                            '—'
-                          )}
+                          ) : '—'}
                         </td>
                         <td className="px-4 py-3">
                           {i.notificado_director ? (

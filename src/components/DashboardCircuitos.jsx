@@ -5,17 +5,13 @@ import supabase from '@/lib/supabase';
 
 // ✅ Función para formatear horarios
 function formatearHorarios(horarios) {
-  // Si es array, lo usamos directamente; si es string, lo dividimos
   const array = Array.isArray(horarios)
     ? horarios
     : typeof horarios === 'string'
     ? horarios.split(',').map(h => h.trim())
     : [];
 
-  // Convertir cada valor a "Xhs"
-  const conHs = array
-    .filter(h => h !== '') // eliminar vacíos
-    .map(h => `${h}hs`);   // agregar "hs"
+  const conHs = array.filter(h => h !== '').map(h => `${h}hs`);
 
   if (conHs.length === 0) return '⚠️ Horarios faltantes';
   if (conHs.length === 1) return conHs[0];
@@ -28,7 +24,6 @@ export default function DashboardCircuitos() {
 
   useEffect(() => {
     async function cargarDatos() {
-      // ✅ Corregido: usar 'data', no 'circ'
       const { data, error } = await supabase
         .from('vista_circuitos_completa')
         .select(`
@@ -74,7 +69,10 @@ export default function DashboardCircuitos() {
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         {circuitos.map((c) => {
-          const puedeInscribirse = c.disponible_para_inscripcion && c.estado_legible !== false;
+          // ✅ Lógica corregida para determinar si se puede inscribir
+          const estaActivo = c.estado_legible === 'Activo';
+          const tieneCupo = c.disponible_para_inscripcion;
+          const puedeInscribirse = estaActivo && tieneCupo;
 
           return (
             <div
@@ -86,6 +84,7 @@ export default function DashboardCircuitos() {
                 alt={c.NombreCircuito}
                 className="w-full h-40 object-cover rounded-t-xl mb-4"
               />
+
               <div className="space-y-2">
                 <div className="flex justify-between items-start">
                   <h3 className="font-bold text-gray-800">{c.NombreCircuito || '—'}</h3>
@@ -130,10 +129,14 @@ export default function DashboardCircuitos() {
                   )}
                 </p>
 
+                {/* ✅ Mensaje de alerta si no puede inscribirse */}
                 {!puedeInscribirse && (
-                  <p className="text-xs text-red-600">⚠️ Este circuito está inactivo</p>
+                  <p className="text-xs text-red-600">
+                    ⚠️ {estaActivo ? 'Cupo lleno' : 'Circuito inactivo'}
+                  </p>
                 )}
 
+                {/* Botones */}
                 <div className="flex gap-2 pt-2">
                   <button
                     className="bg-[#00B884] text-white text-sm font-semibold px-3 py-1 rounded hover:bg-[#00966e] disabled:opacity-50"
@@ -159,7 +162,7 @@ export default function DashboardCircuitos() {
         })}
       </div>
 
-      {/* Modal fijo */}
+      {/* Modal de inscripción */}
       {formularioActivo && (
         <div
           className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/40 backdrop-blur-sm"

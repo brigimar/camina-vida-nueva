@@ -114,5 +114,16 @@ export async function getCircuitos() {
 }
 
 export async function fetchPageBlocks(pageId) {
-  // ... (sin cambios)
+  try {
+    const response = await notion.blocks.children.list({
+      block_id: pageId,
+    });
+
+    const blocks = Array.isArray(response?.results) ? response.results : [];
+
+    return blocks;
+  } catch (error) {
+    console.error('❌ Error al obtener bloques de Notion:', error.message);
+    return [];
+  }
 }

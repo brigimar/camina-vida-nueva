@@ -28,9 +28,8 @@ export default function VistaCircuitosHome({ mostrarBotonReserva = false }) {
           cupo_total,
           cupo_restante,
           cantidad_inscriptos,
-          cupo_lleno,
           disponible_para_inscripcion
-        `);
+        `); // ❌ cupo_lleno eliminado
 
       if (error) console.error('Error al cargar circuitos:', error.message);
       else setCircuitos(data || []);
@@ -108,7 +107,6 @@ export default function VistaCircuitosHome({ mostrarBotonReserva = false }) {
               cupo_total: c.cupo_total ?? null,
               cupo_restante: c.cupo_restante ?? null,
               cantidad_inscriptos: c.cantidad_inscriptos ?? 0,
-              cupo_lleno: c.cupo_lleno ?? false,
               disponible_para_inscripcion: c.disponible_para_inscripcion ?? false
             }}
             mostrarBotonReserva={mostrarBotonReserva}

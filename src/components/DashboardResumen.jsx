@@ -1,4 +1,3 @@
-// src/components/DashboardResumen.jsx
 'use client';
 import { useState, useEffect, useMemo } from 'react';
 import supabase from '@/lib/supabase';
@@ -15,12 +14,12 @@ export default function DashboardResumen() {
       try {
         const { data, error } = await supabase
           .from('vista_inscriptos_dashboard')
-          .select('id, nombre, edad, circuitoNombre');
+          .select('id, nombre, edad, circuitonombre');
 
         if (error) throw error;
         setInscriptos(data || []);
       } catch (err) {
-        console.error('Error al cargar datos para resumen:', err);
+        console.error('Error al cargar datos para resumen:', err?.message || err || 'Error desconocido');
         setError('No se pudieron cargar los datos del resumen.');
       } finally {
         setCargando(false);
@@ -35,7 +34,7 @@ export default function DashboardResumen() {
   const inscriptosPorCircuito = useMemo(() => {
     const grupos = {};
     inscriptos.forEach(i => {
-      const nombre = i.circuitoNombre || 'Sin circuito';
+      const nombre = i.circuitonombre || 'Sin circuito';
       grupos[nombre] = (grupos[nombre] || 0) + 1;
     });
     return Object.entries(grupos).sort((a, b) => b[1] - a[1]);
