@@ -23,7 +23,7 @@ export default function Header() {
           <Link href="/" className="flex items-center gap-3" aria-label="Inicio Camina Vida">
             <div className="relative w-[160px] h-[58px] sm:w-[192px] sm:h-[70px]">
               <Image
-                src="/images/logo1.png"
+                src="/images/logo.webp"
                 alt="Logo Camina Vida"
                 fill
                 sizes="(min-width: 640px) 192px, 160px"

@@ -5,6 +5,7 @@ import supabase from '@/lib/supabase';
 
 import LogoutButton from './LogoutButton';
 import DashboardResumen from './DashboardResumen';
+import DashboardSesiones from './DashboardSesiones';
 import DashboardCircuitos from './DashboardCircuitos';
 import DashboardInscriptos from './DashboardInscriptos';
 import DashboardComparativo from './DashboardComparativo';
@@ -44,6 +45,7 @@ export default function Dashboard() {
 
       <DashboardResumen inscriptosFiltrados={inscriptosFiltrados} />
       <DashboardCircuitos />
+      <DashboardSesiones />
 
       {!loading && (
         <>
