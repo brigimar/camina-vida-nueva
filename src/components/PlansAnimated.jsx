@@ -36,7 +36,7 @@ export default function PlansAnimated() {
 
         <div className="mt-10 text-center">
           <a
-            href="https://wa.me/5491112345678?text=Hola%20!%20Quiero%20consultar%20valor%20y%20disponibilidad%20de%20los%20planes"
+            href="https://wa.me/5491150511147?text=Hola%20!%20Quiero%20consultar%20valor%20y%20disponibilidad%20de%20los%20planes"
             target="_blank"
             rel="noopener noreferrer"
             className="inline-block px-6 py-3 text-sm font-semibold rounded bg-gradient-to-r from-verde-oscuro to-verde text-white hover:brightness-110 transition"
