@@ -8,7 +8,7 @@ export default function CTAFinal() {
         <p className="text-white/90 text-lg mb-6">
           Reservá una clase prueba gratuita y empezá a sentir la diferencia.
         </p>
-        <a href="/circuitos" className="cta-btn">
+        <a href="/caminatas" className="cta-btn">
           Reservar gratis
         </a>
       </div>
