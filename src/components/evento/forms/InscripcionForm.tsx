@@ -23,11 +23,11 @@ export default function InscripcionForm({ onSuccess }: { onSuccess?: () => void 
     setMessage(null);
 
     try {
-      const res = await fetch("/evento/api/registro", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formData),
-      });
+      const res = await fetch("/api/registro", {
+  method: "POST",
+  headers: { "Content-Type": "application/json" },
+  body: JSON.stringify(formData),
+});
 
       if (res.ok) {
         setMessage("✅ Inscripción enviada con éxito");
