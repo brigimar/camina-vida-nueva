@@ -1,16 +1,16 @@
 "use client";
 
 import { FaArrowRight } from "react-icons/fa";
-import HeroSection from "@/components/sections/HeroSection";
-import BenefitsSection from "@/components/sections/BenefitsSection";
-import MethodSection from "@/components/sections/MethodSection";
-import VideoEventFlex from "@/components/sections/VideoEventFlex";
-import CountdownTimer from "@/components/conversion/CountdownTimer";
-import TrustBadges from "@/components/conversion/TrustBadges";
-import SocialProof from "@/components/sections/SocialProof";
-import CaminaVidaSocial from "@/components/sections/CaminaVidaSocial";
-import FloatingWhatsApp from "@/components/ui/FloatingWhatsApp";
-import InscripcionForm from "@/components/forms/InscripcionForm";
+import HeroSection from "@/components/evento/sections/HeroSection";
+import BenefitsSection from "@/components/evento/sections/BenefitsSection";
+import MethodSection from "@/components/evento/sections/MethodSection";
+import VideoEventFlex from "@/components/evento/sections/VideoEventFlex";
+import CountdownTimer from "@/components/evento/conversion/CountdownTimer";
+import TrustBadges from "@/components/evento/conversion/TrustBadges";
+import SocialProof from "@/components/evento/sections/SocialProof";
+import CaminaVidaSocial from "@/components/evento/sections/CaminaVidaSocial";
+import FloatingWhatsApp from "@/components/evento/ui/FloatingWhatsApp";
+import InscripcionForm from "@/components/evento/forms/InscripcionForm";
 
 export default function EventoPage() {
   const EVENT_DATE = "2025-12-13T09:00:00-03:00";
