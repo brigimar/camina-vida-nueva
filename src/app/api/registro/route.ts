@@ -214,7 +214,7 @@ export async function GET() {
   return NextResponse.json({ ok: true, message: "Endpoint activo" });
 }
 
-eexport async function POST(req: Request) {
+export async function POST(req: Request) {
   try {
     console.log("➡️ POST /api/registro recibido");
     const body = await req.json();
