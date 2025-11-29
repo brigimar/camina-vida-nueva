@@ -1,5 +1,4 @@
 import { NextResponse } from "next/server";
-import nodemailer from "nodemailer";
 import { Client as NotionClient } from "@notionhq/client";
 import { createClient } from "@supabase/supabase-js";
 
@@ -10,14 +9,6 @@ const supabase = createClient(
 
 const notion = new NotionClient({ auth: process.env.NOTION_TOKEN });
 
-const transporter = nodemailer.createTransport({
-  service: "gmail",
-  auth: {
-    user: process.env.EMAIL_USER,
-    pass: process.env.EMAIL_PASS,
-  },
-});
-
 type Inscripto = {
   nombre: string;
   edad: number;
@@ -25,23 +16,121 @@ type Inscripto = {
   horario: "mañana" | "tarde";
 };
 
-// ✅ Validación robusta
+// ---------------------------
+// Email provider (pluggable)
+// ---------------------------
+
+type EmailProvider = "none" | "sendgrid" | "brevo";
+const EMAIL_PROVIDER: EmailProvider =
+  (process.env.EMAIL_PROVIDER as EmailProvider) || "none";
+
+async function enviarCorreo(data: Inscripto) {
+  if (EMAIL_PROVIDER === "none") {
+    console.log("📧 Email desactivado (EMAIL_PROVIDER=none). Datos:", data);
+    return;
+  }
+
+  // -------------------------
+  // BREVO (Sendinblue)
+  // -------------------------
+  if (EMAIL_PROVIDER === "brevo") {
+    const apiKey = process.env.BREVO_API_KEY;
+    const from = process.env.EMAIL_FROM;
+    const to = process.env.EMAIL_TO;
+
+    if (!apiKey || !from || !to) {
+      console.warn("⚠️ Brevo no configurado: faltan BREVO_API_KEY/EMAIL_FROM/EMAIL_TO");
+      return;
+    }
+
+    try {
+      const brevo = await import("@getbrevo/brevo");
+      const apiInstance = new brevo.TransactionalEmailsApi();
+      apiInstance.setApiKey(brevo.TransactionalEmailsApiApiKeys.apiKey, apiKey);
+
+      const email = new brevo.SendSmtpEmail();
+      email.subject = "Nuevo inscripto - Caminatas Terapéuticas Palermo";
+      email.sender = { email: from };
+      email.to = [{ email: to }];
+      email.htmlContent = `
+        <h2>Nuevo inscripto</h2>
+        <p><strong>Nombre:</strong> ${data.nombre}</p>
+        <p><strong>Edad:</strong> ${data.edad}</p>
+        <p><strong>WhatsApp:</strong> ${data.whatsapp}</p>
+        <p><strong>Horario:</strong> ${data.horario}</p>
+      `;
+
+      await apiInstance.sendTransacEmail(email);
+      console.log("✅ Email enviado con Brevo");
+    } catch (e: any) {
+      console.error("❌ Error enviando correo con Brevo:", e.message);
+    }
+    return;
+  }
+
+  // -------------------------
+  // SENDGRID
+  // -------------------------
+  if (EMAIL_PROVIDER === "sendgrid") {
+    const apiKey = process.env.SENDGRID_API_KEY;
+    const from = process.env.EMAIL_FROM;
+    const to = process.env.EMAIL_TO;
+
+    if (!apiKey || !from || !to) {
+      console.warn("⚠️ SendGrid no configurado: faltan SENDGRID_API_KEY/EMAIL_FROM/EMAIL_TO");
+      return;
+    }
+
+    try {
+      const sgMail = (await import("@sendgrid/mail")).default;
+      sgMail.setApiKey(apiKey);
+
+      const msg = {
+        to,
+        from,
+        subject: "Nuevo inscripto - Caminatas Terapéuticas Palermo",
+        html: `
+          <h2>Nuevo inscripto</h2>
+          <p><strong>Nombre:</strong> ${data.nombre}</p>
+          <p><strong>Edad:</strong> ${data.edad}</p>
+          <p><strong>WhatsApp:</strong> ${data.whatsapp}</p>
+          <p><strong>Horario:</strong> ${data.horario}</p>
+        `,
+      };
+
+      await sgMail.send(msg);
+      console.log("✅ Correo enviado con SendGrid");
+    } catch (err: any) {
+      console.error("❌ Error enviando correo con SendGrid:", err.message);
+    }
+    return;
+  }
+
+  console.warn("⚠️ EMAIL_PROVIDER desconocido:", EMAIL_PROVIDER);
+}
+
+// ---------------------------
+// Validación
+// ---------------------------
+
 function validar(data: any): Inscripto {
   const { nombre, edad, whatsapp, horario } = data || {};
   if (!nombre || typeof nombre !== "string") throw new Error("Nombre es requerido");
   if (!edad || isNaN(Number(edad)) || Number(edad) <= 0)
     throw new Error("Edad es requerida y debe ser número válido");
-  if (!whatsapp || whatsapp.trim() === "")
-    throw new Error("WhatsApp es requerido");
+  if (!whatsapp || whatsapp.trim() === "") throw new Error("WhatsApp es requerido");
   if (!horario || !["mañana", "tarde"].includes(horario))
     throw new Error("Horario debe ser 'mañana' o 'tarde'");
   return { nombre, edad: Number(edad), whatsapp: String(whatsapp), horario };
 }
 
-// ✅ Guardar en Supabase
+// ---------------------------
+// Supabase
+// ---------------------------
+
 async function guardarEnSupabase(data: Inscripto) {
   console.log("📥 Insertando en Supabase:", data);
-  const { error } = await supabase.from("inscripciones_13_12").insert([
+  const { error } = await supabase.from("inscripciones").insert([
     {
       ...data,
       created_at: new Date().toISOString(),
@@ -54,25 +143,10 @@ async function guardarEnSupabase(data: Inscripto) {
   console.log("✅ Supabase insert OK");
 }
 
-// ✅ Enviar correo
-async function enviarCorreo(data: Inscripto) {
-  console.log("📧 Enviando correo a:", process.env.EMAIL_USER);
-  await transporter.sendMail({
-    from: process.env.EMAIL_USER,
-    to: process.env.EMAIL_USER,
-    subject: "Nuevo inscripto - Caminatas Terapéuticas Palermo",
-    html: `
-      <h2>Nuevo inscripto</h2>
-      <p><strong>Nombre:</strong> ${data.nombre}</p>
-      <p><strong>Edad:</strong> ${data.edad}</p>
-      <p><strong>WhatsApp:</strong> ${data.whatsapp}</p>
-      <p><strong>Horario:</strong> ${data.horario}</p>
-    `,
-  });
-  console.log("✅ Correo enviado");
-}
+// ---------------------------
+// Notion
+// ---------------------------
 
-// ✅ Enviar a Notion
 async function enviarANotion(data: Inscripto) {
   if (!process.env.NOTION_TOKEN || !process.env.NOTION_DB_ID) {
     console.log("⚠️ Notion no configurado, se omite");
@@ -94,7 +168,10 @@ async function enviarANotion(data: Inscripto) {
   console.log("✅ Notion registro OK");
 }
 
-// ✅ Enviar a Telegram
+// ---------------------------
+// Telegram
+// ---------------------------
+
 async function enviarATelegram(data: Inscripto) {
   const token = process.env.TELEGRAM_BOT_TOKEN;
   const authorizedUsers = process.env.TELEGRAM_AUTHORIZED_USERS?.split(",") || [];
@@ -105,7 +182,7 @@ async function enviarATelegram(data: Inscripto) {
   }
 
   const texto =
-    `📝 *Nuevo inscripto en Caminata 13-12*\n\n` +
+    `📝 *Nuevo inscripto en Caminata*\n\n` +
     `👤 *Nombre:* ${data.nombre}\n` +
     `🎂 *Edad:* ${data.edad}\n` +
     `📱 *WhatsApp:* ${data.whatsapp}\n` +
@@ -129,8 +206,15 @@ async function enviarATelegram(data: Inscripto) {
   }
 }
 
-// ✅ Endpoint principal
-export async function POST(req: Request) {
+// ---------------------------
+// Handlers
+// ---------------------------
+
+export async function GET() {
+  return NextResponse.json({ ok: true, message: "Endpoint activo" });
+}
+
+eexport async function POST(req: Request) {
   try {
     console.log("➡️ POST /api/registro recibido");
     const body = await req.json();
@@ -150,6 +234,9 @@ export async function POST(req: Request) {
     return NextResponse.json({ ok: true, message: "Inscripción registrada con éxito" });
   } catch (err: any) {
     console.error("❌ Error en POST /api/registro:", err.message);
-    return NextResponse.json({ ok: false, error: err.message ?? "Error" }, { status: 400 });
+    return NextResponse.json(
+      { ok: false, error: err.message ?? "Error inesperado" },
+      { status: 400 }
+    );
   }
 }
