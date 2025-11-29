@@ -3,16 +3,6 @@ import nodemailer from "nodemailer";
 import { Client as NotionClient } from "@notionhq/client";
 import { createClient } from "@supabase/supabase-js";
 
-// ⚠️ Variables de entorno necesarias en .env.local
-// NEXT_PUBLIC_SUPABASE_URL
-// SUPABASE_SERVICE_ROLE_KEY
-// EMAIL_USER
-// EMAIL_PASS
-// NOTION_TOKEN
-// NOTION_DB_ID
-// TELEGRAM_BOT_TOKEN
-// TELEGRAM_AUTHORIZED_USERS (coma separada)
-
 const supabase = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_URL!,
   process.env.SUPABASE_SERVICE_ROLE_KEY!
@@ -50,20 +40,26 @@ function validar(data: any): Inscripto {
 
 // ✅ Guardar en Supabase
 async function guardarEnSupabase(data: Inscripto) {
+  console.log("📥 Insertando en Supabase:", data);
   const { error } = await supabase.from("inscripciones_13_12").insert([
     {
       ...data,
       created_at: new Date().toISOString(),
     },
   ]);
-  if (error) throw new Error(`Supabase: ${error.message}`);
+  if (error) {
+    console.error("❌ Error Supabase:", error.message);
+    throw new Error(`Supabase: ${error.message}`);
+  }
+  console.log("✅ Supabase insert OK");
 }
 
 // ✅ Enviar correo
 async function enviarCorreo(data: Inscripto) {
+  console.log("📧 Enviando correo a:", process.env.EMAIL_USER);
   await transporter.sendMail({
     from: process.env.EMAIL_USER,
-    to: process.env.EMAIL_USER, // puedes cambiar a otro destinatario
+    to: process.env.EMAIL_USER,
     subject: "Nuevo inscripto - Caminatas Terapéuticas Palermo",
     html: `
       <h2>Nuevo inscripto</h2>
@@ -73,11 +69,16 @@ async function enviarCorreo(data: Inscripto) {
       <p><strong>Horario:</strong> ${data.horario}</p>
     `,
   });
+  console.log("✅ Correo enviado");
 }
 
 // ✅ Enviar a Notion
 async function enviarANotion(data: Inscripto) {
-  if (!process.env.NOTION_TOKEN || !process.env.NOTION_DB_ID) return;
+  if (!process.env.NOTION_TOKEN || !process.env.NOTION_DB_ID) {
+    console.log("⚠️ Notion no configurado, se omite");
+    return;
+  }
+  console.log("🗂️ Registrando en Notion:", data.nombre);
   await notion.pages.create({
     parent: { database_id: process.env.NOTION_DB_ID! },
     properties: {
@@ -90,6 +91,7 @@ async function enviarANotion(data: Inscripto) {
       Estado: { rich_text: [{ text: { content: "Pendiente" } }] },
     },
   });
+  console.log("✅ Notion registro OK");
 }
 
 // ✅ Enviar a Telegram
@@ -113,11 +115,14 @@ async function enviarATelegram(data: Inscripto) {
 
   for (const chatId of authorizedUsers) {
     try {
-      await fetch(`https://api.telegram.org/bot${token}/sendMessage`, {
+      console.log("📲 Enviando a Telegram chatId:", chatId);
+      const res = await fetch(`https://api.telegram.org/bot${token}/sendMessage`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ chat_id: chatId, text: texto, parse_mode: "Markdown" }),
       });
+      const json = await res.json();
+      console.log("✅ Telegram respuesta:", json);
     } catch (err: any) {
       console.error("❌ Error Telegram:", err.message);
     }
@@ -127,8 +132,12 @@ async function enviarATelegram(data: Inscripto) {
 // ✅ Endpoint principal
 export async function POST(req: Request) {
   try {
+    console.log("➡️ POST /api/registro recibido");
     const body = await req.json();
+    console.log("📦 Body recibido:", body);
+
     const data = validar(body);
+    console.log("✅ Validación OK:", data);
 
     await guardarEnSupabase(data);
     await Promise.all([
@@ -137,8 +146,10 @@ export async function POST(req: Request) {
       enviarATelegram(data),
     ]);
 
+    console.log("🎉 Flujo completo OK");
     return NextResponse.json({ ok: true, message: "Inscripción registrada con éxito" });
   } catch (err: any) {
+    console.error("❌ Error en POST /api/registro:", err.message);
     return NextResponse.json({ ok: false, error: err.message ?? "Error" }, { status: 400 });
   }
 }
