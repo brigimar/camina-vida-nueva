@@ -1,13 +1,16 @@
+//src\app\api\registro\route.ts
 import { NextResponse } from "next/server";
 import { Client as NotionClient } from "@notionhq/client";
 import { createClient } from "@supabase/supabase-js";
+
+export const runtime = "nodejs";
 
 const supabase = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_URL!,
   process.env.SUPABASE_SERVICE_ROLE_KEY!
 );
 
-const notion = new NotionClient({ auth: process.env.NOTION_TOKEN });
+const notion = new NotionClient({ auth: process.env.NOTION_API_KEY });
 
 type Inscripto = {
   nombre: string;
@@ -30,9 +33,6 @@ async function enviarCorreo(data: Inscripto) {
     return;
   }
 
-  // -------------------------
-  // BREVO (Sendinblue)
-  // -------------------------
   if (EMAIL_PROVIDER === "brevo") {
     const apiKey = process.env.BREVO_API_KEY;
     const from = process.env.EMAIL_FROM;
@@ -65,63 +65,9 @@ async function enviarCorreo(data: Inscripto) {
     } catch (e: any) {
       console.error("❌ Error enviando correo con Brevo:", e.message);
     }
+
     return;
   }
-
-  // -------------------------
-  // SENDGRID
-  // -------------------------
-  if (EMAIL_PROVIDER === "sendgrid") {
-    const apiKey = process.env.SENDGRID_API_KEY;
-    const from = process.env.EMAIL_FROM;
-    const to = process.env.EMAIL_TO;
-
-    if (!apiKey || !from || !to) {
-      console.warn("⚠️ SendGrid no configurado: faltan SENDGRID_API_KEY/EMAIL_FROM/EMAIL_TO");
-      return;
-    }
-
-    try {
-      const sgMail = (await import("@sendgrid/mail")).default;
-      sgMail.setApiKey(apiKey);
-
-      const msg = {
-        to,
-        from,
-        subject: "Nuevo inscripto - Caminatas Terapéuticas Palermo",
-        html: `
-          <h2>Nuevo inscripto</h2>
-          <p><strong>Nombre:</strong> ${data.nombre}</p>
-          <p><strong>Edad:</strong> ${data.edad}</p>
-          <p><strong>WhatsApp:</strong> ${data.whatsapp}</p>
-          <p><strong>Horario:</strong> ${data.horario}</p>
-        `,
-      };
-
-      await sgMail.send(msg);
-      console.log("✅ Correo enviado con SendGrid");
-    } catch (err: any) {
-      console.error("❌ Error enviando correo con SendGrid:", err.message);
-    }
-    return;
-  }
-
-  console.warn("⚠️ EMAIL_PROVIDER desconocido:", EMAIL_PROVIDER);
-}
-
-// ---------------------------
-// Validación
-// ---------------------------
-
-function validar(data: any): Inscripto {
-  const { nombre, edad, whatsapp, horario } = data || {};
-  if (!nombre || typeof nombre !== "string") throw new Error("Nombre es requerido");
-  if (!edad || isNaN(Number(edad)) || Number(edad) <= 0)
-    throw new Error("Edad es requerida y debe ser número válido");
-  if (!whatsapp || whatsapp.trim() === "") throw new Error("WhatsApp es requerido");
-  if (!horario || !["mañana", "tarde"].includes(horario))
-    throw new Error("Horario debe ser 'mañana' o 'tarde'");
-  return { nombre, edad: Number(edad), whatsapp: String(whatsapp), horario };
 }
 
 // ---------------------------
@@ -149,25 +95,31 @@ async function guardarEnSupabase(data: Inscripto) {
 // ---------------------------
 
 async function enviarANotion(data: Inscripto) {
-  if (!process.env.NOTION_TOKEN || !process.env.NOTION_DB_ID) {
+  if (!process.env.NOTION_API_KEY || !process.env.NOTION_DB_ID) {
     console.log("⚠️ Notion no configurado, se omite");
     return;
   }
-  console.log("🗂️ Registrando en Notion:", data.nombre);
-  await notion.pages.create({
-    parent: { database_id: process.env.NOTION_DB_ID! },
-    properties: {
-      ID: { title: [{ text: { content: data.nombre } }] },
-      Nombre: { rich_text: [{ text: { content: data.nombre } }] },
-      Edad: { number: data.edad },
-      WhatsApp: { rich_text: [{ text: { content: data.whatsapp } }] },
-      Horario: { select: { name: data.horario } },
-      FechaInscripcion: { date: { start: new Date().toISOString() } },
-      Estado: { rich_text: [{ text: { content: "Pendiente" } }] },
-    },
-  });
-  console.log("✅ Notion registro OK");
+  console.log("🗂️ Registrando en Notion:", data);
+
+  try {
+    const res = await notion.pages.create({
+      parent: { database_id: process.env.NOTION_DB_ID! },
+      properties: {
+        Nombre: { rich_text: [{ text: { content: data.nombre } }] },
+        Edad: { number: data.edad },
+        WhatsApp: { rich_text: [{ text: { content: data.whatsapp } }] },
+        Horario: { select: { name: data.horario } },
+        FechaInscripcion: { date: { start: new Date().toISOString() } },
+        Estado: { rich_text: [{ text: { content: "Pendiente" } }] },
+      },
+    });
+    console.log("✅ Notion registro OK:", res.id);
+  } catch (err: any) {
+    console.error("❌ Error Notion:", err.message, err.body || err);
+  }
 }
+
+
 
 // ---------------------------
 // Telegram
@@ -205,6 +157,29 @@ async function enviarATelegram(data: Inscripto) {
       console.error("❌ Error Telegram:", err.message);
     }
   }
+}
+
+
+function validar(body: any): Inscripto {
+  if (!body.nombre || !body.edad || !body.whatsapp || !body.horario) {
+    throw new Error("Faltan campos obligatorios");
+  }
+
+  const edadNum = Number(body.edad);
+  if (isNaN(edadNum) || edadNum <= 0) {
+    throw new Error("Edad inválida");
+  }
+
+  if (body.horario !== "mañana" && body.horario !== "tarde") {
+    throw new Error("Horario inválido");
+  }
+
+  return {
+    nombre: String(body.nombre),
+    edad: edadNum,
+    whatsapp: String(body.whatsapp),
+    horario: body.horario,
+  };
 }
 
 // ---------------------------

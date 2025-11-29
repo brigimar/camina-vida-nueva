@@ -1,21 +1,31 @@
 'use client';
-import { use, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 
 export default function ReservarCircuito({ params }) {
-  const { id } = use(params);
+  const { id } = params;
   const router = useRouter();
 
   const [circuito, setCircuito] = useState(null);
+  const [opcionesDia, setOpcionesDia] = useState([]);
+  const [opcionesHorario, setOpcionesHorario] = useState([]);
+
   const [nombre, setNombre] = useState('');
+  const [edad, setEdad] = useState('');
   const [dni, setDni] = useState('');
   const [whatsapp, setWhatsapp] = useState('');
+  const [dia, setDia] = useState('');
+  const [horario, setHorario] = useState('');
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    fetch(`/api/circuitos/${id}`)
+    fetch(`/api/caminatas/${id}`) // ✅ corregido
       .then(res => res.json())
-      .then(setCircuito);
+      .then(data => {
+        setCircuito(data.circuito);
+        setOpcionesDia(data.opciones_dia || []);
+        setOpcionesHorario(data.opciones_horario || []);
+      });
   }, [id]);
 
   const handleSubmit = async (e) => {
@@ -24,17 +34,25 @@ export default function ReservarCircuito({ params }) {
 
     const res = await fetch('/api/reservas', {
       method: 'POST',
-      body: JSON.stringify({ circuitoId: id, nombre, dni, whatsapp }),
-      headers: { 'Content-Type': 'application/json' }
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        circuitoId: id,
+        nombre,
+        edad,
+        dni,
+        whatsapp,
+        dia,
+        horario,
+      }),
     });
 
     const result = await res.json();
     setLoading(false);
 
-    if (result.success) {
+    if (result.ok) {
       router.push(`/confirmacion?circuito=${id}`);
     } else {
-      alert(result.message || 'Error al reservar');
+      alert(result.error || 'Error al reservar');
     }
   };
 
@@ -60,6 +78,14 @@ export default function ReservarCircuito({ params }) {
             className="input"
           />
           <input
+            type="number"
+            placeholder="Edad"
+            value={edad}
+            onChange={e => setEdad(e.target.value)}
+            required
+            className="input"
+          />
+          <input
             type="text"
             placeholder="DNI"
             value={dni}
@@ -75,6 +101,28 @@ export default function ReservarCircuito({ params }) {
             required
             className="input"
           />
+          <select
+            value={dia}
+            onChange={e => setDia(e.target.value)}
+            required
+            className="input"
+          >
+            <option value="">Selecciona día</option>
+            {opcionesDia.map((d) => (
+              <option key={d} value={d}>{d}</option>
+            ))}
+          </select>
+          <select
+            value={horario}
+            onChange={e => setHorario(e.target.value)}
+            required
+            className="input"
+          >
+            <option value="">Selecciona horario</option>
+            {opcionesHorario.map((h) => (
+              <option key={h} value={h}>{h}</option>
+            ))}
+          </select>
           <button type="submit" disabled={loading} className="btn-primary">
             {loading ? 'Reservando...' : 'Confirmar reserva'}
           </button>
