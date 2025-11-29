@@ -1,6 +1,6 @@
 "use client";
 import { useState } from "react";
-import EventDetails from "@/components/sections/EventDetails";
+import EventDetails from "@/components/evento/sections/EventDetails";
 import Image from "next/image";
 
 export default function VideoEventFlexBig() {
