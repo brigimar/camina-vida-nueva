@@ -1,14 +1,21 @@
 "use client";
 
 import { FaArrowRight } from "react-icons/fa";
+
+// Secciones principales
 import HeroSection from "@/components/evento/sections/HeroSection";
 import BenefitsSection from "@/components/evento/sections/BenefitsSection";
 import MethodSection from "@/components/evento/sections/MethodSection";
 import VideoEventFlex from "@/components/evento/sections/VideoEventFlex";
-import CountdownTimer from "@/components/evento/conversion/CountdownTimer";
-import TrustBadges from "@/components/evento/conversion/TrustBadges";
 import SocialProof from "@/components/evento/sections/SocialProof";
 import CaminaVidaSocial from "@/components/evento/sections/CaminaVidaSocial";
+import EventDetails from "@/components/evento/sections/EventDetails";
+
+// Conversión
+import CountdownTimer from "@/components/evento/conversion/CountdownTimer";
+import TrustBadges from "@/components/evento/conversion/TrustBadges";
+
+// UI y formularios
 import FloatingWhatsApp from "@/components/evento/ui/FloatingWhatsApp";
 import InscripcionForm from "@/components/evento/forms/InscripcionForm";
 
@@ -18,7 +25,10 @@ export default function EventoPage() {
   return (
     <div className="min-h-screen bg-gradient-to-b from-emerald-50 to-cyan-50">
       {/* Hero principal */}
-      <HeroSection /> {/* 👈 ya no recibe props */}
+      <HeroSection />
+
+      {/* Detalles del evento */}
+      <EventDetails />
 
       {/* Beneficios terapéuticos */}
       <BenefitsSection />
@@ -38,6 +48,7 @@ export default function EventoPage() {
       {/* Testimonios */}
       <SocialProof />
 
+      {/* Redes sociales */}
       <CaminaVidaSocial />
 
       {/* CTA Final */}
@@ -69,7 +80,7 @@ export default function EventoPage() {
         </div>
       </section>
 
-            {/* Formulario de inscripción */}
+      {/* Formulario de inscripción */}
       <InscripcionForm />
     </div>
   );
