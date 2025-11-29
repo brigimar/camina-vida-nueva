@@ -130,10 +130,10 @@ function validar(data: any): Inscripto {
 
 async function guardarEnSupabase(data: Inscripto) {
   console.log("📥 Insertando en Supabase:", data);
-  const { error } = await supabase.from("inscripciones").insert([
+  const { error } = await supabase.from("inscripciones_13_12").insert([
     {
       ...data,
-      created_at: new Date().toISOString(),
+      created_at: new Date().toISOString(), // opcional, porque la tabla ya tiene default now()
     },
   ]);
   if (error) {
@@ -142,6 +142,7 @@ async function guardarEnSupabase(data: Inscripto) {
   }
   console.log("✅ Supabase insert OK");
 }
+
 
 // ---------------------------
 // Notion
