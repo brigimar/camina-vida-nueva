@@ -1,6 +1,6 @@
 'use client';
 import { useEffect, useState } from 'react';
-import supabase from '@/lib/supabase';
+import { supabase } from '@/lib/supabase'; // ⚠ Asegurarse de exportar supabase como objeto
 import CircuitoCard from '@/components/CircuitoCard';
 
 export default function VistaCircuitosHome({ mostrarBotonReserva = false }) {
@@ -10,6 +10,11 @@ export default function VistaCircuitosHome({ mostrarBotonReserva = false }) {
 
   useEffect(() => {
     async function cargar() {
+      if (!supabase || !supabase.from) {
+        console.error('Supabase no está inicializado correctamente.');
+        return;
+      }
+
       const { data, error } = await supabase
         .from('vista_circuitos_completa')
         .select(`
@@ -21,7 +26,6 @@ export default function VistaCircuitosHome({ mostrarBotonReserva = false }) {
           "Horarios",
           "Distancia",
           "Alias",
-          
           foto,
           url,
           punto_encuentro,
@@ -31,18 +35,25 @@ export default function VistaCircuitosHome({ mostrarBotonReserva = false }) {
           disponible_para_inscripcion
         `);
 
-      if (error) console.error('Error al cargar circuitos:', error.message);
-      else setCircuitos(data || []);
+      if (error) {
+        console.error('Error al cargar circuitos:', error.message);
+        setCircuitos([]);
+      } else {
+        // Validación de seguridad: siempre array
+        setCircuitos(Array.isArray(data) ? data : []);
+      }
     }
+
     cargar();
   }, []);
 
-  const localidades = [...new Set(circuitos.map(c => c.Localidad).filter(Boolean))];
-  const diasUnicos = [...new Set(circuitos.flatMap(c => c.Dias || []))];
+  // Extraer localidades y días de forma segura
+  const localidades = [...new Set(circuitos.map(c => c?.Localidad).filter(Boolean))];
+  const diasUnicos = [...new Set(circuitos.flatMap(c => c?.Dias || []))];
 
   const filtrados = circuitos.filter(c =>
-    (!filtroLocalidad || c.Localidad === filtroLocalidad) &&
-    (filtroDias.length === 0 || filtroDias.some(d => c.Dias.includes(d)))
+    (!filtroLocalidad || c?.Localidad === filtroLocalidad) &&
+    (filtroDias.length === 0 || (c?.Dias || []).some(d => filtroDias.includes(d)))
   );
 
   return (
@@ -87,32 +98,41 @@ export default function VistaCircuitosHome({ mostrarBotonReserva = false }) {
       </div>
 
       {/* 🧩 Cards */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 justify-center">
-        {filtrados.map(c => (
-          <CircuitoCard
-            key={c.circuito_id}
-            circuito={{
-              id: c.circuito_id, // ✅ UUID real
-              nombre: c.NombreCircuito || '—',
-              descripcion: c.Descripcion || '—',
-              localidad: c.Localidad || '—',
-              foto: c.foto || '/images/circuitos/default.jpg',
-              estado: c.estado_legible,
-              distancia: c.Distancia ?? null,
-              dias: c.Dias || [],
-              horarios: c.Horarios || [],
-              url: c.url || null,
-              punto_encuentro: c.punto_encuentro || null,
-              alias: c.Alias || null,
-              cupo_total: c.cupo_total ?? null,
-              cupo_restante: c.cupo_restante ?? null,
-              cantidad_inscriptos: c.cantidad_inscriptos ?? 0,
-              disponible_para_inscripcion: c.disponible_para_inscripcion ?? false
-            }}
-            mostrarBotonReserva={mostrarBotonReserva}
-          />
-        ))}
-      </div>
+      {filtrados.length === 0 ? (
+        <p className="text-center text-gray-500 italic">No hay circuitos disponibles con los filtros seleccionados.</p>
+      ) : (
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 justify-center">
+          {filtrados.map(c => {
+            // Validación de propiedades
+            const circuitoSeguro = {
+              id: c?.circuito_id ?? Math.random().toString(),
+              nombre: c?.NombreCircuito ?? '—',
+              descripcion: c?.Descripcion ?? '—',
+              localidad: c?.Localidad ?? '—',
+              foto: c?.foto ?? '/images/circuitos/default.jpg',
+              estado: c?.estado_legible ?? '—',
+              distancia: c?.Distancia ?? null,
+              dias: c?.Dias ?? [],
+              horarios: c?.Horarios ?? [],
+              url: c?.url ?? null,
+              punto_encuentro: c?.punto_encuentro ?? null,
+              alias: c?.Alias ?? null,
+              cupo_total: c?.cupo_total ?? null,
+              cupo_restante: c?.cupo_restante ?? null,
+              cantidad_inscriptos: c?.cantidad_inscriptos ?? 0,
+              disponible_para_inscripcion: c?.disponible_para_inscripcion ?? false
+            };
+
+            return (
+              <CircuitoCard
+                key={circuitoSeguro.id}
+                circuito={circuitoSeguro}
+                mostrarBotonReserva={mostrarBotonReserva}
+              />
+            );
+          })}
+        </div>
+      )}
     </section>
   );
 }
