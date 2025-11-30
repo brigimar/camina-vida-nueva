@@ -1,6 +1,7 @@
 import './globals.css';
 import { Poppins } from 'next/font/google';
 import Header from '@/components/Header';
+import Footer from '@/components/Footer';
 
 const poppins = Poppins({
   subsets: ['latin'],
@@ -27,10 +28,17 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="es" className={poppins.variable}>
-      <body className="font-sans">
+      <body className="font-sans flex flex-col min-h-screen">
+        {/* Header fijo en todas las páginas */}
         <Header />
-        <main className="min-h-screen">{children}</main>
-        {/* <Footer /> */}
+
+        {/* Contenido principal crece si es corto */}
+        <main className="flex-grow">
+          {children}
+        </main>
+
+        {/* Footer sticky solo si el contenido no llena la pantalla */}
+        <Footer />
       </body>
     </html>
   );

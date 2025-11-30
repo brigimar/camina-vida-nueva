@@ -7,7 +7,6 @@ import PlansAnimated from '@/components/PlansAnimated.jsx';
 import TestimonialsAnimated from '@/components/TestimonialsAnimated.jsx';
 import CTAFinal from '@/components/CTAFinal.jsx';
 import VistaCircuitosHome from '@/components/VistaCircuitosHome.jsx';
-import Footer from '@/components/Footer'; // 👈 Importación del Footer
 
 export default function HomePage() {
   return (
@@ -23,7 +22,6 @@ export default function HomePage() {
           <CTAFinal />
         </div>
       </main>
-      <Footer /> {/* 👈 Footer al final, fuera del main */}
-    </>
+      </>
   );
 }

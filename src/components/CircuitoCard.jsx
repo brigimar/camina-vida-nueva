@@ -72,13 +72,13 @@ export default function CircuitoCard({ circuito, mostrarBotonReserva = false }) 
 
         {mostrarBotonReserva && puedeInscribirse && (
           <div className="pt-2">
-            <button
-              className="bg-[#00B884] text-white text-sm font-semibold px-3 py-1 rounded hover:bg-[#00966e] w-full"
-              onClick={() => setMostrarFormulario(true)}
-            >
-              Sumarme
-            </button>
-          </div>
+    <button
+      className="w-full bg-emerald-600 text-white py-3 rounded-lg font-bold hover:bg-emerald-700 transition"
+      onClick={() => setMostrarFormulario(true)}
+    >
+      Sumarme
+    </button>
+  </div>
         )}
       </div>
 

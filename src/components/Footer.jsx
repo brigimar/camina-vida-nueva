@@ -30,7 +30,7 @@ export default function Footer() {
           <div>
             <h3 className="text-lg font-semibold mb-4">Contacto</h3>
             <ul className="space-y-2 text-sm text-white/80">
-              <li>📧 <a href="mailto:caminavidacontacto@gmail.com" className="hover:underline">caminavidacontacto@gmail.com</a></li>
+              <li>📧 <a href="mailto:info@caminavida.com.ar" className="hover:underline">info@caminavida.com.ar</a></li>
               <li>📱 <a href="https://wa.me/5491151501147" target="_blank" rel="noopener noreferrer" className="hover:underline">+54 9 11-5150 1147</a></li>
               <li className="flex items-center gap-2">
   <a
