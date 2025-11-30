@@ -21,6 +21,7 @@ export default function VistaCircuitosHome({ mostrarBotonReserva = false }) {
           "Horarios",
           "Distancia",
           "Alias",
+          
           foto,
           url,
           punto_encuentro,

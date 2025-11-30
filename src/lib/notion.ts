@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 import { Client } from '@notionhq/client';
-import { createClient } from '@supabase/supabase-mjs';
+import { createClient } from '@supabase/supabase-js';
 
 if (!process.env.NOTION_API_KEY)
   throw new Error('❌ FALTA NOTION_API_KEY');
