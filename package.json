@@ -2,7 +2,7 @@
   "name": "mi-proyecto-caminatas",
   "version": "0.1.0",
   "private": true,
-  "type": "module",
+  "type": "commonjs",
   "main": "middleware.js",
   "scripts": {
     "dev": "next dev",
@@ -16,7 +16,7 @@
     "@notionhq/client": "^2.3.0",
     "@sendgrid/mail": "^8.1.6",
     "@supabase/auth-helpers-nextjs": "^0.10.0",
-    "@supabase/supabase-js": "^2.80.0",
+    "@supabase/supabase-js": "^2.86.0",
     "@tailwindcss/line-clamp": "^0.4.4",
     "chart.js": "^4.5.1",
     "csv-parse": "^6.1.0",

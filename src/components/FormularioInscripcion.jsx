@@ -1,7 +1,8 @@
 'use client';
 import { useEffect, useState } from 'react';
 
-export default function FormularioInscripcion({ circuitoId, nombreCircuito, onClose }) {
+export default function FormularioInscripcion({ circuitoId, onClose }) {
+  const [circuito, setCircuito] = useState(null);
   const [nombre, setNombre] = useState('');
   const [whatsapp, setWhatsapp] = useState('');
   const [edad, setEdad] = useState('');
@@ -20,12 +21,13 @@ export default function FormularioInscripcion({ circuitoId, nombreCircuito, onCl
   useEffect(() => {
     async function obtenerOpciones() {
       try {
-        // ✅ Ruta corregida: /api/caminatas
         const res = await fetch(`/api/caminatas/${circuitoId}`);
         const data = await res.json();
         if (res.ok) {
-          setOpcionesDia(data.opciones_dia || []);
-          setOpcionesHorario(data.opciones_horario || []);
+          // data.circuito debe incluir: circuito_id, NombreCircuito, opciones_dia, opciones_horario
+          setCircuito(data.circuito || {});
+          setOpcionesDia(data.opciones_dia || data.circuito?.opciones_dia || []);
+          setOpcionesHorario(data.opciones_horario || data.circuito?.opciones_horario || []);
         } else {
           setError('No se pudieron cargar las opciones del circuito.');
         }
@@ -65,15 +67,16 @@ export default function FormularioInscripcion({ circuitoId, nombreCircuito, onCl
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          circuitoId,
-          nombreCircuito,
-          nombre,
-          whatsapp,
-          edad,
-          dni,
-          dia,
-          horario
-        })
+  circuitoId: circuito?.circuito_id,   // ✅ UUID real
+  nombreCircuito: circuito?.NombreCircuito,
+  nombre,
+  whatsapp,
+  edad,
+  dni,
+  dia,
+  horario
+})
+
       });
 
       const resultado = await res.json();
@@ -97,8 +100,11 @@ export default function FormularioInscripcion({ circuitoId, nombreCircuito, onCl
 
   return (
     <form onSubmit={manejarEnvio} className="space-y-4 p-4 border rounded bg-white shadow-md">
-      <h3 className="text-lg font-bold text-verde">Inscripción a {nombreCircuito}</h3>
+      <h3 className="text-lg font-bold text-verde">
+        Inscripción a {circuito?.NombreCircuito || 'Circuito'}
+      </h3>
 
+      {/* Nombre */}
       <input
         type="text"
         placeholder="Nombre completo"
@@ -108,6 +114,7 @@ export default function FormularioInscripcion({ circuitoId, nombreCircuito, onCl
         required
       />
 
+      {/* WhatsApp */}
       <input
         type="tel"
         placeholder="WhatsApp"
@@ -122,6 +129,7 @@ export default function FormularioInscripcion({ circuitoId, nombreCircuito, onCl
         <p className="text-red-600 text-sm">El WhatsApp debe tener al menos 10 dígitos numéricos.</p>
       )}
 
+      {/* Edad */}
       <input
         type="number"
         placeholder="Edad"
@@ -131,6 +139,7 @@ export default function FormularioInscripcion({ circuitoId, nombreCircuito, onCl
         required
       />
 
+      {/* DNI */}
       <input
         type="text"
         placeholder="DNI"
@@ -146,6 +155,7 @@ export default function FormularioInscripcion({ circuitoId, nombreCircuito, onCl
         <p className="text-red-600 text-sm">El DNI debe tener entre 7 y 8 dígitos numéricos.</p>
       )}
 
+      {/* Día */}
       {opcionesDia.length > 0 && (
         <select
           value={dia}
@@ -160,6 +170,7 @@ export default function FormularioInscripcion({ circuitoId, nombreCircuito, onCl
         </select>
       )}
 
+      {/* Horario */}
       {opcionesHorario.length > 0 && (
         <select
           value={horario}

@@ -21,7 +21,6 @@ export default function VistaCircuitosHome({ mostrarBotonReserva = false }) {
           "Horarios",
           "Distancia",
           "Alias",
-          estado_legible,
           foto,
           url,
           punto_encuentro,
@@ -29,7 +28,7 @@ export default function VistaCircuitosHome({ mostrarBotonReserva = false }) {
           cupo_restante,
           cantidad_inscriptos,
           disponible_para_inscripcion
-        `); // ❌ cupo_lleno eliminado
+        `);
 
       if (error) console.error('Error al cargar circuitos:', error.message);
       else setCircuitos(data || []);
@@ -92,7 +91,7 @@ export default function VistaCircuitosHome({ mostrarBotonReserva = false }) {
           <CircuitoCard
             key={c.circuito_id}
             circuito={{
-              id: c.circuito_id,
+              id: c.circuito_id, // ✅ UUID real
               nombre: c.NombreCircuito || '—',
               descripcion: c.Descripcion || '—',
               localidad: c.Localidad || '—',

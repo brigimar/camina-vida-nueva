@@ -1,15 +1,16 @@
-// src/app/api/caminatas/[id]/route.js
 import { NextResponse } from "next/server";
 
-function normalizeArray(value) {
+function normalizeArray(value: any) {
   if (Array.isArray(value)) return value.map(v => String(v).trim()).filter(Boolean);
   if (typeof value === "string") return value.split(",").map(s => s.trim()).filter(Boolean);
   return [];
 }
 
-export async function GET(request, context) {
-  // ✅ ahora params se await-ea
-  const { id } = await context.params;
+export async function GET(
+  request: Request,
+  context: { params: Promise<{ id: string }> }
+) {
+  const { id } = await context.params; // ✅ ahora se espera la Promise
 
   if (!id) {
     return NextResponse.json({ error: "Falta el ID del circuito" }, { status: 400 });
@@ -20,8 +21,8 @@ export async function GET(request, context) {
 
     const supabaseRes = await fetch(url, {
       headers: {
-        apikey: process.env.SUPABASE_SERVICE_ROLE_KEY,
-        Authorization: `Bearer ${process.env.SUPABASE_SERVICE_ROLE_KEY}`,
+        apikey: process.env.SUPABASE_SERVICE_ROLE_KEY!,
+        Authorization: `Bearer ${process.env.SUPABASE_SERVICE_ROLE_KEY!}`,
         "Content-Type": "application/json",
       },
     });
@@ -41,7 +42,6 @@ export async function GET(request, context) {
     const opciones_dia = normalizeArray(circuito.Dias);
     const opciones_horario = normalizeArray(circuito.Horarios);
 
-    // ✅ devolvemos circuito + opciones
     return NextResponse.json({
       circuito,
       opciones_dia,

@@ -1,4 +1,4 @@
-import { createClient } from '@supabase/supabase-js';
+import { createClient } from '@supabase/supabase-mjs';
 import { fetchCircuitosFromNotion } from './notion';
 
 export async function syncCircuitosToSupabase() {

@@ -1,19 +1,6 @@
 'use client';
-import { usePathname } from 'next/navigation';
 import { useState } from 'react';
 import InscripcionModal from './InscripcionModal';
-
-// ✅ Formateo de horarios: "9,10" → "9hs y 10hs"
-function formatearHorarios(horarios) {
-  const array = Array.isArray(horarios)
-    ? horarios
-    : typeof horarios === 'string'
-    ? horarios.split(',').map(h => h.trim())
-    : [];
-  const conHs = array.filter(Boolean).map(h => `${h}hs`);
-  if (conHs.length === 0) return '⚠️ Horarios faltantes';
-  return conHs.length === 1 ? conHs[0] : conHs.join(' y ');
-}
 
 export default function CircuitoCard({ circuito, mostrarBotonReserva = false }) {
   const [mostrarFormulario, setMostrarFormulario] = useState(false);
@@ -33,10 +20,20 @@ export default function CircuitoCard({ circuito, mostrarBotonReserva = false }) 
     estado
   } = circuito;
 
+  // Normalización de días
   const diasArray = Array.isArray(dias)
     ? dias
     : typeof dias === 'string'
     ? dias.split(',').map(d => d.trim())
+    : [];
+
+  // Normalización de horarios
+  const horariosArray = Array.isArray(horarios)
+    ? horarios
+    : typeof horarios === 'string'
+    ? horarios.split(',').map(h => h.trim())
+    : Array.isArray(horarios?.options)
+    ? horarios.options.map(o => (typeof o === 'string' ? o : o?.name)).filter(Boolean)
     : [];
 
   const puedeInscribirse = estado !== false;
@@ -56,52 +53,23 @@ export default function CircuitoCard({ circuito, mostrarBotonReserva = false }) 
           </span>
         </div>
 
-        {/* Alias */}
-        {alias && (
-          <p className="text-xs text-gray-500">🏷️ Alias: {alias}</p>
-        )}
-
-        {/* Descripción */}
-        {descripcion && (
-          <p className="text-sm text-gray-600 italic">"{descripcion}"</p>
-        )}
-
-        {/* Distancia */}
-        <p className="text-sm text-[#64748B]">
-          📏 {distancia ? `${distancia} m` : 'Distancia no definida'}
-        </p>
-
-        {/* Días y horarios */}
+        {alias && <p className="text-xs text-gray-500">🏷️ Alias: {alias}</p>}
+        {descripcion && <p className="text-sm text-gray-600 italic">"{descripcion}"</p>}
+        <p className="text-sm text-[#64748B]">📏 {distancia ? `${distancia} m` : 'Distancia no definida'}</p>
         <p className="text-sm text-[#64748B]">
           📅 {diasArray.length > 0 ? diasArray.join(', ') : 'Días no definidos'}
         </p>
         <p className="text-sm text-[#64748B]">
-          🕒 {formatearHorarios(horarios)}
+          🕒 {horariosArray.length > 0 ? horariosArray.join(', ') : 'Horarios no definidos'}
         </p>
-
-        {/* Punto de encuentro con Google Maps */}
         <p className="text-xs text-[#64748B]">
-          📍{' '}
-          {punto_encuentro ? (
-            <a
-              href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(punto_encuentro)}`}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-blue-600 underline hover:text-blue-800"
-            >
-              {punto_encuentro}
-            </a>
-          ) : (
-            '⚠️ Punto de encuentro faltante'
-          )}
+          📍 {punto_encuentro || '⚠️ Punto de encuentro faltante'}
         </p>
 
-        {/* Estado */}
         {!puedeInscribirse && (
           <p className="text-xs text-red-600">⚠️ Este circuito está inactivo</p>
         )}
 
-        {/* Botón de inscripción */}
         {mostrarBotonReserva && puedeInscribirse && (
           <div className="pt-2">
             <button
@@ -114,23 +82,12 @@ export default function CircuitoCard({ circuito, mostrarBotonReserva = false }) 
         )}
       </div>
 
-      {/* Modal de inscripción */}
       {mostrarFormulario && (
-        <div
-          className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/40 backdrop-blur-sm"
-          onClick={() => setMostrarFormulario(false)}
-        >
-          <div
-            className="bg-white rounded-lg shadow-lg max-w-md w-full"
-            onClick={(e) => e.stopPropagation()}
-          >
-            <InscripcionModal
-              circuitoId={id}
-              nombreCircuito={nombre}
-              onClose={() => setMostrarFormulario(false)}
-            />
-          </div>
-        </div>
+        <InscripcionModal
+          circuitoId={id}              // ✅ UUID real
+          nombreCircuito={nombre}
+          onClose={() => setMostrarFormulario(false)}
+        />
       )}
     </div>
   );
