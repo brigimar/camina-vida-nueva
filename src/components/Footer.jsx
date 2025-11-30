@@ -91,19 +91,31 @@ export default function Footer() {
             <h3 className="text-lg font-semibold mb-4">Legales</h3>
             <ul className="space-y-2 text-sm text-white/80">
               <li>
-                <Link href="/notion-page/privacy" className="hover:underline text-white">
-                  Política de Privacidad
-                </Link>
+                <Link
+  href="/notion/2bb3438670178071b0a0fdb574ce9acd"
+  className="hover:underline text-white"
+>
+  Política de Privacidad
+</Link>
+
               </li>
               <li>
-                <Link href="/notion-page/consent" className="hover:underline text-white">
-                  Consentimiento Informado
-                </Link>
+                <Link
+  href="/notion/2bb34386701780038e5de589fde331ed"
+  className="hover:underline text-white"
+>
+  Consentimiento Informado
+</Link>
+
               </li>
               <li>
-                <Link href="/notion-page/terms" className="hover:underline text-white">
-                  Términos y Condiciones
-                </Link>
+                <Link
+  href="/notion/2bb34386701780ea84dfea567474ac23"
+  className="hover:underline text-white"
+>
+  Términos y Condiciones
+</Link>
+
               </li>
             </ul>
           </div>

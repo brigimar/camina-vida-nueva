@@ -44,7 +44,7 @@ export default function Header() {
           {/* Menú derecho */}
           <nav className="hidden md:flex gap-6 items-center text-sm font-semibold text-muted">
             <button onClick={() => irASeccionHome('#planes')} className="hover:text-verde-oscuro transition">Planes</button>
-            <Link href="/nosotros" className="hover:text-verde-oscuro transition">Nosotros</Link>
+            <Link href="/notion/2bb3438670178038b792f0c060d491a1" className="hover:text-verde-oscuro transition">Nosotros</Link>
             {/* ✅ Nuevo link 13/12 externo */}
             <a
               href="https://caminavida.com.ar/evento"

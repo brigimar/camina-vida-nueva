@@ -1,3 +1,4 @@
+//src\app\nosotros\page.jsx
 'use client';
 import { useEffect, useState } from 'react';
 import NotionBlockRenderer from '@/components/NotionBlockRenderer';
