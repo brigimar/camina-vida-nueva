@@ -1,6 +1,4 @@
 import type { Metadata } from "next";
-import Header from "@/components/Header";
-import Footer from "@/components/Footer";
 
 export const metadata: Metadata = {
   title: "Caminata Terapéutica en Palermo - 13 Diciembre 2025",
@@ -36,11 +34,9 @@ export const metadata: Metadata = {
 export default function EventoLayout({ children }: { children: React.ReactNode }) {
   return (
     <>
-      <Header />
-      <main className="min-h-screen bg-gradient-to-b from-emerald-50 to-cyan-50">
+           <main className="min-h-screen bg-gradient-to-b from-emerald-50 to-cyan-50">
         {children}
       </main>
-      <Footer />
-    </>
+         </>
   );
 }
