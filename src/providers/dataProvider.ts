@@ -1,0 +1,21 @@
+// dataProvider removed (Refine-specific). If imported, provide no-op implementations.
+const API_URL = process.env.NEXT_PUBLIC_BASE_URL + "/api";
+
+export const dataProvider = {
+  async getList() {
+    const res = await fetch(`${API_URL}`);
+    return { data: await res.json(), total: 0 };
+  },
+  async getOne() {
+    throw new Error('dataProvider.getOne removed');
+  },
+  async create() {
+    throw new Error('dataProvider.create removed');
+  },
+  async update() {
+    throw new Error('dataProvider.update removed');
+  },
+  async deleteOne() {
+    throw new Error('dataProvider.deleteOne removed');
+  },
+};

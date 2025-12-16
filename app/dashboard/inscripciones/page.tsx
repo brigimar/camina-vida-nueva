@@ -1,0 +1,37 @@
+export const dynamic = 'force-dynamic';
+
+import InscripcionesListClient from './components/InscripcionesListClient';
+import { Inscripcion, Circuito } from '@/types';
+import { createSupabaseServer } from '@/lib/supabaseServer';
+
+export default async function InscripcionesPage() {
+  const supabase = await createSupabaseServer();
+
+  const iRes = await supabase.from('inscripciones').select('*').limit(100);
+  if (iRes.error) throw new Error(iRes.error.message);
+  const initialInscripciones: Inscripcion[] = iRes.data ?? [];
+
+  // fetch circuitos to map names (simple, not optimized)
+  const cRes = await supabase.from('circuitos').select('*').limit(100);
+  if (cRes.error) throw new Error(cRes.error.message);
+  const initialCircuitos: Circuito[] = cRes.data ?? [];
+
+  return (
+    <div>
+      <div className="flex justify-between items-center mb-6">
+        <h1 className="text-2xl font-bold">Inscripciones</h1>
+        <a
+          href="/dashboard/inscripciones/create"
+          className="px-4 py-2 bg-blue-600 text-white rounded-lg"
+        >
+          Crear inscripción
+        </a>
+      </div>
+
+      <InscripcionesListClient
+        initialInscripciones={initialInscripciones}
+        initialCircuitos={initialCircuitos}
+      />
+    </div>
+  );
+}

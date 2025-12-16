@@ -1,0 +1,15 @@
+import { useState, useEffect } from "react";
+
+export function useUsuarios() {
+  const [data, setData] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    fetch("/api/usuarios")
+      .then((res) => res.json())
+      .then((res) => setData(res.data))
+      .finally(() => setLoading(false));
+  }, []);
+
+  return { data, loading };
+}
