@@ -18,12 +18,12 @@ export default function CircuitosHome() {
       const res = await fetch("/api/circuitos", { cache: "no-store" });
       if (!res.ok) throw new Error("Error al cargar circuitos");
 
-      const data = await res.json();
+      const response = await res.json();
 
-      console.log("✅ Respuesta cruda:", data);
+      console.log("✅ Respuesta cruda:", response);
 
-      // ✅ Tu backend devuelve un array directo
-      setCircuitos(Array.isArray(data) ? data : []);
+      // ✅ API devuelve { data: { data: [...], pagination: {...} } }
+      setCircuitos(response?.data?.data ?? []);
     } catch (e) {
       console.error("Error cargando circuitos:", e);
       setError("No se pudieron cargar los circuitos.");

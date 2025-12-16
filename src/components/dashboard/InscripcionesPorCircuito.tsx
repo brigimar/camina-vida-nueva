@@ -17,7 +17,7 @@ export default function InscripcionesPorCircuito() {
 
     fetch('/api/circuitos?limit=100')
       .then(r => r.json())
-      .then(d => setCircuitos(d?.data ?? d ?? []))
+      .then(response => setCircuitos(response?.data?.data ?? []))
       .catch(() => setCircuitos([]));
   }, []);
 
