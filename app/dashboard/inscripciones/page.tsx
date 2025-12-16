@@ -9,6 +9,8 @@ export default async function InscripcionesPage() {
 
   const iRes = await supabase.from('inscripciones').select('*').limit(100);
   if (iRes.error) throw new Error(iRes.error.message);
+
+
   const initialInscripciones: Inscripcion[] = iRes.data ?? [];
 
   // fetch circuitos to map names (simple, not optimized)
