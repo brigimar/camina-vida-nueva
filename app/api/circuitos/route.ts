@@ -12,6 +12,7 @@ interface PostgrestError {
 export async function GET(req: Request) {
   try {
     const { searchParams } = new URL(req.url);
+    const supabase = await createSupabaseServer();
 
     // ✅ Parámetros
     const page = Number(searchParams.get("page") ?? 1);
