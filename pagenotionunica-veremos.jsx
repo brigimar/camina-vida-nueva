@@ -1,6 +1,6 @@
 'use client';
 import { useEffect, useState } from 'react';
-import NotionBlockRenderer from '@/components/NotionBlockRenderer';
+// NotionBlockRenderer component removed; render blocks raw as fallback
 
 export default function NotionPage({ params }) {
   const { pageId } = params;
@@ -15,7 +15,9 @@ export default function NotionPage({ params }) {
 
   return (
     <main className="min-h-screen bg-fondo text-texto font-sans px-6 py-12 space-y-10">
-      <NotionBlockRenderer blocks={blocks} />
+      {blocks && blocks.length > 0 ? (
+        <pre className="whitespace-pre-wrap max-w-3xl mx-auto">{JSON.stringify(blocks, null, 2)}</pre>
+      ) : null}
     </main>
   );
 }

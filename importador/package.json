@@ -1,7 +1,0 @@
-{
-  "name": "importador",
-  "version": "1.0.0",
-  "type": "module",        
-  "main": "importarCircuitos.js"
-}
-
