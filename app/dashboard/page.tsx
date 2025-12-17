@@ -13,33 +13,35 @@ interface CardProps {
 export default async function DashboardHome() {
   const supabase = await createSupabaseServer();
 
+  // ✅ Fetch circuitos (sin throw)
   const cRes = await supabase.from('circuitos').select('*').limit(100);
-  if (cRes.error) throw new Error(cRes.error.message);
-  const circuitos = (cRes.data ?? []) as Circuito[];
+  const circuitos: Circuito[] = Array.isArray(cRes.data) ? cRes.data : [];
 
-  // Fetch inscripciones con join correcto: inscripciones -> sesiones -> circuitos
+  // ✅ Fetch inscripciones con join correcto
   const iRes = await supabase
     .from('inscripciones')
     .select('*, sesiones(*, circuitos(nombre))')
     .eq('estado', 'activo')
     .limit(100);
-  if (iRes.error) throw new Error(iRes.error.message);
-  const inscripciones = (iRes.data ?? []) as Inscripcion[];
+  const inscripciones: Inscripcion[] = Array.isArray(iRes.data) ? iRes.data : [];
 
+  // ✅ Fetch sesiones
   const sRes = await supabase.from('sesiones').select('*').limit(100);
-  if (sRes.error) throw new Error(sRes.error.message);
-  const sesiones = (sRes.data ?? []) as Sesion[];
+  const sesiones: Sesion[] = Array.isArray(sRes.data) ? sRes.data : [];
 
-  const circuitosActivos = circuitos.filter((c) => c.estado === "activo").length || 0;
-  const totalInscripciones = inscripciones.length || 0;
+  // ✅ KPIs seguros
+  const circuitosActivos = circuitos.filter((c) => c.estado === "activo").length;
+  const totalInscripciones = inscripciones.length;
 
-  // ✅ Contar inscripciones de hoy usando sesiones.fecha (no inscripciones.fecha)
+  // ✅ Contar inscripciones de hoy usando sesiones.fecha
   const hoy = new Date().toISOString().split("T")[0];
-  const inscripcionesHoy = inscripciones.filter((i: Inscripcion) => 
-    i.sesiones?.fecha?.startsWith(hoy)
-  ).length || 0;
+  const inscripcionesHoy = inscripciones.filter(
+    (i) => i.sesiones?.fecha?.startsWith(hoy)
+  ).length;
 
-  const sesionesProgramadas = sesiones.filter((s) => s.estado === "programada").length || 0;
+  const sesionesProgramadas = sesiones.filter(
+    (s) => s.estado === "programada"
+  ).length;
 
   return (
     <div>
@@ -70,4 +72,3 @@ function Card({ title, value }: CardProps) {
     </div>
   );
 }
-

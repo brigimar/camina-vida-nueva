@@ -6,23 +6,24 @@ import { useList } from "@refinedev/core";
 import { Inscripcion } from "@/types";
 
 export default function InscripcionesPorDia() {
-  // ✅ 1. Obtener inscripciones
+  // ✅ 1. Obtener inscripciones con refine
   const inscripciones = useList<Inscripcion>({
     resource: "inscripciones",
   });
 
   const inscripcionesData = inscripciones.data?.data ?? [];
 
-  // ✅ 2. Conteo por día (robusto)
+  // ✅ 2. Conteo por día usando sesiones.fecha
   const conteo: Record<string, number> = {};
 
-  inscripcionesData.forEach((i) => {
-    if (!i.fecha) return; // evita errores silenciosos
+  inscripcionesData.forEach((i: any) => {
+    const fechaRaw = i.sesiones?.fecha;
+    if (!fechaRaw) return;
 
     // ✅ Normalizamos fecha (solo YYYY-MM-DD)
-    const fecha = i.fecha.includes("T")
-      ? i.fecha.split("T")[0]
-      : i.fecha;
+    const fecha = fechaRaw.includes("T")
+      ? fechaRaw.split("T")[0]
+      : fechaRaw;
 
     conteo[fecha] = (conteo[fecha] || 0) + 1;
   });
@@ -46,7 +47,7 @@ export default function InscripcionesPorDia() {
         data: Object.values(conteo),
         borderColor: "#10b981",
         backgroundColor: "rgba(16,185,129,0.2)",
-        tension: 0.3, // ✅ suaviza la línea
+        tension: 0.3,
       },
     ],
   };
