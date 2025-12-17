@@ -13,7 +13,12 @@ export default function InscripcionesListClient({ initialInscripciones, initialC
   const [inscripciones, setInscripciones] = useState<Inscripcion[]>(initialInscripciones || []);
   const [loadingId, setLoadingId] = useState<string | null>(null);
 
-  const circuitosMap = Object.fromEntries((initialCircuitos || []).map((c) => [c.id, c.nombre]));
+  // Map de circuitos para referencia (del join correcto: inscripciones -> sesiones -> circuitos)
+  const circuitosMap = Object.fromEntries(
+    (initialInscripciones || [])
+      .map((i: any) => [i.sesiones?.circuitos?.id, i.sesiones?.circuitos?.nombre])
+      .filter(([id]) => id)
+  );
 
   const handleDelete = async (id: string) => {
     if (!confirm('¿Borrar esta inscripción?')) return;
@@ -39,18 +44,18 @@ export default function InscripcionesListClient({ initialInscripciones, initialC
           <th className="p-3">Nombre</th>
           <th className="p-3">Email</th>
           <th className="p-3">Circuito</th>
-          <th className="p-3">Fecha</th>
+          <th className="p-3">Sesión</th>
           <th className="p-3">Estado</th>
           <th className="p-3">Acciones</th>
         </tr>
       </thead>
       <tbody>
-        {inscripciones.map((ins) => (
+        {inscripciones.map((ins: any) => (
           <tr key={ins.id} className="border-t">
             <td className="p-3">{ins.nombre} {ins.apellido}</td>
             <td className="p-3">{ins.email}</td>
-            <td className="p-3">{circuitosMap[ins.circuito_id] || '—'}</td>
-            <td className="p-3">{new Date(ins.fecha || '').toLocaleDateString()}</td>
+            <td className="p-3">{ins.sesiones?.circuitos?.nombre || '—'}</td>
+            <td className="p-3">{ins.sesiones?.fecha ? new Date(ins.sesiones.fecha).toLocaleDateString() : '—'}</td>
             <td className="p-3 capitalize">{ins.estado}</td>
             <td className="p-3 flex gap-3">
               <Link href={`/dashboard/inscripciones/show/${ins.id}`} className="text-blue-600">Ver</Link>

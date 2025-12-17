@@ -22,14 +22,24 @@ export default function InscripcionesPorCircuito() {
   }, []);
 
   const inscripcionesData = inscripciones;
-  const circuitoIds = [...new Set(inscripcionesData.map((i) => i.circuito_id))];
+  
+  // Extraer IDs de circuitos desde el join correcto: inscripciones -> sesiones -> circuitos
+  const circuitoIds = [...new Set(
+    inscripcionesData
+      .map((i: any) => i.sesiones?.circuitos?.id)
+      .filter(Boolean)
+  )];
+  
   const circuitosData = circuitos.filter(c => circuitoIds.includes(c.id));
 
-  const circuitosMap = Object.fromEntries(circuitosData.map((c) => [c.id, c.nombre]));
+  const circuitosMap = Object.fromEntries(
+    circuitosData.map((c) => [c.id, c.nombre])
+  );
 
   const conteo: Record<string, number> = {};
-  inscripcionesData.forEach((i) => {
-    const nombre = circuitosMap[i.circuito_id] || "Desconocido";
+  inscripcionesData.forEach((i: any) => {
+    // Acceder al nombre a través del join correcto
+    const nombre = i.sesiones?.circuitos?.nombre || "Desconocido";
     conteo[nombre] = (conteo[nombre] || 0) + 1;
   });
 

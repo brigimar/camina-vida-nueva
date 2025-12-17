@@ -6,17 +6,21 @@ import { useList, useMany } from "@refinedev/core";
 import { Circuito, Inscripcion } from "@/types";
 
 export default function InscripcionesPorCircuito() {
-  // ✅ 1. Obtener inscripciones
+  // ✅ 1. Obtener inscripciones con join correcto
   const inscripciones = useList<Inscripcion>({
     resource: "inscripciones",
   });
 
   const inscripcionesData = inscripciones.data?.data ?? [];
 
-  // ✅ 2. Obtener IDs únicos de circuitos
-  const circuitoIds = [...new Set(inscripcionesData.map((i) => i.circuito_id))];
+  // ✅ 2. Obtener IDs únicos de circuitos desde el join correcto
+  const circuitoIds = [...new Set(
+    inscripcionesData
+      .map((i: any) => i.sesiones?.circuitos?.id)
+      .filter(Boolean)
+  )];
 
-  // ✅ 3. Obtener circuitos relacionados
+  // ✅ 3. Obtener circuitos relacionados (si es necesario para caché)
   const circuitosQuery = useMany<Circuito>({
     resource: "circuitos",
     ids: circuitoIds,
@@ -25,16 +29,12 @@ export default function InscripcionesPorCircuito() {
 
   const circuitosData = circuitosQuery.data?.data ?? [];
 
-  // ✅ 4. Mapa id → nombre
-  const circuitosMap = Object.fromEntries(
-    circuitosData.map((c) => [c.id, c.nombre])
-  );
-
-  // ✅ 5. Conteo de inscripciones por circuito
+  // ✅ 4. Conteo de inscripciones por circuito
   const conteo: Record<string, number> = {};
 
-  inscripcionesData.forEach((i) => {
-    const nombre = circuitosMap[i.circuito_id] || "Desconocido";
+  inscripcionesData.forEach((i: any) => {
+    // Acceder al nombre a través del join correcto: inscripciones -> sesiones -> circuitos
+    const nombre = i.sesiones?.circuitos?.nombre || "Desconocido";
     conteo[nombre] = (conteo[nombre] || 0) + 1;
   });
 

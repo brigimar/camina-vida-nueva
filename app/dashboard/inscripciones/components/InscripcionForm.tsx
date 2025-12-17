@@ -2,7 +2,13 @@
 
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { Inscripcion, Circuito } from '@/types';
+import { Inscripcion } from '@/types';
+
+interface Sesion {
+  id: string;
+  fecha: string;
+  circuitos?: { nombre: string };
+}
 
 interface Props {
   initialData?: Partial<Inscripcion>;
@@ -11,14 +17,15 @@ interface Props {
 
 export default function InscripcionForm({ initialData, inscripcionId }: Props) {
   const [form, setForm] = useState<Partial<Inscripcion>>(initialData || {});
-  const [circuitos, setCircuitos] = useState<Circuito[]>([]);
+  const [sesiones, setSesiones] = useState<Sesion[]>([]);
   const router = useRouter();
 
   useEffect(() => {
-    fetch('/api/circuitos?limit=100')
+    // Fetch sesiones (que contienen circuito_id)
+    fetch('/api/sesiones?limit=100')
       .then((r) => r.json())
-      .then((response) => setCircuitos(response?.data?.data ?? []))
-      .catch(() => setCircuitos([]));
+      .then((response) => setSesiones(response?.data?.data ?? []))
+      .catch(() => setSesiones([]));
   }, []);
 
   const handleChange = (e: any) => setForm({ ...form, [e.target.name]: e.target.value });
@@ -40,24 +47,27 @@ export default function InscripcionForm({ initialData, inscripcionId }: Props) {
   return (
     <form onSubmit={handleSubmit} className="bg-white p-6 rounded-lg shadow max-w-xl">
       <div className="grid grid-cols-1 gap-4">
-        <input name="nombre" value={(form.nombre as string) || ''} onChange={handleChange} placeholder="Nombre" className="input" />
-        <input name="apellido" value={(form.apellido as string) || ''} onChange={handleChange} placeholder="Apellido" className="input" />
-        <input name="email" value={(form.email as string) || ''} onChange={handleChange} placeholder="Email" className="input" />
-        <input name="telefono" value={(form.telefono as string) || ''} onChange={handleChange} placeholder="Teléfono" className="input" />
+        <input name="nombre" value={(form.nombre as string) || ''} onChange={handleChange} placeholder="Nombre" className="input" required />
+        <input name="apellido" value={(form.apellido as string) || ''} onChange={handleChange} placeholder="Apellido" className="input" required />
+        <input name="dni" value={(form.dni as string) || ''} onChange={handleChange} placeholder="DNI" className="input" required />
+        <input name="email" value={(form.email as string) || ''} onChange={handleChange} placeholder="Email" className="input" type="email" />
+        <input name="whatsapp" value={(form.whatsapp as string) || ''} onChange={handleChange} placeholder="WhatsApp" className="input" />
+        <input name="edad" value={(form.edad as number) || ''} onChange={handleChange} placeholder="Edad" className="input" type="number" />
 
-        <select name="circuito_id" value={(form.circuito_id as any) ?? ''} onChange={handleChange} className="input">
-          <option value="">Seleccionar circuito</option>
-          {circuitos.map((c) => (
-            <option key={c.id} value={c.id}>{c.nombre}</option>
+        {/* Seleccionar sesión (que contiene el circuito) */}
+        <select name="sesion_id" value={(form.sesion_id as string) ?? ''} onChange={handleChange} className="input" required>
+          <option value="">Seleccionar sesión</option>
+          {sesiones.map((s) => (
+            <option key={s.id} value={s.id}>
+              {new Date(s.fecha).toLocaleDateString()} - {s.circuitos?.nombre || 'Circuito sin nombre'}
+            </option>
           ))}
         </select>
 
-        <input name="fecha" type="date" value={(form.fecha as string)?.split('T')?.[0] ?? ''} onChange={handleChange} className="input" />
-
-        <select name="estado" value={(form.estado as string) || 'pendiente'} onChange={handleChange} className="input">
-          <option value="pendiente">Pendiente</option>
-          <option value="confirmada">Confirmada</option>
-          <option value="cancelada">Cancelada</option>
+        <select name="estado" value={(form.estado as string) || 'activo'} onChange={handleChange} className="input">
+          <option value="activo">Activo</option>
+          <option value="inactivo">Inactivo</option>
+          <option value="cancelado">Cancelado</option>
         </select>
       </div>
 
