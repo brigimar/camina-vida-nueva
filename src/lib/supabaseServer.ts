@@ -20,32 +20,53 @@ import { cookies } from "next/headers";
  *   const { data } = await supabase.from("table").select();
  */
 export async function createSupabaseServer() {
-  const cookieStore = await cookies();
+  try {
+    const cookieStore = await cookies();
 
-  const client = createServerClientFromSupabase(
-    process.env.NEXT_PUBLIC_SUPABASE_URL!,
-    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
-    {
-      cookies: {
-        getAll() {
-          // Only allow reading cookies here. Mutating cookies must happen
-          // inside Route Handlers or Server Actions.
-          return cookieStore.getAll();
+    return createServerClientFromSupabase(
+      process.env.NEXT_PUBLIC_SUPABASE_URL!,
+      process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
+      {
+        cookies: {
+          getAll() {
+            // Only allow reading cookies here. Mutating cookies must happen
+            // inside Route Handlers or Server Actions.
+            return cookieStore.getAll();
+          },
+          // Intentionally no-op for set/remove to avoid accidental cookie
+          // modifications from generic server code. Use explicit handlers in
+          // Route Handlers when you need to set cookies.
+          set() {
+            /* no-op */
+          },
+          remove() {
+            /* no-op */
+          },
         },
-        // Intentionally no-op for set/remove to avoid accidental cookie
-        // modifications from generic server code. Use explicit handlers in
-        // Route Handlers when you need to set cookies.
-        set() {
-          /* no-op */
-        },
-        remove() {
-          /* no-op */
-        },
-      },
-    }
-  );
+      }
+    );
+  } catch (e) {
+    console.error("❌ createSupabaseServer error:", e);
 
-  return client;
+    // Fallback: Create anonymous client without cookies
+    return createServerClientFromSupabase(
+      process.env.NEXT_PUBLIC_SUPABASE_URL!,
+      process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
+      {
+        cookies: {
+          getAll() {
+            return [];
+          },
+          set() {
+            /* no-op */
+          },
+          remove() {
+            /* no-op */
+          },
+        },
+      }
+    );
+  }
 }
 
 /**
