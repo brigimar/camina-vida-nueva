@@ -17,7 +17,12 @@ export default async function DashboardHome() {
   if (cRes.error) throw new Error(cRes.error.message);
   const circuitos = (cRes.data ?? []) as Circuito[];
 
-  const iRes = await supabase.from('inscripciones').select('*').limit(100);
+  // Fetch inscripciones con join correcto: inscripciones -> sesiones -> circuitos
+  const iRes = await supabase
+    .from('inscripciones')
+    .select('*, sesiones(*, circuitos(nombre))')
+    .eq('estado', 'activo')
+    .limit(100);
   if (iRes.error) throw new Error(iRes.error.message);
   const inscripciones = (iRes.data ?? []) as Inscripcion[];
 

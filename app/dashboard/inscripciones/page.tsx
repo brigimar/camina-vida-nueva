@@ -7,13 +7,17 @@ import { createSupabaseServer } from '@/lib/supabaseServer';
 export default async function InscripcionesPage() {
   const supabase = await createSupabaseServer();
 
-  const iRes = await supabase.from('inscripciones').select('*').limit(100);
+  // Fetch inscripciones con join correcto: inscripciones -> sesiones -> circuitos
+  const iRes = await supabase
+    .from('inscripciones')
+    .select('*, sesiones(*, circuitos(nombre))')
+    .eq('estado', 'activo')
+    .limit(100);
   if (iRes.error) throw new Error(iRes.error.message);
-
 
   const initialInscripciones: Inscripcion[] = iRes.data ?? [];
 
-  // fetch circuitos to map names (simple, not optimized)
+  // Fetch circuitos para referencia (si es necesario)
   const cRes = await supabase.from('circuitos').select('*').limit(100);
   if (cRes.error) throw new Error(cRes.error.message);
   const initialCircuitos: Circuito[] = cRes.data ?? [];
