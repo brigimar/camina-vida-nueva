@@ -7,7 +7,15 @@ export function useInscriptos() {
   useEffect(() => {
     fetch("/api/inscripciones")
       .then((res) => res.json())
-      .then((res) => setData(res.data))
+      .then((res) => {
+        // ✅ Parseado correcto: el endpoint retorna { data: [...] }
+        const inscripciones = res?.data?.data ?? res?.data ?? [];
+        setData(Array.isArray(inscripciones) ? inscripciones : []);
+      })
+      .catch((err) => {
+        console.error("Error fetching inscriptos:", err);
+        setData([]);
+      })
       .finally(() => setLoading(false));
   }, []);
 

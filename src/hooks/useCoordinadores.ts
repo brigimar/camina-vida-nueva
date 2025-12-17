@@ -7,7 +7,15 @@ export function useCoordinadores() {
   useEffect(() => {
     fetch("/api/coordinadores")
       .then((res) => res.json())
-      .then((res) => setData(res.data))
+      .then((res) => {
+        // ✅ Parseado correcto: el endpoint retorna { data: [...] }
+        const coordinadores = res?.data?.data ?? res?.data ?? [];
+        setData(Array.isArray(coordinadores) ? coordinadores : []);
+      })
+      .catch((err) => {
+        console.error("Error fetching coordinadores:", err);
+        setData([]);
+      })
       .finally(() => setLoading(false));
   }, []);
 

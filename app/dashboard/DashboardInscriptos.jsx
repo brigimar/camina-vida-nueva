@@ -15,19 +15,21 @@ export default function DashboardInscriptos() {
         <thead>
           <tr>
             <th>Nombre</th>
-            <th>DNI</th>
+            <th>Email</th>
             <th>Circuito</th>
+            <th>Sesión</th>
             <th>Estado</th>
           </tr>
         </thead>
 
         <tbody>
-          {data.map((i) => (
+          {(data ?? []).map((i: any) => (
             <tr key={i.id}>
-              <td>{i.nombre} {i.apellido}</td>
-              <td>{i.dni}</td>
-              <td>{i.circuitos?.nombre}</td>
-              <td>{i.estado}</td>
+              <td>{i.nombre || "—"}</td>
+              <td>{i.email || "—"}</td>
+              <td>{i.sesiones?.circuitos?.nombre || "—"}</td>
+              <td>{i.sesiones?.fecha ? new Date(i.sesiones.fecha).toLocaleDateString() : "—"}</td>
+              <td>{i.estado || "—"}</td>
             </tr>
           ))}
         </tbody>

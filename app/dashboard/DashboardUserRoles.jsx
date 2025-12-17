@@ -14,18 +14,18 @@ export default function DashboardUserRoles() {
       <table>
         <thead>
           <tr>
-            <th>Email</th>
+            <th>User ID</th>
             <th>Rol</th>
             <th>Asignado</th>
           </tr>
         </thead>
 
         <tbody>
-          {data.map((r) => (
+          {(data ?? []).map((r: any) => (
             <tr key={r.id}>
-              <td>{r.users?.email}</td>
-              <td>{r.role}</td>
-              <td>{new Date(r.created_at).toLocaleString()}</td>
+              <td>{r.user_id || "—"}</td>
+              <td>{r.role || "—"}</td>
+              <td>{r.created_at ? new Date(r.created_at).toLocaleString() : "—"}</td>
             </tr>
           ))}
         </tbody>

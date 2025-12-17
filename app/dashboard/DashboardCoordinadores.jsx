@@ -22,12 +22,12 @@ export default function DashboardCoordinadores() {
         </thead>
 
         <tbody>
-          {data.map((c) => (
+          {(data ?? []).map((c: any) => (
             <tr key={c.id}>
-              <td>{c.nombre} {c.apellido}</td>
-              <td>{c.dni}</td>
-              <td>{c.email}</td>
-              <td>{c.estado}</td>
+              <td>{c.nombre && c.apellido ? `${c.nombre} ${c.apellido}` : c.nombre || "—"}</td>
+              <td>{c.dni || "—"}</td>
+              <td>{c.email || "—"}</td>
+              <td>{c.estado || "—"}</td>
             </tr>
           ))}
         </tbody>

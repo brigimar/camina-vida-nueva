@@ -7,7 +7,15 @@ export function useUserRoles() {
   useEffect(() => {
     fetch("/api/user-roles")
       .then((res) => res.json())
-      .then((res) => setData(res.data))
+      .then((res) => {
+        // ✅ Parseado correcto: el endpoint retorna { data: [...] }
+        const roles = res?.data?.data ?? res?.data ?? [];
+        setData(Array.isArray(roles) ? roles : []);
+      })
+      .catch((err) => {
+        console.error("Error fetching user roles:", err);
+        setData([]);
+      })
       .finally(() => setLoading(false));
   }, []);
 

@@ -33,8 +33,11 @@ export default async function DashboardHome() {
   const circuitosActivos = circuitos.filter((c) => c.estado === "activo").length || 0;
   const totalInscripciones = inscripciones.length || 0;
 
+  // ✅ Contar inscripciones de hoy usando sesiones.fecha (no inscripciones.fecha)
   const hoy = new Date().toISOString().split("T")[0];
-  const inscripcionesHoy = inscripciones.filter((i) => i.fecha?.startsWith(hoy)).length || 0;
+  const inscripcionesHoy = inscripciones.filter((i: Inscripcion) => 
+    i.sesiones?.fecha?.startsWith(hoy)
+  ).length || 0;
 
   const sesionesProgramadas = sesiones.filter((s) => s.estado === "programada").length || 0;
 
