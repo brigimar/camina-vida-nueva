@@ -35,10 +35,7 @@ export default function HeaderCaminaVida() {
               priority
               className="object-contain"
             />
-            <span className="text-2xl font-extrabold text-emerald-700 tracking-tight">
-              Camina Vida
-            </span>
-          </Link>
+            </Link>
 
           {/* BOTÓN MOBILE */}
           <button
