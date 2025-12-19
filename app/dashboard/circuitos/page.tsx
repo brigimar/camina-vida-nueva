@@ -1,35 +1,58 @@
 import Link from "next/link";
-import { Circuito } from "@/types";
-import CircuitosListClient from "./components/CircuitosListClient";
-import { createSupabaseServer } from "@/lib/supabaseServer";
-
-export const dynamic = 'force-dynamic';
+import { createSupabaseServer } from '@/lib/supabaseServer'
 
 export default async function CircuitosPage() {
-  let circuitos: Circuito[] = [];
-  try {
-    const supabase = await createSupabaseServer();
-    const { data, error } = await supabase.from('circuitos').select('*').limit(100);
-    if (error) throw error;
-    circuitos = data ?? [];
-  } catch (error) {
-    console.error('Error fetching circuitos:', error);
-  }
+  const supabase = await createSupabaseServer();
+
+  const { data, error } = await supabase
+    .from("circuitos")
+    .select("*")
+    .order("nombre", { ascending: true });
+
+  const circuitos = Array.isArray(data) ? data : [];
 
   return (
     <div className="p-6">
-      <div className="flex justify-between items-center mb-6">
-        <h1 className="text-3xl font-bold">Circuitos</h1>
-        <Link
-          href="/dashboard/circuitos/create"
-          className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700"
-        >
-          + Crear Circuito
-        </Link>
-      </div>
+      <h1 className="text-3xl font-bold mb-6">Circuitos</h1>
 
-      {/* Pass circuitos to client component for interactivity */}
-      <CircuitosListClient initialCircuitos={circuitos} />
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        {circuitos.map((circuito) => (
+          <Link
+            key={circuito.id}
+            href={`/dashboard/circuitos/${circuito.id}`}
+            className="bg-white rounded-xl shadow hover:shadow-lg transition overflow-hidden"
+          >
+            {/* Imagen */}
+            {circuito.imagen_url ? (
+              <img
+                src={circuito.imagen_url}
+                alt={circuito.nombre}
+                className="w-full h-40 object-cover"
+              />
+            ) : (
+              <div className="w-full h-40 bg-gray-200 flex items-center justify-center text-gray-500">
+                Sin imagen
+              </div>
+            )}
+
+            {/* Info */}
+            <div className="p-4">
+              <h2 className="text-xl font-bold">{circuito.nombre}</h2>
+              <p className="text-gray-600 text-sm">{circuito.localidad}</p>
+
+              <div className="mt-3 flex items-center justify-between">
+                <span className="text-sm bg-green-100 text-green-700 px-2 py-1 rounded">
+                  {circuito.nivel ?? "Sin nivel"}
+                </span>
+
+                <span className="text-sm text-gray-700">
+                  {circuito.distancia_km} km
+                </span>
+              </div>
+            </div>
+          </Link>
+        ))}
+      </div>
     </div>
   );
 }

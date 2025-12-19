@@ -7,9 +7,7 @@ interface Props { params: { id: string } }
 
 export default async function SesionesEdit({ params }: Props) {
   const { id } = params;
-  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || '';
-
-  const res = await fetch(`${baseUrl}/api/sesiones/${id}`, { cache: 'no-store' });
+  const res = await fetch(`/api/sesiones/${id}`, { cache: 'no-store' });
   const data = await res.json();
   const sesion: Sesion = data?.data ?? data;
 

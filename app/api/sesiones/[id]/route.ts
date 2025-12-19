@@ -1,5 +1,6 @@
 import { NextRequest } from "next/server";
 import { ok, errorResponse } from "@/lib/utils/respuesta";
+import { requireUser } from "@/lib/auth/authorize"; // ✅ AGREGADO: import faltante
 import {
   getSesionById,
   updateSesion,

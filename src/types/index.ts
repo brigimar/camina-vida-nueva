@@ -29,17 +29,21 @@ export interface Circuito {
 // INSCRIPCIONES
 // ----------------------
 
-export type InscripcionEstado = "pendiente" | "confirmada" | "cancelada";
+export type InscripcionEstado = "activo" | "inactivo" | "cancelado";
 
 export interface Inscripcion {
   id: string;
-  circuito_id: string;
+  sesion_id: string;
   nombre: string;
-  apellido: string;
-  email: string;
-  telefono: string | null;
-  fecha: string;
+  apellido?: string;
+  dni?: string;
+  email?: string;
+  whatsapp?: string;
+  edad?: number;
   estado: InscripcionEstado;
+  origen?: "web" | "dashboard";
+  created_at?: string;
+  updated_at?: string;
 }
 
 // ----------------------
@@ -55,6 +59,9 @@ export interface Sesion {
   horario: string;
   cupo: number;
   estado: SesionEstado;
+  coordinador_id?: string;
+  created_at?: string;
+  updated_at?: string;
 }
 
 // ----------------------
@@ -64,6 +71,13 @@ export interface Sesion {
 export interface Coordinador {
   id: string;
   nombre: string;
+  apellido?: string;
+  dni?: string;
+  telefono?: string;
+  email?: string;
   foto: string | null;
   bio: string | null;
+  estado?: "activo" | "inactivo";
+  created_at?: string;
+  updated_at?: string;
 }

@@ -10,13 +10,8 @@ interface EditProps {
 export default async function InscripcionesEdit({ params }: EditProps) {
   const { id } = params;
 
-  // ✅ Construcción segura del URL absoluto
-  const baseUrl =
-    process.env.NEXT_PUBLIC_BASE_URL ||
-    process.env.VERCEL_URL ||
-    'http://localhost:3000';
-
-  const url = `${baseUrl}/api/inscripciones/${id}`;
+  // ✅ Usando ruta relativa (más seguro en SSR)
+  const url = `/api/inscripciones/${id}`;
 
   let ins: Inscripcion | null = null;
 

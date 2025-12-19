@@ -1,12 +1,13 @@
 export const dynamic = 'force-dynamic';
 
 import { Sesion, Circuito } from '@/types';
+import { createSupabaseServer } from '@/lib/supabaseServer';
 
 interface Props { params: { id: string } }
 
 export default async function SesionesShow({ params }: Props) {
   const { id } = params;
-  const supabase = await (await import('@/lib/supabaseServer')).createSupabaseServer();
+  const supabase = await createSupabaseServer();
 
   const sRes = await supabase.from('sesiones').select('*').eq('id', id).single();
   if (sRes.error) throw new Error(sRes.error.message);

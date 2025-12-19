@@ -1,3 +1,10 @@
+export type CircuitoCategoria =
+  | "terapeuticas"
+  | "saludables"
+  | "fitness"
+  | "aventura"
+  | "premium";
+
 export interface Circuito {
   id: string;
   nombre: string;
@@ -21,4 +28,7 @@ export interface Circuito {
   horarios: string[] | null;
   cupo_maximo: number | null;
   duracion_minutos: number | null;
+
+  // ✅ NUEVO CAMPO
+  categoria: CircuitoCategoria | null;
 }

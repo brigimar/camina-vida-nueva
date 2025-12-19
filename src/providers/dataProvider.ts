@@ -1,5 +1,6 @@
 // dataProvider removed (Refine-specific). If imported, provide no-op implementations.
-const API_URL = process.env.NEXT_PUBLIC_BASE_URL + "/api";
+// ✅ Usando ruta relativa para evitar undefined en SSR
+const API_URL = "/api";
 
 export const dataProvider = {
   async getList() {

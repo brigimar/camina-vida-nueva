@@ -1,11 +1,12 @@
 import { createSupabaseServer } from "@/lib/supabaseServer";
 import { circuitoSchema } from "@/lib/validators/circuitoSchema";
 
-// ✅ LISTAR CON FILTRO, PAGINACIÓN Y BÚSQUEDA
+// ✅ LISTAR CON FILTRO, PAGINACIÓN Y BÚSQUEDA (NUEVOS FILTROS)
 export async function getCircuitosAdvanced({
   page = 1,
   limit = 10,
-  estado = "todos",
+  categoria = "",
+  barrio = "",
   search = "",
 }) {
   const supabase = await createSupabaseServer();
@@ -15,17 +16,25 @@ export async function getCircuitosAdvanced({
 
   let query = supabase
     .from("circuitos")
-    .select("*", { count: "exact" })
-    .order("created_at", { ascending: false });
+    .select("*, sesiones(*)", { count: "exact" })
+    .eq("activo", true)
+    .order("nombre", { ascending: true });
 
-  if (estado === "activo") {
-    query = query.eq("activo", true);
-  }
-
+  // ✅ Búsqueda por texto
   if (search) {
     query = query.or(
       `nombre.ilike.%${search}%,descripcion.ilike.%${search}%,localidad.ilike.%${search}%,punto_encuentro.ilike.%${search}%`
     );
+  }
+
+  // ✅ Filtro por categoría
+  if (categoria) {
+    query = query.eq("categoria", categoria);
+  }
+
+  // ✅ Filtro por barrio/localidad
+  if (barrio) {
+    query = query.eq("barrio", barrio);
   }
 
   const { data, error, count } = await query.range(from, to);
@@ -41,13 +50,13 @@ export async function getCircuitosAdvanced({
   };
 }
 
-// ✅ OBTENER UNO POR ID
+// ✅ OBTENER UNO POR ID (CON SESIONES)
 export async function getCircuitoById(id: string) {
   const supabase = await createSupabaseServer();
 
   const { data, error } = await supabase
     .from("circuitos")
-    .select("*")
+    .select("*, sesiones(*)")
     .eq("id", id)
     .single();
 
@@ -89,14 +98,13 @@ export async function updateCircuito(id: string, payload: unknown) {
   return data;
 }
 
-// ✅ DELETE REAL (soft-delete + auditoría)
+// ✅ DELETE REAL (soft-delete)
 export async function deleteCircuito(id: string) {
   const supabase = await createSupabaseServer();
 
   const { data, error } = await supabase
     .from("circuitos")
     .update({
-      estado: "inactivo",
       activo: false,
       updated_at: new Date().toISOString(),
     })

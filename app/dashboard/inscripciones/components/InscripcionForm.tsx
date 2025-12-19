@@ -16,8 +16,10 @@ interface Props {
 }
 
 export default function InscripcionForm({ initialData, inscripcionId }: Props) {
-  const [form, setForm] = useState<Partial<Inscripcion>>(initialData || {});
+  const [form, setForm] = useState<any>(initialData || {});
   const [sesiones, setSesiones] = useState<Sesion[]>([]);
+  const [error, setError] = useState<string | null>(null);
+  const [success, setSuccess] = useState<string | null>(null);
   const router = useRouter();
 
   useEffect(() => {
@@ -27,8 +29,10 @@ export default function InscripcionForm({ initialData, inscripcionId }: Props) {
       .catch(() => setSesiones([]));
   }, []);
 
-  const handleChange = (e: any) =>
+  const handleChange = (e: any) => {
     setForm({ ...form, [e.target.name]: e.target.value });
+    setError(null);
+  };
 
   const handleSubmit = async (e: any) => {
     e.preventDefault();
@@ -37,13 +41,23 @@ export default function InscripcionForm({ initialData, inscripcionId }: Props) {
       ? `/api/inscripciones/${inscripcionId}`
       : '/api/inscripciones';
 
-    await fetch(url, {
-      method,
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(form),
-    });
+    try {
+      const res = await fetch(url, {
+        method,
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(form),
+      });
 
-    router.push('/dashboard/inscripciones');
+      if (!res.ok) {
+        const errData = await res.json();
+        throw new Error(errData?.error?.message || 'Error guardando inscripción');
+      }
+
+      setSuccess(inscripcionId ? 'Inscripción actualizada' : 'Inscripción creada');
+      setTimeout(() => router.push('/dashboard/inscripciones'), 1000);
+    } catch (err) {
+      setError((err as Error).message);
+    }
   };
 
   return (
@@ -51,6 +65,9 @@ export default function InscripcionForm({ initialData, inscripcionId }: Props) {
       onSubmit={handleSubmit}
       className="bg-white p-6 rounded-lg shadow max-w-xl"
     >
+      {error && <div className="mb-4 p-3 bg-red-100 text-red-700 rounded">{error}</div>}
+      {success && <div className="mb-4 p-3 bg-green-100 text-green-700 rounded">{success}</div>}
+
       <div className="grid grid-cols-1 gap-4">
         <input
           name="nombre"
@@ -59,6 +76,22 @@ export default function InscripcionForm({ initialData, inscripcionId }: Props) {
           placeholder="Nombre"
           className="input"
           required
+        />
+
+        <input
+          name="apellido"
+          value={(form.apellido as string) || ''}
+          onChange={handleChange}
+          placeholder="Apellido"
+          className="input"
+        />
+
+        <input
+          name="dni"
+          value={(form.dni as string) || ''}
+          onChange={handleChange}
+          placeholder="DNI"
+          className="input"
         />
 
         <input
@@ -87,7 +120,7 @@ export default function InscripcionForm({ initialData, inscripcionId }: Props) {
           type="number"
         />
 
-        {/* ✅ Seleccionar sesión */}
+        {/* ✅ Seleccionar sesión - CAMBIÓ de circuito_id a sesion_id */}
         <select
           name="sesion_id"
           value={(form.sesion_id as string) ?? ''}
@@ -116,7 +149,7 @@ export default function InscripcionForm({ initialData, inscripcionId }: Props) {
         </select>
       </div>
 
-      <button className="mt-6 px-4 py-2 bg-blue-600 text-white rounded-lg">
+      <button className="mt-6 w-full px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700">
         {inscripcionId ? 'Guardar cambios' : 'Crear'}
       </button>
     </form>

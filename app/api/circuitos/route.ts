@@ -14,43 +14,56 @@ export async function GET(req: Request) {
     const { searchParams } = new URL(req.url);
     const supabase = await createSupabaseServer();
 
-    // ✅ Parámetros
+    // ✅ Parámetros de paginación
     const page = Number(searchParams.get("page") ?? 1);
     const limit = Number(searchParams.get("limit") ?? 10);
     const offset = (page - 1) * limit;
 
+    // ✅ Parámetros de búsqueda y filtros NUEVOS
     const q = searchParams.get("q");
-    const localidad = searchParams.get("localidad");
-    const dificultad = searchParams.get("dificultad");
-    const activo = searchParams.get("activo");
+    const categoria = searchParams.get("categoria");
+    const barrio = searchParams.get("barrio");
     const dia = searchParams.get("dia");
+    const horario = searchParams.get("horario");
     const sort = searchParams.get("sort") ?? "nombre";
     const order = searchParams.get("order") ?? "asc";
 
     let query = supabase
       .from("circuitos")
-      .select("*", { count: "exact" })
+      .select("*, sesiones(*)", { count: "exact" })
+      .eq("activo", true)
       .order(sort, { ascending: order === "asc" })
       .range(offset, offset + limit - 1);
 
-    // ✅ Búsqueda
+    // ✅ Búsqueda por nombre/descripción/localidad/punto_encuentro
     if (q) {
       query = query.or(
         `nombre.ilike.%${q}%,descripcion.ilike.%${q}%,localidad.ilike.%${q}%,punto_encuentro.ilike.%${q}%`
       );
     }
 
-    // ✅ Filtros
-    if (localidad) query = query.eq("localidad", localidad);
-    if (dificultad) query = query.eq("dificultad", dificultad);
-    if (activo) query = query.eq("activo", activo === "true");
-    if (dia) query = query.contains("dias", [dia]);
+    // ✅ Filtros por categoría
+    if (categoria) query = query.eq("categoria", categoria);
+
+    // ✅ Filtros por barrio/localidad
+    if (barrio) query = query.eq("barrio", barrio);
+
+    // ✅ Nota: Los filtros de día y horario se aplican client-side en CircuitosListado
+    // porque necesitan buscar dentro del array de sesiones
 
     const { data, count, error } = await query;
 
     if (error) throw error;
 
-    return ok({ data, pagination: { page, limit, total: count, pages: Math.ceil((count || 0) / limit) } });
+    return ok({ 
+      data, 
+      pagination: { 
+        page, 
+        limit, 
+        total: count, 
+        pages: Math.ceil((count || 0) / limit) 
+      } 
+    });
   } catch (e) {
     const error = e as PostgrestError;
     console.error("GET /api/circuitos error:", error);

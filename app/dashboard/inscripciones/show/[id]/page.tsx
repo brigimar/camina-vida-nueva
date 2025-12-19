@@ -1,6 +1,7 @@
 export const dynamic = 'force-dynamic';
 
 import { Inscripcion } from '@/types';
+import { createSupabaseServer } from '@/lib/supabaseServer';
 
 interface Props {
   params: { id: string };
@@ -9,9 +10,7 @@ interface Props {
 export default async function InscripcionesShow({ params }: Props) {
   const { id } = params;
 
-  const supabase = await (
-    await import('@/lib/supabaseServer')
-  ).createSupabaseServer();
+  const supabase = await createSupabaseServer();
 
   // ✅ Fetch seguro (sin throw)
   const res = await supabase

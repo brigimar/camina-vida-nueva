@@ -4,7 +4,7 @@ export default async function ReservaPage({ params }) {
   const { id } = params;
 
   const res = await fetch(
-    `${process.env.NEXT_PUBLIC_BASE_URL}/api/inscripciones/${id}`,
+    `/api/inscripciones/${id}`,
     { cache: "no-store" }
   );
 

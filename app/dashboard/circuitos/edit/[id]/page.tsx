@@ -1,31 +1,34 @@
-export const dynamic = 'force-dynamic';
-
+import { createSupabaseServer } from "@/lib/supabaseServer";
 import CircuitoForm from "../../components/CircuitoForm";
 
-export default async function EditCircuitoPage({ params }: { params: Promise<{ id: string }> }) {
-  const { id } = await params;
-  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000";
+interface Props {
+  params: { id: string };
+}
 
-  let circuito = null;
-  try {
-    const res = await fetch(`${baseUrl}/api/circuitos/${id}`, {
-      cache: "no-store",
-    });
+export default async function EditCircuitoPage({ params }: Props) {
+  const supabase = await createSupabaseServer();
 
-    if (!res.ok) {
-      return <div className="p-6 text-red-600">Error cargando circuito</div>;
-    }
+  const { data, error } = await supabase
+    .from("circuitos")
+    .select("*")
+    .eq("id", params.id)
+    .single();
 
-    circuito = await res.json();
-  } catch (error) {
-    console.error("Error:", error);
-    return <div className="p-6 text-red-600">Error cargando circuito</div>;
+  // ✅ Manejo seguro de errores (sin throw)
+  if (error || !data) {
+    return (
+      <div className="p-6 bg-white rounded-xl shadow max-w-xl mx-auto mt-10">
+        <h2 className="text-xl font-bold mb-2">Circuito no encontrado</h2>
+        <p className="text-gray-600">
+          No pudimos cargar la información del circuito.
+        </p>
+      </div>
+    );
   }
 
   return (
-    <div className="p-6">
-      <h1 className="text-3xl font-bold mb-6">Editar Circuito</h1>
-      <CircuitoForm initialData={circuito} circuitoId={id} />
+    <div className="max-w-2xl mx-auto py-10">
+      <CircuitoForm initialData={data} circuitoId={params.id} />
     </div>
   );
 }

@@ -11,9 +11,8 @@ export default async function EditCoordinadorPage({
   params,
 }: EditCoordinadorPageProps) {
   const { id } = await params;
-  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
 
-  const res = await fetch(`${baseUrl}/api/coordinadores/${id}`, {
+  const res = await fetch(`/api/coordinadores/${id}`, {
     cache: "no-store",
   });
 
