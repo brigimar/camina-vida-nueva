@@ -8,7 +8,7 @@ export default function HeroCaminaVida() {
       {/* IMAGEN DE FONDO */}
       <div className="absolute inset-0 -z-10">
         <Image
-          src="/hero-camina-vida.jpg" // ⬅️ cambiá por tu imagen
+          src="/gentevienecaminando.webp" // ⬅️ cambiá por tu imagen
           alt="Personas caminando al aire libre"
           fill
           priority

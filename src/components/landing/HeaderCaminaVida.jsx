@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { useState } from "react";
 import {
   FaBars,
@@ -24,10 +25,17 @@ export default function HeaderCaminaVida() {
       <header className="sticky top-0 z-50 bg-white/90 backdrop-blur-md shadow-sm">
         <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
 
-          {/* LOGO */}
-          <Link href="/" className="flex items-center gap-2">
-            <FaWalking className="text-emerald-700 text-3xl" />
-            <span className="text-2xl font-extrabold text-emerald-700">
+          {/* LOGO CON logo.webp */}
+          <Link href="/" className="flex items-center gap-3">
+            <Image 
+              src="/logo.webp" 
+              alt="Logo Camina Vida" 
+              width={45} 
+              height={45} 
+              priority
+              className="object-contain"
+            />
+            <span className="text-2xl font-extrabold text-emerald-700 tracking-tight">
               Camina Vida
             </span>
           </Link>
@@ -62,7 +70,7 @@ export default function HeaderCaminaVida() {
                 />
               </button>
 
-              {/* Wrapper sin gap */}
+              {/* Wrapper para el menú desplegable */}
               <div className="absolute left-0 top-full pt-4">
                 <div
                   className={`w-[600px] bg-white shadow-2xl rounded-2xl p-8 grid grid-cols-3 gap-6 border border-gray-100 transition-all duration-200 ${
@@ -73,8 +81,7 @@ export default function HeaderCaminaVida() {
                 >
                   {/* Columna 1 */}
                   <div className="space-y-4">
-                    <h4 className="font-bold text-gray-900">Bienestar</h4>
-
+                    <h4 className="font-bold text-gray-900 border-b pb-2">Bienestar</h4>
                     <Link
                       href="/circuitos?categoria=terapeuticas"
                       className="flex items-center gap-3 hover:text-emerald-600 transition"
@@ -82,20 +89,18 @@ export default function HeaderCaminaVida() {
                       <FaHeartbeat className="text-emerald-600" />
                       Terapéuticas
                     </Link>
-
                     <Link
                       href="/circuitos?categoria=saludables"
                       className="flex items-center gap-3 hover:text-emerald-600 transition"
                     >
                       <FaLeaf className="text-emerald-600" />
-                      Saludables Básicas
+                      Saludables
                     </Link>
                   </div>
 
                   {/* Columna 2 */}
                   <div className="space-y-4">
-                    <h4 className="font-bold text-gray-900">Actividad Física</h4>
-
+                    <h4 className="font-bold text-gray-900 border-b pb-2">Actividad</h4>
                     <Link
                       href="/circuitos?categoria=fitness"
                       className="flex items-center gap-3 hover:text-emerald-600 transition"
@@ -103,7 +108,6 @@ export default function HeaderCaminaVida() {
                       <FaWalking className="text-emerald-600" />
                       Fitness
                     </Link>
-
                     <Link
                       href="/circuitos?categoria=aventura"
                       className="flex items-center gap-3 hover:text-emerald-600 transition"
@@ -115,8 +119,7 @@ export default function HeaderCaminaVida() {
 
                   {/* Columna 3 */}
                   <div className="space-y-4">
-                    <h4 className="font-bold text-gray-900">Experiencias</h4>
-
+                    <h4 className="font-bold text-gray-900 border-b pb-2">Explorar</h4>
                     <Link
                       href="/circuitos?categoria=premium"
                       className="flex items-center gap-3 hover:text-emerald-600 transition"
@@ -124,7 +127,6 @@ export default function HeaderCaminaVida() {
                       <FaStar className="text-emerald-600" />
                       Premium
                     </Link>
-
                     <Link
                       href="/circuitos"
                       className="flex items-center gap-3 hover:text-emerald-600 transition"
@@ -156,7 +158,7 @@ export default function HeaderCaminaVida() {
           <div className="hidden md:block">
             <Link
               href="/reservar/1"
-              className="px-5 py-2 bg-emerald-600 text-white rounded-xl font-semibold shadow hover:bg-emerald-700 transition"
+              className="px-5 py-2 bg-emerald-600 text-white rounded-xl font-semibold shadow-md hover:bg-emerald-700 transition-all transform hover:scale-105"
             >
               Reservar
             </Link>
@@ -178,24 +180,27 @@ export default function HeaderCaminaVida() {
           openMobile ? "translate-x-0" : "translate-x-full"
         }`}
       >
-        <button
-          onClick={() => setOpenMobile(false)}
-          className="text-3xl text-emerald-700 absolute top-4 right-4"
-        >
-          <FaTimes />
-        </button>
+        <div className="flex justify-between items-center mb-10">
+          <Image src="/logo.webp" alt="Logo" width={35} height={35} />
+          <button
+            onClick={() => setOpenMobile(false)}
+            className="text-3xl text-emerald-700"
+          >
+            <FaTimes />
+          </button>
+        </div>
 
-        <nav className="mt-12 flex flex-col gap-6 text-lg font-medium text-gray-700">
-          <Link href="/#beneficios" onClick={() => setOpenMobile(false)}>
+        <nav className="flex flex-col gap-6 text-lg font-medium text-gray-700">
+          <Link href="/#beneficios" onClick={() => setOpenMobile(false)} className="hover:text-emerald-600">
             Beneficios
           </Link>
-          <Link href="/#metodo" onClick={() => setOpenMobile(false)}>
+          <Link href="/#metodo" onClick={() => setOpenMobile(false)} className="hover:text-emerald-600">
             Método
           </Link>
-          <Link href="/circuitos" onClick={() => setOpenMobile(false)}>
+          <Link href="/circuitos" onClick={() => setOpenMobile(false)} className="hover:text-emerald-600">
             Circuitos
           </Link>
-          <Link href="/#planes" onClick={() => setOpenMobile(false)}>
+          <Link href="/#planes" onClick={() => setOpenMobile(false)} className="hover:text-emerald-600">
             Planes
           </Link>
         </nav>
@@ -203,16 +208,16 @@ export default function HeaderCaminaVida() {
         <Link
           href="/reservar/1"
           onClick={() => setOpenMobile(false)}
-          className="block mt-10 px-6 py-3 bg-emerald-600 text-white rounded-xl font-semibold text-center shadow hover:bg-emerald-700 transition"
+          className="block mt-10 px-6 py-3 bg-emerald-600 text-white rounded-xl font-semibold text-center shadow-lg hover:bg-emerald-700 transition"
         >
-          Reservar
+          Reservar Ahora
         </Link>
       </aside>
 
       {/* CTA FLOTANTE MOBILE */}
       <Link
         href="/reservar/1"
-        className="md:hidden fixed bottom-6 right-6 px-6 py-3 bg-emerald-600 text-white rounded-full shadow-xl font-semibold z-40"
+        className="md:hidden fixed bottom-6 right-6 px-6 py-3 bg-emerald-600 text-white rounded-full shadow-2xl font-semibold z-40 active:scale-95 transition-transform"
       >
         Reservar
       </Link>
