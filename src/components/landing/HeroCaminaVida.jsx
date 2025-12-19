@@ -1,64 +1,70 @@
 'use client';
 
 import Image from 'next/image';
+import { ArrowDown } from 'lucide-react';
 
 export default function HeroCaminaVida() {
   return (
-    <section className="relative isolate overflow-hidden">
-      {/* IMAGEN DE FONDO */}
+    <section className="relative isolate min-h-[90dvh] flex items-center justify-center overflow-hidden">
+      {/* IMAGEN DE FONDO (Mismo nombre conservado) */}
       <div className="absolute inset-0 -z-10">
         <Image
-          src="/gentevienecaminando.webp" // ⬅️ cambiá por tu imagen
+          src="/gentevienecaminando.webp"
           alt="Personas caminando al aire libre"
           fill
           priority
           className="object-cover"
         />
 
-        {/* OVERLAY VARIABLE */}
+        {/* OVERLAY ESTILO PREMIUM: Gradiente más sutil para resaltar la tipografía */}
         <div
           className="
             absolute inset-0
             bg-gradient-to-b
-            from-emerald-900/70
-            via-emerald-800/50
-            to-white/80
+            from-slate-900/60
+            via-slate-900/40
+            to-brand-crema/90
           "
         />
       </div>
 
-      {/* CONTENIDO */}
-      <div className="text-center px-6 pt-24 pb-16 max-w-4xl mx-auto">
-        <h1 className="text-4xl md:text-5xl font-extrabold text-white leading-tight drop-shadow">
-          Camina Vida
+      {/* CONTENIDO EDITORIAL */}
+      <div className="text-center px-6 max-w-5xl mx-auto mt-12">
+        {/* Tag Superior */}
+        <span className="inline-block text-[#FF5C35] font-bold tracking-[0.3em] uppercase text-[10px] mb-6 animate-fadeInUp">
+          Sembrá pasos, cosechá vida
+        </span>
+
+        {/* Título Principal con Fuente Serif */}
+        <h1 className="text-5xl md:text-7xl lg:text-8xl font-serif text-white leading-[1.1] drop-shadow-sm animate-fadeInUp">
+          Un espacio para <br />
+          <span className="italic text-[#FF5C35]">recibir vida</span>
         </h1>
 
-        <p className="text-2xl md:text-3xl font-semibold text-emerald-100 mt-3 drop-shadow">
-          Sembrá pasos y cosechá vida
+        {/* Bajada que condensa los beneficios */}
+        <p className="mt-8 text-lg md:text-2xl text-white/90 font-light max-w-3xl mx-auto leading-relaxed drop-shadow-md animate-fadeInUp">
+          Ganar **salud**, compartir el camino **con otros** y reconectar con tu bienestar integral a través del movimiento consciente.
         </p>
 
-        <p className="text-emerald-50/90 mt-6 text-lg leading-relaxed max-w-2xl mx-auto drop-shadow">
-          Una experiencia terapéutica que integra movimiento, estiramiento,
-          respiración y meditación.
-        </p>
-
-        <div className="mt-10">
+        {/* Botones de Acción */}
+        <div className="mt-12 flex flex-col sm:flex-row items-center justify-center gap-6 animate-fadeInUp">
           <a
             href="#planes"
-            className="
-              inline-block
-              px-10 py-4
-              bg-emerald-600
-              text-white
-              font-semibold
-              rounded-xl
-              shadow-lg
-              hover:bg-emerald-700
-              transition
-            "
+            className="px-12 py-5 bg-[#FF5C35] text-white font-bold rounded-2xl shadow-xl shadow-orange-900/20 hover:bg-[#e44d2a] hover:scale-105 transition-all duration-300 w-full sm:w-auto"
           >
-            Conocé nuestros planes
+            Comenzar ahora
           </a>
+          <a
+            href="#metodo"
+            className="px-12 py-5 bg-white/10 backdrop-blur-md border border-white/20 text-white font-bold rounded-2xl hover:bg-white/20 transition-all w-full sm:w-auto"
+          >
+            Nuestro método
+          </a>
+        </div>
+
+        {/* Indicador de Scroll */}
+        <div className="absolute bottom-10 left-1/2 -translate-x-1/2 text-white/50 animate-bounce-slow">
+          <ArrowDown size={24} />
         </div>
       </div>
     </section>

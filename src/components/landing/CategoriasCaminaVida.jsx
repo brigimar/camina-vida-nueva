@@ -1,56 +1,44 @@
 "use client";
 
 import { useRef } from "react";
-import { 
-  ChevronLeft, 
-  ChevronRight, 
-  Leaf, 
-  Activity, 
-  Zap, 
-  Mountain, 
-  Sparkles 
-} from "lucide-react";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 
-export default function CategoriasCaminaVida() {
+export default function CategoriasEstiloOlla() {
   const scrollRef = useRef(null);
 
   const categorias = [
     {
       id: "terapeuticas",
-      titulo: "Caminatas Terapéuticas",
-      icon: <Leaf className="text-emerald-600" size={32} strokeWidth={1.5} />,
-      descripcion: "Bienestar emocional, reducción de estrés y mindfulness en movimiento.",
+      titulo: "Terapéuticas",
+      img: "/img1.webp",
     },
     {
       id: "saludables",
-      titulo: "Caminatas Saludables",
-      icon: <Activity className="text-blue-500" size={32} strokeWidth={1.5} />,
-      descripcion: "Actividad física accesible para crear hábito y constancia.",
+      titulo: "Saludables",
+      img: "/img2.webp",
     },
     {
       id: "fitness",
-      titulo: "Caminatas Fitness",
-      icon: <Zap className="text-orange-500" size={32} strokeWidth={1.5} />,
-      descripcion: "Ritmo más intenso para mejorar condición física y quemar calorías.",
+      titulo: "Fitness",
+      img: "/img3.webp",
     },
     {
       id: "aventura",
-      titulo: "Caminatas de Aventura",
-      icon: <Mountain className="text-stone-600" size={32} strokeWidth={1.5} />,
-      descripcion: "Exploración de parques, reservas y senderos especiales.",
+      titulo: "Aventura",
+      img: "/img4.webp",
     },
     {
       id: "premium",
-      titulo: "Caminatas Premium",
-      icon: <Sparkles className="text-amber-500" size={32} strokeWidth={1.5} />,
-      descripcion: "Experiencias únicas: amanecer, música, fotografía, brunch y más.",
+      titulo: "Premium",
+      img: "/img5.webp",
     },
   ];
 
   const scroll = (direction) => {
     if (scrollRef.current) {
-      const { scrollLeft, clientWidth } = scrollRef.current;
-      const scrollTo = direction === "left" ? scrollLeft - clientWidth * 0.8 : scrollLeft + clientWidth * 0.8;
+      const { scrollLeft } = scrollRef.current;
+      const scrollAmount = 320; // Ancho de tarjeta + gap
+      const scrollTo = direction === "left" ? scrollLeft - scrollAmount : scrollLeft + scrollAmount;
       
       scrollRef.current.scrollTo({
         left: scrollTo,
@@ -60,77 +48,77 @@ export default function CategoriasCaminaVida() {
   };
 
   return (
-    <section className="px-6 py-24 bg-[#F8FAFC] overflow-hidden">
-      <div className="max-w-7xl mx-auto">
+    <section className="py-24 bg-[#FFFBF7] overflow-hidden">
+      <div className="max-w-7xl mx-auto px-6">
         
-        {/* Encabezado con estilo editorial */}
-        <div className="text-center mb-16">
-          <span className="text-emerald-600 font-semibold tracking-widest uppercase text-xs">Experiencias</span>
-          <h2 className="text-4xl md:text-5xl font-extrabold text-slate-900 mt-3 mb-4 tracking-tight">
-            Encuentra tu ritmo
-          </h2>
-          <p className="text-slate-500 max-w-2xl mx-auto text-lg">
-            Propuestas diseñadas para conectar con la naturaleza y mejorar tu bienestar físico y mental.
-          </p>
-        </div>
-
-        {/* Contenedor del Slider */}
-        <div className="relative px-2 md:px-4">
-          
-          {/* Flecha Izquierda - Estilo Minimal */}
-          <button
-            onClick={() => scroll("left")}
-            className="absolute left-[-20px] top-1/2 -translate-y-1/2 z-10 hidden lg:flex p-3 rounded-full bg-white shadow-md text-slate-400 hover:text-emerald-600 hover:shadow-xl transition-all duration-300 border border-slate-100"
-          >
-            <ChevronLeft size={24} />
-          </button>
-
-          {/* Slider */}
-          <div
-            ref={scrollRef}
-            className="flex gap-8 overflow-x-auto pb-12 pt-4 snap-x snap-mandatory scroll-smooth scrollbar-hide"
-            style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
-          >
-            {categorias.map((c) => (
-              <div
-                key={c.id}
-                className="snap-center min-w-[300px] md:min-w-[350px] flex-shrink-0 p-10 bg-white rounded-[2rem] border border-slate-100 shadow-[0_10px_30px_-15px_rgba(0,0,0,0.05)] hover:shadow-[0_30px_60px_-20px_rgba(0,0,0,0.1)] transition-all duration-500 group"
-              >
-                {/* Icono con fondo suave */}
-                <div className="w-16 h-16 rounded-2xl bg-slate-50 flex items-center justify-center mb-8 group-hover:scale-110 transition-transform duration-500 ease-out">
-                  {c.icon}
-                </div>
-
-                <h3 className="text-2xl font-bold text-slate-800 mb-4 tracking-tight">
-                  {c.titulo}
-                </h3>
-
-                <p className="text-slate-500 leading-relaxed text-base">
-                  {c.descripcion}
-                </p>
-
-                <div className="mt-8 flex items-center text-emerald-600 font-bold text-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                  Explorar circuitos 
-                  <ChevronRight size={16} className="ml-1" />
-                </div>
-              </div>
-            ))}
+        {/* Cabecera Editorial */}
+        <div className="flex items-end justify-between mb-12">
+          <div className="space-y-2">
+            <h2 className="text-4xl md:text-5xl font-serif text-slate-900">
+              Encontrá tu ritmo
+            </h2>
+            <p className="text-slate-500 font-light text-lg italic">
+              Categorías diseñadas para conectar con tu bienestar.
+            </p>
           </div>
-
-          {/* Flecha Derecha - Estilo Minimal */}
-          <button
-            onClick={() => scroll("right")}
-            className="absolute right-[-20px] top-1/2 -translate-y-1/2 z-10 hidden lg:flex p-3 rounded-full bg-white shadow-md text-slate-400 hover:text-emerald-600 hover:shadow-xl transition-all duration-300 border border-slate-100"
-          >
-            <ChevronRight size={24} />
-          </button>
-
+          
+          {/* Controles de Navegación Estilo Premium */}
+          <div className="hidden md:flex gap-3">
+            <button 
+              onClick={() => scroll("left")} 
+              className="p-4 rounded-full border border-orange-100 bg-white text-[#FF5C35] hover:bg-[#FF5C35] hover:text-white transition-all shadow-sm active:scale-90"
+            >
+              <ChevronLeft size={24} strokeWidth={1.5} />
+            </button>
+            <button 
+              onClick={() => scroll("right")} 
+              className="p-4 rounded-full border border-orange-100 bg-white text-[#FF5C35] hover:bg-[#FF5C35] hover:text-white transition-all shadow-sm active:scale-90"
+            >
+              <ChevronRight size={24} strokeWidth={1.5} />
+            </button>
+          </div>
         </div>
 
-        {/* Indicador visual móvil */}
-        <div className="flex justify-center gap-2 mt-4 md:hidden">
-          <div className="w-12 h-1 bg-slate-200 rounded-full overflow-hidden">
-            <div className="w-1/2 h-full bg-emerald-500"></div>
+        {/* Contenedor del Swipe */}
+        <div
+          ref={scrollRef}
+          className="flex gap-6 overflow-x-auto pb-10 pt-2 scrollbar-hide snap-x snap-mandatory cursor-grab active:cursor-grabbing"
+          style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
+        >
+          {categorias.map((cat) => (
+            <div
+              key={cat.id}
+              className="snap-center min-w-[280px] md:min-w-[320px] h-[450px] relative rounded-[3rem] overflow-hidden group shadow-[0_10px_30px_-15px_rgba(0,0,0,0.1)] hover:shadow-2xl transition-all duration-700"
+            >
+              {/* Imagen de fondo desde /public */}
+              <img
+                src={cat.img}
+                alt={cat.titulo}
+                className="absolute inset-0 w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110"
+              />
+              
+              {/* Overlay gradiente tipo OllaApp */}
+              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-80 group-hover:opacity-90 transition-opacity" />
+              
+              {/* Contenido de la Tarjeta */}
+              <div className="absolute bottom-10 left-10 right-10">
+                <span className="text-[#FF5C35] text-xs font-bold uppercase tracking-[0.2em] mb-2 block opacity-0 group-hover:opacity-100 transition-all translate-y-4 group-hover:translate-y-0">
+                  Explorar
+                </span>
+                <h3 className="text-white text-3xl font-bold tracking-tight mb-2">
+                  {cat.titulo}
+                </h3>
+                {/* Línea decorativa CSS */}
+                <div className="w-12 h-1 bg-[#FF5C35] rounded-full group-hover:w-full transition-all duration-500 ease-out" />
+              </div>
+            </div>
+          ))}
+        </div>
+
+        {/* Indicador visual para móvil */}
+        <div className="md:hidden flex justify-center mt-4">
+          <div className="h-1 w-20 bg-orange-100 rounded-full overflow-hidden">
+            <div className="h-full bg-[#FF5C35] w-1/3 animate-pulse" />
           </div>
         </div>
       </div>

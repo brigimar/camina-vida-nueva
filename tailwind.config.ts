@@ -4,11 +4,18 @@ module.exports = {
     './app/**/*.{js,ts,jsx,tsx}',
     './pages/**/*.{js,ts,jsx,tsx}',
     './components/**/*.{js,ts,jsx,tsx}',
-    './src/**/*.{js,ts,jsx,tsx}', // opcional si usás /src
+    './src/**/*.{js,ts,jsx,tsx}',
   ],
   theme: {
     extend: {
       colors: {
+        // --- COLORES OLLAAPP / CAMINA VIDA ---
+        brand: {
+          coral: '#FF5C35',      // El naranja vibrante
+          crema: '#FFFBF7',      // El fondo orgánico
+          "coral-dark": '#e44d2a',
+        },
+        // --- TUS COLORES ACTUALES (Mantenidos) ---
         verde: '#2E8B57',
         'verde-oscuro': '#1E5631',
         'verde-suave': '#C8E6C9',
@@ -23,8 +30,15 @@ module.exports = {
         card: '#ffffff',
       },
       fontFamily: {
-        sans: ['Poppins', 'sans-serif'],
+        // Agregamos Serif para los títulos elegantes
+        serif: ['var(--font-playfair)', 'serif'], 
+        sans: ['Poppins', 'sans-serif'], // Mantenemos Poppins como tu base
       },
+      borderRadius: {
+        // Opcional: podés crear un radio personalizado para no escribir [3rem] siempre
+        '4xl': '2rem',
+        '5xl': '3rem',
+      }
     },
   },
   plugins: [],

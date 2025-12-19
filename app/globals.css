@@ -1,216 +1,89 @@
 @import "leaflet/dist/leaflet.css";
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap');
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/*
-  Definimos variables CSS en :root para uso general.
-  Esto evita problemas con @apply + var() en entornos de build estrictos.
-*/
 :root {
+  /* Paleta OllaApp / Camina Vida */
+  --brand-coral: #FF5C35;
+  --brand-crema: #FFFBF7;
+  --brand-dark: #1b1b1b;
+  
+  /* Tus verdes originales (ajustados a tonos más orgánicos) */
   --verde: #76c893;
-  --verde-oscuro: #52b788;
-  --verde-claro: #d8f3dc;
-  --texto: #1b4332;
-  --muted: #52796f;
-  --fondo: #f9fafb;
+  --verde-oscuro: #1b4332;
+  --texto: #1b1b1b;
+  --muted: #64748b;
+  --fondo: #FFFBF7; /* Cambiado a crema para el look premium */
   --card: #ffffff;
 }
 
-/*
-  Estilos base del body usando CSS estándar (no @apply)
-  para garantizar compatibilidad en build.
-*/
 body {
-  background-color: var(--fondo);
+  background-color: var(--brand-crema);
   color: var(--texto);
-  font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
-    'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  /* Mezcla de Poppins (sans) y Playfair (serif) gestionada por Tailwind */
+  font-family: ui-sans-serif, system-ui, -apple-system, sans-serif;
   margin: 0;
   padding: 0;
-  line-height: 1.5;
+  line-height: 1.6;
 }
 
-/*
-  Si usas scroll suave (por los enlaces #planes, etc.)
-*/
 html {
   scroll-behavior: smooth;
 }
 
 @layer components {
-  /* Botones */
-  .btn {
-    @apply inline-block font-semibold text-center rounded-md transition duration-200;
+  /* --- BOTONES ESTILO PREMIUM --- */
+  .btn-olla {
+    @apply inline-flex items-center justify-center font-bold rounded-2xl transition-all duration-300 active:scale-95;
   }
 
-  .btn-primary {
-    @apply bg-gradient-to-r from-[#52b788] to-[#76c893] text-white px-5 py-2 hover:opacity-90;
+  .btn-olla-primary {
+    @apply bg-brand-coral text-white px-8 py-4 shadow-lg shadow-orange-200 hover:bg-[#e44d2a];
   }
 
-  .btn-ghost {
-    @apply border border-[#76c893] text-[#76c893] px-5 py-2 hover:bg-[#d8f3dc];
+  .btn-olla-ghost {
+    @apply border border-orange-100 bg-white text-brand-coral px-8 py-4 hover:border-brand-coral;
   }
 
-  .btn-small {
-    @apply text-sm px-3 py-1;
+  /* --- CARDS TIPO BURBUJA --- */
+  .card-olla {
+    @apply bg-white rounded-[3rem] shadow-[0_10px_45px_-15px_rgba(0,0,0,0.05)] border border-orange-50/50 overflow-hidden transition-all duration-500 hover:shadow-2xl;
   }
 
-  /* Cards */
-  .card {
-    @apply bg-[#ffffff] rounded-xl shadow-md overflow-hidden;
+  /* --- SECCIONES EDITORIALES --- */
+  .section-olla {
+    @apply py-24 px-6 md:px-12 max-w-7xl mx-auto;
   }
 
-  .card-body {
-    @apply p-4 text-center;
+  .title-serif {
+    @apply font-serif text-4xl md:text-6xl text-slate-900 leading-tight;
   }
 
-  .card-title {
-    @apply text-lg font-semibold text-[#1b4332] mb-1;
-  }
-
-  .card-sub {
-    @apply text-sm text-[#52796f] mb-2;
-  }
-/* app/globals.css */
-
-
-  /* Hero con fondo claro suave y tipografía alineada */
-  .hero-section {
-    @apply relative w-full min-h-[80dvh] flex items-center justify-center text-center px-4;
-    background: linear-gradient(to bottom right, #086d21, #49dd49);
-  }
-
-  .hero-title {
-    @apply text-3xl sm:text-4xl md:text-5xl font-bold text-texto-oscuro leading-tight;
-  }
-
-  .hero-subtitle {
-    @apply text-lg sm:text-xl max-w-2xl mx-auto text-muted;
-  }
-
-  .hero-cta {
-    @apply inline-block px-6 py-3 bg-verde-oscuro text-white font-semibold rounded-full shadow-md hover:bg-verde transition-colors duration-300;
-  }
-}
-  /* Secciones */
-  .section {
-    @apply py-16 px-6;
-  }
-
-  .section-alt {
-    @apply bg-[#d8f3dc];
-  }
-
-  .section-title {
-    @apply text-2xl font-bold text-center mb-2 text-[#1b4332];
-  }
-
-  .section-sub {
-    @apply text-center text-[#52796f] mb-8;
-  }
-
-  /* Hero */
-  .hero {
-    @apply relative text-white text-center overflow-hidden;
-  }
-
-  .hero-overlay {
-    @apply absolute inset-0 bg-cover bg-center brightness-[0.45];
-  }
-
-  .hero-content {
-    @apply relative z-10 px-6 py-24 max-w-4xl mx-auto;
-  }
-
-  .hero-title {
-    @apply text-5xl font-bold lowercase;
-  }
-
-  .hero-lead {
-    @apply mt-4 text-lg max-w-xl mx-auto opacity-95;
-  }
-
-  .hero-actions {
-    @apply mt-6 flex flex-wrap justify-center gap-4;
-  }
-
-  /* CTA */
-  .cta-section {
-    @apply bg-gradient-to-r from-[#52b788] to-[#76c893] text-white text-center py-16 px-6;
-  }
-
-  .cta-btn {
-    @apply inline-block bg-white text-[#52b788] font-bold px-6 py-3 rounded-md mt-4;
-  }
-
-  /* Circuitos */
-  .card-circuito {
-    @apply border-2 border-[#76c893] rounded-xl bg-[#ffffff] shadow-md transition hover:shadow-lg hover:-translate-y-1;
-  }
-
-  .circuit-image {
-    @apply h-[180px] bg-cover bg-center rounded-t-xl;
-  }
-
-  .circuit-body {
-    @apply p-4 text-center;
-  }
-
-  .circuit-body h3 {
-    @apply text-lg font-semibold mb-1 text-[#1b4332];
-  }
-
-  .circuit-body p {
-    @apply text-sm text-[#52796f] mb-3;
-  }
-
-  /* Clases de utilidad */
-  .text-muted {
-    @apply text-[#52796f];
-  }
-
-
-/* Animaciones personalizadas */
-@keyframes bounce-slow {
-  0%, 100% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(-6px);
+  .subtitle-premium {
+    @apply text-[#FF5C35] font-bold tracking-[0.2em] uppercase text-[10px] mb-4 block;
   }
 }
 
-.animate-bounce-slow {
-  animation: bounce-slow 3s ease-in-out infinite;
-  will-change: transform;
+/* --- SCROLLBAR HIDE (Para el Swipe de Categorías) --- */
+@utility scrollbar-hide {
+  @apply [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden;
 }
+
+/* --- TUS ANIMACIONES (Mantenidas y optimizadas) --- */
 @keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(12px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
 .animate-fadeInUp {
-  animation: fadeInUp 0.5s ease forwards;
+  animation: fadeInUp 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
-/* Shimmer loading animation for skeletons */
-@keyframes shimmer {
-  0% {
-    background-position: -200% center;
-  }
-  100% {
-    background-position: 200% center;
-  }
-}
-
-.animate-shimmer {
+.shimmer-bg {
+  background: linear-gradient(90deg, #f0f0f0 25%, #f8f8f8 50%, #f0f0f0 75%);
+  background-size: 200% 100%;
   animation: shimmer 2s infinite;
 }
