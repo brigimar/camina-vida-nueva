@@ -7,37 +7,18 @@ export default function CategoriasEstiloOlla() {
   const scrollRef = useRef(null);
 
   const categorias = [
-    {
-      id: "terapeuticas",
-      titulo: "Terapéuticas",
-      img: "/img1.webp",
-    },
-    {
-      id: "saludables",
-      titulo: "Saludables",
-      img: "/img3.webp",
-    },
-    {
-      id: "fitness",
-      titulo: "Fitness",
-      img: "/img2.webp",
-    },
-    {
-      id: "aventura",
-      titulo: "Aventura",
-      img: "/img5.webp",
-    },
-    {
-      id: "premium",
-      titulo: "Premium",
-      img: "/img4.webp",
-    },
+    { id: "terapeuticas", titulo: "Terapéuticas", img: "/img1.webp" },
+    { id: "saludables", titulo: "Saludables", img: "/img3.webp" },
+    { id: "fitness", titulo: "Fitness", img: "/img2.webp" },
+    { id: "aventura", titulo: "Aventura", img: "/img5.webp" },
+    { id: "premium", titulo: "Premium", img: "/img4.webp" },
   ];
 
   const scroll = (direction) => {
     if (scrollRef.current) {
-      const { scrollLeft } = scrollRef.current;
-      const scrollAmount = 320; // Ancho de tarjeta + gap
+      const { scrollLeft, clientWidth } = scrollRef.current;
+      // Calculamos el desplazamiento basado en el ancho visible para que sea fluido
+      const scrollAmount = clientWidth * 0.8; 
       const scrollTo = direction === "left" ? scrollLeft - scrollAmount : scrollLeft + scrollAmount;
       
       scrollRef.current.scrollTo({
@@ -48,86 +29,67 @@ export default function CategoriasEstiloOlla() {
   };
 
   return (
-    <section className="py-24 bg-[#FFFBF7] overflow-hidden">
+    <section className="py-16 bg-[#FFFBF7] overflow-hidden">
       <div className="max-w-7xl mx-auto px-6">
         
-        {/* Cabecera Editorial */}
-        <div className="flex items-end justify-between mb-12">
-          <div className="space-y-2">
-            <h2 className="text-4xl md:text-5xl font-serif text-slate-900">
-              Encontrá tu ritmo
+        {/* Cabecera más compacta */}
+        <div className="flex items-center justify-between mb-8">
+          <div className="space-y-1">
+            <h2 className="text-3xl md:text-4xl font-serif text-slate-900">
+              Encontrá tu <span className="italic text-[#FF5C35]">ritmo</span>
             </h2>
-            <p className="text-slate-500 font-light text-lg italic">
-              Categorías diseñadas para conectar con tu bienestar.
+            <p className="text-slate-500 font-light text-sm italic">
+              Conectá con tu bienestar.
             </p>
           </div>
           
-          {/* Controles de Navegación Estilo Premium */}
-          <div className="hidden md:flex gap-3">
+          {/* Controles de Navegación: Visibles en todo momento */}
+          <div className="flex gap-2">
             <button 
               onClick={() => scroll("left")} 
-              className="p-4 rounded-full border border-orange-100 bg-white text-[#FF5C35] hover:bg-[#FF5C35] hover:text-white transition-all shadow-sm active:scale-90"
+              className="p-3 rounded-full border border-orange-100 bg-white text-[#FF5C35] hover:bg-[#FF5C35] hover:text-white transition-all shadow-sm active:scale-90"
+              aria-label="Anterior"
             >
-              <ChevronLeft size={24} strokeWidth={1.5} />
+              <ChevronLeft size={20} />
             </button>
             <button 
               onClick={() => scroll("right")} 
-              className="p-4 rounded-full border border-orange-100 bg-white text-[#FF5C35] hover:bg-[#FF5C35] hover:text-white transition-all shadow-sm active:scale-90"
+              className="p-3 rounded-full border border-orange-100 bg-white text-[#FF5C35] hover:bg-[#FF5C35] hover:text-white transition-all shadow-sm active:scale-90"
+              aria-label="Siguiente"
             >
-              <ChevronRight size={24} strokeWidth={1.5} />
+              <ChevronRight size={20} />
             </button>
           </div>
         </div>
 
-        {/* Contenedor del Swipe */}
+        {/* Contenedor del Swipe: Altura reducida */}
         <div
           ref={scrollRef}
-          className="flex gap-6 overflow-x-auto pb-10 pt-2 scrollbar-hide snap-x snap-mandatory cursor-grab active:cursor-grabbing"
-          style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
+          className="flex gap-4 overflow-x-auto pb-6 pt-2 scrollbar-hide snap-x snap-mandatory"
         >
           {categorias.map((cat) => (
             <div
               key={cat.id}
-              className="snap-center min-w-[280px] md:min-w-[320px] h-[450px] relative rounded-[3rem] overflow-hidden group shadow-[0_10px_30px_-15px_rgba(0,0,0,0.1)] hover:shadow-2xl transition-all duration-700"
+              className="snap-center min-w-[240px] md:min-w-[280px] h-[350px] relative rounded-[2.5rem] overflow-hidden group shadow-md hover:shadow-xl transition-all duration-500"
             >
-              {/* Imagen de fondo desde /public */}
               <img
                 src={cat.img}
                 alt={cat.titulo}
-                className="absolute inset-0 w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110"
+                className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
               />
               
-              {/* Overlay gradiente tipo OllaApp */}
-              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-80 group-hover:opacity-90 transition-opacity" />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent opacity-90" />
               
-              {/* Contenido de la Tarjeta */}
-              <div className="absolute bottom-10 left-10 right-10">
-                <span className="text-[#FF5C35] text-xs font-bold uppercase tracking-[0.2em] mb-2 block opacity-0 group-hover:opacity-100 transition-all translate-y-4 group-hover:translate-y-0">
-                  Explorar
-                </span>
-                <h3 className="text-white text-3xl font-bold tracking-tight mb-2">
+              <div className="absolute bottom-8 left-8 right-8">
+                <h3 className="text-white text-xl md:text-2xl font-bold tracking-tight mb-2">
                   {cat.titulo}
                 </h3>
-                {/* Línea decorativa CSS */}
-                <div className="w-12 h-1 bg-[#FF5C35] rounded-full group-hover:w-full transition-all duration-500 ease-out" />
+                <div className="w-8 h-1 bg-[#FF5C35] rounded-full group-hover:w-full transition-all duration-500" />
               </div>
             </div>
           ))}
         </div>
-
-        {/* Indicador visual para móvil */}
-        <div className="md:hidden flex justify-center mt-4">
-          <div className="h-1 w-20 bg-orange-100 rounded-full overflow-hidden">
-            <div className="h-full bg-[#FF5C35] w-1/3 animate-pulse" />
-          </div>
-        </div>
       </div>
-
-      <style jsx global>{`
-        .scrollbar-hide::-webkit-scrollbar {
-          display: none;
-        }
-      `}</style>
     </section>
   );
 }
