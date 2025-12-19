@@ -15,22 +15,22 @@ export default function CategoriasEstiloOlla() {
     {
       id: "saludables",
       titulo: "Saludables",
-      img: "/img2.webp",
+      img: "/img3.webp",
     },
     {
       id: "fitness",
       titulo: "Fitness",
-      img: "/img3.webp",
+      img: "/img2.webp",
     },
     {
       id: "aventura",
       titulo: "Aventura",
-      img: "/img4.webp",
+      img: "/img5.webp",
     },
     {
       id: "premium",
       titulo: "Premium",
-      img: "/img5.webp",
+      img: "/img4.webp",
     },
   ];
 
