@@ -43,70 +43,113 @@ export default function HeaderCaminaVida() {
           {/* NAV DESKTOP */}
           <nav className="hidden md:flex items-center gap-10 text-gray-700 font-medium">
 
-            {/* ✅ MEGA MENU */}
+            {/* MEGA MENU */}
             <div
-              className="relative group"
+              className="relative"
               onMouseEnter={() => setOpenMega(true)}
               onMouseLeave={() => setOpenMega(false)}
             >
-              <button className="flex items-center gap-2 hover:text-emerald-600 transition">
-                Categorías <FaChevronDown className="text-xs" />
-              </button>
-
-              {/* PANEL MEGA MENU */}
-              <div
-                className={`absolute left-0 top-full mt-4 w-[600px] bg-white shadow-2xl rounded-2xl p-8 grid grid-cols-3 gap-6 border border-gray-100 transition-all duration-300 ${
-                  openMega
-                    ? "opacity-100 translate-y-0 pointer-events-auto"
-                    : "opacity-0 -translate-y-3 pointer-events-none"
+              <button
+                className={`flex items-center gap-2 transition ${
+                  openMega ? "text-emerald-600" : "hover:text-emerald-600"
                 }`}
               >
-                {/* Columna 1 */}
-                <div className="space-y-4">
-                  <h4 className="font-bold text-gray-900 mb-2">Bienestar</h4>
+                Categorías
+                <FaChevronDown
+                  className={`text-xs transition-transform ${
+                    openMega ? "rotate-180" : ""
+                  }`}
+                />
+              </button>
 
-                  <Link href="/circuitos?categoria=terapeuticas" className="flex items-center gap-3 hover:text-emerald-600 transition">
-                    <FaHeartbeat className="text-emerald-600" /> Terapéuticas
-                  </Link>
+              {/* Wrapper sin gap */}
+              <div className="absolute left-0 top-full pt-4">
+                <div
+                  className={`w-[600px] bg-white shadow-2xl rounded-2xl p-8 grid grid-cols-3 gap-6 border border-gray-100 transition-all duration-200 ${
+                    openMega
+                      ? "opacity-100 translate-y-0 pointer-events-auto"
+                      : "opacity-0 -translate-y-2 pointer-events-none"
+                  }`}
+                >
+                  {/* Columna 1 */}
+                  <div className="space-y-4">
+                    <h4 className="font-bold text-gray-900">Bienestar</h4>
 
-                  <Link href="/circuitos?categoria=saludables" className="flex items-center gap-3 hover:text-emerald-600 transition">
-                    <FaLeaf className="text-emerald-600" /> Saludables Básicas
-                  </Link>
-                </div>
+                    <Link
+                      href="/circuitos?categoria=terapeuticas"
+                      className="flex items-center gap-3 hover:text-emerald-600 transition"
+                    >
+                      <FaHeartbeat className="text-emerald-600" />
+                      Terapéuticas
+                    </Link>
 
-                {/* Columna 2 */}
-                <div className="space-y-4">
-                  <h4 className="font-bold text-gray-900 mb-2">Actividad Física</h4>
+                    <Link
+                      href="/circuitos?categoria=saludables"
+                      className="flex items-center gap-3 hover:text-emerald-600 transition"
+                    >
+                      <FaLeaf className="text-emerald-600" />
+                      Saludables Básicas
+                    </Link>
+                  </div>
 
-                  <Link href="/circuitos?categoria=fitness" className="flex items-center gap-3 hover:text-emerald-600 transition">
-                    <FaWalking className="text-emerald-600" /> Fitness
-                  </Link>
+                  {/* Columna 2 */}
+                  <div className="space-y-4">
+                    <h4 className="font-bold text-gray-900">Actividad Física</h4>
 
-                  <Link href="/circuitos?categoria=aventura" className="flex items-center gap-3 hover:text-emerald-600 transition">
-                    <FaMountain className="text-emerald-600" /> Aventura
-                  </Link>
-                </div>
+                    <Link
+                      href="/circuitos?categoria=fitness"
+                      className="flex items-center gap-3 hover:text-emerald-600 transition"
+                    >
+                      <FaWalking className="text-emerald-600" />
+                      Fitness
+                    </Link>
 
-                {/* Columna 3 */}
-                <div className="space-y-4">
-                  <h4 className="font-bold text-gray-900 mb-2">Experiencias</h4>
+                    <Link
+                      href="/circuitos?categoria=aventura"
+                      className="flex items-center gap-3 hover:text-emerald-600 transition"
+                    >
+                      <FaMountain className="text-emerald-600" />
+                      Aventura
+                    </Link>
+                  </div>
 
-                  <Link href="/circuitos?categoria=premium" className="flex items-center gap-3 hover:text-emerald-600 transition">
-                    <FaStar className="text-emerald-600" /> Premium
-                  </Link>
+                  {/* Columna 3 */}
+                  <div className="space-y-4">
+                    <h4 className="font-bold text-gray-900">Experiencias</h4>
 
-                  <Link href="/circuitos" className="flex items-center gap-3 hover:text-emerald-600 transition">
-                    <FaMapMarkedAlt className="text-emerald-600" /> Ver todos
-                  </Link>
+                    <Link
+                      href="/circuitos?categoria=premium"
+                      className="flex items-center gap-3 hover:text-emerald-600 transition"
+                    >
+                      <FaStar className="text-emerald-600" />
+                      Premium
+                    </Link>
+
+                    <Link
+                      href="/circuitos"
+                      className="flex items-center gap-3 hover:text-emerald-600 transition"
+                    >
+                      <FaMapMarkedAlt className="text-emerald-600" />
+                      Ver todos
+                    </Link>
+                  </div>
                 </div>
               </div>
             </div>
 
             {/* LINKS NORMALES */}
-            <Link href="/#beneficios" className="hover:text-emerald-600 transition">Beneficios</Link>
-            <Link href="/#metodo" className="hover:text-emerald-600 transition">Método</Link>
-            <Link href="/circuitos" className="hover:text-emerald-600 transition">Circuitos</Link>
-            <Link href="/#planes" className="hover:text-emerald-600 transition">Planes</Link>
+            <Link href="/#beneficios" className="hover:text-emerald-600 transition">
+              Beneficios
+            </Link>
+            <Link href="/#metodo" className="hover:text-emerald-600 transition">
+              Método
+            </Link>
+            <Link href="/circuitos" className="hover:text-emerald-600 transition">
+              Circuitos
+            </Link>
+            <Link href="/#planes" className="hover:text-emerald-600 transition">
+              Planes
+            </Link>
           </nav>
 
           {/* CTA DESKTOP */}
@@ -121,20 +164,20 @@ export default function HeaderCaminaVida() {
         </div>
       </header>
 
-      {/* ✅ MENÚ DESLIZANTE MOBILE */}
+      {/* OVERLAY MOBILE */}
       <div
-        className={`fixed inset-0 bg-black/40 backdrop-blur-sm z-50 transition-opacity duration-300 ${
-          openMobile ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
+        className={`fixed inset-0 bg-black/40 backdrop-blur-sm z-40 transition-opacity ${
+          openMobile ? "opacity-100" : "opacity-0 pointer-events-none"
         }`}
         onClick={() => setOpenMobile(false)}
       />
 
+      {/* MENÚ MOBILE */}
       <aside
         className={`fixed top-0 right-0 h-full w-72 bg-white shadow-xl z-50 p-6 transform transition-transform duration-300 ${
           openMobile ? "translate-x-0" : "translate-x-full"
         }`}
       >
-        {/* Cerrar */}
         <button
           onClick={() => setOpenMobile(false)}
           className="text-3xl text-emerald-700 absolute top-4 right-4"
@@ -143,28 +186,20 @@ export default function HeaderCaminaVida() {
         </button>
 
         <nav className="mt-12 flex flex-col gap-6 text-lg font-medium text-gray-700">
-          <Link href="/#categorias" onClick={() => setOpenMobile(false)} className="flex items-center gap-3">
-            <FaLeaf className="text-emerald-600" /> Categorías
+          <Link href="/#beneficios" onClick={() => setOpenMobile(false)}>
+            Beneficios
           </Link>
-
-          <Link href="/#beneficios" onClick={() => setOpenMobile(false)} className="flex items-center gap-3">
-            <FaLeaf className="text-emerald-600" /> Beneficios
+          <Link href="/#metodo" onClick={() => setOpenMobile(false)}>
+            Método
           </Link>
-
-          <Link href="/#metodo" onClick={() => setOpenMobile(false)} className="flex items-center gap-3">
-            <FaLeaf className="text-emerald-600" /> Método
+          <Link href="/circuitos" onClick={() => setOpenMobile(false)}>
+            Circuitos
           </Link>
-
-          <Link href="/circuitos" onClick={() => setOpenMobile(false)} className="flex items-center gap-3">
-            <FaMapMarkedAlt className="text-emerald-600" /> Circuitos
-          </Link>
-
-          <Link href="/#planes" onClick={() => setOpenMobile(false)} className="flex items-center gap-3">
-            <FaLeaf className="text-emerald-600" /> Planes
+          <Link href="/#planes" onClick={() => setOpenMobile(false)}>
+            Planes
           </Link>
         </nav>
 
-        {/* CTA dentro del menú */}
         <Link
           href="/reservar/1"
           onClick={() => setOpenMobile(false)}
@@ -174,10 +209,10 @@ export default function HeaderCaminaVida() {
         </Link>
       </aside>
 
-      {/* ✅ CTA FLOTANTE MOBILE */}
+      {/* CTA FLOTANTE MOBILE */}
       <Link
         href="/reservar/1"
-        className="md:hidden fixed bottom-6 right-6 px-6 py-3 bg-emerald-600 text-white rounded-full shadow-xl font-semibold text-lg hover:bg-emerald-700 transition z-40"
+        className="md:hidden fixed bottom-6 right-6 px-6 py-3 bg-emerald-600 text-white rounded-full shadow-xl font-semibold z-40"
       >
         Reservar
       </Link>
