@@ -4,7 +4,7 @@ import { useRef } from "react";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 
 export default function CategoriasCaminaVida() {
-  const scrollRef = useRef<HTMLDivElement>(null);
+  const scrollRef = useRef(null);
 
   const categorias = [
     {
@@ -39,7 +39,7 @@ export default function CategoriasCaminaVida() {
     },
   ];
 
-  const scroll = (direction: "left" | "right") => {
+  const scroll = (direction) => {
     if (scrollRef.current) {
       const { scrollLeft, clientWidth } = scrollRef.current;
       const scrollTo = direction === "left" ? scrollLeft - clientWidth / 1.5 : scrollLeft + clientWidth / 1.5;
@@ -64,99 +64,57 @@ export default function CategoriasCaminaVida() {
             </p>
           </div>
 
-          {/* Botones de Navegación (Solo Desktop) */}
           <div className="hidden md:flex gap-3">
             <button
               onClick={() => scroll("left")}
               className="p-4 rounded-full bg-white border border-gray-200 text-emerald-700 shadow-sm hover:bg-emerald-600 hover:text-white transition-all"
-              aria-label="Anterior"
             >
               <FaChevronLeft />
             </button>
             <button
               onClick={() => scroll("right")}
               className="p-4 rounded-full bg-white border border-gray-200 text-emerald-700 shadow-sm hover:bg-emerald-600 hover:text-white transition-all"
-              aria-label="Siguiente"
             >
               <FaChevronRight />
             </button>
           </div>
         </div>
 
-        {/* Contenedor del Slider */}
         <div className="relative group">
           <div
             ref={scrollRef}
-            className="
-              flex gap-6 overflow-x-auto pb-8 pt-2
-              snap-x snap-mandatory
-              scroll-smooth
-              scrollbar-hide
-            "
+            className="flex gap-6 overflow-x-auto pb-8 pt-2 snap-x snap-mandatory scroll-smooth scrollbar-hide"
             style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
           >
-            {/* Espaciador para el inicio en Desktop */}
             <div className="hidden md:block min-w-[1px]" />
 
             {categorias.map((c) => (
               <div
                 key={c.id}
-                className="
-                  snap-center
-                  min-w-[280px]
-                  md:min-w-[320px]
-                  flex-shrink-0
-                  p-8
-                  bg-white
-                  rounded-3xl
-                  border border-gray-100
-                  shadow-[0_4px_20px_-5px_rgba(0,0,0,0.05)]
-                  hover:shadow-[0_20px_40px_-15px_rgba(0,0,0,0.1)]
-                  hover:-translate-y-2
-                  transition-all duration-300
-                  text-left
-                  group/card
-                "
+                className="snap-center min-w-[280px] md:min-w-[320px] flex-shrink-0 p-8 bg-white rounded-3xl border border-gray-100 shadow-[0_4px_20px_-5px_rgba(0,0,0,0.05)] hover:shadow-[0_20px_40px_-15px_rgba(0,0,0,0.1)] hover:-translate-y-2 transition-all duration-300 text-left group/card"
               >
                 <div className="w-16 h-16 bg-emerald-50 rounded-2xl flex items-center justify-center text-4xl mb-6 group-hover/card:scale-110 transition-transform duration-300">
                   {c.emoji}
                 </div>
-
-                <h3 className="text-xl font-bold text-gray-900 mb-3">
-                  {c.titulo}
-                </h3>
-
-                <p className="text-gray-600 text-sm leading-relaxed mb-6">
-                  {c.descripcion}
-                </p>
-
+                <h3 className="text-xl font-bold text-gray-900 mb-3">{c.titulo}</h3>
+                <p className="text-gray-600 text-sm leading-relaxed mb-6">{c.descripcion}</p>
                 <div className="w-10 h-1 bg-emerald-500 rounded-full opacity-0 group-hover/card:opacity-100 transition-opacity" />
               </div>
             ))}
             
-            {/* Espaciador para el final */}
             <div className="min-w-[20px] flex-shrink-0" />
           </div>
-
-          {/* Gradientes laterales para indicar scroll (Opcional) */}
           <div className="pointer-events-none absolute inset-y-0 left-0 w-12 bg-gradient-to-r from-gray-50 to-transparent hidden md:block" />
           <div className="pointer-events-none absolute inset-y-0 right-0 w-12 bg-gradient-to-l from-gray-50 to-transparent hidden md:block" />
         </div>
 
-        {/* Indicador visual para móvil */}
         <div className="mt-6 flex justify-center md:hidden">
-          <div className="flex gap-1">
-             <div className="w-8 h-1 bg-emerald-200 rounded-full overflow-hidden">
-                <div className="w-1/2 h-full bg-emerald-600 animate-pulse"></div>
-             </div>
-          </div>
-          <span className="ml-3 text-xs font-medium text-gray-400 uppercase tracking-widest">
-            Desliza para explorar
+          <span className="text-xs font-medium text-gray-400 uppercase tracking-widest animate-pulse">
+            Desliza para explorar →
           </span>
         </div>
       </div>
 
-      {/* Estilos adicionales para ocultar scrollbar en Chrome/Safari */}
       <style jsx global>{`
         .scrollbar-hide::-webkit-scrollbar {
           display: none;
