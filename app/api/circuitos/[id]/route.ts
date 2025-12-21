@@ -1,10 +1,12 @@
 import { NextResponse } from "next/server";
 import { createClient } from "@supabase/supabase-js";
 
-const supabase = createClient(
-  process.env.NEXT_PUBLIC_SUPABASE_URL!,
-  process.env.SUPABASE_SERVICE_ROLE_KEY!
-);
+function getAdminClient() {
+  return createClient(
+    process.env.NEXT_PUBLIC_SUPABASE_URL!,
+    process.env.SUPABASE_SERVICE_ROLE_KEY!
+  );
+}
 
 interface PostgrestError {
   message: string;
@@ -18,6 +20,7 @@ export async function GET(
 ) {
   try {
     const { id } = await params;
+    const supabase = getAdminClient();
     const { data, error } = await supabase
       .from("circuitos")
       .select("*")
@@ -48,6 +51,7 @@ export async function PUT(
   try {
     const { id } = await params;
     const body = await req.json();
+    const supabase = getAdminClient();
 
     const { data, error } = await supabase
       .from("circuitos")
@@ -82,6 +86,7 @@ export async function DELETE(
 ) {
   try {
     const { id } = await params;
+    const supabase = getAdminClient();
     const { data, error } = await supabase
       .from("circuitos")
       .update({
