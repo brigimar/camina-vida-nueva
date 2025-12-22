@@ -1,15 +1,18 @@
 import { createSupabaseServer } from "@/lib/supabase";
 import { sesionSchema } from "@/lib/validators/sesionSchema";
+import { Database } from "@/types/supabase";
 
-export async function getSesiones() {
-  const supabase = createSupabaseServer();
+type SesionRow = Database["public"]["Tables"]["sesiones"]["Row"];
+
+export async function getSesiones(): Promise<SesionRow[]> {
+  const supabase = await createSupabaseServer();
   const { data, error } = await supabase.from("sesiones").select("*");
   if (error) throw error;
-  return data;
+  return data as SesionRow[];
 }
 
-export async function getSesionById(id: string) {
-  const supabase = createSupabaseServer();
+export async function getSesionById(id: string): Promise<SesionRow | null> {
+  const supabase = await createSupabaseServer();
   const { data, error } = await supabase
     .from("sesiones")
     .select("*")
@@ -17,11 +20,11 @@ export async function getSesionById(id: string) {
     .single();
 
   if (error) throw error;
-  return data;
+  return data as SesionRow | null;
 }
 
-export async function createSesion(payload: unknown) {
-  const supabase = createSupabaseServer();
+export async function createSesion(payload: unknown): Promise<SesionRow> {
+  const supabase = await createSupabaseServer();
   const parsed = sesionSchema.parse(payload);
 
   const { data, error } = await supabase
@@ -31,11 +34,14 @@ export async function createSesion(payload: unknown) {
     .single();
 
   if (error) throw error;
-  return data;
+  return data as SesionRow;
 }
 
-export async function updateSesion(id: string, payload: unknown) {
-  const supabase = createSupabaseServer();
+export async function updateSesion(
+  id: string,
+  payload: unknown
+): Promise<SesionRow> {
+  const supabase = await createSupabaseServer();
   const parsed = sesionSchema.partial().parse(payload);
 
   const { data, error } = await supabase
@@ -46,11 +52,12 @@ export async function updateSesion(id: string, payload: unknown) {
     .single();
 
   if (error) throw error;
-  return data;
+  return data as SesionRow;
 }
 
-export async function deleteSesion(id: string) {
-  const supabase = createSupabaseServer();
+export async function deleteSesion(id: string): Promise<boolean> {
+  const supabase = await createSupabaseServer();
   const { error } = await supabase.from("sesiones").delete().eq("id", id);
   if (error) throw error;
+  return !error;
 }
