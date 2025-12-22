@@ -1,13 +1,15 @@
-export const dynamic = 'force-dynamic';
+export const dynamic = "force-dynamic";
 
-import { Sesion } from '@/types';
-import SesionForm from '../../components/SesionForm';
+import { Sesion } from "@/types";
+import SesionForm from "../../components/SesionForm";
 
-interface Props { params: { id: string } }
+interface Props {
+  params: { id: string };
+}
 
 export default async function SesionesEdit({ params }: Props) {
   const { id } = params;
-  const res = await fetch(`/api/sesiones/${id}`, { cache: 'no-store' });
+  const res = await fetch(`/api/sesiones/${id}`, { cache: "no-store" });
   const data = await res.json();
   const sesion: Sesion = data?.data ?? data;
 

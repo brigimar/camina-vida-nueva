@@ -1,0 +1,9 @@
+﻿{
+  "name": "StyleConventionsRule",
+  "pattern": ".*",
+  "reason": "El agente debe respetar las convenciones de estilo del proyecto: \
+- Usar TypeScript/React con estructura clara. \
+- Mantener nombres consistentes en español. \
+- Documentar funciones con comentarios breves. \
+- Evitar inventar módulos inexistentes."
+}

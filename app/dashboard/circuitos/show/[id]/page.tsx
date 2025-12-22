@@ -1,17 +1,23 @@
-export const dynamic = 'force-dynamic';
+export const dynamic = "force-dynamic";
 
 import Link from "next/link";
 import Image from "next/image";
-import { Circuito } from "@/types";
-import { createSupabaseServer } from "@/lib/supabaseServer";
+import { createSupabaseServer } from "@/lib/supabase";
 
-export default async function CircuitosShowPage({ params }: { params: { id: string } }) {
+export default async function CircuitosShowPage({
+  params,
+}: {
+  params: { id: string };
+}) {
   const { id } = params;
 
   const supabase = await createSupabaseServer();
-  const { data: circuito, error } = await supabase.from('circuitos').select('*').eq('id', id).single();
-  if (error) throw new Error(error.message);
-  if (!circuito) throw new Error('Circuito no encontrado');
+  const { data: circuito } = await supabase
+    .from("circuitos")
+    .select("*")
+    .eq("id", id)
+    .single();
+  if (!circuito) throw new Error("Circuito no encontrado");
 
   return (
     <div className="p-6">
@@ -60,7 +66,9 @@ export default async function CircuitosShowPage({ params }: { params: { id: stri
             {circuito.duracion_minutos && (
               <div>
                 <p className="text-gray-600 text-sm">Duración</p>
-                <p className="font-medium">{circuito.duracion_minutos} minutos</p>
+                <p className="font-medium">
+                  {circuito.duracion_minutos} minutos
+                </p>
               </div>
             )}
             {circuito.cupo_maximo && (
@@ -167,7 +175,13 @@ export default async function CircuitosShowPage({ params }: { params: { id: stri
         </p>
         <p>
           <span className="text-gray-600 text-sm">Activo:</span>{" "}
-          <span className={circuito.activo ? "text-green-600 font-medium" : "text-red-600 font-medium"}>
+          <span
+            className={
+              circuito.activo
+                ? "text-green-600 font-medium"
+                : "text-red-600 font-medium"
+            }
+          >
             {circuito.activo ? "Sí" : "No"}
           </span>
         </p>
@@ -176,8 +190,12 @@ export default async function CircuitosShowPage({ params }: { params: { id: stri
       {/* Días y horarios */}
       <div className="bg-white rounded-lg shadow p-6 mt-6">
         <h2 className="text-xl font-bold mb-4">Días y horarios</h2>
-        <p className="text-gray-600">{circuito.dias?.join(", ") || "No especificado"}</p>
-        <p className="text-gray-600">{circuito.horarios?.join(", ") || "No especificado"}</p>
+        <p className="text-gray-600">
+          {circuito.dias?.join(", ") || "No especificado"}
+        </p>
+        <p className="text-gray-600">
+          {circuito.horarios?.join(", ") || "No especificado"}
+        </p>
       </div>
 
       {/* Ubicación */}

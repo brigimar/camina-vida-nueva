@@ -8,15 +8,15 @@ export const dataProvider = {
     return { data: await res.json(), total: 0 };
   },
   async getOne() {
-    throw new Error('dataProvider.getOne removed');
+    throw new Error("dataProvider.getOne removed");
   },
   async create() {
-    throw new Error('dataProvider.create removed');
+    throw new Error("dataProvider.create removed");
   },
   async update() {
-    throw new Error('dataProvider.update removed');
+    throw new Error("dataProvider.update removed");
   },
   async deleteOne() {
-    throw new Error('dataProvider.deleteOne removed');
+    throw new Error("dataProvider.deleteOne removed");
   },
 };

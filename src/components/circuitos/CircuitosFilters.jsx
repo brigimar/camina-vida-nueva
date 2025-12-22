@@ -17,7 +17,6 @@ const CircuitosFilters = memo(function CircuitosFilters({
 }) {
   return (
     <div className="p-4 bg-white rounded-2xl shadow space-y-4">
-
       {/* BUSCADOR */}
       <input
         type="text"
@@ -29,7 +28,6 @@ const CircuitosFilters = memo(function CircuitosFilters({
 
       {/* SELECTORES */}
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-
         {/* CATEGORÍA */}
         <select
           value={categoria}
@@ -85,7 +83,6 @@ const CircuitosFilters = memo(function CircuitosFilters({
           <option value="tarde">Tarde (12–18)</option>
           <option value="noche">Noche (18–23)</option>
         </select>
-
       </div>
     </div>
   );

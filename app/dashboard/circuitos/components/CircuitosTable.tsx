@@ -20,7 +20,9 @@ interface UseCircuitosResult {
 
 export default function CircuitosTable() {
   const [filters, setFilters] = useState({});
-  const { data, pagination, loading } = useCircuitos(filters) as UseCircuitosResult;
+  const { data, pagination, loading } = useCircuitos(
+    filters,
+  ) as UseCircuitosResult;
 
   return (
     <div>

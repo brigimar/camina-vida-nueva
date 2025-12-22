@@ -1,28 +1,31 @@
 "use client";
 
-import { useState } from 'react';
-import Link from 'next/link';
-import { Inscripcion, Circuito } from '@/types';
+import { useState } from "react";
+import Link from "next/link";
+import { Inscripcion } from "@/types";
 
 interface Props {
   initialInscripciones: Inscripcion[];
-  initialCircuitos?: Circuito[];
 }
 
-export default function InscripcionesListClient({ initialInscripciones, initialCircuitos = [] }: Props) {
-  const [inscripciones, setInscripciones] = useState<Inscripcion[]>(initialInscripciones || []);
+export default function InscripcionesListClient({
+  initialInscripciones,
+}: Props) {
+  const [inscripciones, setInscripciones] = useState<Inscripcion[]>(
+    initialInscripciones || [],
+  );
   const [loadingId, setLoadingId] = useState<string | null>(null);
 
   const handleDelete = async (id: string) => {
-    if (!confirm('¿Borrar esta inscripción?')) return;
+    if (!confirm("¿Borrar esta inscripción?")) return;
     setLoadingId(id);
 
-    const res = await fetch(`/api/inscripciones/${id}`, { method: 'DELETE' });
+    const res = await fetch(`/api/inscripciones/${id}`, { method: "DELETE" });
 
     if (res.ok) {
       setInscripciones((prev) => prev.filter((i) => i.id !== id));
     } else {
-      console.error('Error borrando inscripción');
+      console.error("Error borrando inscripción");
     }
 
     setLoadingId(null);
@@ -43,34 +46,42 @@ export default function InscripcionesListClient({ initialInscripciones, initialC
         </tr>
       </thead>
       <tbody>
-        {inscripciones.map((ins: any) => (
+        {inscripciones.map((ins) => (
           <tr key={ins.id} className="border-t">
             <td className="p-3">{ins.nombre}</td>
             <td className="p-3">{ins.email}</td>
 
             {/* ✅ circuito desde sesiones.circuitos.nombre */}
-            <td className="p-3">
-              {ins.sesiones?.circuitos?.nombre ?? '—'}
-            </td>
+            <td className="p-3">{ins.sesiones?.circuitos?.nombre ?? "—"}</td>
 
             {/* ✅ fecha segura */}
             <td className="p-3">
               {ins.sesiones?.fecha
                 ? new Date(ins.sesiones.fecha).toLocaleDateString()
-                : '—'}
+                : "—"}
             </td>
 
             <td className="p-3 capitalize">{ins.estado}</td>
 
             <td className="p-3 flex gap-3">
-              <Link href={`/dashboard/inscripciones/show/${ins.id}`} className="text-blue-600">Ver</Link>
-              <Link href={`/dashboard/inscripciones/edit/${ins.id}`} className="text-green-600">Editar</Link>
+              <Link
+                href={`/dashboard/inscripciones/show/${ins.id}`}
+                className="text-blue-600"
+              >
+                Ver
+              </Link>
+              <Link
+                href={`/dashboard/inscripciones/edit/${ins.id}`}
+                className="text-green-600"
+              >
+                Editar
+              </Link>
               <button
                 onClick={() => handleDelete(ins.id)}
                 className="text-red-600"
                 disabled={loadingId === ins.id}
               >
-                {loadingId === ins.id ? 'Borrando...' : 'Borrar'}
+                {loadingId === ins.id ? "Borrando..." : "Borrar"}
               </button>
             </td>
           </tr>

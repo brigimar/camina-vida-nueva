@@ -37,7 +37,6 @@ const CircuitoFlyerCard = memo(function CircuitoFlyerCard({
       className="bg-white rounded-3xl overflow-hidden shadow-xl mb-6 transition-transform active:scale-95 cursor-pointer"
       onClick={handleCardClick}
     >
-      
       {/* Imagen */}
       <div className="relative h-60 w-full">
         {imagen_url ? (
@@ -82,30 +81,35 @@ const CircuitoFlyerCard = memo(function CircuitoFlyerCard({
         </p>
 
         <p className="text-gray-700 text-sm mt-3 leading-relaxed">
-          Un recorrido para reconectar con tu bienestar, moverte con energía y disfrutar del aire libre.
+          Un recorrido para reconectar con tu bienestar, moverte con energía y
+          disfrutar del aire libre.
         </p>
 
         {/* Métricas */}
         <div className="flex justify-around border-t border-gray-200 mt-4 pt-4">
-          
           <div className="text-center">
             <i className="fas fa-ruler-horizontal text-emerald-700 text-2xl mb-1"></i>
             <div className="font-bold text-gray-800">{distancia_km} km</div>
-            <div className="text-xs text-gray-500 uppercase tracking-wide">Distancia</div>
+            <div className="text-xs text-gray-500 uppercase tracking-wide">
+              Distancia
+            </div>
           </div>
 
           <div className="text-center">
             <i className="fas fa-clock text-emerald-700 text-2xl mb-1"></i>
             <div className="font-bold text-gray-800">{tiempo ?? "—"}</div>
-            <div className="text-xs text-gray-500 uppercase tracking-wide">Tiempo</div>
+            <div className="text-xs text-gray-500 uppercase tracking-wide">
+              Tiempo
+            </div>
           </div>
 
           <div className="text-center">
             <i className="fas fa-shoe-prints text-emerald-700 text-2xl mb-1"></i>
             <div className="font-bold text-gray-800">{pasos ?? "—"}</div>
-            <div className="text-xs text-gray-500 uppercase tracking-wide">Pasos</div>
+            <div className="text-xs text-gray-500 uppercase tracking-wide">
+              Pasos
+            </div>
           </div>
-
         </div>
       </div>
 

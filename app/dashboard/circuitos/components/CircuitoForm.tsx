@@ -1,16 +1,19 @@
 "use client";
 
 import { useState } from "react";
-import { createClient } from '@/lib/supabaseBrowser'
-
+import { createSupabaseClient } from "@/lib/supabase";
+import { Circuito } from "@/types";
 
 interface CircuitoFormProps {
-  initialData?: any;
+  initialData?: Partial<Circuito>;
   circuitoId?: string;
 }
 
-export default function CircuitoForm({ initialData, circuitoId }: CircuitoFormProps) {
-  const supabase = createClient();
+export default function CircuitoForm({
+  initialData,
+  circuitoId,
+}: CircuitoFormProps) {
+  const supabase = createSupabaseClient();
 
   const [nombre, setNombre] = useState(initialData?.nombre ?? "");
   const [localidad, setLocalidad] = useState(initialData?.localidad ?? "");
@@ -41,7 +44,9 @@ export default function CircuitoForm({ initialData, circuitoId }: CircuitoFormPr
         return;
       }
 
-      const { data } = supabase.storage.from("Circuitos").getPublicUrl(filePath);
+      const { data } = supabase.storage
+        .from("Circuitos")
+        .getPublicUrl(filePath);
       setImagenUrl(data.publicUrl);
       setSubiendo(false);
     } catch (err) {
@@ -76,14 +81,19 @@ export default function CircuitoForm({ initialData, circuitoId }: CircuitoFormPr
   };
 
   return (
-    <form onSubmit={handleSubmit} className="bg-white p-6 rounded-xl shadow space-y-6">
+    <form
+      onSubmit={handleSubmit}
+      className="bg-white p-6 rounded-xl shadow space-y-6"
+    >
       <h2 className="text-2xl font-bold">
         {circuitoId ? "Editar circuito" : "Crear circuito"}
       </h2>
 
       {/* Nombre */}
       <div>
-        <label className="block text-sm font-medium text-gray-700">Nombre</label>
+        <label className="block text-sm font-medium text-gray-700">
+          Nombre
+        </label>
         <input
           type="text"
           value={nombre}
@@ -96,7 +106,9 @@ export default function CircuitoForm({ initialData, circuitoId }: CircuitoFormPr
 
       {/* Localidad */}
       <div>
-        <label className="block text-sm font-medium text-gray-700">Localidad</label>
+        <label className="block text-sm font-medium text-gray-700">
+          Localidad
+        </label>
         <input
           type="text"
           value={localidad}
@@ -109,7 +121,9 @@ export default function CircuitoForm({ initialData, circuitoId }: CircuitoFormPr
 
       {/* Distancia */}
       <div>
-        <label className="block text-sm font-medium text-gray-700">Distancia (km)</label>
+        <label className="block text-sm font-medium text-gray-700">
+          Distancia (km)
+        </label>
         <input
           type="number"
           step="0.1"
@@ -137,7 +151,9 @@ export default function CircuitoForm({ initialData, circuitoId }: CircuitoFormPr
 
       {/* Estado */}
       <div>
-        <label className="block text-sm font-medium text-gray-700">Estado</label>
+        <label className="block text-sm font-medium text-gray-700">
+          Estado
+        </label>
         <select
           value={estado}
           onChange={(e) => setEstado(e.target.value)}
@@ -161,9 +177,18 @@ export default function CircuitoForm({ initialData, circuitoId }: CircuitoFormPr
 
       {/* Imagen */}
       <div>
-        <label className="block text-sm font-medium text-gray-700">Imagen del circuito</label>
-        <input type="file" accept="image/*" onChange={handleUpload} className="mt-1" />
-        {subiendo && <p className="text-sm text-gray-500 mt-1">Subiendo imagen...</p>}
+        <label className="block text-sm font-medium text-gray-700">
+          Imagen del circuito
+        </label>
+        <input
+          type="file"
+          accept="image/*"
+          onChange={handleUpload}
+          className="mt-1"
+        />
+        {subiendo && (
+          <p className="text-sm text-gray-500 mt-1">Subiendo imagen...</p>
+        )}
         {imagenUrl && (
           <img
             src={imagenUrl}

@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 import {
   AlertDialog,
@@ -19,7 +19,12 @@ interface Props {
   onConfirm: () => void;
 }
 
-export default function DeleteCircuitoDialog({ open, onOpenChange, circuito, onConfirm }: Props) {
+export default function DeleteCircuitoDialog({
+  open,
+  onOpenChange,
+  circuito,
+  onConfirm,
+}: Props) {
   return (
     <AlertDialog open={open} onOpenChange={onOpenChange}>
       <AlertDialogContent>

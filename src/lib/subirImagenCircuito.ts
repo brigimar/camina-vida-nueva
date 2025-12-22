@@ -1,6 +1,6 @@
 "use client";
 
-import { createSupabaseBrowser } from "./supabaseBrowser";
+import { createSupabaseClient } from "@/lib/supabase";
 
 /**
  * Sube una imagen de circuito al bucket "Fotos_circuitos" en Supabase Storage
@@ -23,13 +23,13 @@ export async function subirImagenCircuito(file: File): Promise<string> {
   }
 
   try {
-    const supabase = createSupabaseBrowser();
+    const supabase = createSupabaseClient();
     const ext = file.name.split(".").pop()?.toLowerCase() || "jpg";
     const fileName = `${crypto.randomUUID()}.${ext}`;
     const filePath = `circuitos/${fileName}`;
 
     // ✅ Upload to "Fotos_circuitos" bucket
-    const { data, error } = await supabase.storage
+    const { error } = await supabase.storage
       .from("Fotos_circuitos")
       .upload(filePath, file, {
         cacheControl: "3600",

@@ -1,10 +1,20 @@
-export const dynamic = 'force-dynamic';
+export const dynamic = "force-dynamic";
 
-import { Inscripcion } from '@/types';
-import { createSupabaseServer } from '@/lib/supabaseServer';
+import { Inscripcion } from "@/types";
+import { createSupabaseServer } from "@/lib/supabase";
 
 interface Props {
   params: { id: string };
+}
+
+interface InscripcionConRelaciones extends Inscripcion {
+  sesiones?: {
+    id: string;
+    fecha: string;
+    circuitos?: {
+      nombre: string;
+    } | null;
+  } | null;
 }
 
 export default async function InscripcionesShow({ params }: Props) {
@@ -14,17 +24,19 @@ export default async function InscripcionesShow({ params }: Props) {
 
   // ✅ Fetch seguro (sin throw)
   const res = await supabase
-    .from('inscripciones')
-    .select('*, sesiones(*, circuitos(nombre))')
-    .eq('id', id)
+    .from("inscripciones")
+    .select("*, sesiones(*, circuitos(nombre))")
+    .eq("id", id)
     .single();
 
   if (res.error) {
-    console.error('❌ Supabase error (inscripción):', res.error);
+    console.error("❌ Supabase error (inscripción):", res.error);
   }
 
-  const ins: any =
-    res.data && typeof res.data === 'object' ? res.data : null;
+  const ins: InscripcionConRelaciones | null =
+    res.data && typeof res.data === "object"
+      ? (res.data as InscripcionConRelaciones)
+      : null;
 
   // ✅ Si no existe, no romper SSR
   if (!ins || !ins.id) {
@@ -51,18 +63,18 @@ export default async function InscripcionesShow({ params }: Props) {
       </p>
 
       <p>
-        <strong>WhatsApp:</strong> {ins.whatsapp || '—'}
+        <strong>WhatsApp:</strong> {ins.whatsapp || "—"}
       </p>
 
       <p className="mt-4">
-        <strong>Circuito:</strong> {circuito?.nombre || '—'}
+        <strong>Circuito:</strong> {circuito?.nombre || "—"}
       </p>
 
       <p>
-        <strong>Sesión:</strong>{' '}
+        <strong>Sesión:</strong>{" "}
         {ins.sesiones?.fecha
           ? new Date(ins.sesiones.fecha).toLocaleDateString()
-          : '—'}
+          : "—"}
       </p>
 
       <p className="mt-4">

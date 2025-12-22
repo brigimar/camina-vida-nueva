@@ -1,4 +1,4 @@
-import { createSupabaseServer } from "@/lib/supabaseServer";
+import { createSupabaseServer } from "@/lib/supabase";
 
 export async function getAlertas({
   rol,
@@ -6,7 +6,7 @@ export async function getAlertas({
   activas = true,
   tipo,
   severidad,
-  circuitoId
+  circuitoId,
 }: {
   rol: string;
   coordinadorId?: string;
@@ -15,7 +15,7 @@ export async function getAlertas({
   severidad?: string;
   circuitoId?: string;
 }) {
-  const supabase = await createSupabaseServer();
+  const supabase = createSupabaseServer();
 
   let query = supabase
     .from("alertas")

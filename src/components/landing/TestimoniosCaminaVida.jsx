@@ -1,8 +1,18 @@
 export default function TestimoniosCaminaVida() {
   const testimonios = [
-    { texto: "Me ayudó a reconectar con mi cuerpo y sentirme mejor cada día.", autor: "Luis G." },
-    { texto: "Las caminatas me dieron claridad y foco en mi día a día.", autor: "Martín R." },
-    { texto: "Disfruté el grupo, cada paso y todo lo que aprendí en el proceso.", autor: "Sofía M." },
+    {
+      texto: "Me ayudó a reconectar con mi cuerpo y sentirme mejor cada día.",
+      autor: "Luis G.",
+    },
+    {
+      texto: "Las caminatas me dieron claridad y foco en mi día a día.",
+      autor: "Martín R.",
+    },
+    {
+      texto:
+        "Disfruté el grupo, cada paso y todo lo que aprendí en el proceso.",
+      autor: "Sofía M.",
+    },
   ];
 
   return (

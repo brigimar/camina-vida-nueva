@@ -18,9 +18,12 @@ export default function CategoriasEstiloOlla() {
     if (scrollRef.current) {
       const { scrollLeft, clientWidth } = scrollRef.current;
       // Calculamos el desplazamiento basado en el ancho visible para que sea fluido
-      const scrollAmount = clientWidth * 0.8; 
-      const scrollTo = direction === "left" ? scrollLeft - scrollAmount : scrollLeft + scrollAmount;
-      
+      const scrollAmount = clientWidth * 0.8;
+      const scrollTo =
+        direction === "left"
+          ? scrollLeft - scrollAmount
+          : scrollLeft + scrollAmount;
+
       scrollRef.current.scrollTo({
         left: scrollTo,
         behavior: "smooth",
@@ -31,7 +34,6 @@ export default function CategoriasEstiloOlla() {
   return (
     <section className="py-16 bg-[#FFFBF7] overflow-hidden">
       <div className="max-w-7xl mx-auto px-6">
-        
         {/* Cabecera más compacta */}
         <div className="flex items-center justify-between mb-8">
           <div className="space-y-1">
@@ -42,18 +44,18 @@ export default function CategoriasEstiloOlla() {
               Conectá con tu bienestar.
             </p>
           </div>
-          
+
           {/* Controles de Navegación: Visibles en todo momento */}
           <div className="flex gap-2">
-            <button 
-              onClick={() => scroll("left")} 
+            <button
+              onClick={() => scroll("left")}
               className="p-3 rounded-full border border-orange-100 bg-white text-[#FF5C35] hover:bg-[#FF5C35] hover:text-white transition-all shadow-sm active:scale-90"
               aria-label="Anterior"
             >
               <ChevronLeft size={20} />
             </button>
-            <button 
-              onClick={() => scroll("right")} 
+            <button
+              onClick={() => scroll("right")}
               className="p-3 rounded-full border border-orange-100 bg-white text-[#FF5C35] hover:bg-[#FF5C35] hover:text-white transition-all shadow-sm active:scale-90"
               aria-label="Siguiente"
             >
@@ -77,9 +79,9 @@ export default function CategoriasEstiloOlla() {
                 alt={cat.titulo}
                 className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
               />
-              
+
               <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent opacity-90" />
-              
+
               <div className="absolute bottom-8 left-8 right-8">
                 <h3 className="text-white text-xl md:text-2xl font-bold tracking-tight mb-2">
                   {cat.titulo}

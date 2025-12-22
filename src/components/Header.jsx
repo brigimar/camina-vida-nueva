@@ -1,9 +1,9 @@
-'use client';
-import { useState } from 'react';
-import Link from 'next/link';
-import Image from 'next/image';
-import { useRouter } from 'next/navigation';
-import LoginButton from './LoginButton';
+"use client";
+import { useState } from "react";
+import Link from "next/link";
+import Image from "next/image";
+import { useRouter } from "next/navigation";
+import LoginButton from "./LoginButton";
 
 export default function Header() {
   const [menuAbierto, setMenuAbierto] = useState(false);
@@ -22,13 +22,32 @@ export default function Header() {
         <div className="max-w-screen-xl mx-auto px-4 py-3 flex items-center justify-between">
           {/* Menú izquierdo */}
           <nav className="hidden md:flex gap-6 items-center text-sm font-semibold text-muted">
-            <button onClick={() => irASeccionHome('#beneficios')} className="hover:text-verde-oscuro transition">Beneficios</button>
-            <button onClick={() => irASeccionHome('#metodo')} className="hover:text-verde-oscuro transition">Método</button>
-            <Link href="/caminatas" className="hover:text-verde-oscuro transition">Caminatas</Link>
+            <button
+              onClick={() => irASeccionHome("#beneficios")}
+              className="hover:text-verde-oscuro transition"
+            >
+              Beneficios
+            </button>
+            <button
+              onClick={() => irASeccionHome("#metodo")}
+              className="hover:text-verde-oscuro transition"
+            >
+              Método
+            </button>
+            <Link
+              href="/caminatas"
+              className="hover:text-verde-oscuro transition"
+            >
+              Caminatas
+            </Link>
           </nav>
 
           {/* ✅ Logo centrado */}
-          <Link href="/" className="flex items-center gap-3 mx-auto" aria-label="Inicio Camina Vida">
+          <Link
+            href="/"
+            className="flex items-center gap-3 mx-auto"
+            aria-label="Inicio Camina Vida"
+          >
             <div className="relative w-[160px] h-[58px] sm:w-[192px] sm:h-[70px]">
               <Image
                 src="/images/logo2.webp"
@@ -43,8 +62,18 @@ export default function Header() {
 
           {/* Menú derecho */}
           <nav className="hidden md:flex gap-6 items-center text-sm font-semibold text-muted">
-            <button onClick={() => irASeccionHome('#planes')} className="hover:text-verde-oscuro transition">Planes</button>
-            <Link href="/notion/2bb3438670178038b792f0c060d491a1" className="hover:text-verde-oscuro transition">Nosotros</Link>
+            <button
+              onClick={() => irASeccionHome("#planes")}
+              className="hover:text-verde-oscuro transition"
+            >
+              Planes
+            </button>
+            <Link
+              href="/notion/2bb3438670178038b792f0c060d491a1"
+              className="hover:text-verde-oscuro transition"
+            >
+              Nosotros
+            </Link>
             {/* ✅ Nuevo link 13/12 externo */}
             <a
               href="https://caminavida.com.ar/evento"
@@ -69,8 +98,22 @@ export default function Header() {
             onClick={() => setMenuAbierto(!menuAbierto)}
             aria-label="Abrir menú"
           >
-            <svg className="w-6 h-6" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" d={menuAbierto ? 'M6 18L18 6M6 6l12 12' : 'M4 6h16M4 12h16M4 18h16'} />
+            <svg
+              className="w-6 h-6"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              viewBox="0 0 24 24"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d={
+                  menuAbierto
+                    ? "M6 18L18 6M6 6l12 12"
+                    : "M4 6h16M4 12h16M4 18h16"
+                }
+              />
             </svg>
           </button>
         </div>
@@ -78,11 +121,38 @@ export default function Header() {
         {/* Menú móvil */}
         {menuAbierto && (
           <div className="md:hidden px-4 pb-4 space-y-2">
-            <button onClick={() => irASeccionHome('#beneficios')} className="block w-full text-left px-4 py-2.5 text-sm font-semibold text-muted hover:text-verde-oscuro rounded-lg transition">Beneficios</button>
-            <button onClick={() => irASeccionHome('#metodo')} className="block w-full text-left px-4 py-2.5 text-sm font-semibold text-muted hover:text-verde-oscuro rounded-lg transition">Método</button>
-            <Link href="/caminatas" onClick={() => setMenuAbierto(false)} className="block w-full text-left px-4 py-2.5 text-sm font-semibold text-muted hover:text-verde-oscuro rounded-lg transition">Caminatas</Link>
-            <button onClick={() => irASeccionHome('#planes')} className="block w-full text-left px-4 py-2.5 text-sm font-semibold text-muted hover:text-verde-oscuro rounded-lg transition">Planes</button>
-            <Link href="/nosotros" onClick={() => setMenuAbierto(false)} className="block w-full text-left px-4 py-2.5 text-sm font-semibold text-muted hover:text-verde-oscuro rounded-lg transition">Nosotros</Link>
+            <button
+              onClick={() => irASeccionHome("#beneficios")}
+              className="block w-full text-left px-4 py-2.5 text-sm font-semibold text-muted hover:text-verde-oscuro rounded-lg transition"
+            >
+              Beneficios
+            </button>
+            <button
+              onClick={() => irASeccionHome("#metodo")}
+              className="block w-full text-left px-4 py-2.5 text-sm font-semibold text-muted hover:text-verde-oscuro rounded-lg transition"
+            >
+              Método
+            </button>
+            <Link
+              href="/caminatas"
+              onClick={() => setMenuAbierto(false)}
+              className="block w-full text-left px-4 py-2.5 text-sm font-semibold text-muted hover:text-verde-oscuro rounded-lg transition"
+            >
+              Caminatas
+            </Link>
+            <button
+              onClick={() => irASeccionHome("#planes")}
+              className="block w-full text-left px-4 py-2.5 text-sm font-semibold text-muted hover:text-verde-oscuro rounded-lg transition"
+            >
+              Planes
+            </button>
+            <Link
+              href="/nosotros"
+              onClick={() => setMenuAbierto(false)}
+              className="block w-full text-left px-4 py-2.5 text-sm font-semibold text-muted hover:text-verde-oscuro rounded-lg transition"
+            >
+              Nosotros
+            </Link>
             {/* ✅ Nuevo link 13/12 externo en móvil */}
             <a
               href="https://caminavida.com.ar/evento"
@@ -113,12 +183,19 @@ export default function Header() {
       {mostrarModal && (
         <div className="fixed inset-0 z-50 bg-black/40 backdrop-blur-sm flex items-center justify-center">
           <div className="bg-white rounded-lg shadow-lg p-6 w-full max-w-md">
-            <h3 className="text-lg font-semibold mb-4 text-texto">Reservá tu clase prueba</h3>
+            <h3 className="text-lg font-semibold mb-4 text-texto">
+              Reservá tu clase prueba
+            </h3>
             <p className="text-sm text-muted mb-4">
               Te redirigiremos a WhatsApp para confirmar tu reserva gratuita.
             </p>
             <div className="flex justify-end gap-2">
-              <button onClick={() => setMostrarModal(false)} className="text-sm text-muted hover:text-texto">Cancelar</button>
+              <button
+                onClick={() => setMostrarModal(false)}
+                className="text-sm text-muted hover:text-texto"
+              >
+                Cancelar
+              </button>
               <a
                 href="https://wa.me/5491151501147?text=Hola%20!%20Quiero%20reservar%20mi%20clase%20prueba"
                 target="_blank"

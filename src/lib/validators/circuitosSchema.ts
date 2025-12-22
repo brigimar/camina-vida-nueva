@@ -1,4 +1,4 @@
-import { z } from 'zod';
+import { z } from "zod";
 
 export const circuitoSchema = z.object({
   nombre: z.string().min(3),

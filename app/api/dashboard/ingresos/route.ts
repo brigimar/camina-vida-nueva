@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import { getIngresos } from "@/services/ingresos.service";
-import { createSupabaseServer } from "@/lib/supabaseServer";
+import { createSupabaseServer } from "@/lib/supabase";
 
 export async function GET(req: Request) {
   const supabase = await createSupabaseServer();
@@ -28,7 +28,8 @@ export async function GET(req: Request) {
         "Cache-Control": "public, max-age=3600, stale-while-revalidate=300",
       },
     });
-  } catch (e: any) {
-    return NextResponse.json({ error: e.message }, { status: 500 });
+  } catch (e: unknown) {
+    const errorMessage = e instanceof Error ? e.message : "Unknown error";
+    return NextResponse.json({ error: errorMessage }, { status: 500 });
   }
 }

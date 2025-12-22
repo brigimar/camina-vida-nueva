@@ -1,13 +1,11 @@
 import { NextResponse } from "next/server";
-import { createSupabaseServer } from "@/lib/supabaseServer";
+import { createSupabaseServer } from "@/lib/supabase";
 
 export async function GET() {
   const supabase = await createSupabaseServer();
 
   // Consulta directa a la vista materializada
-  const { data, error } = await supabase
-    .from("vm_caminatas_hoy")
-    .select("*");
+  const { data, error } = await supabase.from("vm_caminatas_hoy").select("*");
 
   if (error) {
     return NextResponse.json({ error: error.message }, { status: 500 });

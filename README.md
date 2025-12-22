@@ -1,4 +1,3 @@
-
 # Camina Vida 🥾💚
 
 **Camina Vida** es una plataforma de bienestar comunitario que promueve caminatas guiadas, salud emocional y encuentros positivos. Este repositorio contiene el frontend del sitio institucional y dashboard de coordinación, desarrollado con **Next.js 15**, **Tailwind CSS**, **Supabase** y **Notion**.
@@ -16,7 +15,6 @@
 ---
 
 ## 📦 Estructura del proyecto
-
 
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 

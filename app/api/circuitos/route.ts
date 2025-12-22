@@ -1,6 +1,5 @@
-import { NextResponse } from "next/server";
-import { createSupabaseServer } from "@/lib/supabaseServer";
-import { ok, errorResponse, unauthorized } from "@/lib/utils/respuesta";
+import { createSupabaseServer } from "@/lib/supabase";
+import { ok, errorResponse } from "@/lib/utils/respuesta";
 import { circuitoSchema } from "@/lib/validators/circuitoSchema";
 import { requireUser } from "@/lib/auth/authorize";
 
@@ -23,8 +22,6 @@ export async function GET(req: Request) {
     const q = searchParams.get("q");
     const categoria = searchParams.get("categoria");
     const barrio = searchParams.get("barrio");
-    const dia = searchParams.get("dia");
-    const horario = searchParams.get("horario");
     const sort = searchParams.get("sort") ?? "nombre";
     const order = searchParams.get("order") ?? "asc";
 
@@ -38,7 +35,7 @@ export async function GET(req: Request) {
     // ✅ Búsqueda por nombre/descripción/localidad/punto_encuentro
     if (q) {
       query = query.or(
-        `nombre.ilike.%${q}%,descripcion.ilike.%${q}%,localidad.ilike.%${q}%,punto_encuentro.ilike.%${q}%`
+        `nombre.ilike.%${q}%,descripcion.ilike.%${q}%,localidad.ilike.%${q}%,punto_encuentro.ilike.%${q}%`,
       );
     }
 
@@ -55,14 +52,14 @@ export async function GET(req: Request) {
 
     if (error) throw error;
 
-    return ok({ 
-      data, 
-      pagination: { 
-        page, 
-        limit, 
-        total: count, 
-        pages: Math.ceil((count || 0) / limit) 
-      } 
+    return ok({
+      data,
+      pagination: {
+        page,
+        limit,
+        total: count,
+        pages: Math.ceil((count || 0) / limit),
+      },
     });
   } catch (e) {
     const error = e as PostgrestError;
@@ -78,7 +75,11 @@ export async function POST(req: Request) {
     const body = await req.json();
     const payload = circuitoSchema.parse(body);
 
-    const { data, error } = await supabase.from("circuitos").insert(payload).select().single();
+    const { data, error } = await supabase
+      .from("circuitos")
+      .insert(payload)
+      .select()
+      .single();
     if (error) throw error;
 
     return ok(data, 201);
@@ -86,4 +87,3 @@ export async function POST(req: Request) {
     return errorResponse(e);
   }
 }
-

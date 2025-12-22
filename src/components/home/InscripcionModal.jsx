@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 import FormularioInscripcion from "@/components/inscripcion/FormularioInscripcion";
 

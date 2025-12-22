@@ -41,7 +41,9 @@ export default function CircuitosListClient({
   return (
     <div className="overflow-x-auto">
       {circuitos.length === 0 ? (
-        <p className="text-center py-8 text-gray-500">No hay circuitos registrados</p>
+        <p className="text-center py-8 text-gray-500">
+          No hay circuitos registrados
+        </p>
       ) : (
         <table className="w-full bg-white shadow rounded-lg overflow-hidden">
           <thead className="bg-gray-100 text-left">
@@ -59,7 +61,9 @@ export default function CircuitosListClient({
               <tr key={circuito.id} className="border-t hover:bg-gray-50">
                 <td className="p-3 font-medium">{circuito.nombre}</td>
                 <td className="p-3">{circuito.localidad || "-"}</td>
-                <td className="p-3">{circuito.distancia_km ? `${circuito.distancia_km} km` : "-"}</td>
+                <td className="p-3">
+                  {circuito.distancia_km ? `${circuito.distancia_km} km` : "-"}
+                </td>
                 <td className="p-3">
                   <span
                     className={`px-3 py-1 rounded-full text-sm ${

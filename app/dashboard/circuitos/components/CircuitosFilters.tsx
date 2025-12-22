@@ -19,7 +19,9 @@ export default function CircuitosFilters({ onChange }: CircuitosFiltersProps) {
     activo: "",
   });
 
-  const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+  const handleChange = (
+    e: ChangeEvent<HTMLInputElement | HTMLSelectElement>,
+  ) => {
     const updated = { ...filters, [e.target.name]: e.target.value };
     setFilters(updated);
     onChange(updated);
@@ -27,7 +29,6 @@ export default function CircuitosFilters({ onChange }: CircuitosFiltersProps) {
 
   return (
     <div className="flex gap-4 mb-4">
-
       <input
         name="q"
         placeholder="Buscar..."
@@ -53,7 +54,6 @@ export default function CircuitosFilters({ onChange }: CircuitosFiltersProps) {
         <option value="true">Activo</option>
         <option value="false">Inactivo</option>
       </select>
-
     </div>
   );
 }

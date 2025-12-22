@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 import { useState } from "react";
 
@@ -89,11 +89,7 @@ export default function FormularioInscripcion({ circuito, onSuccess }) {
         {loading ? "Enviando..." : "Inscribirme"}
       </button>
 
-      {mensaje && (
-        <p className="text-center text-sm mt-2">
-          {mensaje}
-        </p>
-      )}
+      {mensaje && <p className="text-center text-sm mt-2">{mensaje}</p>}
     </form>
   );
 }

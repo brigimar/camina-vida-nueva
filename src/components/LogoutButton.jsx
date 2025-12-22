@@ -1,12 +1,12 @@
-'use client';
-import { useRouter } from 'next/navigation';
+"use client";
+import { useRouter } from "next/navigation";
 
 export default function LogoutButton() {
   const router = useRouter();
 
   const handleLogout = () => {
-    localStorage.removeItem('auth');
-    router.push('/login');
+    localStorage.removeItem("auth");
+    router.push("/login");
   };
 
   return (

@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { createSupabaseServer } from "@/lib/supabaseServer";
+import { createSupabaseServer } from "@/lib/supabase";
 import { getAlertas } from "@/services/alertas.service";
 
 export async function GET(req: Request) {
@@ -12,7 +12,10 @@ export async function GET(req: Request) {
     .single();
 
   if (profileError || !profile) {
-    return NextResponse.json({ error: "Perfil no encontrado" }, { status: 401 });
+    return NextResponse.json(
+      { error: "Perfil no encontrado" },
+      { status: 401 },
+    );
   }
 
   const { rol, coordinador_id } = profile;
@@ -39,7 +42,7 @@ export async function GET(req: Request) {
       activas,
       tipo,
       severidad,
-      circuitoId
+      circuitoId,
     });
 
     return NextResponse.json(data, {
@@ -47,7 +50,8 @@ export async function GET(req: Request) {
         "Cache-Control": "public, max-age=600, stale-while-revalidate=120",
       },
     });
-  } catch (e: any) {
-    return NextResponse.json({ error: e.message }, { status: 500 });
+  } catch (e: unknown) {
+    const errorMessage = e instanceof Error ? e.message : "Unknown error";
+    return NextResponse.json({ error: errorMessage }, { status: 500 });
   }
 }

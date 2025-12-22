@@ -1,4 +1,4 @@
-export const dynamic = 'force-dynamic';
+export const dynamic = "force-dynamic";
 
 import { Coordinador } from "@/types";
 import CoordinadorForm from "../../components/CoordinadorForm";

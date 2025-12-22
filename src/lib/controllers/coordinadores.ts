@@ -1,4 +1,4 @@
-import { createSupabaseServer } from "@/lib/supabaseServer";
+import { createSupabaseServer } from "@/lib/supabase";
 import { z } from "zod";
 
 export const coordinadorSchema = z.object({
@@ -13,7 +13,7 @@ export const coordinadorSchema = z.object({
 
 // ✅ LISTAR
 export async function getCoordinadores() {
-  const supabase = await createSupabaseServer();
+  const supabase = createSupabaseServer();
 
   const { data, error } = await supabase
     .from("coordinadores")
@@ -26,7 +26,7 @@ export async function getCoordinadores() {
 
 // ✅ CREAR
 export async function createCoordinador(payload: unknown) {
-  const supabase = await createSupabaseServer();
+  const supabase = createSupabaseServer();
   const parsed = coordinadorSchema.parse(payload);
 
   const { data, error } = await supabase
@@ -41,7 +41,7 @@ export async function createCoordinador(payload: unknown) {
 
 // ✅ ACTUALIZAR
 export async function updateCoordinador(id: string, payload: unknown) {
-  const supabase = await createSupabaseServer();
+  const supabase = createSupabaseServer();
   const parsed = coordinadorSchema.partial().parse(payload);
 
   const { data, error } = await supabase
@@ -60,7 +60,7 @@ export async function updateCoordinador(id: string, payload: unknown) {
 
 // ✅ DELETE (soft-delete)
 export async function deleteCoordinador(id: string) {
-  const supabase = await createSupabaseServer();
+  const supabase = createSupabaseServer();
 
   const { data, error } = await supabase
     .from("coordinadores")

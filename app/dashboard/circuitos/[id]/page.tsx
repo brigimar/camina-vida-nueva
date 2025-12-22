@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { createSupabaseServer } from "@/lib/supabaseServer";
+import { createSupabaseServer } from "@/lib/supabase";
 
 interface Props {
   params: { id: string };
@@ -8,7 +8,7 @@ interface Props {
 export default async function CircuitoDetailPage({ params }: Props) {
   const supabase = await createSupabaseServer();
 
-  const { data: circuito, error } = await supabase
+  const { data: circuito } = await supabase
     .from("circuitos")
     .select("*")
     .eq("id", params.id)
@@ -25,7 +25,6 @@ export default async function CircuitoDetailPage({ params }: Props) {
 
   return (
     <div className="max-w-3xl mx-auto p-6 space-y-6">
-
       {/* Imagen grande estilo flyer */}
       <div className="rounded-xl overflow-hidden shadow-lg">
         {circuito.imagen_url ? (
@@ -43,15 +42,15 @@ export default async function CircuitoDetailPage({ params }: Props) {
 
       {/* Contenido tipo flyer */}
       <div className="bg-white p-8 rounded-xl shadow space-y-6">
-
         <div>
-          <h1 className="text-4xl font-bold text-gray-900">{circuito.nombre}</h1>
+          <h1 className="text-4xl font-bold text-gray-900">
+            {circuito.nombre}
+          </h1>
           <p className="text-gray-600 text-lg mt-1">{circuito.localidad}</p>
         </div>
 
         {/* Badges tipo flyer */}
         <div className="flex flex-wrap gap-3 mt-4">
-
           <span className="px-4 py-2 bg-green-100 text-green-700 rounded-full text-sm font-semibold">
             Nivel: {circuito.nivel ?? "Sin nivel"}
           </span>

@@ -2,11 +2,13 @@
 
 import { useState, ChangeEvent, FormEvent } from "react";
 import Image from "next/image";
-import { Coordinador } from "@/types";
+import { Database } from "@/types/supabase";
 import { subirFotoStaff } from "@/lib/subirFotoStaff";
 
+type CoordinadorRow = Database["public"]["Tables"]["coordinadores"]["Row"];
+
 interface CoordinadorFormProps {
-  initialData?: Partial<Coordinador>;
+  initialData?: Partial<CoordinadorRow>;
   coordinadorId?: string;
 }
 
@@ -14,12 +16,12 @@ export default function CoordinadorForm({
   initialData,
   coordinadorId,
 }: CoordinadorFormProps) {
-  const [form, setForm] = useState<any>(initialData || {});
+  const [form, setForm] = useState<Partial<CoordinadorRow>>(initialData || {});
   const [error, setError] = useState<string | null>(null);
   const [success, setSuccess] = useState<string | null>(null);
 
   const handleChange = (
-    e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+    e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
   ) => {
     setForm({ ...form, [e.target.name]: e.target.value });
     setError(null);
@@ -54,10 +56,14 @@ export default function CoordinadorForm({
 
       if (!res.ok) {
         const errData = await res.json();
-        throw new Error(errData?.error?.message || "Error guardando coordinador");
+        throw new Error(
+          errData?.error?.message || "Error guardando coordinador",
+        );
       }
 
-      setSuccess(coordinadorId ? "Coordinador actualizado" : "Coordinador creado");
+      setSuccess(
+        coordinadorId ? "Coordinador actualizado" : "Coordinador creado",
+      );
       setTimeout(() => {
         window.location.href = "/dashboard/coordinadores";
       }, 1000);
@@ -67,13 +73,20 @@ export default function CoordinadorForm({
   };
 
   return (
-    <form onSubmit={handleSubmit} className="bg-white p-6 rounded-lg shadow max-w-xl space-y-4">
-      {error && <div className="p-3 bg-red-100 text-red-700 rounded">{error}</div>}
-      {success && <div className="p-3 bg-green-100 text-green-700 rounded">{success}</div>}
+    <form
+      onSubmit={handleSubmit}
+      className="bg-white p-6 rounded-lg shadow max-w-xl space-y-4"
+    >
+      {error && (
+        <div className="p-3 bg-red-100 text-red-700 rounded">{error}</div>
+      )}
+      {success && (
+        <div className="p-3 bg-green-100 text-green-700 rounded">{success}</div>
+      )}
 
       <input
         name="nombre"
-        value={(form.nombre as string) || ""}
+        value={form.nombre ?? ""}
         onChange={handleChange}
         placeholder="Nombre"
         className="w-full input"
@@ -82,7 +95,7 @@ export default function CoordinadorForm({
 
       <input
         name="apellido"
-        value={(form.apellido as string) || ""}
+        value={form.apellido ?? ""}
         onChange={handleChange}
         placeholder="Apellido"
         className="w-full input"
@@ -91,7 +104,7 @@ export default function CoordinadorForm({
 
       <input
         name="dni"
-        value={(form.dni as string) || ""}
+        value={form.dni ?? ""}
         onChange={handleChange}
         placeholder="DNI"
         className="w-full input"
@@ -100,7 +113,7 @@ export default function CoordinadorForm({
 
       <input
         name="telefono"
-        value={(form.telefono as string) || ""}
+        value={form.telefono ?? ""}
         onChange={handleChange}
         placeholder="Teléfono"
         className="w-full input"
@@ -109,7 +122,7 @@ export default function CoordinadorForm({
       <input
         name="email"
         type="email"
-        value={(form.email as string) || ""}
+        value={form.email ?? ""}
         onChange={handleChange}
         placeholder="Email"
         className="w-full input"
@@ -127,7 +140,7 @@ export default function CoordinadorForm({
 
       {form.foto && (
         <Image
-          src={form.foto as string}
+          src={form.foto}
           alt="Foto coordinador"
           width={128}
           height={128}
@@ -137,7 +150,7 @@ export default function CoordinadorForm({
 
       <textarea
         name="bio"
-        value={(form.bio as string) || ""}
+        value={form.bio ?? ""}
         onChange={handleChange}
         placeholder="Biografía"
         className="w-full input"

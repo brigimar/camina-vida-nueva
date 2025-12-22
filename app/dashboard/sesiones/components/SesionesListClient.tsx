@@ -1,30 +1,35 @@
 "use client";
 
-import { useState } from 'react';
-import Link from 'next/link';
-import { Sesion, Circuito } from '@/types';
+import { useState } from "react";
+import Link from "next/link";
+import { Sesion, Circuito } from "@/types";
 
 interface Props {
   initialSesiones: Sesion[];
   initialCircuitos?: Circuito[];
 }
 
-export default function SesionesListClient({ initialSesiones, initialCircuitos = [] }: Props) {
+export default function SesionesListClient({
+  initialSesiones,
+  initialCircuitos = [],
+}: Props) {
   const [sesiones, setSesiones] = useState<Sesion[]>(initialSesiones || []);
   const [loadingId, setLoadingId] = useState<string | null>(null);
 
-  const circuitosMap = Object.fromEntries((initialCircuitos || []).map((c) => [c.id, c.nombre]));
+  const circuitosMap = Object.fromEntries(
+    (initialCircuitos || []).map((c) => [c.id, c.nombre]),
+  );
 
   const handleDelete = async (id: string) => {
-    if (!confirm('¿Borrar esta sesión?')) return;
+    if (!confirm("¿Borrar esta sesión?")) return;
     setLoadingId(id);
 
-    const res = await fetch(`/api/sesiones/${id}`, { method: 'DELETE' });
+    const res = await fetch(`/api/sesiones/${id}`, { method: "DELETE" });
 
     if (res.ok) {
       setSesiones((prev) => prev.filter((s) => s.id !== id));
     } else {
-      console.error('Error borrando sesión');
+      console.error("Error borrando sesión");
     }
 
     setLoadingId(null);
@@ -47,16 +52,30 @@ export default function SesionesListClient({ initialSesiones, initialCircuitos =
       <tbody>
         {sesiones.map((s) => (
           <tr key={s.id} className="border-t">
-            <td className="p-3">{circuitosMap[s.circuito_id] || '—'}</td>
+            <td className="p-3">{circuitosMap[s.circuito_id] || "—"}</td>
             <td className="p-3">{new Date(s.fecha).toLocaleDateString()}</td>
             <td className="p-3">{s.horario}</td>
             <td className="p-3">{s.cupo}</td>
             <td className="p-3 capitalize">{s.estado}</td>
             <td className="p-3 flex gap-3">
-              <Link href={`/dashboard/sesiones/show/${s.id}`} className="text-blue-600">Ver</Link>
-              <Link href={`/dashboard/sesiones/edit/${s.id}`} className="text-green-600">Editar</Link>
-              <button onClick={() => handleDelete(s.id)} className="text-red-600" disabled={loadingId === s.id}>
-                {loadingId === s.id ? 'Borrando...' : 'Borrar'}
+              <Link
+                href={`/dashboard/sesiones/show/${s.id}`}
+                className="text-blue-600"
+              >
+                Ver
+              </Link>
+              <Link
+                href={`/dashboard/sesiones/edit/${s.id}`}
+                className="text-green-600"
+              >
+                Editar
+              </Link>
+              <button
+                onClick={() => handleDelete(s.id)}
+                className="text-red-600"
+                disabled={loadingId === s.id}
+              >
+                {loadingId === s.id ? "Borrando..." : "Borrar"}
               </button>
             </td>
           </tr>

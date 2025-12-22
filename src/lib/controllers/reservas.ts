@@ -1,8 +1,8 @@
-import { createSupabaseServer } from "@/lib/supabaseServer";
+import { createSupabaseServer } from "@/lib/supabase";
 import { reservaSchema } from "@/lib/validators/reservaSchema";
 
 export async function getReservas() {
-  const supabase = await createSupabaseServer();
+  const supabase = createSupabaseServer();
   const { data, error } = await supabase
     .from("reservas")
     .select("*")
@@ -13,7 +13,7 @@ export async function getReservas() {
 }
 
 export async function getReservaById(id: string) {
-  const supabase = await createSupabaseServer();
+  const supabase = createSupabaseServer();
   const { data, error } = await supabase
     .from("reservas")
     .select("*")
@@ -25,7 +25,7 @@ export async function getReservaById(id: string) {
 }
 
 export async function createReserva(payload: unknown) {
-  const supabase = await createSupabaseServer();
+  const supabase = createSupabaseServer();
   const parsed = reservaSchema.parse(payload);
 
   const { data, error } = await supabase
@@ -39,7 +39,7 @@ export async function createReserva(payload: unknown) {
 }
 
 export async function updateReserva(id: string, payload: unknown) {
-  const supabase = await createSupabaseServer();
+  const supabase = createSupabaseServer();
   const parsed = reservaSchema.partial().parse(payload);
 
   const { data, error } = await supabase
@@ -54,11 +54,8 @@ export async function updateReserva(id: string, payload: unknown) {
 }
 
 export async function deleteReserva(id: string) {
-  const supabase = await createSupabaseServer();
-  const { error } = await supabase
-    .from("reservas")
-    .delete()
-    .eq("id", id);
+  const supabase = createSupabaseServer();
+  const { error } = await supabase.from("reservas").delete().eq("id", id);
 
   if (error) throw error;
 }

@@ -44,8 +44,8 @@ const CircuitosListado = memo(function CircuitosListado({
   // ✅ Filtrado client-side memoizado
   const filtrados = useMemo(() => {
     return circuitos
-      .filter((c) =>
-        !search || c.nombre.toLowerCase().includes(search.toLowerCase())
+      .filter(
+        (c) => !search || c.nombre.toLowerCase().includes(search.toLowerCase()),
       )
       .filter((c) => !categoria || c.categoria === categoria)
       .filter((c) => !barrio || c.barrio === barrio)

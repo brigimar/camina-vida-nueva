@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { createSupabaseServer } from "@/lib/supabaseServer";
+import { createSupabaseServer } from "@/lib/supabase";
 import { getOperacion } from "@/services/operacion.service";
 
 export async function GET() {
@@ -12,7 +12,10 @@ export async function GET() {
     .single();
 
   if (profileError || !profile) {
-    return NextResponse.json({ error: "Perfil no encontrado" }, { status: 401 });
+    return NextResponse.json(
+      { error: "Perfil no encontrado" },
+      { status: 401 },
+    );
   }
 
   const { rol, coordinador_id } = profile;
@@ -32,7 +35,8 @@ export async function GET() {
         "Cache-Control": "public, max-age=900, stale-while-revalidate=120",
       },
     });
-  } catch (e: any) {
-    return NextResponse.json({ error: e.message }, { status: 500 });
+  } catch (e: unknown) {
+    const errorMessage = e instanceof Error ? e.message : "Unknown error";
+    return NextResponse.json({ error: errorMessage }, { status: 500 });
   }
 }

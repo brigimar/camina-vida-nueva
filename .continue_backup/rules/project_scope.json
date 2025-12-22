@@ -1,0 +1,6 @@
+﻿{
+  "name": "ProjectScopeRule",
+  "pattern": ".*",
+  "reason": "El agente debe trabajar únicamente dentro de la carpeta raíz PS E:\\BuenosPasos\\buenospasos\\pasoapaso\\caminatas-limpio>. \
+Esto asegura que todas las operaciones se apliquen al proyecto correcto y evita modificar archivos fuera del alcance."
+}

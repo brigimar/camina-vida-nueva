@@ -1,26 +1,26 @@
-"use client";
+﻿"use client";
 
 import { useEffect, useState } from "react";
 
-export function useCircuitos(params: Record<string, string | number | boolean> = {}) {
+export function useCircuitos(
+  params: Record<string, string | number | boolean> = {},
+) {
   const [data, setData] = useState([]);
   const [pagination, setPagination] = useState(null);
   const [loading, setLoading] = useState(true);
 
-  // ✅ Crear query string desde los parámetros
+  // âœ… Crear query string desde los parÃ¡metros
   const queryString = new URLSearchParams(
     Object.fromEntries(
-      Object.entries(params)
-        .filter(([_, value]) => value)
-        .map(([key, value]) => [key, String(value)])
-    )
+      Object.entries(params).map(([key, value]) => [key, String(value)]),
+    ),
   ).toString();
 
   useEffect(() => {
     setLoading(true);
 
     const url = `/api/circuitos${queryString ? `?${queryString}` : ""}`;
-    
+
     fetch(url)
       .then((res) => res.json())
       .then((json) => {

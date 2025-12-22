@@ -1,18 +1,21 @@
-export const dynamic = 'force-dynamic';
+export const dynamic = "force-dynamic";
 
 import CoordinadoresListClient from "./components/CoordinadoresListClient";
 import { Coordinador } from "@/types";
-import { createSupabaseServer } from "@/lib/supabaseServer";
+import { createSupabaseServer } from "@/lib/supabase";
 
 export default async function CoordinadoresPage() {
   let initialCoordinadores: Coordinador[] = [];
   try {
     const supabase = await createSupabaseServer();
-    const { data, error } = await supabase.from('coordinadores').select('*').limit(100);
+    const { data, error } = await supabase
+      .from("coordinadores")
+      .select("*")
+      .limit(100);
     if (error) throw error;
     initialCoordinadores = data ?? [];
   } catch (err) {
-    console.error('Error fetching coordinadores:', err);
+    console.error("Error fetching coordinadores:", err);
   }
 
   return (

@@ -1,6 +1,6 @@
 "use client";
 
-import InscripcionForm from '../components/InscripcionForm';
+import InscripcionForm from "../components/InscripcionForm";
 
 export default function InscripcionesCreate() {
   return (

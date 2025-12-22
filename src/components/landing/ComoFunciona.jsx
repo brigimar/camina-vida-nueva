@@ -7,20 +7,20 @@ export default function ComoFunciona() {
       id: "01",
       titulo: "Elegí tu circuito",
       desc: "Explorá nuestras caminatas terapéuticas, de fitness o aventura.",
-      icon: <MapPin className="text-[#FF5C35]" size={24} />
+      icon: <MapPin className="text-[#FF5C35]" size={24} />,
     },
     {
       id: "02",
       titulo: "Reservá tu lugar",
       desc: "Seleccioná la fecha que mejor te quede y asegurá tu cupo online.",
-      icon: <Calendar className="text-[#FF5C35]" size={24} />
+      icon: <Calendar className="text-[#FF5C35]" size={24} />,
     },
     {
       id: "03",
       titulo: "Recibí vida",
       desc: "Disfrutá de una experiencia guiada diseñada para tu bienestar.",
-      icon: <Heart className="text-[#FF5C35]" size={24} />
-    }
+      icon: <Heart className="text-[#FF5C35]" size={24} />,
+    },
   ];
 
   return (
@@ -33,12 +33,14 @@ export default function ComoFunciona() {
               <span className="absolute -top-10 -left-4 text-8xl font-serif italic text-orange-100/50 select-none">
                 {paso.id}
               </span>
-              
+
               <div className="relative z-10">
                 <div className="mb-6 inline-flex p-4 bg-white rounded-2xl shadow-sm">
                   {paso.icon}
                 </div>
-                <h3 className="text-2xl font-serif text-slate-900 mb-4">{paso.titulo}</h3>
+                <h3 className="text-2xl font-serif text-slate-900 mb-4">
+                  {paso.titulo}
+                </h3>
                 <p className="text-slate-500 leading-relaxed text-sm">
                   {paso.desc}
                 </p>

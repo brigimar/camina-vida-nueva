@@ -1,0 +1,10 @@
+﻿{
+  "models": [
+    {
+      "title": "Gemma 2B Local",
+      "provider": "ollama",
+      "model": "gemma:2b"
+    }
+  ],
+  "ollamaBaseUrl": "http://127.0.0.1:11435"
+}

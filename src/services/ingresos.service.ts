@@ -1,11 +1,9 @@
-import { createSupabaseServer } from "@/lib/supabaseServer";
+import { createSupabaseServer } from "@/lib/supabase";
 
 export async function getIngresos({ mes }: { mes?: string }) {
-  const supabase = await createSupabaseServer();
+  const supabase = createSupabaseServer();
 
-  let query = supabase
-    .from("vm_ingresos_por_circuito_mes")
-    .select("*");
+  let query = supabase.from("vm_ingresos_por_circuito_mes").select("*");
 
   if (mes) {
     query = query.eq("mes", mes);

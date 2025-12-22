@@ -8,7 +8,6 @@ export default function CTAReservar() {
       <div className="max-w-6xl mx-auto">
         {/* Contenedor Principal Estilo "Banner" */}
         <div className="relative overflow-hidden bg-slate-900 rounded-[4rem] p-12 md:p-24 text-center shadow-2xl shadow-slate-200">
-          
           {/* Decoración de fondo sutil (gradiente de luz) */}
           <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(circle_at_top_right,_var(--tw-gradient-stops))] from-[#FF5C35]/20 via-transparent to-transparent opacity-40" />
 
@@ -29,8 +28,11 @@ export default function CTAReservar() {
 
             {/* Descripción */}
             <p className="text-slate-400 text-lg md:text-xl font-light max-w-2xl mx-auto leading-relaxed">
-              Unite a nuestra comunidad y descubrí cómo una caminata consciente puede transformar tu salud y tu humor. 
-              <span className="text-white font-medium block mt-2">Reservá tu clase de prueba gratuita hoy mismo.</span>
+              Unite a nuestra comunidad y descubrí cómo una caminata consciente
+              puede transformar tu salud y tu humor.
+              <span className="text-white font-medium block mt-2">
+                Reservá tu clase de prueba gratuita hoy mismo.
+              </span>
             </p>
 
             {/* Botón de Acción Grande */}

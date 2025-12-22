@@ -1,9 +1,6 @@
-import { createClient } from "@supabase/supabase-js";
+import { createSupabaseClient } from "@/lib/supabase";
 
-const supabase = createClient(
-  process.env.NEXT_PUBLIC_SUPABASE_URL!,
-  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
-);
+const supabase = createSupabaseClient();
 
 export async function subirFotoStaff(file: File) {
   const ext = file.name.split(".").pop();
@@ -18,9 +15,7 @@ export async function subirFotoStaff(file: File) {
   if (error) throw error;
 
   // ✅ Obtener URL pública
-  const { data } = supabase.storage
-    .from("Fotos_staff")
-    .getPublicUrl(filePath);
+  const { data } = supabase.storage.from("Fotos_staff").getPublicUrl(filePath);
 
   return data.publicUrl;
 }

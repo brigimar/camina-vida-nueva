@@ -1,4 +1,4 @@
-import { createSupabaseServer } from "@/lib/supabaseServer";
+import { createSupabaseServer } from "@/lib/supabase";
 import { z } from "zod";
 
 export const userRoleSchema = z.object({
@@ -8,7 +8,7 @@ export const userRoleSchema = z.object({
 });
 
 export async function updateUserRole(id: string, payload: unknown) {
-  const supabase = await createSupabaseServer();
+  const supabase = createSupabaseServer();
   const parsed = userRoleSchema.partial().parse(payload);
 
   // ✅ 1. Obtener el rol anterior
@@ -58,19 +58,17 @@ export async function updateUserRole(id: string, payload: unknown) {
 }
 
 export async function getUserRoles() {
-  const supabase = await createSupabaseServer();
-  
-  const { data, error } = await supabase
-    .from("user_roles")
-    .select("*");
-  
+  const supabase = createSupabaseServer();
+
+  const { data, error } = await supabase.from("user_roles").select("*");
+
   if (error) throw error;
-  
+
   return data;
 }
 
 export async function assignUserRole(payload: unknown) {
-  const supabase = await createSupabaseServer();
+  const supabase = createSupabaseServer();
   const parsed = userRoleSchema.parse(payload);
 
   const { data, error } = await supabase
@@ -96,12 +94,9 @@ export async function assignUserRole(payload: unknown) {
 }
 
 export async function deleteUserRole(id: string) {
-  const supabase = await createSupabaseServer();
+  const supabase = createSupabaseServer();
 
-  const { error } = await supabase
-    .from("user_roles")
-    .delete()
-    .eq("id", id);
+  const { error } = await supabase.from("user_roles").delete().eq("id", id);
 
   if (error) throw error;
 

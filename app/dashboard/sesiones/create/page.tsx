@@ -1,6 +1,6 @@
 "use client";
 
-import SesionForm from '../components/SesionForm';
+import SesionForm from "../components/SesionForm";
 
 export default function SesionesCreate() {
   return (

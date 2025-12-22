@@ -1,12 +1,9 @@
 import CircuitosListado from "./CircuitosListado";
-import { createSupabaseServer } from "@/lib/supabaseServer";
+import { createSupabaseClient } from "@/lib/supabase";
 
 // ✅ Componente async que se renderiza dentro de Suspense
-export default async function CircuitosContent({
-  page = 1,
-  limit = 20,
-}) {
-  const supabase = await createSupabaseServer();
+export default async function CircuitosContent({ page = 1, limit = 20 }) {
+  const supabase = createSupabaseClient();
 
   // ✅ Calcular rango para paginación SSR
   const from = (page - 1) * limit;

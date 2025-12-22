@@ -1,9 +1,9 @@
-export const dynamic = 'force-dynamic';
+export const dynamic = "force-dynamic";
 
 import InscripcionesPorCircuito from "@/components/dashboard/InscripcionesPorCircuito";
 import InscripcionesPorDia from "@/components/dashboard/InscripcionesPorDia";
 import { Circuito, Inscripcion, Sesion } from "@/types";
-import { createSupabaseServer } from "@/lib/supabaseServer";
+import { createSupabaseServer } from "@/lib/supabase";
 
 interface CardProps {
   title: string;
@@ -14,33 +14,37 @@ export default async function DashboardHome() {
   const supabase = await createSupabaseServer();
 
   // ✅ Fetch circuitos (sin throw)
-  const cRes = await supabase.from('circuitos').select('*').limit(100);
+  const cRes = await supabase.from("circuitos").select("*").limit(100);
   const circuitos: Circuito[] = Array.isArray(cRes.data) ? cRes.data : [];
 
   // ✅ Fetch inscripciones con join correcto
   const iRes = await supabase
-    .from('inscripciones')
-    .select('*, sesiones(*, circuitos(nombre))')
-    .eq('estado', 'activo')
+    .from("inscripciones")
+    .select("*, sesiones(*, circuitos(nombre))")
+    .eq("estado", "activo")
     .limit(100);
-  const inscripciones: Inscripcion[] = Array.isArray(iRes.data) ? iRes.data : [];
+  const inscripciones: Inscripcion[] = Array.isArray(iRes.data)
+    ? iRes.data
+    : [];
 
   // ✅ Fetch sesiones
-  const sRes = await supabase.from('sesiones').select('*').limit(100);
+  const sRes = await supabase.from("sesiones").select("*").limit(100);
   const sesiones: Sesion[] = Array.isArray(sRes.data) ? sRes.data : [];
 
   // ✅ KPIs seguros
-  const circuitosActivos = circuitos.filter((c) => c.estado === "activo").length;
+  const circuitosActivos = circuitos.filter(
+    (c) => c.estado === "activo",
+  ).length;
   const totalInscripciones = inscripciones.length;
 
   // ✅ Contar inscripciones de hoy usando sesiones.fecha
   const hoy = new Date().toISOString().split("T")[0];
-  const inscripcionesHoy = inscripciones.filter(
-    (i) => i.sesiones?.fecha?.startsWith(hoy)
+  const inscripcionesHoy = inscripciones.filter((i) =>
+    i.sesiones?.fecha?.startsWith(hoy),
   ).length;
 
   const sesionesProgramadas = sesiones.filter(
-    (s) => s.estado === "programada"
+    (s) => s.estado === "programada",
   ).length;
 
   return (

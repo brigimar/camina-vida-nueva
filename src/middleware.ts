@@ -7,7 +7,7 @@ export function middleware(req: NextRequest) {
   console.log("🧭 MIDDLEWARE PATH:", path);
   console.log(
     "🍪 COOKIES:",
-    req.cookies.getAll().map(c => c.name)
+    req.cookies.getAll().map((c) => c.name),
   );
 
   // permitir login y api
@@ -16,22 +16,20 @@ export function middleware(req: NextRequest) {
   }
 
   if (path.startsWith("/dashboard")) {
-  const cookies = req.cookies.getAll();
+    const cookies = req.cookies.getAll();
 
-  const hasSession = cookies.some(
-    (c) =>
-      c.name.startsWith("sb-") &&
-      c.name.includes("auth-token")
-  );
+    const hasSession = cookies.some(
+      (c) => c.name.startsWith("sb-") && c.name.includes("auth-token"),
+    );
 
-  console.log("🔐 SESSION DETECTADA:", hasSession);
+    console.log("🔐 SESSION DETECTADA:", hasSession);
 
-  if (!hasSession) {
-    const url = req.nextUrl.clone();
-    url.pathname = "/login";
-    return NextResponse.redirect(url);
+    if (!hasSession) {
+      const url = req.nextUrl.clone();
+      url.pathname = "/login";
+      return NextResponse.redirect(url);
+    }
   }
-}
 
   return NextResponse.next();
 }

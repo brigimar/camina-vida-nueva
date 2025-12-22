@@ -1,10 +1,17 @@
 import { NextRequest } from "next/server";
 import { ok, errorResponse } from "@/lib/utils/respuesta";
-import { getCoordinadores, createCoordinador } from "@/lib/controllers/coordinadores";
+import {
+  getCoordinadores,
+  createCoordinador,
+} from "@/lib/controllers/coordinadores";
 import { requireUser } from "@/lib/auth/authorize";
 import { z } from "zod";
 
-const coordinadorSchema = z.object({ nombre: z.string().min(1), foto: z.string().optional(), bio: z.string().optional() });
+const coordinadorSchema = z.object({
+  nombre: z.string().min(1),
+  foto: z.string().optional(),
+  bio: z.string().optional(),
+});
 
 export async function GET() {
   try {

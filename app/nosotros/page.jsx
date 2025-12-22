@@ -1,15 +1,15 @@
 //src\app\nosotros\page.jsx
-'use client';
-import { useEffect, useState } from 'react';
+"use client";
+import { useEffect, useState } from "react";
 // import NotionBlockRenderer from '@/components/NotionBlockRenderer';
 
 export default function NosotrosPage() {
   const [blocks, setBlocks] = useState([]);
 
   useEffect(() => {
-    fetch('/api/notion-nosotros')
-      .then(res => res.json())
-      .then(data => setBlocks(data.blocks));
+    fetch("/api/notion-nosotros")
+      .then((res) => res.json())
+      .then((data) => setBlocks(data.blocks));
   }, []);
 
   return (
@@ -22,7 +22,9 @@ export default function NosotrosPage() {
       </section>
 
       {blocks && blocks.length > 0 ? (
-        <pre className="whitespace-pre-wrap max-w-3xl mx-auto">{JSON.stringify(blocks, null, 2)}</pre>
+        <pre className="whitespace-pre-wrap max-w-3xl mx-auto">
+          {JSON.stringify(blocks, null, 2)}
+        </pre>
       ) : null}
     </main>
   );

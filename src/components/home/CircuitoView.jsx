@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
@@ -10,16 +10,15 @@ export default function CircuitoView({ circuito }) {
 
   const whatsappMessage = encodeURIComponent(
     `Hola! Quiero compartirte este circuito de Camina Vida:\n\n` +
-    `🏞️ *${circuito.NombreCircuito}*\n` +
-    `📍 ${circuito.Localidad}\n` +
-    `📅 ${circuito.Dias?.join(", ")}\n` +
-    `🕒 ${circuito.Horarios?.join(", ")}\n\n` +
-    `Podés verlo acá:\n${typeof window !== "undefined" ? window.location.href : ""}`
+      `🏞️ *${circuito.NombreCircuito}*\n` +
+      `📍 ${circuito.Localidad}\n` +
+      `📅 ${circuito.Dias?.join(", ")}\n` +
+      `🕒 ${circuito.Horarios?.join(", ")}\n\n` +
+      `Podés verlo acá:\n${typeof window !== "undefined" ? window.location.href : ""}`,
   );
 
   return (
     <section className="max-w-4xl mx-auto px-6 py-16">
-
       {/* TÍTULO */}
       <motion.h1
         initial={{ opacity: 0, y: 10 }}
@@ -59,14 +58,30 @@ export default function CircuitoView({ circuito }) {
         transition={{ delay: 0.3, duration: 0.4 }}
         className="space-y-3 mb-10 bg-gray-50 p-6 rounded-xl shadow-sm"
       >
-        <p><strong>Localidad:</strong> {circuito.Localidad}</p>
-        <p><strong>Días:</strong> {circuito.Dias?.join(", ")}</p>
-        <p><strong>Horarios:</strong> {circuito.Horarios?.join(", ")}</p>
-        <p><strong>Distancia:</strong> {circuito.Distancia} km</p>
-        <p><strong>Tiempo estimado:</strong> {circuito.tiempo_estimado || "—"}</p>
-        <p><strong>Dificultad:</strong> {circuito.dificultad || "—"}</p>
-        <p><strong>Punto de encuentro:</strong> {circuito.punto_encuentro}</p>
-        <p><strong>Cupo restante:</strong> {circuito.cupo_restante}</p>
+        <p>
+          <strong>Localidad:</strong> {circuito.Localidad}
+        </p>
+        <p>
+          <strong>Días:</strong> {circuito.Dias?.join(", ")}
+        </p>
+        <p>
+          <strong>Horarios:</strong> {circuito.Horarios?.join(", ")}
+        </p>
+        <p>
+          <strong>Distancia:</strong> {circuito.Distancia} km
+        </p>
+        <p>
+          <strong>Tiempo estimado:</strong> {circuito.tiempo_estimado || "—"}
+        </p>
+        <p>
+          <strong>Dificultad:</strong> {circuito.dificultad || "—"}
+        </p>
+        <p>
+          <strong>Punto de encuentro:</strong> {circuito.punto_encuentro}
+        </p>
+        <p>
+          <strong>Cupo restante:</strong> {circuito.cupo_restante}
+        </p>
       </motion.div>
 
       {/* FOTO DEL COORDINADOR */}
@@ -124,7 +139,6 @@ export default function CircuitoView({ circuito }) {
 
       {/* BOTONES */}
       <div className="flex flex-col sm:flex-row gap-4">
-
         {/* INSCRIPCIÓN */}
         <motion.button
           whileTap={{ scale: 0.97 }}

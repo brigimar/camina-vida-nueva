@@ -9,7 +9,9 @@ const CircuitosGrid = memo(function CircuitosGrid({ circuitos }) {
   if (!circuitos || circuitos.length === 0) {
     return (
       <div className="text-center py-12">
-        <p className="text-gray-500 text-lg">No se encontraron circuitos con esos criterios.</p>
+        <p className="text-gray-500 text-lg">
+          No se encontraron circuitos con esos criterios.
+        </p>
       </div>
     );
   }
@@ -43,4 +45,3 @@ const CircuitosGrid = memo(function CircuitosGrid({ circuitos }) {
 CircuitosGrid.displayName = "CircuitosGrid";
 
 export default CircuitosGrid;
-

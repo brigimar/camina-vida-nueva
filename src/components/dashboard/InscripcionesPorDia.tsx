@@ -2,26 +2,23 @@
 
 import "@/lib/chart";
 import { Line } from "react-chartjs-2";
-import { useEffect, useState } from "react";
-import { Inscripcion } from "@/types";
+import { useInscriptos } from "@/hooks/useInscriptos";
+import { Database } from "@/types/supabase";
+
+type InscripcionRow = Database["public"]["Tables"]["inscripciones"]["Row"];
 
 export default function InscripcionesPorDia() {
-  const [inscripciones, setInscripciones] = useState<Inscripcion[]>([]);
+  const { data: inscripcionesData = [], loading } = useInscriptos();
 
-  useEffect(() => {
-    fetch('/api/inscripciones?limit=100')
-      .then(r => r.json())
-      .then(d => setInscripciones(d?.data ?? d ?? []))
-      .catch(() => setInscripciones([]));
-  }, []);
-
-  const inscripcionesData = inscripciones;
+  if (loading) return <p>Cargando inscripciones...</p>;
 
   const conteo: Record<string, number> = {};
 
-  inscripcionesData.forEach((i) => {
-    if (!i.fecha) return;
-    const fecha = i.fecha.includes("T") ? i.fecha.split("T")[0] : i.fecha;
+  inscripcionesData.forEach((i: InscripcionRow) => {
+    const fechaRaw = i.sesiones?.fecha;
+    if (!fechaRaw) return;
+
+    const fecha = fechaRaw.includes("T") ? fechaRaw.split("T")[0] : fechaRaw;
     conteo[fecha] = (conteo[fecha] || 0) + 1;
   });
 
@@ -29,7 +26,9 @@ export default function InscripcionesPorDia() {
     return (
       <div className="bg-white p-6 rounded-xl shadow">
         <h2 className="text-xl font-bold mb-4">Inscripciones por día</h2>
-        <p className="text-gray-500 text-sm">No hay inscripciones registradas.</p>
+        <p className="text-gray-500 text-sm">
+          No hay inscripciones registradas.
+        </p>
       </div>
     );
   }

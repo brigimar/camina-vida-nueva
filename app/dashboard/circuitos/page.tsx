@@ -1,10 +1,10 @@
 import Link from "next/link";
-import { createSupabaseServer } from '@/lib/supabaseServer'
+import { createSupabaseServer } from "@/lib/supabase";
 
 export default async function CircuitosPage() {
   const supabase = await createSupabaseServer();
 
-  const { data, error } = await supabase
+  const { data } = await supabase
     .from("circuitos")
     .select("*")
     .order("nombre", { ascending: true });

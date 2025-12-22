@@ -1,4 +1,5 @@
 <!-- .github/copilot-instructions.md -->
+
 # Copilot / AI Agent Quick Instructions
 
 Purpose: help an AI coding agent be immediately productive in this Next.js + Supabase project.

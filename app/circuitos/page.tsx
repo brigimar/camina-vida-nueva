@@ -11,7 +11,9 @@ interface CircuitosPageProps {
 }
 
 // ✅ Página con streaming, Suspense y paginación SSR
-export default async function CircuitosPage({ searchParams }: CircuitosPageProps) {
+export default async function CircuitosPage({
+  searchParams,
+}: CircuitosPageProps) {
   const params = await searchParams;
   // ✅ Leer page del query param
   const page = Math.max(1, Number(params?.page ?? 1));
@@ -30,4 +32,3 @@ export default async function CircuitosPage({ searchParams }: CircuitosPageProps
     </main>
   );
 }
-

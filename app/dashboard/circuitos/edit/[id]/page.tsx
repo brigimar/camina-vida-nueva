@@ -1,4 +1,4 @@
-import { createSupabaseServer } from "@/lib/supabaseServer";
+import { createSupabaseServer } from "@/lib/supabase";
 import CircuitoForm from "../../components/CircuitoForm";
 
 interface Props {

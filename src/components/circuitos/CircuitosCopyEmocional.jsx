@@ -23,7 +23,8 @@ const CircuitosCopyEmocional = memo(function CircuitosCopyEmocional({
         titulo: "¡Bienvenido a nuestros circuitos!",
         mensaje:
           "Más de 100 caminos te están esperando. Probá filtrar por barrio o por momento del día.",
-        estilo: "bg-gradient-to-r from-emerald-50 to-cyan-50 border-l-4 border-emerald-500",
+        estilo:
+          "bg-gradient-to-r from-emerald-50 to-cyan-50 border-l-4 border-emerald-500",
       };
     }
 
@@ -33,7 +34,8 @@ const CircuitosCopyEmocional = memo(function CircuitosCopyEmocional({
         titulo: "No encontramos match exacto",
         mensaje:
           "No encontramos circuitos con esa combinación. Probá cambiar el día o el horario — lo importante es empezar de a poco.",
-        estilo: "bg-gradient-to-r from-amber-50 to-orange-50 border-l-4 border-amber-500",
+        estilo:
+          "bg-gradient-to-r from-amber-50 to-orange-50 border-l-4 border-amber-500",
       };
     }
 
@@ -42,7 +44,8 @@ const CircuitosCopyEmocional = memo(function CircuitosCopyEmocional({
       return {
         titulo: "¡Perfecto!",
         mensaje: `Encontramos ${countResultados} circuito${countResultados !== 1 ? "s" : ""} que encaja${countResultados !== 1 ? "n" : ""} con lo que buscás. Son un gran punto de partida.`,
-        estilo: "bg-gradient-to-r from-violet-50 to-pink-50 border-l-4 border-violet-500",
+        estilo:
+          "bg-gradient-to-r from-violet-50 to-pink-50 border-l-4 border-violet-500",
       };
     }
 
@@ -52,28 +55,32 @@ const CircuitosCopyEmocional = memo(function CircuitosCopyEmocional({
         saludables: {
           titulo: "Circuitos Saludables",
           mensaje: "Ideal para empezar suave y construir hábito.",
-          estilo: "bg-gradient-to-r from-blue-50 to-cyan-50 border-l-4 border-blue-500",
+          estilo:
+            "bg-gradient-to-r from-blue-50 to-cyan-50 border-l-4 border-blue-500",
         },
         terapeuticas: {
           titulo: "Circuitos Terapéuticos",
-          mensaje:
-            "Pensadas para acompañar procesos físicos o emocionales.",
-          estilo: "bg-gradient-to-r from-emerald-50 to-teal-50 border-l-4 border-emerald-600",
+          mensaje: "Pensadas para acompañar procesos físicos o emocionales.",
+          estilo:
+            "bg-gradient-to-r from-emerald-50 to-teal-50 border-l-4 border-emerald-600",
         },
         fitness: {
           titulo: "Circuitos Fitness",
           mensaje: "Para cuando querés subir una marcha.",
-          estilo: "bg-gradient-to-r from-red-50 to-orange-50 border-l-4 border-red-500",
+          estilo:
+            "bg-gradient-to-r from-red-50 to-orange-50 border-l-4 border-red-500",
         },
         aventura: {
           titulo: "Circuitos Aventura",
           mensaje: "Para quienes buscan algo distinto.",
-          estilo: "bg-gradient-to-r from-yellow-50 to-amber-50 border-l-4 border-yellow-500",
+          estilo:
+            "bg-gradient-to-r from-yellow-50 to-amber-50 border-l-4 border-yellow-500",
         },
         premium: {
           titulo: "Circuitos Premium",
           mensaje: "Experiencias especiales para momentos especiales.",
-          estilo: "bg-gradient-to-r from-purple-50 to-pink-50 border-l-4 border-purple-500",
+          estilo:
+            "bg-gradient-to-r from-purple-50 to-pink-50 border-l-4 border-purple-500",
         },
       };
 
@@ -81,7 +88,8 @@ const CircuitosCopyEmocional = memo(function CircuitosCopyEmocional({
         categoriaMessages[categoria] || {
           titulo: "Circuitos seleccionados",
           mensaje: "Encontramos circuitos que te pueden interesar.",
-          estilo: "bg-gradient-to-r from-gray-50 to-slate-50 border-l-4 border-gray-400",
+          estilo:
+            "bg-gradient-to-r from-gray-50 to-slate-50 border-l-4 border-gray-400",
         }
       );
     }
@@ -91,7 +99,8 @@ const CircuitosCopyEmocional = memo(function CircuitosCopyEmocional({
       return {
         titulo: "¡Muchas opciones!",
         mensaje: `Tenemos ${countResultados} circuitos disponibles. Seguí explorando o ajustá los filtros.`,
-        estilo: "bg-gradient-to-r from-indigo-50 to-blue-50 border-l-4 border-indigo-500",
+        estilo:
+          "bg-gradient-to-r from-indigo-50 to-blue-50 border-l-4 border-indigo-500",
       };
     }
 
@@ -99,9 +108,19 @@ const CircuitosCopyEmocional = memo(function CircuitosCopyEmocional({
     return {
       titulo: "Nuestros Circuitos",
       mensaje: "Seleccioná los que más te atraigan.",
-      estilo: "bg-gradient-to-r from-gray-50 to-slate-50 border-l-4 border-gray-400",
+      estilo:
+        "bg-gradient-to-r from-gray-50 to-slate-50 border-l-4 border-gray-400",
     };
-  }, [tieneFiltros, countResultados, totalSinFiltros, categoria, search, barrio, dia, horario]);
+  }, [
+    tieneFiltros,
+    countResultados,
+    totalSinFiltros,
+    categoria,
+    search,
+    barrio,
+    dia,
+    horario,
+  ]);
 
   return (
     <div

@@ -1,30 +1,36 @@
 "use client";
 import { useState, useCallback } from "react";
 import { useRouter } from "next/navigation";
-import { getBrowserSupabase } from "@/src/lib/supabaseBrowser";
+import { createSupabaseClient } from "@/lib/supabase";
 
 export default function LoginPage() {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState<string>("");
+  const [password, setPassword] = useState<string>("");
   const [error, setError] = useState<string | null>(null);
+  const [loading, setLoading] = useState<boolean>(false);
   const router = useRouter();
 
   const handleLogin = useCallback(
     async (e: React.FormEvent<HTMLFormElement>) => {
       e.preventDefault();
       setError(null);
-      const supabase = getBrowserSupabase();
+      setLoading(true);
+
+      const supabase = createSupabaseClient();
       const { error } = await supabase.auth.signInWithPassword({
         email,
         password,
       });
+
+      setLoading(false);
+
       if (error) {
         setError(error.message);
       } else {
         router.push("/dashboard");
       }
     },
-    [email, password, router]
+    [email, password, router],
   );
 
   return (
@@ -33,7 +39,9 @@ export default function LoginPage() {
         <h1 className="text-2xl font-bold mb-6 text-center">Iniciar sesión</h1>
         <form onSubmit={handleLogin} className="space-y-4">
           <div>
-            <label className="block text-sm font-medium text-gray-700">Email</label>
+            <label className="block text-sm font-medium text-gray-700">
+              Email
+            </label>
             <input
               type="email"
               value={email}
@@ -44,7 +52,9 @@ export default function LoginPage() {
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-700">Contraseña</label>
+            <label className="block text-sm font-medium text-gray-700">
+              Contraseña
+            </label>
             <input
               type="password"
               value={password}
@@ -58,9 +68,10 @@ export default function LoginPage() {
 
           <button
             type="submit"
+            disabled={loading}
             className="w-full bg-green-600 text-white py-2 px-4 rounded-lg font-semibold hover:bg-green-700 transition"
           >
-            Entrar
+            {loading ? "Entrando..." : "Entrar"}
           </button>
         </form>
       </div>

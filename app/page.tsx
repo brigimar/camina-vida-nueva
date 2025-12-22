@@ -1,4 +1,4 @@
-import { createSupabaseServer } from "@/lib/supabaseServer";
+import { createSupabaseServer } from "@/lib/supabase";
 import HeroCaminaVida from "@/components/landing/HeroCaminaVida";
 import ComoFunciona from "@/components/landing/ComoFunciona"; // Nuevo Import
 import CategoriasCaminaVida from "@/components/landing/CategoriasCaminaVida";
@@ -23,7 +23,6 @@ export default async function HomePage() {
 
   return (
     <main className="min-h-screen bg-[#FFFBF7]">
-      
       <HeroCaminaVida />
 
       {/* El flujo lógico: Hero -> Cómo funciona -> Categorías */}
@@ -37,7 +36,8 @@ export default async function HomePage() {
           <div className="text-center mb-16">
             <span className="subtitle-premium">Explora</span>
             <h2 className="text-4xl md:text-5xl font-serif text-slate-900">
-              Últimos circuitos <span className="italic text-[#FF5C35]">agregados</span>
+              Últimos circuitos{" "}
+              <span className="italic text-[#FF5C35]">agregados</span>
             </h2>
           </div>
 
@@ -57,7 +57,6 @@ export default async function HomePage() {
       <PlanesCaminaVida />
       <TestimoniosCaminaVida />
       <CTAReservar />
-
     </main>
   );
 }

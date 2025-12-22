@@ -1,6 +1,6 @@
-import { createSupabaseServer } from "../supabaseServer";
+import { createSupabaseServer } from "@/lib/supabase";
 
-export async function getUserRole(req: Request) {
+export async function getUserRole(req: Request): Promise<string | null> {
   const authHeader = req.headers.get("Authorization");
 
   if (!authHeader) return null;
@@ -9,7 +9,13 @@ export async function getUserRole(req: Request) {
 
   const supabase = await createSupabaseServer();
 
-  const { data } = await supabase.auth.getUser(token as any);
+  const { data } = await supabase.auth.getUser(token);
 
-  return data.user?.app_metadata?.role || "viewer";
+  if (!data.user) return null;
+
+  const appMetadata = data.user.app_metadata as
+    | { role?: string }
+    | null
+    | undefined;
+  return appMetadata?.role || "viewer";
 }

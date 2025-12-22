@@ -1,7 +1,7 @@
-export const dynamic = 'force-dynamic';
+export const dynamic = "force-dynamic";
 
-import { Inscripcion } from '@/types';
-import InscripcionForm from '../../components/InscripcionForm';
+import { Inscripcion } from "@/types";
+import InscripcionForm from "../../components/InscripcionForm";
 
 interface EditProps {
   params: { id: string };
@@ -16,13 +16,13 @@ export default async function InscripcionesEdit({ params }: EditProps) {
   let ins: Inscripcion | null = null;
 
   try {
-    const res = await fetch(url, { cache: 'no-store' });
+    const res = await fetch(url, { cache: "no-store" });
     const json = await res.json();
 
     // ✅ Asegurar que data.data sea un objeto válido
-    ins = json?.data && typeof json.data === 'object' ? json.data : null;
+    ins = json?.data && typeof json.data === "object" ? json.data : null;
   } catch (err) {
-    console.error('❌ Error fetching inscripción:', err);
+    console.error("❌ Error fetching inscripción:", err);
   }
 
   // ✅ Si no existe, no romper SSR

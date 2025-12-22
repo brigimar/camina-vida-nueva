@@ -1,12 +1,22 @@
 import { NextRequest } from "next/server";
 import { ok, errorResponse } from "@/lib/utils/respuesta";
-import { updateCoordinador, deleteCoordinador } from "@/lib/controllers/coordinadores";
+import {
+  updateCoordinador,
+  deleteCoordinador,
+} from "@/lib/controllers/coordinadores";
 import { requireUser } from "@/lib/auth/authorize";
 import { z } from "zod";
 
-const coordinadorSchema = z.object({ nombre: z.string().min(1).optional(), foto: z.string().optional(), bio: z.string().optional() });
+const coordinadorSchema = z.object({
+  nombre: z.string().min(1).optional(),
+  foto: z.string().optional(),
+  bio: z.string().optional(),
+});
 
-export async function PUT(req: NextRequest, { params }: { params: Promise<{ id: string }> }) {
+export async function PUT(
+  req: NextRequest,
+  { params }: { params: Promise<{ id: string }> },
+) {
   try {
     await requireUser();
     const { id } = await params;
@@ -19,7 +29,10 @@ export async function PUT(req: NextRequest, { params }: { params: Promise<{ id: 
   }
 }
 
-export async function DELETE(req: NextRequest, { params }: { params: Promise<{ id: string }> }) {
+export async function DELETE(
+  req: NextRequest,
+  { params }: { params: Promise<{ id: string }> },
+) {
   try {
     await requireUser();
     const { id } = await params;

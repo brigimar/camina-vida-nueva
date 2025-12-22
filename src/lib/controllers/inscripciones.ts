@@ -1,4 +1,4 @@
-import { createSupabaseServer } from "@/lib/supabaseServer";
+import { createSupabaseServer } from "@/lib/supabase";
 import { z } from "zod";
 
 /* ---------------------------------------------------------
@@ -28,7 +28,7 @@ export const inscripcionSchema = z.object({
  Join correcto: inscripciones -> sesiones -> circuitos
 --------------------------------------------------------- */
 export async function getInscriptos() {
-  const supabase = await createSupabaseServer();
+  const supabase = createSupabaseServer();
 
   try {
     const { data, error } = await supabase
@@ -56,7 +56,7 @@ export async function getInscriptos() {
  (NO inscripciones.circuito_id que no existe)
 --------------------------------------------------------- */
 export async function getInscriptosByCircuito(circuito_id: string) {
-  const supabase = await createSupabaseServer();
+  const supabase = createSupabaseServer();
 
   try {
     const { data, error } = await supabase
@@ -87,7 +87,7 @@ export async function getInscriptosByCircuito(circuito_id: string) {
  - Nunca lanzar errores crudos
 --------------------------------------------------------- */
 export async function createInscripcion(payload: unknown) {
-  const supabase = await createSupabaseServer();
+  const supabase = createSupabaseServer();
 
   try {
     console.log(">>> [CREATE] Payload recibido:", payload);
@@ -123,7 +123,7 @@ export async function createInscripcion(payload: unknown) {
  - Error handling con log + return null
 --------------------------------------------------------- */
 export async function updateInscripcion(id: string, payload: unknown) {
-  const supabase = await createSupabaseServer();
+  const supabase = createSupabaseServer();
 
   try {
     console.log(">>> [UPDATE] ID:", id);
@@ -165,7 +165,7 @@ export async function updateInscripcion(id: string, payload: unknown) {
  - Nunca lanzar errores crudos
 --------------------------------------------------------- */
 export async function deleteInscripcion(id: string) {
-  const supabase = await createSupabaseServer();
+  const supabase = createSupabaseServer();
 
   try {
     console.log(">>> [DELETE] Desactivando inscripción:", id);

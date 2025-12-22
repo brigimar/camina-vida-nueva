@@ -1,19 +1,24 @@
-export const dynamic = 'force-dynamic';
+export const dynamic = "force-dynamic";
 
 import Image from "next/image";
-import { Coordinador } from "@/types";
-import { createSupabaseServer } from '@/lib/supabaseServer';
+import { createSupabaseServer } from "@/lib/supabase";
 
 interface CoordinadoresShowProps {
   params: { id: string };
 }
 
-export default async function CoordinadoresShow({ params }: CoordinadoresShowProps) {
+export default async function CoordinadoresShow({
+  params,
+}: CoordinadoresShowProps) {
   const { id } = params;
   const supabase = await createSupabaseServer();
-  const { data: coord, error } = await supabase.from('coordinadores').select('*').eq('id', id).single();
+  const { data: coord, error } = await supabase
+    .from("coordinadores")
+    .select("*")
+    .eq("id", id)
+    .single();
   if (error) throw new Error(error.message);
-  if (!coord) throw new Error('Coordinador no encontrado');
+  if (!coord) throw new Error("Coordinador no encontrado");
 
   return (
     <div className="bg-white p-6 rounded-lg shadow max-w-xl">
@@ -29,7 +34,9 @@ export default async function CoordinadoresShow({ params }: CoordinadoresShowPro
         />
       )}
 
-      <p className="text-gray-700 whitespace-pre-line">{coord.bio || "Sin bio"}</p>
+      <p className="text-gray-700 whitespace-pre-line">
+        {coord.bio || "Sin bio"}
+      </p>
     </div>
   );
 }

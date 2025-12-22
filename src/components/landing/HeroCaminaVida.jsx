@@ -1,7 +1,7 @@
-'use client';
+"use client";
 
-import Image from 'next/image';
-import { ArrowDown } from 'lucide-react';
+import Image from "next/image";
+import { ArrowDown } from "lucide-react";
 
 export default function HeroCaminaVida() {
   return (
@@ -43,7 +43,8 @@ export default function HeroCaminaVida() {
 
         {/* Bajada que condensa los beneficios */}
         <p className="mt-8 text-lg md:text-2xl text-white/90 font-light max-w-3xl mx-auto leading-relaxed drop-shadow-md animate-fadeInUp">
-          Ganar **salud**, compartir el camino **con otros** y reconectar con tu bienestar integral a través del movimiento consciente.
+          Ganar **salud**, compartir el camino **con otros** y reconectar con tu
+          bienestar integral a través del movimiento consciente.
         </p>
 
         {/* Botones de Acción */}

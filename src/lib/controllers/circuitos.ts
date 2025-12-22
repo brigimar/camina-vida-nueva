@@ -1,4 +1,4 @@
-import { createSupabaseServer } from "@/lib/supabaseServer";
+import { createSupabaseServer } from "@/lib/supabase";
 import { circuitoSchema } from "@/lib/validators/circuitoSchema";
 
 // ✅ LISTAR CON FILTRO, PAGINACIÓN Y BÚSQUEDA (NUEVOS FILTROS)
@@ -9,7 +9,7 @@ export async function getCircuitosAdvanced({
   barrio = "",
   search = "",
 }) {
-  const supabase = await createSupabaseServer();
+  const supabase = createSupabaseServer();
 
   const from = (page - 1) * limit;
   const to = from + limit - 1;
@@ -23,7 +23,7 @@ export async function getCircuitosAdvanced({
   // ✅ Búsqueda por texto
   if (search) {
     query = query.or(
-      `nombre.ilike.%${search}%,descripcion.ilike.%${search}%,localidad.ilike.%${search}%,punto_encuentro.ilike.%${search}%`
+      `nombre.ilike.%${search}%,descripcion.ilike.%${search}%,localidad.ilike.%${search}%,punto_encuentro.ilike.%${search}%`,
     );
   }
 
@@ -52,7 +52,7 @@ export async function getCircuitosAdvanced({
 
 // ✅ OBTENER UNO POR ID (CON SESIONES)
 export async function getCircuitoById(id: string) {
-  const supabase = await createSupabaseServer();
+  const supabase = createSupabaseServer();
 
   const { data, error } = await supabase
     .from("circuitos")
@@ -66,7 +66,7 @@ export async function getCircuitoById(id: string) {
 
 // ✅ CREAR CIRCUITO
 export async function createCircuito(payload: unknown) {
-  const supabase = await createSupabaseServer();
+  const supabase = createSupabaseServer();
   const parsed = circuitoSchema.parse(payload);
 
   const { data, error } = await supabase
@@ -81,7 +81,7 @@ export async function createCircuito(payload: unknown) {
 
 // ✅ ACTUALIZAR CIRCUITO
 export async function updateCircuito(id: string, payload: unknown) {
-  const supabase = await createSupabaseServer();
+  const supabase = createSupabaseServer();
   const parsed = circuitoSchema.partial().parse(payload);
 
   const { data, error } = await supabase
@@ -100,7 +100,7 @@ export async function updateCircuito(id: string, payload: unknown) {
 
 // ✅ DELETE REAL (soft-delete)
 export async function deleteCircuito(id: string) {
-  const supabase = await createSupabaseServer();
+  const supabase = createSupabaseServer();
 
   const { data, error } = await supabase
     .from("circuitos")

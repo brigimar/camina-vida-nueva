@@ -31,12 +31,16 @@ export const metadata: Metadata = {
   },
 };
 
-export default function EventoLayout({ children }: { children: React.ReactNode }) {
+export default function EventoLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   return (
     <>
-           <main className="min-h-screen bg-gradient-to-b from-emerald-50 to-cyan-50">
+      <main className="min-h-screen bg-gradient-to-b from-emerald-50 to-cyan-50">
         {children}
       </main>
-         </>
+    </>
   );
 }

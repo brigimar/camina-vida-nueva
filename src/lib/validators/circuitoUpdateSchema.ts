@@ -1,4 +1,3 @@
-import { z } from "zod";
-import { circuitoSchema } from "./circuitoSchema";
+﻿import { circuitoSchema } from "./circuitoSchema";
 
 export const circuitoUpdateSchema = circuitoSchema.partial();

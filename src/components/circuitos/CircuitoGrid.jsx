@@ -1,7 +1,7 @@
-'use client';
-import { motion, AnimatePresence } from 'framer-motion';
-import { MapPin, CalendarDays, Clock, Map, ArrowRight } from 'lucide-react';
-import Link from 'next/link';
+"use client";
+import { motion, AnimatePresence } from "framer-motion";
+import { MapPin, CalendarDays, Clock, Map, ArrowRight } from "lucide-react";
+import Link from "next/link";
 
 export default function CircuitoGrid({
   circuitos = [],
@@ -24,13 +24,13 @@ export default function CircuitoGrid({
             {/* Contenedor de Imagen */}
             <div className="relative h-64 overflow-hidden">
               <img
-                src={c.foto || '/images/circuitos/default.jpg'}
+                src={c.foto || "/images/circuitos/default.jpg"}
                 alt={c.nombre}
                 className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110"
               />
               <div className="absolute top-6 left-6">
                 <span className="px-4 py-2 bg-white/90 backdrop-blur-md rounded-full text-[10px] font-bold uppercase tracking-widest text-[#FF5C35] shadow-sm">
-                  {c.categoria || 'Caminata'}
+                  {c.categoria || "Caminata"}
                 </span>
               </div>
             </div>
@@ -52,15 +52,25 @@ export default function CircuitoGrid({
               <div className="space-y-3 mb-8 flex-grow">
                 <div className="flex items-center gap-3 text-slate-500 text-sm font-light">
                   <CalendarDays size={16} className="text-orange-200" />
-                  <span>{Array.isArray(c.dias) ? c.dias.join(', ') : 'Sábados y Domingos'}</span>
+                  <span>
+                    {Array.isArray(c.dias)
+                      ? c.dias.join(", ")
+                      : "Sábados y Domingos"}
+                  </span>
                 </div>
                 <div className="flex items-center gap-3 text-slate-500 text-sm font-light">
                   <Clock size={16} className="text-orange-200" />
-                  <span>{Array.isArray(c.horarios) ? c.horarios.join(', ') : '09:00 hs'}</span>
+                  <span>
+                    {Array.isArray(c.horarios)
+                      ? c.horarios.join(", ")
+                      : "09:00 hs"}
+                  </span>
                 </div>
                 <div className="flex items-center gap-3 text-slate-500 text-sm font-light">
                   <Map size={16} className="text-orange-200" />
-                  <span className="truncate">{c.punto_encuentro || 'Punto a coordinar'}</span>
+                  <span className="truncate">
+                    {c.punto_encuentro || "Punto a coordinar"}
+                  </span>
                 </div>
               </div>
 
@@ -72,12 +82,15 @@ export default function CircuitoGrid({
               )}
 
               {/* Botón de Acción Estilo OllaApp */}
-              <Link 
+              <Link
                 href={`/circuitos/${c.id}`}
                 className="w-full py-4 bg-[#FFFBF7] border border-orange-100 text-[#FF5C35] rounded-2xl font-bold flex items-center justify-center gap-2 group-hover:bg-[#FF5C35] group-hover:text-white transition-all duration-300"
               >
                 Ver experiencia
-                <ArrowRight size={18} className="transition-transform group-hover:translate-x-1" />
+                <ArrowRight
+                  size={18}
+                  className="transition-transform group-hover:translate-x-1"
+                />
               </Link>
             </div>
           </motion.div>

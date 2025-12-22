@@ -1,10 +1,16 @@
 import { NextRequest } from "next/server";
 import { ok, errorResponse } from "@/lib/utils/respuesta";
-import { updateInscripcion, deleteInscripcion } from "@/lib/controllers/inscripciones";
+import {
+  updateInscripcion,
+  deleteInscripcion,
+} from "@/lib/controllers/inscripciones";
 import { requireUser } from "@/lib/auth/authorize";
 import { inscripcionSchema } from "@/lib/validators/inscripcionSchema";
 
-export async function PUT(req: NextRequest, { params }: { params: Promise<{ id: string }> }) {
+export async function PUT(
+  req: NextRequest,
+  { params }: { params: Promise<{ id: string }> },
+) {
   try {
     await requireUser();
     const { id } = await params;
@@ -17,7 +23,10 @@ export async function PUT(req: NextRequest, { params }: { params: Promise<{ id: 
   }
 }
 
-export async function DELETE(req: NextRequest, { params }: { params: Promise<{ id: string }> }) {
+export async function DELETE(
+  req: NextRequest,
+  { params }: { params: Promise<{ id: string }> },
+) {
   try {
     await requireUser();
     const { id } = await params;

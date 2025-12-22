@@ -1,0 +1,13 @@
+﻿{
+  "name": "AuditoriaPrincipios",
+  "pattern": ".*",
+  "reason": "El agente debe seguir actividades contundentes antes de trabajar: \
+1. Leer tareas y establecer objetivos claros. \
+2. Respetar convenciones y pautas de estilo del proyecto. \
+3. Usar comentarios en código si se sale de tareas previstas. \
+4. Evitar escribir funcionalidades arbitrarias fuera de Run::main(). \
+5. Realizar auditorías de código y marcar hallazgos. \
+6. Usar flags de autorización (create_req, read, mod, admin) y roles (create, read, modify, admin, write, edit, view, inspect, power, run). \
+7. Comenzar siempre con estructura inicial y estilos de utilidad antes de implementar funciones. \
+Este bloque asegura que el agente trabaje con disciplina y consistencia dentro del proyecto caminatas-limpio."
+}

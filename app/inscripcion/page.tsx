@@ -1,7 +1,7 @@
-export const dynamic = 'force-dynamic';
+export const dynamic = "force-dynamic";
 
 import CircuitoView from "@/components/home/CircuitoView";
-import { createSupabaseServer } from "@/lib/supabaseServer";
+import { createSupabaseServer } from "@/lib/supabase";
 
 export default async function InscripcionPage({ searchParams }) {
   const circuitoId = searchParams?.circuito;
@@ -38,7 +38,9 @@ export default async function InscripcionPage({ searchParams }) {
   } catch (err) {
     console.error("Error loading circuito:", err);
     return (
-      <div className="p-10 text-center text-red-600">No se pudo cargar el circuito.</div>
+      <div className="p-10 text-center text-red-600">
+        No se pudo cargar el circuito.
+      </div>
     );
   }
 }

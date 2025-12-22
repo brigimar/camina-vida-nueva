@@ -1,254 +1,254 @@
 |-- .github/
-  |-- copilot-instructions.md
+|-- copilot-instructions.md
 |-- app/
-  |-- globals.css
-  |-- layout.tsx
-  |-- page.tsx
-  |-- api/
-    |-- auth/
-      |-- login/
-        |-- route.ts
-    |-- circuitos/
-      |-- route.ts
-      |-- [id]/
-        |-- route.ts
-    |-- coordinadores/
-      |-- route.ts
-      |-- [id]/
-        |-- route.ts
-    |-- dashboard/
-      |-- alertas/
-        |-- route.ts
-      |-- hoy/
-        |-- route.ts
-      |-- ingresos/
-        |-- route.ts
-      |-- operacion/
-        |-- route.ts
-      |-- resumen/
-        |-- route.ts
-    |-- inscripciones/
-      |-- route.ts
-      |-- [id]/
-        |-- route.ts
-    |-- metrics/
-      |-- route.ts
-    |-- reservas/
-      |-- route.ts
-      |-- [id]/
-        |-- route.ts
-    |-- sesiones/
-      |-- route.ts
-      |-- [id]/
-        |-- route.ts
-    |-- user-roles/
-      |-- route.ts
-      |-- [id]/
-        |-- route.ts
-    |-- usuarios/
-      |-- route.ts
-  |-- circuitos/
-    |-- page.tsx
-  |-- coordinadores/
-    |-- page.tsx
-  |-- dashboard/
-    |-- DashboardCircuitos.jsx
-    |-- DashboardCoordinadores.jsx
-    |-- DashboardInscriptos.jsx
-    |-- DashboardResumen.jsx
-    |-- DashboardUserRoles.jsx
-    |-- DashboardUsuarios.jsx
-    |-- layout.tsx
-    |-- page.tsx
-    |-- circuitos/
-      |-- page.tsx
-      |-- [id]/
-        |-- page.tsx
-      |-- components/
-        |-- CircuitoForm.tsx
-        |-- CircuitosFilters.tsx
-        |-- CircuitosListClient.tsx
-        |-- CircuitosTable.tsx
-        |-- DeleteCircuitoDialog.tsx
-      |-- create/
-        |-- page.tsx
-      |-- edit/
-        |-- [id]/
-          |-- page.tsx
-      |-- show/
-        |-- [id]/
-          |-- page.tsx
-    |-- configuracion/
-      |-- page.tsx
-    |-- coordinadores/
-      |-- page.tsx
-      |-- components/
-        |-- CoordinadoresListClient.tsx
-        |-- CoordinadorForm.tsx
-      |-- create/
-        |-- page.tsx
-      |-- edit/
-        |-- [id]/
-          |-- page.tsx
-      |-- show/
-        |-- [id]/
-          |-- page.tsx
-    |-- inscripciones/
-      |-- page.tsx
-      |-- components/
-        |-- InscripcionesListClient.tsx
-        |-- InscripcionForm.tsx
-      |-- create/
-        |-- page.tsx
-      |-- edit/
-        |-- [id]/
-          |-- page.tsx
-      |-- show/
-        |-- [id]/
-          |-- page.tsx
-    |-- sesiones/
-      |-- page.tsx
-      |-- components/
-        |-- SesionesListClient.tsx
-        |-- SesionForm.tsx
-      |-- create/
-        |-- page.tsx
-      |-- edit/
-        |-- [id]/
-          |-- page.tsx
-      |-- show/
-        |-- [id]/
-          |-- page.tsx
-  |-- evento/
-    |-- layout.tsx
-  |-- inscripcion/
-    |-- page.tsx
-  |-- login/
-    |-- page.jsx
-  |-- nosotros/
-    |-- page.jsx
-  |-- perfil/
-    |-- page.jsx
-  |-- reservar/
-    |-- [id]/
-      |-- page.tsx
-  |-- unauthorized/
-    |-- page.jsx
+|-- globals.css
+|-- layout.tsx
+|-- page.tsx
+|-- api/
+|-- auth/
+|-- login/
+|-- route.ts
+|-- circuitos/
+|-- route.ts
+|-- [id]/
+|-- route.ts
+|-- coordinadores/
+|-- route.ts
+|-- [id]/
+|-- route.ts
+|-- dashboard/
+|-- alertas/
+|-- route.ts
+|-- hoy/
+|-- route.ts
+|-- ingresos/
+|-- route.ts
+|-- operacion/
+|-- route.ts
+|-- resumen/
+|-- route.ts
+|-- inscripciones/
+|-- route.ts
+|-- [id]/
+|-- route.ts
+|-- metrics/
+|-- route.ts
+|-- reservas/
+|-- route.ts
+|-- [id]/
+|-- route.ts
+|-- sesiones/
+|-- route.ts
+|-- [id]/
+|-- route.ts
+|-- user-roles/
+|-- route.ts
+|-- [id]/
+|-- route.ts
+|-- usuarios/
+|-- route.ts
+|-- circuitos/
+|-- page.tsx
+|-- coordinadores/
+|-- page.tsx
+|-- dashboard/
+|-- DashboardCircuitos.jsx
+|-- DashboardCoordinadores.jsx
+|-- DashboardInscriptos.jsx
+|-- DashboardResumen.jsx
+|-- DashboardUserRoles.jsx
+|-- DashboardUsuarios.jsx
+|-- layout.tsx
+|-- page.tsx
+|-- circuitos/
+|-- page.tsx
+|-- [id]/
+|-- page.tsx
+|-- components/
+|-- CircuitoForm.tsx
+|-- CircuitosFilters.tsx
+|-- CircuitosListClient.tsx
+|-- CircuitosTable.tsx
+|-- DeleteCircuitoDialog.tsx
+|-- create/
+|-- page.tsx
+|-- edit/
+|-- [id]/
+|-- page.tsx
+|-- show/
+|-- [id]/
+|-- page.tsx
+|-- configuracion/
+|-- page.tsx
+|-- coordinadores/
+|-- page.tsx
+|-- components/
+|-- CoordinadoresListClient.tsx
+|-- CoordinadorForm.tsx
+|-- create/
+|-- page.tsx
+|-- edit/
+|-- [id]/
+|-- page.tsx
+|-- show/
+|-- [id]/
+|-- page.tsx
+|-- inscripciones/
+|-- page.tsx
+|-- components/
+|-- InscripcionesListClient.tsx
+|-- InscripcionForm.tsx
+|-- create/
+|-- page.tsx
+|-- edit/
+|-- [id]/
+|-- page.tsx
+|-- show/
+|-- [id]/
+|-- page.tsx
+|-- sesiones/
+|-- page.tsx
+|-- components/
+|-- SesionesListClient.tsx
+|-- SesionForm.tsx
+|-- create/
+|-- page.tsx
+|-- edit/
+|-- [id]/
+|-- page.tsx
+|-- show/
+|-- [id]/
+|-- page.tsx
+|-- evento/
+|-- layout.tsx
+|-- inscripcion/
+|-- page.tsx
+|-- login/
+|-- page.jsx
+|-- nosotros/
+|-- page.jsx
+|-- perfil/
+|-- page.jsx
+|-- reservar/
+|-- [id]/
+|-- page.tsx
+|-- unauthorized/
+|-- page.jsx
 |-- public/
-  |-- favicon.ico
-  |-- favicon1.ico
-  |-- logo.webp
+|-- favicon.ico
+|-- favicon1.ico
+|-- logo.webp
 |-- scripts/
-  |-- create-test-user.js
-  |-- test-dashboard.js
-  |-- test-login.js
+|-- create-test-user.js
+|-- test-dashboard.js
+|-- test-login.js
 |-- sql/
-  |-- schema.sql
-  |-- seed.sql
-  |-- tabla-circuitos.dart
-  |-- triggers.sql
+|-- schema.sql
+|-- seed.sql
+|-- tabla-circuitos.dart
+|-- triggers.sql
 |-- src/
-  |-- middleware.ts
-  |-- components/
-    |-- CircuitoCard.jsx
-    |-- FiltrosCircuitos.jsx
-    |-- Footer.jsx
-    |-- Header.jsx
-    |-- LoginButton.tsx
-    |-- LogoutButton.jsx
-    |-- SelectorFecha.jsx
-    |-- circuitos/
-      |-- CircuitoCard.jsx
-      |-- CircuitoFlyerCard.jsx
-      |-- CircuitoGrid.jsx
-      |-- CircuitosContent.jsx
-      |-- CircuitosCopyEmocional.jsx
-      |-- CircuitosFilters.jsx
-      |-- CircuitosGrid.jsx
-      |-- CircuitoSkeleton.jsx
-      |-- CircuitosListado.jsx
-      |-- CircuitosSkeleton.jsx
-      |-- MapaGeneralCircuitos.jsx
-      |-- Paginacion.jsx
-    |-- dashboard/
-      |-- AgendaHoy.tsx
-      |-- Header.jsx
-      |-- InscripcionesPorCircuito.jsx
-      |-- InscripcionesPorCircuito.tsx
-      |-- InscripcionesPorDia.jsx
-      |-- InscripcionesPorDia.tsx
-      |-- Sidebar.jsx
-    |-- home/
-      |-- CircuitosHome.jsx
-      |-- CircuitoView.jsx
-      |-- InscripcionModal.jsx
-      |-- MapaPuntoEncuentro.jsx
-    |-- inscripcion/
-      |-- FormularioInscripcion.jsx
-    |-- landing/
-      |-- BeneficiosCaminaVida.jsx
-      |-- CategoriasCaminaVida.jsx
-      |-- CTAReservar.jsx
-      |-- FooterCaminaVida.jsx
-      |-- HeaderCaminaVida.jsx
-      |-- HeroCaminaVida.jsx
-      |-- MetodoCaminaVida.jsx
-      |-- PlanesCaminaVida.jsx
-      |-- TestimoniosCaminaVida.jsx
-    |-- layout/
-      |-- LayoutClient.tsx
-    |-- ui/
-      |-- button.jsx
-      |-- card.jsx
-  |-- hooks/
-    |-- useCircuitos.ts
-    |-- useCoordinadores.ts
-    |-- useInscriptos.ts
-    |-- useUserRoles.ts
-    |-- useUsuarios.ts
-  |-- lib/
-    |-- chart.js
-    |-- chart.ts
-    |-- metricsHelper.ts
-    |-- subirFotoStaff.ts
-    |-- subirImagenCircuito.ts
-    |-- supabaseBrowser.ts
-    |-- supabaseClient.ts
-    |-- supabaseServer.ts
-    |-- auth/
-      |-- authorize.ts
-      |-- getUserRole.ts
-    |-- controllers/
-      |-- circuitos.ts
-      |-- coordinadores.ts
-      |-- inscripciones.ts
-      |-- reservas.ts
-      |-- sesiones.ts
-      |-- userRoles.ts
-    |-- utils/
-      |-- respuesta.ts
-    |-- validators/
-      |-- circuitoSchema.ts
-      |-- circuitosSchema.ts
-      |-- circuitoUpdateSchema.ts
-      |-- inscripcionSchema.ts
-      |-- reservaSchema.ts
-      |-- sesionSchema.ts
-  |-- providers/
-    |-- authProvider.ts
-    |-- dataProvider.ts
-    |-- refineProvider.tsx
-  |-- services/
-    |-- alertas.service.ts
-    |-- ingresos.service.ts
-    |-- operacion.service.ts
-  |-- shared/
-    |-- validation/
-      |-- index.ts
-  |-- supabase/
-    |-- functions/
-      |-- sync-alertas/
-        |-- index.ts
-  |-- types/
-    |-- circuito.ts
-    |-- index.ts
+|-- middleware.ts
+|-- components/
+|-- CircuitoCard.jsx
+|-- FiltrosCircuitos.jsx
+|-- Footer.jsx
+|-- Header.jsx
+|-- LoginButton.tsx
+|-- LogoutButton.jsx
+|-- SelectorFecha.jsx
+|-- circuitos/
+|-- CircuitoCard.jsx
+|-- CircuitoFlyerCard.jsx
+|-- CircuitoGrid.jsx
+|-- CircuitosContent.jsx
+|-- CircuitosCopyEmocional.jsx
+|-- CircuitosFilters.jsx
+|-- CircuitosGrid.jsx
+|-- CircuitoSkeleton.jsx
+|-- CircuitosListado.jsx
+|-- CircuitosSkeleton.jsx
+|-- MapaGeneralCircuitos.jsx
+|-- Paginacion.jsx
+|-- dashboard/
+|-- AgendaHoy.tsx
+|-- Header.jsx
+|-- InscripcionesPorCircuito.jsx
+|-- InscripcionesPorCircuito.tsx
+|-- InscripcionesPorDia.jsx
+|-- InscripcionesPorDia.tsx
+|-- Sidebar.jsx
+|-- home/
+|-- CircuitosHome.jsx
+|-- CircuitoView.jsx
+|-- InscripcionModal.jsx
+|-- MapaPuntoEncuentro.jsx
+|-- inscripcion/
+|-- FormularioInscripcion.jsx
+|-- landing/
+|-- BeneficiosCaminaVida.jsx
+|-- CategoriasCaminaVida.jsx
+|-- CTAReservar.jsx
+|-- FooterCaminaVida.jsx
+|-- HeaderCaminaVida.jsx
+|-- HeroCaminaVida.jsx
+|-- MetodoCaminaVida.jsx
+|-- PlanesCaminaVida.jsx
+|-- TestimoniosCaminaVida.jsx
+|-- layout/
+|-- LayoutClient.tsx
+|-- ui/
+|-- button.jsx
+|-- card.jsx
+|-- hooks/
+|-- useCircuitos.ts
+|-- useCoordinadores.ts
+|-- useInscriptos.ts
+|-- useUserRoles.ts
+|-- useUsuarios.ts
+|-- lib/
+|-- chart.js
+|-- chart.ts
+|-- metricsHelper.ts
+|-- subirFotoStaff.ts
+|-- subirImagenCircuito.ts
+|-- supabaseBrowser.ts
+|-- supabaseClient.ts
+|-- supabaseServer.ts
+|-- auth/
+|-- authorize.ts
+|-- getUserRole.ts
+|-- controllers/
+|-- circuitos.ts
+|-- coordinadores.ts
+|-- inscripciones.ts
+|-- reservas.ts
+|-- sesiones.ts
+|-- userRoles.ts
+|-- utils/
+|-- respuesta.ts
+|-- validators/
+|-- circuitoSchema.ts
+|-- circuitosSchema.ts
+|-- circuitoUpdateSchema.ts
+|-- inscripcionSchema.ts
+|-- reservaSchema.ts
+|-- sesionSchema.ts
+|-- providers/
+|-- authProvider.ts
+|-- dataProvider.ts
+|-- refineProvider.tsx
+|-- services/
+|-- alertas.service.ts
+|-- ingresos.service.ts
+|-- operacion.service.ts
+|-- shared/
+|-- validation/
+|-- index.ts
+|-- supabase/
+|-- functions/
+|-- sync-alertas/
+|-- index.ts
+|-- types/
+|-- circuito.ts
+|-- index.ts

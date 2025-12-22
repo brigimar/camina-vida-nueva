@@ -1,6 +1,9 @@
 import { NextRequest } from "next/server";
 import { ok, errorResponse } from "@/lib/utils/respuesta";
-import { getInscriptos, createInscripcion } from "@/lib/controllers/inscripciones";
+import {
+  getInscriptos,
+  createInscripcion,
+} from "@/lib/controllers/inscripciones";
 import { requireUser } from "@/lib/auth/authorize";
 import { inscripcionSchema } from "@/lib/validators/inscripcionSchema";
 

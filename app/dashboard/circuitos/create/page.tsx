@@ -1,6 +1,6 @@
 import CircuitoForm from "../components/CircuitoForm";
 
-export default function CreateCircuitoPage() {
+export default async function CreateCircuitoPage() {
   return (
     <div className="max-w-2xl mx-auto py-10">
       <CircuitoForm />

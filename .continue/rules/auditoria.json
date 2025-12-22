@@ -1,0 +1,8 @@
+﻿{
+  "name": "AuditoriaRule",
+  "pattern": ".*",
+  "reason": "El agente debe realizar auditorías de código antes y durante el desarrollo: \
+- Revisar dependencias y funciones no utilizadas. \
+- Señalar hallazgos en comentarios. \
+- Proponer pasos de mejora sin alterar la lógica principal."
+}

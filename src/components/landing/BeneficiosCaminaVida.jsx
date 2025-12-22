@@ -6,34 +6,39 @@ export default function BeneficiosCaminaVida() {
   const beneficios = [
     {
       titulo: "Menos dolor articular",
-      descripcion: "Estiramientos y movimientos suaves diseñados para lubricar articulaciones y ganar flexibilidad sin impacto.",
+      descripcion:
+        "Estiramientos y movimientos suaves diseñados para lubricar articulaciones y ganar flexibilidad sin impacto.",
       icon: <Activity className="text-[#FF5C35]" size={32} strokeWidth={1.5} />,
-      color: "bg-[#FFF4F0]" // Melocotón muy suave
+      color: "bg-[#FFF4F0]", // Melocotón muy suave
     },
     {
       titulo: "Circulación y corazón",
-      descripcion: "Fortalecemos tu salud cardiovascular con un ritmo moderado y constante que oxigena todo tu cuerpo.",
-      icon: <HeartPulse className="text-[#FF5C35]" size={32} strokeWidth={1.5} />,
-      color: "bg-[#F0F7FF]" // Azul cielo suave
+      descripcion:
+        "Fortalecemos tu salud cardiovascular con un ritmo moderado y constante que oxigena todo tu cuerpo.",
+      icon: (
+        <HeartPulse className="text-[#FF5C35]" size={32} strokeWidth={1.5} />
+      ),
+      color: "bg-[#F0F7FF]", // Azul cielo suave
     },
     {
       titulo: "Baja ansiedad y estrés",
-      descripcion: "Técnicas de respiración consciente y mindfulness en movimiento para silenciar la mente y reducir el cortisol.",
+      descripcion:
+        "Técnicas de respiración consciente y mindfulness en movimiento para silenciar la mente y reducir el cortisol.",
       icon: <Wind className="text-[#FF5C35]" size={32} strokeWidth={1.5} />,
-      color: "bg-[#F5F0FF]" // Lavanda suave
+      color: "bg-[#F5F0FF]", // Lavanda suave
     },
     {
       titulo: "Comunidad y compromiso",
-      descripcion: "Forma parte de un grupo que comparte tus valores, brindando apoyo mutuo y motivación en cada paso.",
+      descripcion:
+        "Forma parte de un grupo que comparte tus valores, brindando apoyo mutuo y motivación en cada paso.",
       icon: <Users2 className="text-[#FF5C35]" size={32} strokeWidth={1.5} />,
-      color: "bg-[#FFFBF0]" // Crema/Amarillo suave
+      color: "bg-[#FFFBF0]", // Crema/Amarillo suave
     },
   ];
 
   return (
     <section id="beneficios" className="px-6 py-24 bg-[#FFFBF7]">
       <div className="max-w-6xl mx-auto">
-        
         {/* Cabecera Estilo OllaApp */}
         <div className="text-center mb-20">
           <span className="text-[#FF5C35] font-bold tracking-[0.2em] uppercase text-[10px] mb-4 block">
@@ -41,11 +46,14 @@ export default function BeneficiosCaminaVida() {
           </span>
           <h2 className="text-4xl md:text-5xl font-serif text-slate-900 mb-6 leading-tight">
             Beneficios reales, <br />
-            <span className="italic text-[#FF5C35]">respaldados por la experiencia</span>
+            <span className="italic text-[#FF5C35]">
+              respaldados por la experiencia
+            </span>
           </h2>
           <div className="w-12 h-1 bg-orange-100 mx-auto rounded-full mb-8" />
           <p className="text-slate-500 max-w-2xl mx-auto text-lg font-light leading-relaxed">
-            Más que una simple caminata: diseñamos una experiencia terapéutica integral que conecta tu cuerpo, mente y emociones.
+            Más que una simple caminata: diseñamos una experiencia terapéutica
+            integral que conecta tu cuerpo, mente y emociones.
           </p>
         </div>
 
@@ -58,7 +66,9 @@ export default function BeneficiosCaminaVida() {
             >
               <div className="flex flex-col sm:flex-row items-center sm:items-start text-center sm:text-left gap-8">
                 {/* Icono más grande y minimalista */}
-                <div className={`flex-shrink-0 w-20 h-20 ${b.color} rounded-[2rem] flex items-center justify-center transition-transform duration-700 group-hover:rotate-[10deg]`}>
+                <div
+                  className={`flex-shrink-0 w-20 h-20 ${b.color} rounded-[2rem] flex items-center justify-center transition-transform duration-700 group-hover:rotate-[10deg]`}
+                >
                   {b.icon}
                 </div>
 
@@ -80,7 +90,9 @@ export default function BeneficiosCaminaVida() {
           <p className="text-slate-600 italic font-serif text-xl">
             "Caminar es la mejor medicina del hombre."
           </p>
-          <span className="text-[#FF5C35] text-xs font-bold uppercase tracking-widest mt-2 block">— Hipócrates</span>
+          <span className="text-[#FF5C35] text-xs font-bold uppercase tracking-widest mt-2 block">
+            — Hipócrates
+          </span>
         </div>
       </div>
     </section>

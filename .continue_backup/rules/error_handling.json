@@ -1,0 +1,9 @@
+﻿{
+  "name": "ErrorHandlingRule",
+  "pattern": ".*",
+  "reason": "Cada vez que se detecte un error en el código, el agente debe documentar: \
+1. Tipo de error. \
+2. Detalles del error. \
+3. Pasos de corrección. \
+Esto debe quedar reflejado en comentarios dentro del archivo editado."
+}

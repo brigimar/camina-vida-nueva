@@ -4,37 +4,41 @@ import { motion } from "framer-motion";
 
 export default function MetodoCaminaVida() {
   const pasos = [
-    { 
+    {
       numero: "01",
-      titulo: "Estiramientos", 
-      descripcion: "Movimientos suaves para preparar el cuerpo y despertar la consciencia física." 
+      titulo: "Estiramientos",
+      descripcion:
+        "Movimientos suaves para preparar el cuerpo y despertar la consciencia física.",
     },
-    { 
+    {
       numero: "02",
-      titulo: "Respiración", 
-      descripcion: "Técnicas de pranayama para relajar el sistema nervioso y oxigenar cada célula." 
+      titulo: "Respiración",
+      descripcion:
+        "Técnicas de pranayama para relajar el sistema nervioso y oxigenar cada célula.",
     },
-    { 
+    {
       numero: "03",
-      titulo: "Caminata", 
-      descripcion: "Ejercicio moderado y consciente, conectando el ritmo del corazón con el entorno." 
+      titulo: "Caminata",
+      descripcion:
+        "Ejercicio moderado y consciente, conectando el ritmo del corazón con el entorno.",
     },
-    { 
+    {
       numero: "04",
-      titulo: "Meditación", 
-      descripcion: "Momentos de silencio y atención plena para integrar el bienestar alcanzado." 
+      titulo: "Meditación",
+      descripcion:
+        "Momentos de silencio y atención plena para integrar el bienestar alcanzado.",
     },
-    { 
+    {
       numero: "05",
-      titulo: "Cierre en grupo", 
-      descripcion: "Un espacio de reflexión y conexión humana para terminar la experiencia." 
+      titulo: "Cierre en grupo",
+      descripcion:
+        "Un espacio de reflexión y conexión humana para terminar la experiencia.",
     },
   ];
 
   return (
     <section id="metodo" className="px-6 py-24 bg-[#FFFBF7] relative">
       <div className="max-w-7xl mx-auto">
-        
         {/* Cabecera */}
         <div className="mb-20">
           <span className="text-[#FF5C35] font-bold tracking-[0.2em] uppercase text-[10px] mb-4 block">
@@ -42,7 +46,9 @@ export default function MetodoCaminaVida() {
           </span>
           <h2 className="text-4xl md:text-6xl font-serif text-slate-900 leading-tight">
             Un método pensado para <br />
-            <span className="italic text-[#FF5C35]">tu equilibrio integral</span>
+            <span className="italic text-[#FF5C35]">
+              tu equilibrio integral
+            </span>
           </h2>
         </div>
 
@@ -63,7 +69,9 @@ export default function MetodoCaminaVida() {
               >
                 {/* Círculo con Número */}
                 <div className="w-16 h-16 rounded-full bg-white border border-orange-100 flex items-center justify-center mb-8 shadow-sm group-hover:border-[#FF5C35] group-hover:shadow-lg group-hover:shadow-orange-100 transition-all duration-500">
-                  <span className="text-2xl font-serif text-[#FF5C35]">{p.numero}</span>
+                  <span className="text-2xl font-serif text-[#FF5C35]">
+                    {p.numero}
+                  </span>
                 </div>
 
                 {/* Contenido */}

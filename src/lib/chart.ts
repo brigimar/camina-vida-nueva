@@ -23,7 +23,7 @@ ChartJS.register(
   ArcElement,
   Title,
   Tooltip,
-  Legend
+  Legend,
 );
 
 // No exporta nada en particular, simplemente asegura que al importar este archivo

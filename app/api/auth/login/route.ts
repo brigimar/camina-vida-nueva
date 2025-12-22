@@ -1,41 +1,23 @@
-import { NextResponse } from "next/server";
-import { cookies } from "next/headers";
-import { createServerClient } from "@supabase/ssr";
+import { type NextRequest, NextResponse } from "next/server";
+import { createSupabaseServer } from "@/lib/supabase";
 
-export async function POST(req: Request) {
-  const { email, password } = await req.json(); // ✅ JSON
+export async function POST(request: NextRequest) {
+  const supabase = createSupabaseServer();
+  const requestUrl = new URL(request.url);
+  const formData = await request.formData();
+  const email = String(formData.get("email"));
+  const password = String(formData.get("password"));
 
-  const cookieStore = await cookies();
-
-  const supabase = createServerClient(
-    process.env.NEXT_PUBLIC_SUPABASE_URL!,
-    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
-    {
-      cookies: {
-        get(name) {
-          return cookieStore.get(name)?.value;
-        },
-        set(name, value, options) {
-          cookieStore.set({ name, value, ...options });
-        },
-        remove(name, options) {
-          cookieStore.set({ name, value: "", ...options });
-        },
-      },
-    }
-  );
-
-  const { error } = await supabase.auth.signInWithPassword({
-    email,
-    password,
-  });
+  const { error } = await supabase.auth.signInWithPassword({ email, password });
 
   if (error) {
-    return NextResponse.json({ error: error.message }, { status: 400 });
+    return NextResponse.redirect(
+      `${requestUrl.origin}/login?error=Could not authenticate user`,
+      { status: 301 },
+    );
   }
 
-  return NextResponse.redirect(
-    `${process.env.NEXT_PUBLIC_SITE_URL}/dashboard`,
-    { status: 303 }
-  );
+  return NextResponse.redirect(new URL("/dashboard", request.url), {
+    status: 301,
+  });
 }

@@ -26,13 +26,15 @@ export default function PerfilPage() {
       <div style={styles.card}>
         <h1 style={styles.title}>Mi Perfil</h1>
 
-        <div style={styles.avatar}>
-          {user.email[0].toUpperCase()}
-        </div>
+        <div style={styles.avatar}>{user.email[0].toUpperCase()}</div>
 
         <div style={styles.info}>
-          <p><strong>Email:</strong> {user.email}</p>
-          <p><strong>Rol:</strong> {user.app_metadata?.role}</p>
+          <p>
+            <strong>Email:</strong> {user.email}
+          </p>
+          <p>
+            <strong>Rol:</strong> {user.app_metadata?.role}
+          </p>
         </div>
 
         <button style={styles.button} onClick={() => logout()}>

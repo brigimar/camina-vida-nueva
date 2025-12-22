@@ -9,9 +9,11 @@ interface Props {
   initialCoordinadores: Coordinador[];
 }
 
-export default function CoordinadoresListClient({ initialCoordinadores }: Props) {
+export default function CoordinadoresListClient({
+  initialCoordinadores,
+}: Props) {
   const [coordinadores, setCoordinadores] = useState<Coordinador[]>(
-    initialCoordinadores || []
+    initialCoordinadores || [],
   );
   const [loadingId, setLoadingId] = useState<string | null>(null);
 

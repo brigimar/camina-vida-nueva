@@ -1,5 +1,12 @@
 import { NextResponse } from "next/server";
-import { createSupabaseServer } from "@/lib/supabaseServer";
+import { createSupabaseServer } from "@/lib/supabase";
+
+interface UserRole {
+  id: string;
+  user_id: string;
+  role: string;
+  created_at?: string;
+}
 
 export async function GET() {
   try {
@@ -19,11 +26,14 @@ export async function GET() {
 
     if (circuitosError) throw circuitosError;
 
+    const rolesArray = (roles || []) as UserRole[];
+
     return NextResponse.json({
       data: {
-        admins: (roles || []).filter((r: any) => r.role === "admin").length,
-        coordinadores: (roles || []).filter((r: any) => r.role === "coordinador").length,
-        inscriptos: (roles || []).filter((r: any) => r.role === "usuario").length,
+        admins: rolesArray.filter((r) => r.role === "admin").length,
+        coordinadores: rolesArray.filter((r) => r.role === "coordinador")
+          .length,
+        inscriptos: rolesArray.filter((r) => r.role === "usuario").length,
         circuitos: (circuitos || []).length,
       },
     });
@@ -31,7 +41,7 @@ export async function GET() {
     console.error("Error fetching resumen:", error);
     return NextResponse.json(
       { error: "Failed to fetch resumen" },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }

@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
@@ -13,28 +13,27 @@ export default function CircuitosHome() {
   const [circuitoSeleccionado, setCircuitoSeleccionado] = useState(null);
 
   useEffect(() => {
-  async function cargar() {
-    try {
-      const res = await fetch("/api/circuitos", { cache: "no-store" });
-      if (!res.ok) throw new Error("Error al cargar circuitos");
+    async function cargar() {
+      try {
+        const res = await fetch("/api/circuitos", { cache: "no-store" });
+        if (!res.ok) throw new Error("Error al cargar circuitos");
 
-      const response = await res.json();
+        const response = await res.json();
 
-      console.log("✅ Respuesta cruda:", response);
+        console.log("✅ Respuesta cruda:", response);
 
-      // ✅ API devuelve { data: { data: [...], pagination: {...} } }
-      setCircuitos(response?.data?.data ?? []);
-    } catch (e) {
-      console.error("Error cargando circuitos:", e);
-      setError("No se pudieron cargar los circuitos.");
-    } finally {
-      setLoading(false);
+        // ✅ API devuelve { data: { data: [...], pagination: {...} } }
+        setCircuitos(response?.data?.data ?? []);
+      } catch (e) {
+        console.error("Error cargando circuitos:", e);
+        setError("No se pudieron cargar los circuitos.");
+      } finally {
+        setLoading(false);
+      }
     }
-  }
 
-  cargar();
-}, []);
-
+    cargar();
+  }, []);
 
   function abrirInscripcion(circuito) {
     setCircuitoSeleccionado(circuito);

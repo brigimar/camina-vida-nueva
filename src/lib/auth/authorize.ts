@@ -1,4 +1,4 @@
-import { createSupabaseServer } from "../supabaseServer";
+import { createSupabaseServer } from "@/lib/supabase";
 
 export async function requireUser() {
   const supabase = await createSupabaseServer();
@@ -11,7 +11,11 @@ export async function requireUser() {
 
 export async function requireRole(allowed: string[]) {
   const user = await requireUser();
-  const role = (user?.app_metadata as any)?.role;
+  const appMetadata = user?.app_metadata as
+    | { role?: string }
+    | null
+    | undefined;
+  const role = appMetadata?.role;
   if (!role || !allowed.includes(role)) {
     throw { message: "Forbidden", status: 403 };
   }

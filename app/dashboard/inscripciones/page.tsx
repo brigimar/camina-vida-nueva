@@ -1,8 +1,8 @@
-export const dynamic = 'force-dynamic';
+export const dynamic = "force-dynamic";
 
-import InscripcionesListClient from './components/InscripcionesListClient';
-import { Inscripcion } from '@/types';
-import { createSupabaseServer } from '@/lib/supabaseServer';
+import InscripcionesListClient from "./components/InscripcionesListClient";
+import { Inscripcion } from "@/types";
+import { createSupabaseServer } from "@/lib/supabase";
 
 export default async function InscripcionesPage() {
   const supabase = await createSupabaseServer();
@@ -11,13 +11,13 @@ export default async function InscripcionesPage() {
   // ✅ Fetch inscripciones (join correcto)
   // ============================
   const iRes = await supabase
-    .from('inscripciones')
-    .select('*, sesiones(*, circuitos(nombre))')
-    .eq('estado', 'activo')
+    .from("inscripciones")
+    .select("*, sesiones(*, circuitos(nombre))")
+    .eq("estado", "activo")
     .limit(100);
 
   if (iRes.error) {
-    console.error('❌ Supabase error (inscripciones):', iRes.error);
+    console.error("❌ Supabase error (inscripciones):", iRes.error);
   }
 
   const initialInscripciones: Inscripcion[] = Array.isArray(iRes.data)
@@ -39,9 +39,7 @@ export default async function InscripcionesPage() {
         </a>
       </div>
 
-      <InscripcionesListClient
-        initialInscripciones={initialInscripciones}
-      />
+      <InscripcionesListClient initialInscripciones={initialInscripciones} />
     </div>
   );
 }
