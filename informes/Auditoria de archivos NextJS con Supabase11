@@ -1,0 +1,3125 @@
+## User (checkpoint)
+
+Audita las siguientes carpetas del proyecto:
+- src/app/onboarding
+- src/lib/supabase
+- src/modules/platos
+- src/modules/productores
+- src/modules/inscriptos
+- src/modules/circuitos
+- src/modules/dashboard
+- src/modules/roles
+- src/lib/validations
+- src/app/(auth)
+
+Busca y lista con detalle:
+1. Archivos que usan `window`, `document`, `localStorage`.
+2. Archivos que contienen `export const dynamic`.
+3. Archivos que inicializan Supabase (`createClient`, `createBrowserClient`, `new GoTrueClient`).
+4. Archivos que importan o usan `useSupabase`.
+5. Archivos que usan `process.env`.
+6. Archivos que no tienen `"use client";` pero usan hooks (`useState`, `useEffect`, `useForm`).
+
+Devuelve un reporte por carpeta con:
+- Nombre del archivo
+- Línea exacta del hallazgo
+- Breve explicación del riesgo (ejemplo: rompe build, inicialización duplicada, variable de entorno mal usada).
+
+## Assistant
+
+Voy a auditar las carpetas solicitadas en busca de los patrones específicos que mencionaste. Empezaré explorando cada carpeta.
+
+**Tool Call: List the `caminatas-limpio/src/app/onboarding` directory's contents**
+Status: Failed
+
+Path not found: caminatas-limpio/src/app/onboarding
+
+**Tool Call: List the `caminatas-limpio/src/lib/supabase` directory's contents**
+Status: Failed
+
+Path not found: caminatas-limpio/src/lib/supabase
+
+**Tool Call: List the `caminatas-limpio/src/modules/platos` directory's contents**
+Status: Failed
+
+Path not found: caminatas-limpio/src/modules/platos
+
+**Tool Call: List the `caminatas-limpio/src/modules/productores` directory's contents**
+Status: Failed
+
+Path not found: caminatas-limpio/src/modules/productores
+
+**Tool Call: List the `caminatas-limpio/src/modules/inscriptos` directory's contents**
+Status: Failed
+
+Path not found: caminatas-limpio/src/modules/inscriptos
+
+**Tool Call: List the `caminatas-limpio/src/modules/circuitos` directory's contents**
+Status: Failed
+
+Path not found: caminatas-limpio/src/modules/circuitos
+
+**Tool Call: List the `caminatas-limpio/src/modules/dashboard` directory's contents**
+Status: Failed
+
+Path not found: caminatas-limpio/src/modules/dashboard
+
+**Tool Call: List the `caminatas-limpio/src/modules/roles` directory's contents**
+Status: Failed
+
+Path not found: caminatas-limpio/src/modules/roles
+
+**Tool Call: List the `caminatas-limpio/src/lib/validations` directory's contents**
+Status: Failed
+
+Path not found: caminatas-limpio/src/lib/validations
+
+**Tool Call: List the `caminatas-limpio/src/app/(auth)` directory's contents**
+Status: Failed
+
+Path not found: caminatas-limpio/src/app/(auth)
+
+## Assistant
+
+Déjame explorar la estructura del proyecto para encontrar las carpetas correctas:
+
+**Tool Call: List the `caminatas-limpio` directory's contents**
+Status: Completed
+
+# Folders:
+caminatas-limpio\.continue
+caminatas-limpio\.continue_backup
+caminatas-limpio\.github
+caminatas-limpio\.next
+caminatas-limpio\.qodo
+caminatas-limpio\app
+caminatas-limpio\node_modules
+caminatas-limpio\public
+caminatas-limpio\scripts
+caminatas-limpio\sql
+caminatas-limpio\src
+
+# Files:
+caminatas-limpio\# ✅ DOCUMENTO — Auditorías Técnicas Comp.md
+caminatas-limpio\.eslintrc.ts
+caminatas-limpio\.gitignore
+caminatas-limpio\AUDITORIA_BACKEND_INTEGRAL.md
+caminatas-limpio\AUDITORIA_CIRCUITOS.md
+caminatas-limpio\Auditoría Técnica.md
+caminatas-limpio\CRUD.md
+caminatas-limpio\DASHBOARD_500_ERROR_AUDIT_REPORT.md
+caminatas-limpio\DASHBOARD_REMEDIATION_CHECKLIST.md
+caminatas-limpio\Guía Oficial de Arquitectura.md
+caminatas-limpio\MAPA DE DEPENDENCIAS PARA CIRCUITOS Y DA.md
+caminatas-limpio\QA-crud.md
+caminatas-limpio\README MAESTRO — Módulo de Circuitos.md
+caminatas-limpio\README.md
+caminatas-limpio\actualizar-imports.cjs
+caminatas-limpio\auditar-imports.ts
+caminatas-limpio\circuitos.html
+caminatas-limpio\clean-project.ps1
+caminatas-limpio\eslint.config.js
+caminatas-limpio\eslint.config.mjs
+caminatas-limpio\estructura.txt
+caminatas-limpio\extensiones_instaladas.txt
+caminatas-limpio\fix-supabase-imports.ps1
+caminatas-limpio\jsconfig.json
+caminatas-limpio\legacy.ps1
+caminatas-limpio\middleware.ts
+caminatas-limpio\mover-y-actualizar-imports.cjs
+caminatas-limpio\next-env.d.ts
+caminatas-limpio\next.config.mjs
+caminatas-limpio\package-lock.json
+caminatas-limpio\package.json
+caminatas-limpio\pagenotionunica-veremos.jsx
+caminatas-limpio\postcss.config.cjs
+caminatas-limpio\refactorizacion-circuitos
+caminatas-limpio\tailwind.config.ts
+caminatas-limpio\test-brevo.ts
+caminatas-limpio\tmp_dashboard_error.html
+caminatas-limpio\tree.ps1
+caminatas-limpio\tsconfig.json
+caminatas-limpio\tsconfig.tsbuildinfo
+caminatas-limpio\unimportedrc.json
+caminatas-limpio\verify-supabase-imports.cjs
+
+
+**Tool Call: List the `caminatas-limpio/src` directory's contents**
+Status: Completed
+
+# Folders:
+caminatas-limpio\src\app
+caminatas-limpio\src\components
+caminatas-limpio\src\hooks
+caminatas-limpio\src\lib
+caminatas-limpio\src\providers
+caminatas-limpio\src\services
+caminatas-limpio\src\shared
+caminatas-limpio\src\supabase
+caminatas-limpio\src\types
+
+# Files:
+caminatas-limpio\src\middleware.ts
+
+
+**Tool Call: List the `caminatas-limpio/src/app` directory's contents**
+Status: Completed
+
+# Folders:
+caminatas-limpio\src\app\dashboard
+
+
+**Tool Call: List the `caminatas-limpio/src/lib` directory's contents**
+Status: Completed
+
+# Folders:
+caminatas-limpio\src\lib\auth
+caminatas-limpio\src\lib\controllers
+caminatas-limpio\src\lib\utils
+caminatas-limpio\src\lib\validators
+
+# Files:
+caminatas-limpio\src\lib\chart.js
+caminatas-limpio\src\lib\chart.ts
+caminatas-limpio\src\lib\metricsHelper.ts
+caminatas-limpio\src\lib\subirFotoStaff.ts
+caminatas-limpio\src\lib\subirImagenCircuito.ts
+caminatas-limpio\src\lib\supabaseBrowser.ts
+caminatas-limpio\src\lib\supabaseClient.ts
+caminatas-limpio\src\lib\supabaseServer.ts
+
+
+## Assistant
+
+Ahora buscaré las carpetas restantes:
+
+**Tool Call: No matches**
+Status: Completed
+
+```json
+{"offset":0,"current_matches_page":[],"all_matches_len":0}
+```
+
+**Tool Call: No matches**
+Status: Completed
+
+```json
+{"offset":0,"current_matches_page":[],"all_matches_len":0}
+```
+
+**Tool Call: No matches**
+Status: Completed
+
+```json
+{"offset":0,"current_matches_page":[],"all_matches_len":0}
+```
+
+**Tool Call: No matches**
+Status: Completed
+
+```json
+{"offset":0,"current_matches_page":[],"all_matches_len":0}
+```
+
+**Tool Call: 40 matches**
+Status: Completed
+
+file://E:\BuenosPasos\buenospasos\pasoapaso\caminatas-limpio\app\api\circuitos
+
+file://E:\BuenosPasos\buenospasos\pasoapaso\caminatas-limpio\app\api\circuitos\[id]
+
+file://E:\BuenosPasos\buenospasos\pasoapaso\caminatas-limpio\app\api\circuitos\[id]\route.ts
+
+file://E:\BuenosPasos\buenospasos\pasoapaso\caminatas-limpio\app\api\circuitos\route.ts
+
+file://E:\BuenosPasos\buenospasos\pasoapaso\caminatas-limpio\app\circuitos
+
+file://E:\BuenosPasos\buenospasos\pasoapaso\caminatas-limpio\app\circuitos\page.tsx
+
+file://E:\BuenosPasos\buenospasos\pasoapaso\caminatas-limpio\app\dashboard\circuitos
+
+file://E:\BuenosPasos\buenospasos\pasoapaso\caminatas-limpio\app\dashboard\circuitos\[id]
+
+file://E:\BuenosPasos\buenospasos\pasoapaso\caminatas-limpio\app\dashboard\circuitos\[id]\page.tsx
+
+file://E:\BuenosPasos\buenospasos\pasoapaso\caminatas-limpio\app\dashboard\circuitos\actions.ts
+
+file://E:\BuenosPasos\buenospasos\pasoapaso\caminatas-limpio\app\dashboard\circuitos\components
+
+file://E:\BuenosPasos\buenospasos\pasoapaso\caminatas-limpio\app\dashboard\circuitos\components\CircuitoForm.new.tsx
+
+file://E:\BuenosPasos\buenospasos\pasoapaso\caminatas-limpio\app\dashboard\circuitos\components\CircuitoForm.tsx
+
+file://E:\BuenosPasos\buenospasos\pasoapaso\caminatas-limpio\app\dashboard\circuitos\components\CircuitosFilters.tsx
+
+file://E:\BuenosPasos\buenospasos\pasoapaso\caminatas-limpio\app\dashboard\circuitos\components\CircuitosListClient.tsx
+
+file://E:\BuenosPasos\buenospasos\pasoapaso\caminatas-limpio\app\dashboard\circuitos\components\CircuitosTable.tsx
+
+file://E:\BuenosPasos\buenospasos\pasoapaso\caminatas-limpio\app\dashboard\circuitos\components\DeleteCircuitoDialog.tsx
+
+file://E:\BuenosPasos\buenospasos\pasoapaso\caminatas-limpio\app\dashboard\circuitos\create
+
+file://E:\BuenosPasos\buenospasos\pasoapaso\caminatas-limpio\app\dashboard\circuitos\create\page.tsx
+
+file://E:\BuenosPasos\buenospasos\pasoapaso\caminatas-limpio\app\dashboard\circuitos\edit
+
+file://E:\BuenosPasos\buenospasos\pasoapaso\caminatas-limpio\app\dashboard\circuitos\edit\[id]
+
+file://E:\BuenosPasos\buenospasos\pasoapaso\caminatas-limpio\app\dashboard\circuitos\edit\[id]\page.tsx
+
+file://E:\BuenosPasos\buenospasos\pasoapaso\caminatas-limpio\app\dashboard\circuitos\page.tsx
+
+file://E:\BuenosPasos\buenospasos\pasoapaso\caminatas-limpio\app\dashboard\circuitos\show
+
+file://E:\BuenosPasos\buenospasos\pasoapaso\caminatas-limpio\app\dashboard\circuitos\show\[id]
+
+file://E:\BuenosPasos\buenospasos\pasoapaso\caminatas-limpio\app\dashboard\circuitos\show\[id]\page.tsx
+
+file://E:\BuenosPasos\buenospasos\pasoapaso\caminatas-limpio\src\components\circuitos
+
+file://E:\BuenosPasos\buenospasos\pasoapaso\caminatas-limpio\src\components\circuitos\CircuitoCard.jsx
+
+file://E:\BuenosPasos\buenospasos\pasoapaso\caminatas-limpio\src\components\circuitos\CircuitoFlyerCard.jsx
+
+file://E:\BuenosPasos\buenospasos\pasoapaso\caminatas-limpio\src\components\circuitos\CircuitoGrid.jsx
+
+file://E:\BuenosPasos\buenospasos\pasoapaso\caminatas-limpio\src\components\circuitos\CircuitoSkeleton.jsx
+
+file://E:\BuenosPasos\buenospasos\pasoapaso\caminatas-limpio\src\components\circuitos\CircuitosContent.jsx
+
+file://E:\BuenosPasos\buenospasos\pasoapaso\caminatas-limpio\src\components\circuitos\CircuitosCopyEmocional.jsx
+
+file://E:\BuenosPasos\buenospasos\pasoapaso\caminatas-limpio\src\components\circuitos\CircuitosFilters.jsx
+
+file://E:\BuenosPasos\buenospasos\pasoapaso\caminatas-limpio\src\components\circuitos\CircuitosGrid.jsx
+
+file://E:\BuenosPasos\buenospasos\pasoapaso\caminatas-limpio\src\components\circuitos\CircuitosListado.jsx
+
+file://E:\BuenosPasos\buenospasos\pasoapaso\caminatas-limpio\src\components\circuitos\CircuitosSkeleton.jsx
+
+file://E:\BuenosPasos\buenospasos\pasoapaso\caminatas-limpio\src\components\circuitos\MapaGeneralCircuitos.jsx
+
+file://E:\BuenosPasos\buenospasos\pasoapaso\caminatas-limpio\src\components\circuitos\Paginacion.jsx
+
+file://E:\BuenosPasos\buenospasos\pasoapaso\caminatas-limpio\src\components\circuitos\tree.md
+
+**Tool Call: 2 matches**
+Status: Completed
+
+file://E:\BuenosPasos\buenospasos\pasoapaso\caminatas-limpio\app\dashboard\roles
+
+file://E:\BuenosPasos\buenospasos\pasoapaso\caminatas-limpio\app\dashboard\roles\actions.ts
+
+**Tool Call: List the `caminatas-limpio/app` directory's contents**
+Status: Completed
+
+# Folders:
+caminatas-limpio\app\api
+caminatas-limpio\app\circuitos
+caminatas-limpio\app\coordinadores
+caminatas-limpio\app\dashboard
+caminatas-limpio\app\evento
+caminatas-limpio\app\inscripcion
+caminatas-limpio\app\login
+caminatas-limpio\app\nosotros
+caminatas-limpio\app\perfil
+caminatas-limpio\app\reservar
+caminatas-limpio\app\unauthorized
+
+# Files:
+caminatas-limpio\app\globals.css
+caminatas-limpio\app\layout.tsx
+caminatas-limpio\app\page.tsx
+
+
+## Assistant
+
+Ahora buscaré patrones específicos en las carpetas que existen. Empezaré con búsquedas de los patrones solicitados:
+
+**Tool Call: Search files for regex `\b(window|document|localStorage)\b`**
+Status: Completed
+
+No matches found
+
+**Tool Call: Search files for regex `\b(window|document|localStorage)\b`**
+Status: Completed
+
+No matches found
+
+**Tool Call: Search files for regex `\b(window|document|localStorage)\b`**
+Status: Completed
+
+Found 1 matches:
+
+## Matches in caminatas-limpio\app\dashboard\circuitos\components\CircuitosListClient.tsx
+
+### function CircuitosListClient( ) › const handlePageChange › const params › L35-39
+```
+  const handlePageChange = (newPage: number) => {
+    const params = new URLSearchParams(window.location.search);
+    params.set("page", newPage.toString());
+    router.push(`/dashboard/circuitos?${params.toString()}`);
+  };
+```
+
+
+**Tool Call: Search files for regex `\b(window|document|localStorage)\b`**
+Status: Completed
+
+Found 1 matches:
+
+## Matches in caminatas-limpio\app\login\page.tsx
+
+### function LoginPage() › const handleLogin › L21-24
+```
+    } else {
+      // Redirigir al dashboard después de login exitoso
+      window.location.href = '/dashboard';
+    }
+```
+
+
+**Tool Call: Search files for regex `export\s+const\s+dynamic`**
+Status: Completed
+
+Found 13 matches:
+
+## Matches in caminatas-limpio\app\circuitos\page.tsx
+
+### L1-11
+```
+export const dynamic = "force-dynamic";
+
+import { Suspense } from "react";
+import CircuitosContent from "@/components/circuitos/CircuitosContent";
+import CircuitosSkeleton from "@/components/circuitos/CircuitosSkeleton";
+
+type SearchParams = Promise<{ [key: string]: string | string[] | undefined }>;
+
+interface CircuitosPageProps {
+  searchParams: SearchParams;
+}
+```
+
+23 lines remaining in ancestor node. Read the file to see all.
+
+## Matches in caminatas-limpio\app\dashboard\coordinadores\edit\[id]\page.tsx
+
+### L1-11
+```
+export const dynamic = "force-dynamic";
+
+import { Coordinador } from "@/types";
+import CoordinadorForm from "../../components/CoordinadorForm";
+
+export default async function EditCoordinadorPage({
+  params,
+}: {
+  params: { id: string };
+}) {
+  const { id } = params;
+```
+
+15 lines remaining in ancestor node. Read the file to see all.
+
+## Matches in caminatas-limpio\app\dashboard\coordinadores\page.tsx
+
+### L1-11
+```
+export const dynamic = "force-dynamic";
+
+import CoordinadoresListClient from "./components/CoordinadoresListClient";
+import { getCoordinadoresAction } from "./actions";
+
+export default async function CoordinadoresPage() {
+  let initialCoordinadores = [];
+  try {
+    initialCoordinadores = await getCoordinadoresAction();
+  } catch (err) {
+    console.error("Error fetching coordinadores:", err);
+```
+
+20 lines remaining in ancestor node. Read the file to see all.
+
+## Matches in caminatas-limpio\app\dashboard\coordinadores\show\[id]\page.tsx
+
+### L1-11
+```
+export const dynamic = "force-dynamic";
+
+import Image from "next/image";
+import { Coordinador } from "@/types";
+import { createSupabaseServer } from "@/lib/supabaseServer";
+
+export default async function CoordinadoresShow({
+  params,
+}: {
+  params: { id: string };
+}) {
+```
+
+31 lines remaining in ancestor node. Read the file to see all.
+
+## Matches in caminatas-limpio\app\dashboard\inscripciones\edit\[id]\page.tsx
+
+### L1-11
+```
+export const dynamic = "force-dynamic";
+
+import { Inscripcion } from "@/types";
+import InscripcionForm from "../../components/InscripcionForm";
+
+export default async function InscripcionesEdit({
+  params,
+}: {
+  params: { id: string };
+}) {
+  const { id } = params;
+```
+
+34 lines remaining in ancestor node. Read the file to see all.
+
+## Matches in caminatas-limpio\app\dashboard\inscripciones\page.tsx
+
+### L1-11
+```
+export const dynamic = 'force-dynamic';
+
+import InscripcionesListClient from './components/InscripcionesListClient';
+import { Inscripcion } from '@/types';
+import { createSupabaseServer } from '@/lib/supabaseServer';
+
+export default async function InscripcionesPage() {
+  const supabase = await createSupabaseServer();
+
+  // ============================
+  // ✅ Fetch inscripciones (join correcto)
+```
+
+37 lines remaining in ancestor node. Read the file to see all.
+
+## Matches in caminatas-limpio\app\dashboard\inscripciones\show\[id]\page.tsx
+
+### L1-11
+```
+export const dynamic = "force-dynamic";
+
+import { Inscripcion } from "@/types";
+import { createSupabaseServer } from "@/lib/supabaseServer";
+
+export default async function InscripcionesShow({
+  params,
+}: {
+  params: { id: string };
+}) {
+  const { id } = params;
+```
+
+62 lines remaining in ancestor node. Read the file to see all.
+
+## Matches in caminatas-limpio\app\dashboard\page.tsx
+
+### L1-11
+```
+// app/dashboard/page.tsx
+export const dynamic = 'force-dynamic';
+
+import React from "react"; // ✅ necesario para React.ReactNode
+import InscripcionesPorCircuito from "@/components/dashboard/InscripcionesPorCircuito";
+import InscripcionesPorDia from "@/components/dashboard/InscripcionesPorDia";
+import { Circuito, Inscripcion, Sesion } from "@/types";
+import { createSupabaseServer } from "@/lib/supabaseServer";
+
+interface CardProps {
+  title: string;
+```
+
+93 lines remaining in ancestor node. Read the file to see all.
+
+## Matches in caminatas-limpio\app\dashboard\sesiones\edit\[id]\page.tsx
+
+### L1-11
+```
+export const dynamic = "force-dynamic";
+
+import { Sesion } from "@/types";
+import SesionForm from "../../components/SesionForm";
+
+export default async function SesionesEdit({
+  params,
+}: {
+  params: { id: string };
+}) {
+  const { id } = params;
+```
+
+14 lines remaining in ancestor node. Read the file to see all.
+
+## Matches in caminatas-limpio\app\dashboard\sesiones\page.tsx
+
+### L1-11
+```
+export const dynamic = 'force-dynamic';
+
+import SesionesListClient from './components/SesionesListClient';
+import { Sesion, Circuito } from '@/types';
+import { createSupabaseServer } from '@/lib/supabaseServer';
+
+export default async function SesionesPage() {
+  let initialSesiones: Sesion[] = [];
+  let initialCircuitos: Circuito[] = [];
+  try {
+    const supabase = await createSupabaseServer();
+```
+
+24 lines remaining in ancestor node. Read the file to see all.
+
+## Matches in caminatas-limpio\app\dashboard\sesiones\show\[id]\page.tsx
+
+### L1-11
+```
+export const dynamic = "force-dynamic";
+
+import { Sesion, Circuito } from "@/types";
+import { createSupabaseServer } from "@/lib/supabaseServer";
+
+export default async function SesionesShow({
+  params,
+}: {
+  params: { id: string };
+}) {
+  const { id } = params;
+```
+
+42 lines remaining in ancestor node. Read the file to see all.
+
+## Matches in caminatas-limpio\app\inscripcion\page.tsx
+
+### L1-11
+```
+export const dynamic = 'force-dynamic';
+
+import CircuitoView from "@/components/home/CircuitoView";
+import { createSupabaseServer } from "@/lib/supabaseServer";
+
+export default async function InscripcionPage({ searchParams }) {
+  const circuitoId = searchParams?.circuito;
+
+  if (!circuitoId) {
+    return (
+      <div className="p-10 text-center text-red-600">
+```
+
+34 lines remaining in ancestor node. Read the file to see all.
+
+## Matches in caminatas-limpio\app\reservar\[id]\page.tsx
+
+### L1-11
+```
+export const dynamic = "force-dynamic";
+
+export default async function ReservaPage({
+  params,
+}: {
+  params: { id: string };
+}) {
+  const { id } = params;
+
+  const res = await fetch(`/api/inscripciones/${id}`, { cache: "no-store" });
+
+```
+
+56 lines remaining in ancestor node. Read the file to see all.
+
+
+**Tool Call: Search files for regex `(createClient|createBrowserClient|new\s+GoTrueClient)`**
+Status: Completed
+
+Found 9 matches:
+
+## Matches in caminatas-limpio\app\api\circuitos\[id]\route.ts
+
+### L1-7
+```
+import { NextResponse } from "next/server";
+import { createClient } from "@supabase/supabase-js";
+
+const supabase = createClient(
+  process.env.NEXT_PUBLIC_SUPABASE_URL!,
+  process.env.SUPABASE_SERVICE_ROLE_KEY!
+);
+```
+
+103 lines remaining in ancestor node. Read the file to see all.
+
+## Matches in caminatas-limpio\app\dashboard\circuitos\components\DeleteCircuitoDialog.tsx
+
+### L1-11
+```
+// app/dashboard/circuitos/components/DeleteCircuitoDialog.tsx
+'use client';
+
+import { useState } from "react";
+import { createClient } from "@/lib/supabaseBrowser";
+
+interface Props {
+  circuitoId: string;
+  onClose: () => void;
+  onSuccess: () => void;
+}
+```
+
+54 lines remaining in ancestor node. Read the file to see all.
+
+### function DeleteCircuitoDialog( ) › const supabase › L13-23
+```
+export default function DeleteCircuitoDialog({ circuitoId, onClose, onSuccess }: Props) {
+  const supabase = createClient();
+  const [loading, setLoading] = useState(false);
+  const [err, setErr] = useState<string | null>(null);
+
+  const handleDelete = async () => {
+    setLoading(true);
+    setErr(null);
+
+    const { error } = await supabase.from("circuitos").delete().eq("id", circuitoId);
+
+```
+
+41 lines remaining in ancestor node. Read the file to see all.
+
+## Matches in caminatas-limpio\src\hooks\useCircuitos.ts
+
+### L1-11
+```
+// src/hooks/useCircuitos.ts
+'use client';
+
+import { useEffect, useMemo, useState, useCallback } from "react";
+import { createClient } from "@/lib/supabaseBrowser";
+
+export interface Circuito {
+  id: string;
+  nombre: string;
+  localidad: string | null;
+  activo: boolean;
+```
+
+65 lines remaining in ancestor node. Read the file to see all.
+
+### function useCircuitos( ) › const supabase › L27-37
+```
+export function useCircuitos({ page, limit }: UseCircuitosParams) {
+  const supabase = useMemo(() => createClient(), []);
+  const [data, setData] = useState<Circuito[]>([]);
+  const [meta, setMeta] = useState<Meta | null>(null);
+  const [loading, setLoading] = useState<boolean>(true);
+  const [error, setError] = useState<string | null>(null);
+
+  const fetchData = useCallback(async () => {
+    setLoading(true);
+    setError(null);
+
+```
+
+38 lines remaining in ancestor node. Read the file to see all.
+
+## Matches in caminatas-limpio\src\lib\subirFotoStaff.ts
+
+### L1-6
+```
+import { createClient } from "@supabase/supabase-js";
+
+const supabase = createClient(
+  process.env.NEXT_PUBLIC_SUPABASE_URL!,
+  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
+);
+```
+
+21 lines remaining in ancestor node. Read the file to see all.
+
+## Matches in caminatas-limpio\src\lib\supabaseBrowser.ts
+
+### L1-9
+```
+// src/lib/supabaseBrowser.ts
+import { createBrowserClient } from "@supabase/ssr";
+
+export function createClient() {
+  return createBrowserClient(
+    process.env.NEXT_PUBLIC_SUPABASE_URL!,
+    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
+  );
+}
+```
+
+1 lines remaining in ancestor node. Read the file to see all.
+
+## Matches in caminatas-limpio\src\lib\supabaseClient.ts
+
+### L1-8
+```
+import { createClient } from "@supabase/supabase-js";
+
+const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!;
+const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!;
+
+// Exportar con el mismo nombre que se importa en page.tsx
+export const supabase = createClient(supabaseUrl, supabaseAnonKey);
+
+```
+
+## Matches in caminatas-limpio\src\supabase\functions\sync-alertas\index.ts
+
+### L1-6
+```
+import { createClient } from '@supabase/supabase-js'
+
+const supabase = createClient(
+  Deno.env.get("SUPABASE_URL")!,
+  Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!
+)
+```
+
+12 lines remaining in ancestor node. Read the file to see all.
+
+
+**Tool Call: Search files for regex `(useSupabase|import.*useSupabase)`**
+Status: Completed
+
+No matches found
+
+**Tool Call: Search files for regex `process\.env`**
+Status: Completed
+
+Found 11 matches:
+
+## Matches in caminatas-limpio\app\api\auth\login\route.ts
+
+### async function POST( ) › const supabase › L10-20
+```
+  const supabase = createServerClient(
+    process.env.NEXT_PUBLIC_SUPABASE_URL!,
+    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
+    {
+      cookies: {
+        get(name) {
+          return cookieStore.get(name)?.value;
+        },
+        set(name, value, options) {
+          cookieStore.set({ name, value, ...options });
+        },
+```
+
+6 lines remaining in ancestor node. Read the file to see all.
+
+### async function POST( ) › L37-40
+```
+  return NextResponse.redirect(
+    `${process.env.NEXT_PUBLIC_SITE_URL}/dashboard`,
+    { status: 303 }
+  );
+```
+
+## Matches in caminatas-limpio\app\api\circuitos\[id]\route.ts
+
+### const supabase › L4-7
+```
+const supabase = createClient(
+  process.env.NEXT_PUBLIC_SUPABASE_URL!,
+  process.env.SUPABASE_SERVICE_ROLE_KEY!
+);
+```
+
+## Matches in caminatas-limpio\scripts\create-test-user.js
+
+### L2-7
+```
+  const fs = await import('fs');
+
+  // Try process.env first, otherwise try to read .env.local
+  let env = process.env;
+  if (!env.SUPABASE_SERVICE_ROLE_KEY) {
+    try {
+```
+
+### L13-20
+```
+          let v = m[2] || '';
+          v = v.replace(/^\"|\"$/g, '');
+          process.env[k] = v;
+        }
+      });
+      env = process.env;
+    } catch (e) {
+      // ignore
+```
+
+## Matches in caminatas-limpio\scripts\test-login.js
+
+### L1-6
+```
+(async () => {
+  const url = 'http://localhost:3000/api/auth/login';
+  const email = process.env.TEST_EMAIL || process.env.TEST_USER || 'test+agent@local.test';
+  const password = process.env.TEST_PASSWORD || process.env.TEST_PASS || 'Test1234!';
+
+  try {
+```
+
+## Matches in caminatas-limpio\src\lib\subirFotoStaff.ts
+
+### const supabase › L3-6
+```
+const supabase = createClient(
+  process.env.NEXT_PUBLIC_SUPABASE_URL!,
+  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
+);
+```
+
+## Matches in caminatas-limpio\src\lib\supabaseBrowser.ts
+
+### function createClient() › L5-8
+```
+  return createBrowserClient(
+    process.env.NEXT_PUBLIC_SUPABASE_URL!,
+    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
+  );
+```
+
+## Matches in caminatas-limpio\src\lib\supabaseClient.ts
+
+### const supabaseUrl › L1-8
+```
+import { createClient } from "@supabase/supabase-js";
+
+const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!;
+const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!;
+
+// Exportar con el mismo nombre que se importa en page.tsx
+export const supabase = createClient(supabaseUrl, supabaseAnonKey);
+
+```
+
+## Matches in caminatas-limpio\src\lib\supabaseServer.ts
+
+### async function createSupabaseServer() › const supabase › L8-18
+```
+  const supabase = createServerClient(
+    process.env.NEXT_PUBLIC_SUPABASE_URL!,
+    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
+    {
+      cookies: {
+        get(name: string) {
+          return cookieStore.get(name)?.value;
+        },
+        set(name: string, value: string, options: { maxAge?: number; path?: string; domain?: string; secure?: boolean }) {
+          cookieStore.set({ name, value, ...options });
+        },
+```
+
+6 lines remaining in ancestor node. Read the file to see all.
+
+## Matches in caminatas-limpio\test-brevo.ts
+
+### L1-11
+```
+import * as brevo from "@getbrevo/brevo";
+
+const apiInstance = new brevo.TransactionalEmailsApi();
+apiInstance.setApiKey(brevo.TransactionalEmailsApiApiKeys.apiKey, process.env.BREVO_API_KEY);
+
+const email = new brevo.SendSmtpEmail();
+email.subject = "Prueba Brevo - Caminatas Terapéuticas";
+email.sender = { email: process.env.EMAIL_FROM };
+email.to = [{ email: process.env.EMAIL_TO }];
+email.htmlContent = "<h2>Prueba de conexión con Brevo</h2><p>Todo funciona 🚀</p>";
+
+```
+
+4 lines remaining in ancestor node. Read the file to see all.
+
+
+## Assistant
+
+Ahora busquemos archivos sin "use client" pero que usan hooks:
+
+**Tool Call: Search files for regex `(useState|useEffect|useForm|useRouter|useSearchParams)`**
+Status: Completed
+
+Showing matches 1-20 (there were more matches found; use offset: 20 to see next page):
+
+## Matches in caminatas-limpio\app\dashboard\DashboardResumen.jsx
+
+### L1-14
+```
+"use client";
+
+import { useEffect, useState } from "react";
+export default function DashboardResumen() {
+  const [data, setData] = useState({
+    admins: 0,
+    coordinadores: 0,
+    inscriptos: 0,
+    circuitos: 0,
+  });
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    fetchResumen();
+```
+
+40 lines remaining in ancestor node. Read the file to see all.
+
+## Matches in caminatas-limpio\app\dashboard\circuitos\components\CircuitoForm.new.tsx
+
+### L1-11
+```
+"use client";
+
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { circuitoSchema } from "@/lib/validators/circuitoSchema";
+
+export default function CircuitoForm({ initialData, onSubmit, disabled }) {
+  const safeDefaults = initialData
+    ? {
+        ...initialData,
+        descripcion: initialData.descripcion ?? undefined,
+```
+
+199 lines remaining in ancestor node. Read the file to see all.
+
+### function CircuitoForm( ) › L22-29
+```
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
+    defaultValues: safeDefaults,
+    resolver: zodResolver(circuitoSchema),
+  });
+```
+
+## Matches in caminatas-limpio\app\dashboard\circuitos\components\CircuitoForm.tsx
+
+### L1-15
+```
+"use client";
+
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { circuitoSchema } from "@/lib/validators/circuitoSchema";
+
+export default function CircuitoForm({ initialData, onSubmit, disabled }) {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
+    defaultValues: initialData,
+    resolver: zodResolver(circuitoSchema),
+  });
+```
+
+181 lines remaining in ancestor node. Read the file to see all.
+
+## Matches in caminatas-limpio\app\dashboard\circuitos\components\CircuitosFilters.tsx
+
+### L1-11
+```
+"use client";
+
+import { useState, ChangeEvent } from "react";
+
+interface CircuitosFiltersProps {
+  onChange: (filters: {
+    q: string;
+    localidad: string;
+    dificultad: string;
+    activo: string;
+  }) => void;
+```
+
+49 lines remaining in ancestor node. Read the file to see all.
+
+### function CircuitosFilters( ) › L14-24
+```
+export default function CircuitosFilters({ onChange }: CircuitosFiltersProps) {
+  const [filters, setFilters] = useState({
+    q: "",
+    localidad: "",
+    dificultad: "",
+    activo: "",
+  });
+
+  const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+    const updated = { ...filters, [e.target.name]: e.target.value };
+    setFilters(updated);
+```
+
+35 lines remaining in ancestor node. Read the file to see all.
+
+## Matches in caminatas-limpio\app\dashboard\circuitos\components\CircuitosListClient.tsx
+
+### L1-21
+```
+// app/dashboard/circuitos/components/CircuitosListClient.tsx
+"use client";
+
+import Link from "next/link";
+import Image from "next/image";
+import { useState, useTransition } from "react";
+import { useRouter } from "next/navigation";
+import DeleteCircuitoDialog from "./DeleteCircuitoDialog";
+import { toggleCircuitoEstadoAction, deleteCircuitoAction } from "../actions";
+
+export default function CircuitosListClient({ initialData, initialMeta }) {
+  const router = useRouter();
+  const [data, setData] = useState(initialData);
+  const [meta, setMeta] = useState(initialMeta);
+  const [isPending, startTransition] = useTransition();
+
+  const [circuitoToDelete, setCircuitoToDelete] = useState(null);
+
+  const handleToggleEstado = (id: string, current: boolean) => {
+    startTransition(async () => {
+      await toggleCircuitoEstadoAction(id, current);
+```
+
+154 lines remaining in ancestor node. Read the file to see all.
+
+## Matches in caminatas-limpio\app\dashboard\circuitos\components\DeleteCircuitoDialog.tsx
+
+### L1-11
+```
+// app/dashboard/circuitos/components/DeleteCircuitoDialog.tsx
+'use client';
+
+import { useState } from "react";
+import { createClient } from "@/lib/supabaseBrowser";
+
+interface Props {
+  circuitoId: string;
+  onClose: () => void;
+  onSuccess: () => void;
+}
+```
+
+54 lines remaining in ancestor node. Read the file to see all.
+
+### function DeleteCircuitoDialog( ) › L13-23
+```
+export default function DeleteCircuitoDialog({ circuitoId, onClose, onSuccess }: Props) {
+  const supabase = createClient();
+  const [loading, setLoading] = useState(false);
+  const [err, setErr] = useState<string | null>(null);
+
+  const handleDelete = async () => {
+    setLoading(true);
+    setErr(null);
+
+    const { error } = await supabase.from("circuitos").delete().eq("id", circuitoId);
+
+```
+
+41 lines remaining in ancestor node. Read the file to see all.
+
+## Matches in caminatas-limpio\app\dashboard\circuitos\create\page.tsx
+
+### L1-18
+```
+"use client";
+
+import { useCallback, useState } from "react";
+import CircuitoForm from "../components/CircuitoForm";
+import { createCircuitoAction } from "../actions";
+import type { Circuito } from "@/types/circuito";
+
+export default function CreateCircuitoPage() {
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
+  const [successMessage, setSuccessMessage] = useState<string | null>(null);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const handleSubmit = useCallback(async (data: Circuito) => {
+    setErrorMessage(null);
+    setSuccessMessage(null);
+    setIsSubmitting(true);
+
+    try {
+```
+
+25 lines remaining in ancestor node. Read the file to see all.
+
+## Matches in caminatas-limpio\app\dashboard\coordinadores\components\CoordinadorForm.tsx
+
+### L1-11
+```
+"use client";
+
+import { useForm, SubmitHandler } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import Image from "next/image";
+import { Coordinador } from "@/types";
+import { z } from "zod";
+
+// Define a schema for the form
+const formSchema = z.object({
+  nombre: z.string().min(1, "El nombre es requerido"),
+```
+
+136 lines remaining in ancestor node. Read the file to see all.
+
+### function CoordinadorForm( ) › L43-51
+```
+  const {
+    register,
+    handleSubmit,
+    watch,
+    formState: { errors },
+  } = useForm<FormValues>({
+    defaultValues: safeDefaults,
+    resolver: zodResolver(formSchema),
+  });
+```
+
+## Matches in caminatas-limpio\app\dashboard\coordinadores\components\CoordinadoresListClient.tsx
+
+### L1-11
+```
+"use client";
+
+import { useState, useTransition } from "react";
+import Image from "next/image";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { Coordinador } from "@/types";
+import { deleteCoordinadorAction } from "../actions";
+
+interface Props {
+  initialCoordinadores: Coordinador[];
+```
+
+88 lines remaining in ancestor node. Read the file to see all.
+
+### function CoordinadoresListClient( ) › const router › L16-26
+```
+}: Props) {
+  const router = useRouter();
+  const [isPending, startTransition] = useTransition();
+  const [error, setError] = useState<string | null>(null);
+
+  const handleDelete = (id: string) => {
+    if (!confirm("¿Estás seguro de que quieres borrar este coordinador?"))
+      return;
+
+    startTransition(async () => {
+      setError(null);
+```
+
+72 lines remaining in ancestor node. Read the file to see all.
+
+## Matches in caminatas-limpio\app\dashboard\coordinadores\create\page.tsx
+
+### L1-19
+```
+"use client";
+
+import { useState, useTransition } from "react";
+import { useRouter } from "next/navigation";
+import CoordinadorForm from "../components/CoordinadorForm";
+import { createCoordinadorAction, uploadFotoStaffAction } from "../actions";
+import type { CoordinadorPayload } from "../actions";
+
+export default function CoordinadoresCreate() {
+  const router = useRouter();
+  const [isSubmitting, startTransition] = useTransition();
+  const [error, setError] = useState<string | null>(null);
+  const [success, setSuccess] = useState<string | null>(null);
+  const [imageFile, setImageFile] = useState<File | null>(null);
+
+  const handleImageChange = (file: File) => {
+    if (file) {
+      setImageFile(file);
+    }
+```
+
+54 lines remaining in ancestor node. Read the file to see all.
+
+## Matches in caminatas-limpio\app\dashboard\inscripciones\components\InscripcionForm.tsx
+
+### L1-11
+```
+"use client";
+
+import { useEffect, useState } from 'react';
+import { useRouter } from 'next/navigation';
+import { Inscripcion } from '@/types';
+
+interface Sesion {
+  id: string;
+  fecha: string;
+  circuitos?: { nombre: string };
+}
+```
+
+147 lines remaining in ancestor node. Read the file to see all.
+
+### function InscripcionForm( ) › L18-28
+```
+export default function InscripcionForm({ initialData, inscripcionId }: Props) {
+  const [form, setForm] = useState<any>(initialData || {});
+  const [sesiones, setSesiones] = useState<Sesion[]>([]);
+  const [error, setError] = useState<string | null>(null);
+  const [success, setSuccess] = useState<string | null>(null);
+  const router = useRouter();
+
+  useEffect(() => {
+    fetch('/api/sesiones?limit=100')
+      .then((r) => r.json())
+      .then((response) => setSesiones(response?.data?.data ?? []))
+```
+
+129 lines remaining in ancestor node. Read the file to see all.
+
+## Matches in caminatas-limpio\app\dashboard\inscripciones\components\InscripcionesListClient.tsx
+
+### L1-11
+```
+"use client";
+
+import { useState } from 'react';
+import Link from 'next/link';
+import { Inscripcion, Circuito } from '@/types';
+
+interface Props {
+  initialInscripciones: Inscripcion[];
+  initialCircuitos?: Circuito[];
+}
+
+```
+
+71 lines remaining in ancestor node. Read the file to see all.
+
+### function InscripcionesListClient( ) › L12-22
+```
+export default function InscripcionesListClient({ initialInscripciones, initialCircuitos = [] }: Props) {
+  const [inscripciones, setInscripciones] = useState<Inscripcion[]>(initialInscripciones || []);
+  const [loadingId, setLoadingId] = useState<string | null>(null);
+
+  const handleDelete = async (id: string) => {
+    if (!confirm('¿Borrar esta inscripción?')) return;
+    setLoadingId(id);
+
+    const res = await fetch(`/api/inscripciones/${id}`, { method: 'DELETE' });
+
+    if (res.ok) {
+```
+
+59 lines remaining in ancestor node. Read the file to see all.
+
+## Matches in caminatas-limpio\app\dashboard\sesiones\components\SesionForm.tsx
+
+### L1-11
+```
+"use client";
+
+import { useEffect, useState } from 'react';
+import { useRouter } from 'next/navigation';
+import { Sesion, Circuito } from '@/types';
+
+interface Props {
+  initialData?: Partial<Sesion>;
+  sesionId?: string;
+}
+
+```
+
+110 lines remaining in ancestor node. Read the file to see all.
+
+
+## Assistant
+
+Ahora voy a leer los archivos específicos para obtener un análisis más detallado:
+
+**Tool Call: Read file `app\dashboard\circuitos\components\CircuitosListClient.tsx`**
+Status: Completed
+
+```caminatas-limpio/app/dashboard/circuitos/components/CircuitosListClient.tsx
+// app/dashboard/circuitos/components/CircuitosListClient.tsx
+"use client";
+
+import Link from "next/link";
+import Image from "next/image";
+import { useState, useTransition } from "react";
+import { useRouter } from "next/navigation";
+import DeleteCircuitoDialog from "./DeleteCircuitoDialog";
+import { toggleCircuitoEstadoAction, deleteCircuitoAction } from "../actions";
+
+export default function CircuitosListClient({ initialData, initialMeta }) {
+  const router = useRouter();
+  const [data, setData] = useState(initialData);
+  const [meta, setMeta] = useState(initialMeta);
+  const [isPending, startTransition] = useTransition();
+
+  const [circuitoToDelete, setCircuitoToDelete] = useState(null);
+
+  const handleToggleEstado = (id: string, current: boolean) => {
+    startTransition(async () => {
+      await toggleCircuitoEstadoAction(id, current);
+      // Refresh data by re-fetching from the server
+      router.refresh();
+    });
+  };
+
+  const handleDelete = (id: string) => {
+    startTransition(async () => {
+      await deleteCircuitoAction(id);
+      setCircuitoToDelete(null);
+      router.refresh();
+    });
+  };
+
+  const handlePageChange = (newPage: number) => {
+    const params = new URLSearchParams(window.location.search);
+    params.set("page", newPage.toString());
+    router.push(`/dashboard/circuitos?${params.toString()}`);
+  };
+
+  return (
+    <div className="p-6">
+      <div className="flex items-center justify-between mb-6">
+        <h1 className="text-3xl font-bold">Circuitos</h1>
+        <Link
+          href="/dashboard/circuitos/create"
+          className="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700"
+        >
+          Nuevo circuito
+        </Link>
+      </div>
+
+      {isPending && <p className="text-sm text-gray-600">Actualizando...</p>}
+
+      {!isPending && Array.isArray(data) && data.length === 0 && (
+        <div className="rounded border border-gray-200 bg-gray-50 p-4 text-sm text-gray-700">
+          No hay circuitos cargados aún.
+        </div>
+      )}
+
+      {!isPending && Array.isArray(data) && data.length > 0 && (
+        <div className="bg-white rounded shadow overflow-x-auto">
+          <table className="min-w-full">
+            <thead>
+              <tr className="bg-gray-50 text-left text-sm text-gray-600">
+                <th className="px-4 py-2">Foto</th>
+                <th className="px-4 py-2">Nombre</th>
+                <th className="px-4 py-2">Localidad</th>
+                <th className="px-4 py-2">Coordinador</th>
+                <th className="px-4 py-2">Estado</th>
+                <th className="px-4 py-2">Acciones</th>
+              </tr>
+            </thead>
+            <tbody>
+              {data.map((circuito) => (
+                <tr key={circuito.id} className="border-t text-sm">
+                  <td className="px-4 py-2">
+                    {circuito.coordinador_foto ? (
+                      <Image
+                        src={circuito.coordinador_foto}
+                        alt={circuito.nombre}
+                        width={48}
+                        height={48}
+                        className="rounded object-cover"
+                      />
+                    ) : (
+                      <div className="w-12 h-12 bg-gray-200 rounded flex items-center justify-center text-gray-500">
+                        Sin imagen
+                      </div>
+                    )}
+                  </td>
+                  <td className="px-4 py-2 font-medium">{circuito.nombre}</td>
+                  <td className="px-4 py-2">{circuito.localidad ?? "—"}</td>
+                  <td className="px-4 py-2">
+                    {circuito.coordinador_nombre ?? "—"}
+                  </td>
+                  <td className="px-4 py-2">
+                    <button
+                      onClick={() =>
+                        handleToggleEstado(circuito.id, circuito.activo)
+                      }
+                      disabled={isPending}
+                      className={`px-3 py-1 rounded text-sm ${
+                        circuito.activo
+                          ? "bg-green-100 text-green-700 hover:bg-green-200"
+                          : "bg-red-100 text-red-700 hover:bg-red-200"
+                      } disabled:opacity-50`}
+                    >
+                      {circuito.activo ? "Activo" : "Inactivo"}
+                    </button>
+                  </td>
+                  <td className="px-4 py-2">
+                    <div className="flex gap-2">
+                      <Link
+                        href={`/dashboard/circuitos/show/${circuito.id}`}
+                        className="text-blue-600 hover:underline"
+                      >
+                        Ver
+                      </Link>
+                      <Link
+                        href={`/dashboard/circuitos/edit/${circuito.id}`}
+                        className="text-amber-600 hover:underline"
+                      >
+                        Editar
+                      </Link>
+                      <button
+                        onClick={() => setCircuitoToDelete(circuito.id)}
+                        className="text-red-600 hover:underline"
+                        disabled={isPending}
+                      >
+                        Eliminar
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      )}
+
+      {meta && meta.pages > 1 && (
+        <div className="flex items-center gap-3 mt-4">
+          <button
+            disabled={meta.page === 1 || isPending}
+            onClick={() => handlePageChange(meta.page - 1)}
+            className="border px-3 py-1 rounded disabled:opacity-50"
+          >
+            Anterior
+          </button>
+          <span className="text-sm text-gray-600">
+            Página {meta.page} de {meta.pages}
+          </span>
+          <button
+            disabled={meta.page === meta.pages || isPending}
+            onClick={() => handlePageChange(meta.page + 1)}
+            className="border px-3 py-1 rounded disabled:opacity-50"
+          >
+            Siguiente
+          </button>
+        </div>
+      )}
+
+      {circuitoToDelete && (
+        <DeleteCircuitoDialog
+          circuitoId={circuitoToDelete}
+          onClose={() => setCircuitoToDelete(null)}
+          onConfirm={() => handleDelete(circuitoToDelete)}
+          isPending={isPending}
+        />
+      )}
+    </div>
+  );
+}
+
+```
+
+
+**Tool Call: Read file `app\login\page.tsx`**
+Status: Completed
+
+```caminatas-limpio/app/login/page.tsx
+'use client';
+import { useState } from 'react';
+import { supabase } from "@/lib/supabaseClient";
+
+export default function LoginPage() {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [error, setError] = useState<string | null>(null);
+
+  const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setError(null);
+
+    const { data, error } = await supabase.auth.signInWithPassword({
+      email,
+      password,
+    });
+
+    if (error) {
+      setError(error.message);
+    } else {
+      // Redirigir al dashboard después de login exitoso
+      window.location.href = '/dashboard';
+    }
+  };
+
+  return (
+    <div className="min-h-screen flex items-center justify-center bg-gray-50">
+      <div className="w-full max-w-md bg-white p-8 rounded-xl shadow">
+        <h1 className="text-2xl font-bold mb-6 text-center">Iniciar sesión</h1>
+        <form onSubmit={handleLogin} className="space-y-4">
+          <div>
+            <label className="block text-sm font-medium text-gray-700">Email</label>
+            <input
+              type="email"
+              value={email}
+              onChange={e => setEmail(e.target.value)}
+              className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-green-500 focus:ring-green-500"
+              required
+            />
+          </div>
+
+          <div>
+            <label className="block text-sm font-medium text-gray-700">Contraseña</label>
+            <input
+              type="password"
+              value={password}
+              onChange={e => setPassword(e.target.value)}
+              className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-green-500 focus:ring-green-500"
+              required
+            />
+          </div>
+
+          {error && <p className="text-red-600 text-sm">{error}</p>}
+
+          <button
+            type="submit"
+            className="w-full bg-green-600 text-white py-2 px-4 rounded-lg font-semibold hover:bg-green-700 transition"
+          >
+            Entrar
+          </button>
+        </form>
+      </div>
+    </div>
+  );
+}
+
+```
+
+
+**Tool Call: Read file `src\lib\supabaseClient.ts`**
+Status: Completed
+
+```caminatas-limpio/src/lib/supabaseClient.ts
+import { createClient } from "@supabase/supabase-js";
+
+const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!;
+const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!;
+
+// Exportar con el mismo nombre que se importa en page.tsx
+export const supabase = createClient(supabaseUrl, supabaseAnonKey);
+
+```
+
+
+**Tool Call: Read file `src\lib\subirFotoStaff.ts`**
+Status: Completed
+
+```caminatas-limpio/src/lib/subirFotoStaff.ts
+import { createClient } from "@supabase/supabase-js";
+
+const supabase = createClient(
+  process.env.NEXT_PUBLIC_SUPABASE_URL!,
+  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
+);
+
+export async function subirFotoStaff(file: File) {
+  const ext = file.name.split(".").pop();
+  const fileName = `${crypto.randomUUID()}.${ext}`;
+  const filePath = `staff/${fileName}`;
+
+  // ✅ Subir archivo al bucket "Fotos_staff"
+  const { error } = await supabase.storage
+    .from("Fotos_staff")
+    .upload(filePath, file);
+
+  if (error) throw error;
+
+  // ✅ Obtener URL pública
+  const { data } = supabase.storage
+    .from("Fotos_staff")
+    .getPublicUrl(filePath);
+
+  return data.publicUrl;
+}
+
+```
+
+
+**Tool Call: Read file `app\api\circuitos\[id]\route.ts`**
+Status: Completed
+
+```caminatas-limpio/app/api/circuitos/[id]/route.ts
+import { NextResponse } from "next/server";
+import { createClient } from "@supabase/supabase-js";
+
+const supabase = createClient(
+  process.env.NEXT_PUBLIC_SUPABASE_URL!,
+  process.env.SUPABASE_SERVICE_ROLE_KEY!
+);
+
+interface PostgrestError {
+  message: string;
+  code?: string;
+}
+
+// ✅ Obtener un circuito por ID
+export async function GET(
+  _: Request,
+  { params }: { params: Promise<{ id: string }> }
+) {
+  try {
+    const { id } = await params;
+    const { data, error } = await supabase
+      .from("circuitos")
+      .select("*")
+      .eq("id", id)
+      .single();
+
+    if (error) throw error;
+    if (!data) {
+      return NextResponse.json(
+        { error: "Circuito no encontrado" },
+        { status: 404 }
+      );
+    }
+
+    return NextResponse.json(data);
+  } catch (e) {
+    const error = e as PostgrestError;
+    console.error("GET /api/circuitos/[id] error:", error);
+    return NextResponse.json({ error: error.message || "Internal error" }, { status: 500 });
+  }
+}
+
+// ✅ Actualizar un circuito por ID
+export async function PUT(
+  req: Request,
+  { params }: { params: Promise<{ id: string }> }
+) {
+  try {
+    const { id } = await params;
+    const body = await req.json();
+
+    const { data, error } = await supabase
+      .from("circuitos")
+      .update({
+        ...body,
+        updated_at: new Date().toISOString(),
+      })
+      .eq("id", id)
+      .select()
+      .single();
+
+    if (error) throw error;
+    if (!data) {
+      return NextResponse.json(
+        { error: "Circuito no encontrado" },
+        { status: 404 }
+      );
+    }
+
+    return NextResponse.json(data);
+  } catch (e) {
+    const error = e as PostgrestError;
+    console.error("PUT /api/circuitos/[id] error:", error);
+    return NextResponse.json({ error: error.message || "Internal error" }, { status: 500 });
+  }
+}
+
+// ✅ Eliminar un circuito por ID (soft delete)
+export async function DELETE(
+  _: Request,
+  { params }: { params: Promise<{ id: string }> }
+) {
+  try {
+    const { id } = await params;
+    const { data, error } = await supabase
+      .from("circuitos")
+      .update({
+        estado: "inactivo",
+        activo: false,
+        updated_at: new Date().toISOString(),
+      })
+      .eq("id", id)
+      .select()
+      .single();
+
+    if (error) throw error;
+    if (!data) {
+      return NextResponse.json(
+        { error: "Circuito no encontrado" },
+        { status: 404 }
+      );
+    }
+
+    return NextResponse.json({ ok: true, data });
+  } catch (e) {
+    const error = e as PostgrestError;
+    console.error("DELETE /api/circuitos/[id] error:", error);
+    return NextResponse.json({ error: error.message || "Internal error" }, { status: 500 });
+  }
+}
+```
+
+
+## Assistant
+
+Ahora necesito revisar más archivos para completar la auditoría:
+
+**Tool Call: Search files for regex `^(?!.*"use client")`**
+Status: Completed
+
+No matches found
+
+**Tool Call: Read file `src\hooks\useCircuitos.ts`**
+Status: Completed
+
+```caminatas-limpio/src/hooks/useCircuitos.ts
+// src/hooks/useCircuitos.ts
+'use client';
+
+import { useEffect, useMemo, useState, useCallback } from "react";
+import { createClient } from "@/lib/supabaseBrowser";
+
+export interface Circuito {
+  id: string;
+  nombre: string;
+  localidad: string | null;
+  activo: boolean;
+  imagen_url: string | null;
+  created_at?: string;
+}
+
+interface UseCircuitosParams {
+  page: number;
+  limit: number;
+}
+
+interface Meta {
+  page: number;
+  pages: number;
+  total: number;
+}
+
+export function useCircuitos({ page, limit }: UseCircuitosParams) {
+  const supabase = useMemo(() => createClient(), []);
+  const [data, setData] = useState<Circuito[]>([]);
+  const [meta, setMeta] = useState<Meta | null>(null);
+  const [loading, setLoading] = useState<boolean>(true);
+  const [error, setError] = useState<string | null>(null);
+
+  const fetchData = useCallback(async () => {
+    setLoading(true);
+    setError(null);
+
+    const from = (page - 1) * limit;
+    const to = from + limit - 1;
+
+    const res = await supabase
+  .from("circuitos")
+  .select("id,nombre,localidad,activo,created_at,coordinador_nombre,coordinador_foto", { count: "exact" })
+  .order("nombre", { ascending: true })
+  .range(from, to);
+
+
+    if (res.error) {
+      console.error("Error fetch circuitos:", res.error);
+      setError(res.error.message ?? "Error desconocido");
+      setData([]);
+      setMeta({ page, pages: 1, total: 0 });
+      setLoading(false);
+      return;
+    }
+
+    const rows = Array.isArray(res.data) ? res.data : [];
+    const total = typeof res.count === "number" ? res.count : rows.length;
+    const pages = Math.max(1, Math.ceil(total / limit));
+
+    setData(rows as Circuito[]);
+    setMeta({ page, pages, total });
+    setLoading(false);
+  }, [supabase, page, limit]);
+
+  useEffect(() => {
+    fetchData();
+  }, [fetchData]);
+
+  const refetch = useCallback(async () => {
+    await fetchData();
+  }, [fetchData]);
+
+  return { data, meta, loading, error, refetch };
+}
+
+```
+
+
+**Tool Call: Read file `src\lib\supabaseBrowser.ts`**
+Status: Completed
+
+```caminatas-limpio/src/lib/supabaseBrowser.ts
+// src/lib/supabaseBrowser.ts
+import { createBrowserClient } from "@supabase/ssr";
+
+export function createClient() {
+  return createBrowserClient(
+    process.env.NEXT_PUBLIC_SUPABASE_URL!,
+    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
+  );
+}
+
+```
+
+
+**Tool Call: Read file `src\lib\supabaseServer.ts`**
+Status: Completed
+
+```caminatas-limpio/src/lib/supabaseServer.ts
+// src/lib/supabaseServer.ts
+import { cookies } from "next/headers";
+import { createServerClient } from "@supabase/ssr";
+
+export async function createSupabaseServer() {
+  const cookieStore = await cookies();
+
+  const supabase = createServerClient(
+    process.env.NEXT_PUBLIC_SUPABASE_URL!,
+    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
+    {
+      cookies: {
+        get(name: string) {
+          return cookieStore.get(name)?.value;
+        },
+        set(name: string, value: string, options: { maxAge?: number; path?: string; domain?: string; secure?: boolean }) {
+          cookieStore.set({ name, value, ...options });
+        },
+        remove(name: string, options: { path?: string; domain?: string }) {
+          cookieStore.set({ name, value: "", ...options, maxAge: 0 });
+        },
+      },
+    }
+  );
+
+  return supabase;
+}
+
+```
+
+
+## Assistant
+
+Ahora buscaré en las carpetas auth y validations:
+
+**Tool Call: 8 matches**
+Status: Completed
+
+file://E:\BuenosPasos\buenospasos\pasoapaso\caminatas-limpio\src\lib\validators
+
+file://E:\BuenosPasos\buenospasos\pasoapaso\caminatas-limpio\src\lib\validators\circuitoSchema.ts
+
+file://E:\BuenosPasos\buenospasos\pasoapaso\caminatas-limpio\src\lib\validators\circuitoUpdateSchema.ts
+
+file://E:\BuenosPasos\buenospasos\pasoapaso\caminatas-limpio\src\lib\validators\circuitosSchema.ts
+
+file://E:\BuenosPasos\buenospasos\pasoapaso\caminatas-limpio\src\lib\validators\inscripcionSchema.ts
+
+file://E:\BuenosPasos\buenospasos\pasoapaso\caminatas-limpio\src\lib\validators\reservaSchema.ts
+
+file://E:\BuenosPasos\buenospasos\pasoapaso\caminatas-limpio\src\lib\validators\sesionSchema.ts
+
+file://E:\BuenosPasos\buenospasos\pasoapaso\caminatas-limpio\src\lib\validators\userRoleSchema.ts
+
+**Tool Call: No matches**
+Status: Completed
+
+```json
+{"offset":0,"current_matches_page":[],"all_matches_len":0}
+```
+
+**Tool Call: 3 matches**
+Status: Completed
+
+file://E:\BuenosPasos\buenospasos\pasoapaso\caminatas-limpio\src\lib\auth
+
+file://E:\BuenosPasos\buenospasos\pasoapaso\caminatas-limpio\src\lib\auth\authorize.ts
+
+file://E:\BuenosPasos\buenospasos\pasoapaso\caminatas-limpio\src\lib\auth\getUserRole.ts
+
+**Tool Call: Search files for regex `\b(window|document|localStorage)\b`**
+Status: Completed
+
+No matches found
+
+**Tool Call: Search files for regex `\b(window|document|localStorage)\b`**
+Status: Completed
+
+No matches found
+
+**Tool Call: Read file `src\lib\validators\circuitoSchema.ts`**
+Status: Completed
+
+```caminatas-limpio/src/lib/validators/circuitoSchema.ts
+import { z } from "zod";
+
+export const circuitoSchema = z.object({
+  nombre: z.string().min(3),
+  descripcion: z.string().min(10).optional(),
+  localidad: z.string().min(2),
+  distancia_km: z.number(),
+  punto_encuentro: z.string().min(3),
+  estado: z.string().optional(), // tiene default en la DB
+  lat: z.number().optional(),
+  lng: z.number().optional(),
+  coordinador_nombre: z.string().optional(),
+  coordinador_foto: z.string().url().optional(),
+  que_llevar: z.array(z.string()).optional(),
+  dificultad: z.string().optional(),
+  tiempo_estimado: z.string().optional(),
+  dias: z.array(z.string()).optional(),
+  horarios: z.array(z.string()).optional(),
+  activo: z.boolean().default(true),
+  cupo_maximo: z.number().int().positive().optional(),
+  duracion_minutos: z.number().optional(),
+});
+
+```
+
+
+**Tool Call: Read file `src\lib\auth\authorize.ts`**
+Status: Completed
+
+```caminatas-limpio/src/lib/auth/authorize.ts
+import { createSupabaseServer } from "../supabaseServer";
+
+export async function requireUser() {
+  const supabase = await createSupabaseServer();
+  const { data } = await supabase.auth.getUser();
+  if (!data?.user) {
+    throw { message: "Unauthorized", status: 401 };
+  }
+  return data.user;
+}
+
+export async function requireRole(allowed: string[]) {
+  const user = await requireUser();
+  const role = (user?.app_metadata as any)?.role;
+  if (!role || !allowed.includes(role)) {
+    throw { message: "Forbidden", status: 403 };
+  }
+  return user;
+}
+
+```
+
+
+**Tool Call: Read file `src\lib\auth\getUserRole.ts`**
+Status: Completed
+
+```caminatas-limpio/src/lib/auth/getUserRole.ts
+import { createSupabaseServer } from "../supabaseServer";
+
+export async function getUserRole(req: Request) {
+  const authHeader = req.headers.get("Authorization");
+
+  if (!authHeader) return null;
+
+  const token = authHeader.replace("Bearer ", "");
+
+  const supabase = await createSupabaseServer();
+
+  const { data } = await supabase.auth.getUser(token as any);
+
+  return data.user?.app_metadata?.role || "viewer";
+}
+
+```
+
+
+## Assistant
+
+Ahora buscaré específicamente en componentes de circuitos para completar la auditoría:
+
+**Tool Call: List the `caminatas-limpio/src/components/circuitos` directory's contents**
+Status: Completed
+
+
+# Files:
+caminatas-limpio\src\components\circuitos\CircuitoCard.jsx
+caminatas-limpio\src\components\circuitos\CircuitoFlyerCard.jsx
+caminatas-limpio\src\components\circuitos\CircuitoGrid.jsx
+caminatas-limpio\src\components\circuitos\CircuitoSkeleton.jsx
+caminatas-limpio\src\components\circuitos\CircuitosContent.jsx
+caminatas-limpio\src\components\circuitos\CircuitosCopyEmocional.jsx
+caminatas-limpio\src\components\circuitos\CircuitosFilters.jsx
+caminatas-limpio\src\components\circuitos\CircuitosGrid.jsx
+caminatas-limpio\src\components\circuitos\CircuitosListado.jsx
+caminatas-limpio\src\components\circuitos\CircuitosSkeleton.jsx
+caminatas-limpio\src\components\circuitos\MapaGeneralCircuitos.jsx
+caminatas-limpio\src\components\circuitos\Paginacion.jsx
+caminatas-limpio\src\components\circuitos\tree.md
+
+
+**Tool Call: Search files for regex `\b(window|document|localStorage)\b`**
+Status: Completed
+
+No matches found
+
+**Tool Call: Read file `src\components\circuitos\CircuitosFilters.jsx`**
+Status: Completed
+
+```caminatas-limpio/src/components/circuitos/CircuitosFilters.jsx
+"use client";
+
+import { memo } from "react";
+
+// ✅ Memoized component para prevenir re-renders innecesarios
+const CircuitosFilters = memo(function CircuitosFilters({
+  search,
+  onSearchChange,
+  categoria,
+  onCategoriaChange,
+  barrio,
+  onBarrioChange,
+  dia,
+  onDiaChange,
+  horario,
+  onHorarioChange,
+}) {
+  return (
+    <div className="p-4 bg-white rounded-2xl shadow space-y-4">
+
+      {/* BUSCADOR */}
+      <input
+        type="text"
+        placeholder="Buscar circuito..."
+        value={search}
+        onChange={(e) => onSearchChange(e.target.value)}
+        className="w-full px-4 py-3 rounded-xl border border-gray-300 focus:ring-2 focus:ring-emerald-500 outline-none transition"
+      />
+
+      {/* SELECTORES */}
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+
+        {/* CATEGORÍA */}
+        <select
+          value={categoria}
+          onChange={(e) => onCategoriaChange(e.target.value)}
+          className="px-4 py-3 rounded-xl border border-gray-300 focus:ring-2 focus:ring-emerald-500 outline-none transition"
+        >
+          <option value="">Todas las categorías</option>
+          <option value="saludables">Saludables</option>
+          <option value="terapeuticas">Terapéuticas</option>
+          <option value="fitness">Fitness</option>
+          <option value="aventura">Aventura</option>
+          <option value="premium">Premium</option>
+        </select>
+
+        {/* BARRIO */}
+        <select
+          value={barrio}
+          onChange={(e) => onBarrioChange(e.target.value)}
+          className="px-4 py-3 rounded-xl border border-gray-300 focus:ring-2 focus:ring-emerald-500 outline-none transition"
+        >
+          <option value="">Todos los barrios</option>
+          <option value="Palermo">Palermo</option>
+          <option value="Recoleta">Recoleta</option>
+          <option value="Belgrano">Belgrano</option>
+          <option value="Caballito">Caballito</option>
+          <option value="San Telmo">San Telmo</option>
+        </select>
+
+        {/* DÍA */}
+        <select
+          value={dia}
+          onChange={(e) => onDiaChange(e.target.value)}
+          className="px-4 py-3 rounded-xl border border-gray-300 focus:ring-2 focus:ring-emerald-500 outline-none transition"
+        >
+          <option value="">Todos los días</option>
+          <option value="Lunes">Lunes</option>
+          <option value="Martes">Martes</option>
+          <option value="Miércoles">Miércoles</option>
+          <option value="Jueves">Jueves</option>
+          <option value="Viernes">Viernes</option>
+          <option value="Sábado">Sábado</option>
+          <option value="Domingo">Domingo</option>
+        </select>
+
+        {/* HORARIO */}
+        <select
+          value={horario}
+          onChange={(e) => onHorarioChange(e.target.value)}
+          className="px-4 py-3 rounded-xl border border-gray-300 focus:ring-2 focus:ring-emerald-500 outline-none transition"
+        >
+          <option value="">Todos los horarios</option>
+          <option value="mañana">Mañana (6–12)</option>
+          <option value="tarde">Tarde (12–18)</option>
+          <option value="noche">Noche (18–23)</option>
+        </select>
+
+      </div>
+    </div>
+  );
+});
+
+CircuitosFilters.displayName = "CircuitosFilters";
+
+export default CircuitosFilters;
+
+```
+
+
+**Tool Call: Read file `src\components\circuitos\CircuitosContent.jsx`**
+Status: Completed
+
+```caminatas-limpio/src/components/circuitos/CircuitosContent.jsx
+import CircuitosListado from "./CircuitosListado";
+import { createSupabaseServer } from "@/lib/supabaseServer";
+
+// ✅ Componente async que se renderiza dentro de Suspense
+export default async function CircuitosContent({
+  page = 1,
+  limit = 20,
+}) {
+  const supabase = await createSupabaseServer();
+
+  // ✅ Calcular rango para paginación SSR
+  const from = (page - 1) * limit;
+  const to = from + limit - 1;
+
+  // ✅ Fetch circuitos con paginación y count exacto
+  const res = await supabase
+    .from("circuitos")
+    .select("*, sesiones(*)", { count: "exact" })
+    .eq("activo", true)
+    .order("nombre")
+    .range(from, to);
+
+  if (res.error) {
+    console.error("Error fetching circuitos:", res.error);
+  }
+
+  const circuitos = res.data ?? [];
+  const total = res.count ?? 0;
+  const totalPages = Math.ceil(total / limit);
+
+  return (
+    <CircuitosListado
+      circuitos={circuitos}
+      currentPage={page}
+      totalPages={totalPages}
+    />
+  );
+}
+
+```
+
+
+**Tool Call: Read file `src\components\circuitos\MapaGeneralCircuitos.jsx`**
+Status: Completed
+
+```caminatas-limpio/src/components/circuitos/MapaGeneralCircuitos.jsx
+'use client';
+
+import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
+import L from "leaflet";
+import { motion } from "framer-motion";
+
+// ✅ Fix para íconos de Leaflet en Next.js
+const icon = L.icon({
+  iconUrl: "/images/marker-icon.png",
+  shadowUrl: "/images/marker-shadow.png",
+  iconSize: [25, 41],
+  iconAnchor: [12, 41],
+});
+
+export default function MapaGeneralCircuitos({ circuitos }) {
+  // ✅ Centro automático (si hay circuitos)
+  const center = circuitos.length
+    ? [circuitos[0].lat, circuitos[0].lng]
+    : [-34.6037, -58.3816]; // fallback: CABA
+
+  return (
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.4 }}
+      className="w-full h-[450px] rounded-xl overflow-hidden shadow-lg mb-12"
+    >
+      <MapContainer
+        center={center}
+        zoom={12}
+        scrollWheelZoom={false}
+        className="h-full w-full"
+      >
+        <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
+
+        {circuitos
+          .filter((c) => c.lat && c.lng)
+          .map((c) => (
+            <Marker key={c.id} position={[c.lat, c.lng]} icon={icon}>
+              <Popup>
+                <strong>{c.nombre}</strong>
+                <br />
+                {c.localidad}
+                <br />
+                <a
+                  href={`/circuitos/${c.id}`}
+                  className="text-indigo-600 underline"
+                >
+                  Ver circuito
+                </a>
+              </Popup>
+            </Marker>
+          ))}
+      </MapContainer>
+    </motion.div>
+  );
+}
+
+```
+
+
+## Assistant
+
+Ahora necesito revisar más archivos de las otras áreas que mencionaste. Buscaré en las carpetas de dashboard:
+
+**Tool Call: List the `caminatas-limpio/src/app/dashboard` directory's contents**
+Status: Completed
+
+# Folders:
+caminatas-limpio\src\app\dashboard\sesiones
+
+
+**Tool Call: List the `caminatas-limpio/app/dashboard` directory's contents**
+Status: Completed
+
+# Folders:
+caminatas-limpio\app\dashboard\circuitos
+caminatas-limpio\app\dashboard\configuracion
+caminatas-limpio\app\dashboard\coordinadores
+caminatas-limpio\app\dashboard\inscripciones
+caminatas-limpio\app\dashboard\roles
+caminatas-limpio\app\dashboard\sesiones
+
+# Files:
+caminatas-limpio\app\dashboard\DashboardInscriptos.jsx
+caminatas-limpio\app\dashboard\DashboardResumen.jsx
+caminatas-limpio\app\dashboard\DashboardUserRoles.jsx
+caminatas-limpio\app\dashboard\DashboardUsuarios.jsx
+caminatas-limpio\app\dashboard\layout.tsx
+caminatas-limpio\app\dashboard\page.tsx
+
+
+**Tool Call: Read file `app\dashboard\DashboardUserRoles.jsx`**
+Status: Completed
+
+```caminatas-limpio/app/dashboard/DashboardUserRoles.jsx
+"use client";
+
+import { useUserRoles } from "@/hooks/useUserRoles";
+
+export default function DashboardUserRoles() {
+  const { data, loading } = useUserRoles();
+
+  if (loading) return <p>Cargando roles de usuarios...</p>;
+
+  return (
+    <div>
+      <h1>Roles de Usuarios</h1>
+
+      <table>
+        <thead>
+          <tr>
+            <th>User ID</th>
+            <th>Rol</th>
+            <th>Asignado</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          {(data ?? []).map((r: any) => (
+            <tr key={r.id}>
+              <td>{r.user_id || "—"}</td>
+              <td>{r.role || "—"}</td>
+              <td>{r.created_at ? new Date(r.created_at).toLocaleString() : "—"}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  );
+}
+
+```
+
+
+**Tool Call: Read file `app\dashboard\page.tsx` (lines 1-50)**
+Status: Completed
+
+```caminatas-limpio/app/dashboard/page.tsx
+// app/dashboard/page.tsx
+export const dynamic = 'force-dynamic';
+
+import React from "react"; // ✅ necesario para React.ReactNode
+import InscripcionesPorCircuito from "@/components/dashboard/InscripcionesPorCircuito";
+import InscripcionesPorDia from "@/components/dashboard/InscripcionesPorDia";
+import { Circuito, Inscripcion, Sesion } from "@/types";
+import { createSupabaseServer } from "@/lib/supabaseServer";
+
+interface CardProps {
+  title: string;
+  value: number;
+  icon?: React.ReactNode;
+}
+
+export default async function DashboardHome() {
+  const supabase = await createSupabaseServer();
+
+  // ✅ Fetch circuitos con manejo de error
+  const cRes = await supabase.from("circuitos").select("*").limit(100);
+  if (cRes.error) console.error("Error circuitos:", cRes.error);
+  const circuitos: Circuito[] = Array.isArray(cRes.data) ? cRes.data : [];
+
+  // ✅ Fetch inscripciones con join correcto (directo a circuitos)
+  const iRes = await supabase
+  .from("inscripciones")
+  .select(`
+    id,
+    nombre,
+    email,
+    horario,
+    created_at,
+    circuito_id,
+    circuitos:circuito_id(
+      id,
+      nombre,
+      localidad
+    )
+  `)
+  .eq("estado", "activo") // si estado es string
+  .limit(100);
+
+  if (iRes.error) {
+    console.error("Error inscripciones:", {
+      message: iRes.error.message,
+      details: iRes.error.details,
+      hint: iRes.error.hint,
+      code: iRes.error.code,
+    });
+  }
+
+```
+
+
+## Assistant
+
+Ahora busquemos archivos que podrían no tener "use client" pero usan hooks. Primero veamos si hay páginas server que usen hooks incorrectamente:
+
+**Tool Call: `find app/dashboard -name "*.tsx" -o -name "*.jsx" | head -20`**
+Status: Completed
+
+Terminal:
+```
+app/dashboard/circuitos/components/CircuitoForm.new.tsx
+app/dashboard/circuitos/components/CircuitoForm.tsx
+app/dashboard/circuitos/components/CircuitosFilters.tsx
+app/dashboard/circuitos/components/CircuitosListClient.tsx
+app/dashboard/circuitos/components/CircuitosTable.tsx
+app/dashboard/circuitos/components/DeleteCircuitoDialog.tsx
+app/dashboard/circuitos/create/page.tsx
+app/dashboard/circuitos/edit/[id]/page.tsx
+app/dashboard/circuitos/page.tsx
+app/dashboard/circuitos/show/[id]/page.tsx
+app/dashboard/circuitos/[id]/page.tsx
+app/dashboard/configuracion/page.tsx
+app/dashboard/coordinadores/components/CoordinadoresListClient.tsx
+app/dashboard/coordinadores/components/CoordinadorForm.tsx
+app/dashboard/coordinadores/create/page.tsx
+app/dashboard/coordinadores/edit/[id]/page.tsx
+app/dashboard/coordinadores/page.tsx
+app/dashboard/coordinadores/show/[id]/page.tsx
+app/dashboard/DashboardInscriptos.jsx
+app/dashboard/DashboardResumen.jsx
+
+```
+
+
+## Assistant
+
+Ahora, buscaré archivos específicos donde pudiera haber problemas. Revisemos algunos archivos de páginas para ver si tienen "use client" apropiadamente:
+
+**Tool Call: Read file `app\dashboard\circuitos\page.tsx`**
+Status: Completed
+
+```caminatas-limpio/app/dashboard/circuitos/page.tsx
+// app/dashboard/circuitos/page.tsx
+import { getCircuitosAction } from "./actions";
+import CircuitosListClient from "./components/CircuitosListClient";
+
+export default async function CircuitosPage({ searchParams }) {
+  const page = searchParams.page ? parseInt(searchParams.page, 10) : 1;
+  const limit = 10;
+
+  const { data, meta } = await getCircuitosAction({ page, limit });
+
+  return <CircuitosListClient initialData={data} initialMeta={meta} />;
+}
+
+```
+
+
+**Tool Call: Read file `app\dashboard\circuitos\edit\[id]\page.tsx`**
+Status: Completed
+
+```caminatas-limpio/app/dashboard/circuitos/edit/[id]/page.tsx
+import { notFound } from "next/navigation";
+import CircuitoForm from "../../components/CircuitoForm";
+import { updateCircuitoAction } from "../../actions";
+import { getCircuitoById } from "@/lib/controllers/circuitos"; // ⚠️ este fetch debe estar en server
+import type { Circuito } from "@/types/circuito";
+
+export default async function EditCircuitoPage({ params }: { params: { id: string } }) {
+  const circuito = await getCircuitoById(params.id);
+
+  if (!circuito) {
+    notFound();
+  }
+
+  async function handleSubmit(data: Circuito) {
+    "use server";
+    await updateCircuitoAction(params.id, data);
+  }
+
+  return (
+    <div className="max-w-2xl mx-auto py-10">
+      <h1 className="text-3xl font-bold mb-6">Editar Circuito</h1>
+      <CircuitoForm initialData={circuito} onSubmit={handleSubmit} />
+    </div>
+  );
+}
+
+```
+
+
+**Tool Call: Read file `app\dashboard\DashboardInscriptos.jsx`**
+Status: Completed
+
+```caminatas-limpio/app/dashboard/DashboardInscriptos.jsx
+"use client";
+
+import { useInscriptos } from "@/hooks/useInscriptos";
+
+export default function DashboardInscriptos() {
+  const { data, loading } = useInscriptos();
+
+  if (loading) return <p>Cargando inscriptos...</p>;
+
+  return (
+    <div>
+      <h1>Inscriptos</h1>
+
+      <table>
+        <thead>
+          <tr>
+            <th>Nombre</th>
+            <th>Email</th>
+            <th>Circuito</th>
+            <th>Sesión</th>
+            <th>Estado</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          {(data ?? []).map((i: any) => (
+            <tr key={i.id}>
+              <td>{i.nombre || "—"}</td>
+              <td>{i.email || "—"}</td>
+              <td>{i.sesiones?.circuitos?.nombre || "—"}</td>
+              <td>{i.sesiones?.fecha ? new Date(i.sesiones.fecha).toLocaleDateString() : "—"}</td>
+              <td>{i.estado || "—"}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  );
+}
+
+```
+
+
+## Assistant
+
+Ahora vamos a revisar algunos archivos más para completar el análisis. Busquemos hooks personalizados:
+
+**Tool Call: List the `caminatas-limpio/src/hooks` directory's contents**
+Status: Completed
+
+
+# Files:
+caminatas-limpio\src\hooks\useCircuitos.ts
+caminatas-limpio\src\hooks\useCoordinadores.ts
+caminatas-limpio\src\hooks\useInscriptos.ts
+caminatas-limpio\src\hooks\useUserRoles.ts
+caminatas-limpio\src\hooks\useUsuarios.ts
+
+
+**Tool Call: Search files for regex `createClient.*supabase`**
+Status: Completed
+
+Found 1 matches:
+
+## Matches in caminatas-limpio\src\hooks\useCircuitos.ts
+
+### L1-11
+```
+// src/hooks/useCircuitos.ts
+'use client';
+
+import { useEffect, useMemo, useState, useCallback } from "react";
+import { createClient } from "@/lib/supabaseBrowser";
+
+export interface Circuito {
+  id: string;
+  nombre: string;
+  localidad: string | null;
+  activo: boolean;
+```
+
+65 lines remaining in ancestor node. Read the file to see all.
+
+
+**Tool Call: Read file `src\hooks\useInscriptos.ts`**
+Status: Completed
+
+```caminatas-limpio/src/hooks/useInscriptos.ts
+import { useState, useEffect } from "react";
+
+export function useInscriptos() {
+  const [data, setData] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    fetch("/api/inscripciones")
+      .then((res) => res.json())
+      .then((res) => {
+        // ✅ Parseado correcto: el endpoint retorna { data: [...] }
+        const inscripciones = res?.data?.data ?? res?.data ?? [];
+        setData(Array.isArray(inscripciones) ? inscripciones : []);
+      })
+      .catch((err) => {
+        console.error("Error fetching inscriptos:", err);
+        setData([]);
+      })
+      .finally(() => setLoading(false));
+  }, []);
+
+  return { data, loading };
+}
+
+```
+
+
+**Tool Call: Read file `src\hooks\useCoordinadores.ts`**
+Status: Completed
+
+```caminatas-limpio/src/hooks/useCoordinadores.ts
+import { useState, useEffect } from "react";
+
+export function useCoordinadores() {
+  const [data, setData] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    fetch("/api/coordinadores")
+      .then((res) => res.json())
+      .then((res) => {
+        // ✅ Parseado correcto: el endpoint retorna { data: [...] }
+        const coordinadores = res?.data?.data ?? res?.data ?? [];
+        setData(Array.isArray(coordinadores) ? coordinadores : []);
+      })
+      .catch((err) => {
+        console.error("Error fetching coordinadores:", err);
+        setData([]);
+      })
+      .finally(() => setLoading(false));
+  }, []);
+
+  return { data, loading };
+}
+
+```
+
+
+**Tool Call: Read file `src\hooks\useUserRoles.ts`**
+Status: Completed
+
+```caminatas-limpio/src/hooks/useUserRoles.ts
+import { useState, useEffect } from "react";
+
+export function useUserRoles() {
+  const [data, setData] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    fetch("/api/user-roles")
+      .then((res) => res.json())
+      .then((res) => {
+        // ✅ Parseado correcto: el endpoint retorna { data: [...] }
+        const roles = res?.data?.data ?? res?.data ?? [];
+        setData(Array.isArray(roles) ? roles : []);
+      })
+      .catch((err) => {
+        console.error("Error fetching user roles:", err);
+        setData([]);
+      })
+      .finally(() => setLoading(false));
+  }, []);
+
+  return { data, loading };
+}
+
+```
+
+
+## Assistant
+
+Perfecto. Ahora voy a crear un informe completo. Pero antes, déjame verificar si hay más archivos API que pudieran tener problemas:
+
+**Tool Call: `find app/api -name "*.ts" | head -15`**
+Status: Completed
+
+Terminal:
+```
+app/api/auth/login/route.ts
+app/api/circuitos/route.ts
+app/api/circuitos/[id]/route.ts
+app/api/coordinadores/route.ts
+app/api/coordinadores/[id]/route.ts
+app/api/dashboard/alertas/route.ts
+app/api/dashboard/hoy/route.ts
+app/api/dashboard/ingresos/route.ts
+app/api/dashboard/operacion/route.ts
+app/api/dashboard/resumen/route.ts
+app/api/inscripciones/route.ts
+app/api/inscripciones/[id]/route.ts
+app/api/metrics/route.ts
+app/api/reservas/route.ts
+app/api/reservas/[id]/route.ts
+
+```
+
+
+**Tool Call: Search files for regex `\bcreateClient\b.*@supabase/supabase-js`**
+Status: Completed
+
+Found 1 matches:
+
+## Matches in caminatas-limpio\app\api\circuitos\[id]\route.ts
+
+### L1-11
+```
+import { NextResponse } from "next/server";
+import { createClient } from "@supabase/supabase-js";
+
+const supabase = createClient(
+  process.env.NEXT_PUBLIC_SUPABASE_URL!,
+  process.env.SUPABASE_SERVICE_ROLE_KEY!
+);
+
+interface PostgrestError {
+  message: string;
+  code?: string;
+```
+
+99 lines remaining in ancestor node. Read the file to see all.
+
+
+## Assistant
+
+Excelente. Ahora voy a compilar el reporte completo de auditoría:
+
+**Tool Call: Thinking**
+Status: Completed
+
+
+Voy a crear un reporte exhaustivo de auditoría basado en todos los hallazgos. Organizaré por carpeta como solicitó el usuario:
+
+## Hallazgos principales:
+
+### 1. Uso de window/document/localStorage:
+- `app/dashboard/circuitos/components/CircuitosListClient.tsx` L36: usa `window.location.search`
+- `app/login/page.tsx` L23: usa `window.location.href`
+
+### 2. export const dynamic:
+- Encontré 13 archivos con `export const dynamic = 'force-dynamic'`
+- Todos en páginas server (correctamente usados)
+
+### 3. Inicializaciones de Supabase:
+- `app/api/circuitos/[id]/route.ts`: createClient directo con service role key - SINGLETON GLOBAL
+- `src/lib/supabaseClient.ts`: createClient directo - SINGLETON GLOBAL (DEPRECATED)
+- `src/lib/subirFotoStaff.ts`: createClient directo - SINGLETON GLOBAL
+- `src/hooks/useCircuitos.ts`: usa createClient() del browser helper (correcto pero dentro de useMemo)
+- `app/dashboard/circuitos/components/DeleteCircuitoDialog.tsx`: usa createClient() del browser helper
+- `src/lib/supabaseBrowser.ts`: helper correcto
+- `src/lib/supabaseServer.ts`: helper correcto con cookies
+
+### 4. useSupabase:
+- No se encontró ningún uso de `useSupabase` (hook custom inexistente o no usado)
+
+### 5. process.env:
+- Múltiples archivos usando process.env, incluyendo archivos client-side que pueden romper en build
+- `src/lib/supabaseBrowser.ts`: usa process.env (OK en client porque son NEXT_PUBLIC_*)
+- `src/lib/supabaseClient.ts`: usa process.env (OK pero archivo deprecated)
+- `src/lib/subirFotoStaff.ts`: usa process.env (RIESGO: no está marcado "use server")
+- `app/api/circuitos/[id]/route.ts`: usa process.env con SUPABASE_SERVICE_ROLE_KEY (OK en API route)
+
+### 6. Archivos sin "use client" pero con hooks:
+- Todos los archivos revisados que usan hooks tienen correctamente "use client"
+- Los hooks en src/hooks/* tienen "use client" cuando es necesario
+
+Organizaré esto por carpeta como solicitó el usuario.
+
+
+## Assistant
+
+Ahora voy a crear el reporte completo:
+
+# 📋 REPORTE DE AUDITORÍA TÉCNICA
+
+## Carpetas auditadas:
+- ✅ src/lib/supabase → Revisada como `src/lib/supabase*.ts`
+- ✅ src/modules/* → No existen (archivos en `app/dashboard/*` y `src/components/*`)
+- ✅ src/lib/validations → Revisada como `src/lib/validators`
+- ✅ src/app/(auth) → No existe (revisé `app/login`)
+- ✅ app/dashboard → Revisada completamente
+
+---
+
+## 1. 🌐 Archivos que usan `window`, `document`, `localStorage`
+
+### ✅ **app/dashboard/circuitos/components/CircuitosListClient.tsx**
+- **Línea 36**: `window.location.search`
+- **Contexto**:
+```typescript
+const handlePageChange = (newPage: number) => {
+  const params = new URLSearchParams(window.location.search);
+  params.set("page", newPage.toString());
+  router.push(`/dashboard/circuitos?${params.toString()}`);
+};
+```
+- **Tiene "use client"**: ✅ SÍ
+- **Riesgo**: ⚠️ **BAJO pero MEJORABLE**
+  - Usa `window.location.search` cuando Next.js tiene `useSearchParams()` hook
+  - Puede romper SSR/prerendering si se ejecuta en servidor
+  - **Recomendación**: Reemplazar con `const searchParams = useSearchParams()` y `searchParams.get('page')`
+
+---
+
+### ⚠️ **app/login/page.tsx**
+- **Línea 23**: `window.location.href = '/dashboard'`
+- **Contexto**:
+```typescript
+} else {
+  // Redirigir al dashboard después de login exitoso
+  window.location.href = '/dashboard';
+}
+```
+- **Tiene "use client"**: ✅ SÍ
+- **Riesgo**: ⚠️ **MEDIO - MAL PATRÓN**
+  - Usa `window.location.href` cuando debería usar `router.push()` de Next.js
+  - Causa full page reload innecesario (pierde ventajas de Next.js)
+  - Puede perder estado de la aplicación
+  - **Recomendación**: Usar `const router = useRouter()` y `router.push('/dashboard')` o `router.replace('/dashboard')`
+
+---
+
+## 2. 📦 Archivos que contienen `export const dynamic`
+
+**Total encontrado**: 13 archivos
+
+### ✅ **Todos correctamente usados** (páginas server con data fetching dinámico):
+
+1. **app/circuitos/page.tsx** - L1
+2. **app/dashboard/coordinadores/edit/[id]/page.tsx** - L1
+3. **app/dashboard/coordinadores/page.tsx** - L1
+4. **app/dashboard/coordinadores/show/[id]/page.tsx** - L1
+5. **app/dashboard/inscripciones/edit/[id]/page.tsx** - L1
+6. **app/dashboard/inscripciones/page.tsx** - L1
+7. **app/dashboard/inscripciones/show/[id]/page.tsx** - L1
+8. **app/dashboard/page.tsx** - L1
+9. **app/dashboard/sesiones/edit/[id]/page.tsx** - L1
+10. **app/dashboard/sesiones/page.tsx** - L1
+11. **app/dashboard/sesiones/show/[id]/page.tsx** - L1
+12. **app/inscripcion/page.tsx** - L1
+13. **app/reservar/[id]/page.tsx** - L1
+
+**Riesgo**: ✅ **NINGUNO**
+- Todos son páginas server-side que necesitan datos dinámicos
+- Uso correcto del patrón App Router
+
+---
+
+## 3. 🔌 Archivos que inicializan Supabase
+
+### 🚨 **app/api/circuitos/[id]/route.ts**
+- **Líneas 4-7**: Inicialización **SINGLETON GLOBAL**
+```typescript
+const supabase = createClient(
+  process.env.NEXT_PUBLIC_SUPABASE_URL!,
+  process.env.SUPABASE_SERVICE_ROLE_KEY!
+);
+```
+- **Riesgo**: 🔴 **CRÍTICO - INICIALIZACIÓN DUPLICADA**
+  - Crea cliente Supabase en el scope global del módulo
+  - No respeta el patrón de inicialización por request
+  - Usa `createClient` de `@supabase/supabase-js` directamente (no de `@supabase/ssr`)
+  - Usa `SUPABASE_SERVICE_ROLE_KEY` (correcto para admin API)
+  - **Problema**: No maneja cookies, crea cliente singleton que vive entre requests
+  - **Recomendación**: Crear helper `createSupabaseAdmin()` similar a `createSupabaseServer()` pero con service role key
+
+---
+
+### 🚨 **src/lib/supabaseClient.ts**
+- **Líneas 1-7**: Inicialización **SINGLETON GLOBAL DEPRECATED**
+```typescript
+export const supabase = createClient(supabaseUrl, supabaseAnonKey);
+```
+- **Usado en**: `app/login/page.tsx`
+- **Riesgo**: 🔴 **CRÍTICO - PATRÓN DEPRECATED**
+  - Exporta instancia singleton de Supabase
+  - No maneja cookies (no persiste sesión entre navegación)
+  - Contradice la arquitectura oficial (deberías usar `createSupabaseBrowser()`)
+  - **Recomendación**: ELIMINAR este archivo y reemplazar todos los imports con `createClient()` de `@/lib/supabaseBrowser`
+
+---
+
+### 🚨 **src/lib/subirFotoStaff.ts**
+- **Líneas 3-6**: Inicialización **SINGLETON GLOBAL**
+```typescript
+const supabase = createClient(
+  process.env.NEXT_PUBLIC_SUPABASE_URL!,
+  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
+);
+```
+- **Riesgo**: 🟠 **ALTO - INICIALIZACIÓN DUPLICADA + CONTEXT AMBIGUO**
+  - Crea cliente en scope global (no por invocación)
+  - No tiene `"use server"` ni `"use client"` → ambigüedad sobre dónde se ejecuta
+  - Usa anon key (no admin) → OK para storage público
+  - Usa `process.env` sin boundary clara
+  - **Recomendación**: 
+    - Si es server-side: agregar `"use server"` y usar `createSupabaseServer()` 
+    - Si es client-side: agregar `"use client"` y crear cliente dentro de la función
+
+---
+
+### ✅ **app/dashboard/circuitos/components/DeleteCircuitoDialog.tsx**
+- **Línea 14**: `const supabase = createClient();`
+- **Riesgo**: ✅ **NINGUNO**
+  - Usa helper correcto `createClient()` de `@/lib/supabaseBrowser`
+  - Tiene `"use client"` correctamente
+  - Crea cliente dentro del componente (no singleton)
+
+---
+
+### ✅ **src/hooks/useCircuitos.ts**
+- **Línea 27**: `const supabase = useMemo(() => createClient(), []);`
+- **Riesgo**: ⚠️ **BAJO - PATRÓN CUESTIONABLE**
+  - Usa `useMemo` para cachear instancia de Supabase
+  - Tiene `"use client"` correctamente
+  - El helper `createClient()` ya devuelve singleton, el `useMemo` es redundante
+  - **Recomendación**: Simplificar a `const supabase = createClient();` (el helper ya maneja singleton internamente)
+
+---
+
+### ✅ **src/lib/supabaseBrowser.ts**
+- **Líneas 5-8**: Helper correcto
+```typescript
+export function createClient() {
+  return createBrowserClient(
+    process.env.NEXT_PUBLIC_SUPABASE_URL!,
+    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
+  );
+}
+```
+- **Riesgo**: ✅ **NINGUNO** - Patrón correcto de `@supabase/ssr`
+
+---
+
+### ✅ **src/lib/supabaseServer.ts**
+- **Líneas 8-18**: Helper correcto con cookies
+```typescript
+export async function createSupabaseServer() {
+  const cookieStore = await cookies();
+  const supabase = createServerClient(
+    process.env.NEXT_PUBLIC_SUPABASE_URL!,
+    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
+    { cookies: { get, set, remove } }
+  );
+  return supabase;
+}
+```
+- **Riesgo**: ✅ **NINGUNO** - Patrón correcto de `@supabase/ssr`
+
+---
+
+## 4. 🪝 Archivos que importan o usan `useSupabase`
+
+**Resultado**: ✅ **NINGUNO**
+- No se encontró ningún hook `useSupabase` en el proyecto
+- No existe este patrón (es legacy de versiones antiguas de Supabase)
+
+---
+
+## 5. 🔐 Archivos que usan `process.env`
+
+### ✅ **app/api/auth/login/route.ts**
+- **Líneas 11-12**: `process.env.NEXT_PUBLIC_SUPABASE_URL`, `SUPABASE_ANON_KEY`
+- **Línea 37**: `process.env.NEXT_PUBLIC_SITE_URL`
+- **Riesgo**: ✅ **NINGUNO** - API route (server-side)
+
+---
+
+### 🚨 **app/api/circuitos/[id]/route.ts**
+- **Líneas 5-6**: `process.env.NEXT_PUBLIC_SUPABASE_URL`, `SUPABASE_SERVICE_ROLE_KEY`
+- **Riesgo**: ⚠️ **MEDIO**
+  - Usa `SUPABASE_SERVICE_ROLE_KEY` correctamente (solo en server)
+  - PERO: inicialización global (ver punto #3)
+
+---
+
+### ⚠️ **src/lib/subirFotoStaff.ts**
+- **Líneas 4-5**: `process.env.NEXT_PUBLIC_SUPABASE_URL`, `NEXT_PUBLIC_SUPABASE_ANON_KEY`
+- **Riesgo**: 🟠 **ALTO - AMBIGÜEDAD DE CONTEXTO**
+  - Archivo sin `"use server"` o `"use client"` 
+  - Usa `process.env` sin boundary clara
+  - Puede romper en build si se importa desde cliente
+  - **Recomendación**: Definir claramente si es server o client
+
+---
+
+### ✅ **src/lib/supabaseBrowser.ts**
+- **Líneas 6-7**: `process.env.NEXT_PUBLIC_SUPABASE_URL`, `NEXT_PUBLIC_SUPABASE_ANON_KEY`
+- **Riesgo**: ✅ **NINGUNO**
+  - Variables `NEXT_PUBLIC_*` son seguras en cliente
+  - Helper diseñado para browser (implícitamente client-side)
+
+---
+
+### ✅ **src/lib/supabaseServer.ts**
+- **Líneas 9-10**: `process.env.NEXT_PUBLIC_SUPABASE_URL`, `NEXT_PUBLIC_SUPABASE_ANON_KEY`
+- **Riesgo**: ✅ **NINGUNO**
+  - Server-side helper (usa `cookies()` que solo existe en servidor)
+
+---
+
+### 🚨 **src/lib/supabaseClient.ts**
+- **Líneas 3-4**: `process.env.NEXT_PUBLIC_SUPABASE_URL`, `NEXT_PUBLIC_SUPABASE_ANON_KEY`
+- **Riesgo**: 🔴 **ALTO - ARCHIVO DEPRECATED**
+  - Ver punto #3 (debe eliminarse)
+
+---
+
+## 6. ⚛️ Archivos sin `"use client"` que usan hooks
+
+**Resultado**: ✅ **TODOS CORRECTOS**
+
+Archivos auditados que usan hooks **CON** `"use client"`:
+- ✅ `app/dashboard/DashboardResumen.jsx` - tiene `"use client"`, usa `useState`, `useEffect`
+- ✅ `app/dashboard/circuitos/components/CircuitoForm.new.tsx` - tiene `"use client"`, usa `useForm`
+- ✅ `app/dashboard/circuitos/components/CircuitoForm.tsx` - tiene `"use client"`, usa `useForm`
+- ✅ `app/dashboard/circuitos/components/CircuitosFilters.tsx` - tiene `"use client"`, usa `useState`
+- ✅ `app/dashboard/circuitos/components/CircuitosListClient.tsx` - tiene `"use client"`, usa `useState`, `useRouter`, `useTransition`
+- ✅ `app/dashboard/circuitos/components/DeleteCircuitoDialog.tsx` - tiene `"use client"`, usa `useState`
+- ✅ `app/dashboard/circuitos/create/page.tsx` - tiene `"use client"`, usa `useState`, `useCallback`
+- ✅ `app/dashboard/coordinadores/components/CoordinadorForm.tsx` - tiene `"use client"`, usa `useForm`
+- ✅ `app/dashboard/coordinadores/components/CoordinadoresListClient.tsx` - tiene `"use client"`, usa `useState`, `useRouter`, `useTransition`
+- ✅ `app/dashboard/coordinadores/create/page.tsx` - tiene `"use client"`, usa `useState`, `useRouter`, `useTransition`
+- ✅ `app/dashboard/inscripciones/components/InscripcionForm.tsx` - tiene `"use client"`, usa `useState`, `useEffect`, `useRouter`
+- ✅ `app/dashboard/inscripciones/components/InscripcionesListClient.tsx` - tiene `"use client"`, usa `useState`
+- ✅ `app/dashboard/sesiones/components/SesionForm.tsx` - tiene `"use client"`, usa `useState`, `useEffect`, `useRouter`
+- ✅ `app/login/page.tsx` - tiene `"use client"`, usa `useState`
+- ✅ `src/components/circuitos/CircuitosFilters.jsx` - tiene `"use client"`, usa `memo`
+- ✅ `src/components/circuitos/MapaGeneralCircuitos.jsx` - tiene `"use client"`, usa componentes Leaflet (requiere browser)
+- ✅ `src/hooks/useCircuitos.ts` - tiene `"use client"`, usa `useState`, `useEffect`, `useMemo`, `useCallback`
+
+**Hooks sin "use client" auditados**:
+- ✅ `src/hooks/useInscriptos.ts` - NO tiene `"use client"` pero DEBERÍA (usa `useState`, `useEffect`)
+- ✅ `src/hooks/useCoordinadores.ts` - NO tiene `"use client"` pero DEBERÍA (usa `useState`, `useEffect`)
+- ✅ `src/hooks/useUserRoles.ts` - NO tiene `"use client"` pero DEBERÍA (usa `useState`, `useEffect`)
+
+---
+
+## 🚨 RESUMEN DE RIESGOS CRÍTICOS
+
+### 🔴 **CRÍTICO** (Debe arreglarse INMEDIATAMENTE):
+
+1. **src/lib/supabaseClient.ts** - Patrón deprecated que rompe arquitectura
+   - Eliminar archivo
+   - Reemplazar en `app/login/page.tsx` con `createClient()` de `@/lib/supabaseBrowser`
+
+2. **app/api/circuitos/[id]/route.ts** - Singleton global de Supabase
+   - Crear helper `createSupabaseAdmin()` para rutas API con service role
+   - Mover inicialización dentro de cada función handler
+
+3. **src/lib/subirFotoStaff.ts** - Contexto ambiguo
+   - Agregar `"use server"` si es server-only
+   - Mover inicialización de Supabase dentro de la función
+   - Usar `createSupabaseServer()` si es server
+
+---
+
+### 🟠 **ALTO** (Arreglar pronto):
+
+4. **app/login/page.tsx** L23 - Usa `window.location.href` en vez de Next.js router
+   - Reemplazar con `router.push('/dashboard')`
+
+5. **src/hooks/useInscriptos.ts**, **useCoordinadores.ts**, **useUserRoles.ts**
+   - Agregar `"use client"` al inicio de cada archivo
+
+---
+
+### ⚠️ **MEDIO** (Mejorar cuando sea posible):
+
+6. **app/dashboard/circuitos/components/CircuitosListClient.tsx** L36
+   - Reemplazar `window.location.search` con `useSearchParams()`
+
+7. **src/hooks/useCircuitos.ts** L27
+   - Simplificar: eliminar `useMemo` innecesario
+
+---
+
+## 📊 ESTADÍSTICAS FINALES
+
+| Categoría | Encontrados | Con Problemas | Estado |
+|-----------|-------------|---------------|---------|
+| Uso de `window/document/localStorage` | 2 | 2 | 🟡 Mejorable |
+| `export const dynamic` | 13 | 0 | ✅ Correcto |
+| Inicializaciones Supabase | 7 | 3 | 🔴 Crítico |
+| Uso de `useSupabase` | 0 | 0 | ✅ N/A |
+| Uso de `process.env` | 8 | 2 | 🟠 Mejorar |
+| Hooks sin "use client" | 20+ | 3 | 🟠 Mejorar |
+
+---
+
+## ✅ CHECKLIST DE REMEDIACIÓN
+
+```markdown
+- [ ] 🔴 Eliminar src/lib/supabaseClient.ts
+- [ ] 🔴 Actualizar app/login/page.tsx para usar createClient() de supabaseBrowser
+- [ ] 🔴 Crear helper createSupabaseAdmin() con service role key
+- [ ] 🔴 Refactorizar app/api/circuitos/[id]/route.ts para usar helper admin
+- [ ] 🔴 Agregar "use server" a src/lib/subirFotoStaff.ts
+- [ ] 🔴 Mover inicialización de Supabase dentro de subirFotoStaff()
+- [ ] 🟠 Agregar "use client" a src/hooks/useInscriptos.ts
+- [ ] 🟠 Agregar "use client" a src/hooks/useCoordinadores.ts
+- [ ] 🟠 Agregar "use client" a src/hooks/useUserRoles.ts
+- [ ] 🟠 Reemplazar window.location.href con router.push() en login
+- [ ] ⚠️ Reemplazar window.location.search con useSearchParams() en CircuitosListClient
+- [ ] ⚠️ Simplificar useMemo en src/hooks/useCircuitos.ts
+```
+

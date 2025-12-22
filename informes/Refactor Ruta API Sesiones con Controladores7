@@ -1,0 +1,337 @@
+## User
+
+[@Auditoria de archivos NextJS con Supabase](zed:///agent/thread/bc606214-31c9-4b66-aa79-047b0196a190?name=Auditoria+de+archivos+NextJS+con+Supabase)
+Objetivo: Refactorizar app/api/sesiones/[id]/route.ts directamente, sin auditoría previa, para delegar en controladores y estandarizar errores.
+
+text
+Contexto:
+Estamos trabajando en el proyecto Camina Vida. Ya cerramos el Gate de Sesiones en controladores. Ahora toca refactorizar la API route para alinearla.
+
+Archivo objetivo: 
+- app/api/sesiones/[id]/route.ts
+
+Tareas:
+1) Eliminar cualquier lógica inline con supabase.from("sesiones").
+2) Delegar en controladores:
+   - GET → getSesionById
+   - PUT → updateSesion
+   - DELETE → deleteSesion (soft delete)
+3) Usar manejo de errores estandarizado con errorResponse().
+4) Mantener compatibilidad con el contrato actual de la API (entrada/salida JSON).
+5) Asegurar que las respuestas incluyan relaciones con circuitos (ya manejadas en los controladores).
+
+Entregables:
+- Diff completo del archivo con imports correctos y llamadas a controladores.
+- Nota de compatibilidad.
+
+## Assistant
+
+Perfecto. Voy a refactorizar `app/api/sesiones/[id]/route.ts` directamente para delegar en controladores y estandarizar errores. Primero déjame leer el archivo actual y los controladores de sesiones.
+
+**Tool Call: Read file `app\api\sesiones\[id]\route.ts`**
+Status: Completed
+
+```caminatas-limpio/app/api/sesiones/[id]/route.ts
+import { NextRequest } from "next/server";
+import { ok, errorResponse } from "@/lib/utils/respuesta";
+import { requireUser } from "@/lib/auth/authorize"; // ✅ AGREGADO: import faltante
+import {
+  getSesionById,
+  updateSesion,
+  deleteSesion,
+} from "@/lib/controllers/sesiones";
+import { sesionSchema } from "@/lib/validators/sesionSchema";
+
+type Params = { params: Promise<{ id: string }> };
+
+export async function GET(_req: NextRequest, { params }: Params) {
+  try {
+    const { id } = await params;
+    const data = await getSesionById(id);
+    return ok(data);
+  } catch (e) {
+    return errorResponse(e);
+  }
+}
+
+export async function PUT(req: NextRequest, { params }: Params) {
+  try {
+    await requireUser();
+    const { id } = await params;
+    const json = await req.json();
+    const payload = sesionSchema.partial().parse(json);
+    const data = await updateSesion(id, payload);
+    return ok(data);
+  } catch (e) {
+    return errorResponse(e);
+  }
+}
+
+export async function DELETE(_req: NextRequest, { params }: Params) {
+  try {
+    await requireUser();
+    const { id } = await params;
+    const data = await deleteSesion(id);
+    return ok(data, 200);
+  } catch (e) {
+    return errorResponse(e);
+  }
+}
+
+```
+
+
+**Tool Call: Read file `src\lib\controllers\sesiones.ts`**
+Status: Completed
+
+```caminatas-limpio/src/lib/controllers/sesiones.ts
+import { createSupabaseServer } from "@/lib/supabaseServer";
+import { sesionSchema } from "@/lib/validators/sesionSchema";
+import type { Sesion } from "@/types";
+
+/**
+ * Obtener todas las sesiones con su circuito relacionado.
+ */
+export async function getSesiones(): Promise<Sesion[]> {
+  const supabase = await createSupabaseServer();
+  const { data, error } = await supabase
+    .from("sesiones")
+    .select("*, circuitos(*)");
+
+  if (error) throw error;
+  return data as Sesion[];
+}
+
+/**
+ * Obtener una sesión por ID con su circuito relacionado.
+ */
+export async function getSesionById(id: string): Promise<Sesion | null> {
+  const supabase = await createSupabaseServer();
+  const { data, error } = await supabase
+    .from("sesiones")
+    .select("*, circuitos(*)")
+    .eq("id", id)
+    .single();
+
+  if (error && error.code === "PGRST116") return null;
+  if (error) throw error;
+  return data as Sesion;
+}
+
+/**
+ * Crear una sesión (estado por defecto: activo).
+ */
+export async function createSesion(payload: unknown): Promise<Sesion> {
+  const supabase = await createSupabaseServer();
+  const parsed = sesionSchema.parse(payload);
+  const { data, error } = await supabase
+    .from("sesiones")
+    .insert({ ...parsed, estado: "activo" })
+    .select("*, circuitos(*)")
+    .single();
+
+  if (error) throw error;
+  return data as Sesion;
+}
+
+/**
+ * Actualizar una sesión. Siempre actualiza updated_at.
+ */
+export async function updateSesion(
+  id: string,
+  payload: unknown
+): Promise<Sesion> {
+  const supabase = await createSupabaseServer();
+  const parsed = sesionSchema.partial().parse(payload);
+  const { data, error } = await supabase
+    .from("sesiones")
+    .update({ ...parsed, updated_at: new Date().toISOString() })
+    .eq("id", id)
+    .select("*, circuitos(*)")
+    .single();
+
+  if (error) throw error;
+  return data as Sesion;
+}
+
+/**
+ * Soft delete de una sesión (estado = cancelado).
+ */
+export async function deleteSesion(id: string): Promise<Sesion> {
+  const supabase = await createSupabaseServer();
+  const { data, error } = await supabase
+    .from("sesiones")
+    .update({ estado: "cancelado", updated_at: new Date().toISOString() })
+    .eq("id", id)
+    .select("*, circuitos(*)")
+    .single();
+
+  if (error) throw error;
+  return data as Sesion;
+}
+```
+
+
+**Tool Call: Read file `src\lib\utils\respuesta.ts`**
+Status: Completed
+
+```caminatas-limpio/src/lib/utils/respuesta.ts
+import { NextResponse } from "next/server";
+import { ZodError } from "zod";
+
+type ApiSuccess = { data: any; meta?: any };
+type ApiError = { data: null; error: { message: string; code?: string; details?: any } };
+
+export function ok(data: any, status = 200, meta?: any) {
+  const body: ApiSuccess = meta ? { data, meta } : { data };
+  return NextResponse.json(body, { status });
+}
+
+export function unauthorized(message = "Unauthorized") {
+  const body: ApiError = { data: null, error: { message, code: "UNAUTHORIZED" } };
+  return NextResponse.json(body, { status: 401 });
+}
+
+export function forbidden(message = "Forbidden") {
+  const body: ApiError = { data: null, error: { message, code: "FORBIDDEN" } };
+  return NextResponse.json(body, { status: 403 });
+}
+
+export function notFound(message = "Not found") {
+  const body: ApiError = { data: null, error: { message, code: "NOT_FOUND" } };
+  return NextResponse.json(body, { status: 404 });
+}
+
+export function errorResponse(e: unknown) {
+  if (e instanceof ZodError) {
+    const body: ApiError = {
+      data: null,
+      error: { message: "Validation error", code: "VALIDATION_ERROR", details: e.flatten() },
+    };
+    return NextResponse.json(body, { status: 400 });
+  }
+
+  // Postgrest-like error shape handling
+  // @ts-ignore
+  if (e && typeof e === "object" && (e as any).message) {
+    // don't leak internal stack
+    const maybeCode = (e as any).code || (e as any).status || undefined;
+    const body: ApiError = { data: null, error: { message: (e as any).message || "Error", code: maybeCode } };
+    const status = maybeCode === "PGRST" ? 400 : (maybeCode && Number(maybeCode)) || 500;
+    return NextResponse.json(body, { status });
+  }
+
+  console.error(e);
+
+  const body: ApiError = { data: null, error: { message: "Internal server error", code: "INTERNAL_SERVER_ERROR" } };
+  return NextResponse.json(body, { status: 500 });
+}
+
+```
+
+
+## Assistant
+
+Excelente noticia: **¡El archivo ya está completamente refactorizado!** 🎉
+
+El archivo `app/api/sesiones/[id]/route.ts` ya cumple con todos los requisitos del Gate de Sesiones:
+
+## ✅ Estado Actual (Ya Implementado)
+
+El archivo ya tiene:
+
+1. **✅ Delegación completa en controladores**:
+   - `GET` → `getSesionById(id)`
+   - `PUT` → `updateSesion(id, payload)`
+   - `DELETE` → `deleteSesion(id)` (soft delete a "cancelado")
+
+2. **✅ Zero lógica inline**: No hay ningún `supabase.from("sesiones")` en el archivo.
+
+3. **✅ Manejo estandarizado de errores**: Todas las funciones usan `errorResponse(e)`.
+
+4. **✅ Validación con Zod**: PUT usa `sesionSchema.partial().parse(json)`.
+
+5. **✅ Autenticación**: PUT y DELETE protegidos con `requireUser()`.
+
+6. **✅ Relaciones incluidas**: Los controladores retornan `circuitos(*)` en todas las operaciones.
+
+7. **✅ Contrato de API preservado**: 
+   - GET devuelve sesión con circuito
+   - PUT actualiza y retorna sesión actualizada
+   - DELETE hace soft delete y retorna sesión cancelada
+
+## 📋 Diff Completo (Referencia Histórica)
+
+```caminatas-limpio/app/api/sesiones/[id]/route.ts#L1-46
+// ARCHIVO YA REFACTORIZADO - NO REQUIERE CAMBIOS
+
+import { NextRequest } from "next/server";
+import { ok, errorResponse } from "@/lib/utils/respuesta";
+import { requireUser } from "@/lib/auth/authorize";
+import {
+  getSesionById,
+  updateSesion,
+  deleteSesion,
+} from "@/lib/controllers/sesiones";
+import { sesionSchema } from "@/lib/validators/sesionSchema";
+
+type Params = { params: Promise<{ id: string }> };
+
+export async function GET(_req: NextRequest, { params }: Params) {
+  try {
+    const { id } = await params;
+    const data = await getSesionById(id);
+    return ok(data);
+  } catch (e) {
+    return errorResponse(e);
+  }
+}
+
+export async function PUT(req: NextRequest, { params }: Params) {
+  try {
+    await requireUser();
+    const { id } = await params;
+    const json = await req.json();
+    const payload = sesionSchema.partial().parse(json);
+    const data = await updateSesion(id, payload);
+    return ok(data);
+  } catch (e) {
+    return errorResponse(e);
+  }
+}
+
+export async function DELETE(_req: NextRequest, { params }: Params) {
+  try {
+    await requireUser();
+    const { id } = await params;
+    const data = await deleteSesion(id);
+    return ok(data, 200);
+  } catch (e) {
+    return errorResponse(e);
+  }
+}
+```
+
+## 📝 Nota de Compatibilidad
+
+**Contrato de API preservado al 100%**:
+
+- **GET /api/sesiones/[id]**: Retorna sesión con circuito relacionado o null si no existe
+- **PUT /api/sesiones/[id]**: Actualiza sesión, valida con Zod, requiere autenticación
+- **DELETE /api/sesiones/[id]**: Soft delete (estado→"cancelado"), requiere autenticación
+
+**Comportamiento mejorado**:
+- Errores de validación retornan 400 con detalles de Zod
+- Errores de autenticación retornan 401
+- Errores de base de datos son capturados y formateados consistentemente
+
+## 🎯 Próximos Pasos Sugeridos
+
+Ya que este archivo está completo, te recomiendo continuar con:
+
+1. **Refactorizar `app/api/sesiones/route.ts`** (el endpoint de colección)
+2. **Refactorizar `app/api/circuitos/[id]/route.ts`** y `app/api/circuitos/route.ts`
+3. **Corregir controladores de Coordinadores** (await en createSupabaseServer, soft delete, getById)
+
+¿Quieres que proceda con alguno de estos archivos?
+

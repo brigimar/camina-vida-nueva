@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Circuitos Camina Vida</title>
+    <!-- Bootstrap Icons (opcional, pero bonito) -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <style>
+        :root {
+            --primary: #2c3e50;
+            --secondary: #3498db;
+            --accent: #e74c3c;
+            --light: #ecf0f1;
+            --dark: #2c3e50;
+            --success: #2ecc71;
+            --warning: #f39c12;
+            --gray: #95a5a6;
+            --white: #ffffff;
+            --shadow: 0 4px 12px rgba(0,0,0,0.05);
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f8f9fa;
+            color: var(--dark);
+            line-height: 1.6;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding: 2rem 0;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        h1::before {
+            content: "🧭";
+            font-size: 1.5rem;
+        }
+
+        .subtitle {
+            color: var(--gray);
+            font-size: 1.1rem;
+            margin-top: 0.5rem;
+        }
+
+        .circuits-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .circuit-card {
+            background: var(--white);
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .circuit-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+        }
+
+        .circuit-image {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+            object-position: center;
+        }
+
+        .circuit-content {
+            padding: 1.5rem;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .circuit-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 1rem;
+        }
+
+        .circuit-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin: 0;
+        }
+
+        .badge {
+            background: var(--success);
+            color: white;
+            border-radius: 20px;
+            padding: 4px 10px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .circuit-description {
+            font-style: italic;
+            color: var(--gray);
+            margin-bottom: 1rem;
+            font-size: 0.95rem;
+        }
+
+        .circuit-details {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            font-size: 0.9rem;
+        }
+
+        .detail-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--dark);
+        }
+
+        .detail-icon {
+            color: var(--secondary);
+            font-size: 1rem;
+        }
+
+        .detail-text {
+            flex-grow: 1;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .circuits-grid {
+                grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            }
+
+            h1 {
+                font-size: 2rem;
+            }
+
+            .circuit-image {
+                height: 150px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .circuits-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .circuit-header {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+
+            .circuit-title {
+                font-size: 1.2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Circuitos Camina Vida</h1>
+            <p class="subtitle">Elegí tu circuito ideal y regístrate directamente desde la Home.</p>
+        </header>
+
+        <section class="circuits-grid">
+            <!-- Circuito 1 -->
+            <article class="circuit-card">
+                <img src="https://via.placeholder.com/600x180/2c3e50/ffffff?text=Caminata+Plaza+Irlanda" alt="Caminata Plaza Irlanda" class="circuit-image">
+                <div class="circuit-content">
+                    <div class="circuit-header">
+                        <h2 class="circuit-title">Caminata Plaza Irlanda</h2>
+                        <span class="badge">0</span>
+                    </div>
+                    <p class="circuit-description">Caminata suave ideal para adultos mayores.</p>
+                    <div class="circuit-details">
+                        <div class="detail-item">
+                            <span class="detail-icon"><i class="bi bi-ruler"></i></span>
+                            <span class="detail-text">Distancia no definida</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-icon"><i class="bi bi-calendar-check"></i></span>
+                            <span class="detail-text">Martes, Jueves</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-icon"><i class="bi bi-clock"></i></span>
+                            <span class="detail-text">08:30</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-icon"><i class="bi bi-pin-map"></i></span>
+                            <span class="detail-text">Fuente central</span>
+                        </div>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Circuito 2 -->
+            <article class="circuit-card">
+                <img src="https://via.placeholder.com/600x180/3498db/ffffff?text=Caminata+Parque+Centenario" alt="Caminata Parque Centenario" class="circuit-image">
+                <div class="circuit-content">
+                    <div class="circuit-header">
+                        <h2 class="circuit-title">Caminata Parque Centenario</h2>
+                        <span class="badge">0</span>
+                    </div>
+                    <p class="circuit-description">Caminata suave alrededor del lago y senderos internos.</p>
+                    <div class="circuit-details">
+                        <div class="detail-item">
+                            <span class="detail-icon"><i class="bi bi-ruler"></i></span>
+                            <span class="detail-text">Distancia no definida</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-icon"><i class="bi bi-calendar-check"></i></span>
+                            <span class="detail-text">Lunes, Miércoles, Viernes</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-icon"><i class="bi bi-clock"></i></span>
+                            <span class="detail-text">08:00, 18:00</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-icon"><i class="bi bi-pin-map"></i></span>
+                            <span class="detail-text">Entrada principal por Av. Díaz Vélez</span>
+                        </div>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Circuito 3 -->
+            <article class="circuit-card">
+                <img src="https://via.placeholder.com/600x180/e74c3c/ffffff?text=Caminata+Parque+Rivadavia" alt="Caminata Parque Rivadavia" class="circuit-image">
+                <div class="circuit-content">
+                    <div class="circuit-header">
+                        <h2 class="circuit-title">Caminata Parque Rivadavia</h2>
+                        <span class="badge">0</span>
+                    </div>
+                    <p class="circuit-description">Circuito ideal para principiantes, con sombra y terreno plano.</p>
+                    <div class="circuit-details">
+                        <div class="detail-item">
+                            <span class="detail-icon"><i class="bi bi-ruler"></i></span>
+                            <span class="detail-text">Distancia no definida</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-icon"><i class="bi bi-calendar-check"></i></span>
+                            <span class="detail-text">Martes, Jueves</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-icon"><i class="bi bi-clock"></i></span>
+                            <span class="detail-text">09:00, 17:00</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-icon"><i class="bi bi-pin-map"></i></span>
+                            <span class="detail-text">Monumento central del parque</span>
+                        </div>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Circuito 4 -->
+            <article class="circuit-card">
+                <img src="https://via.placeholder.com/600x180/9b59b6/ffffff?text=Caminata+Reserva+Ecológica" alt="Caminata Reserva Ecológica" class="circuit-image">
+                <div class="circuit-content">
+                    <div class="circuit-header">
+                        <h2 class="circuit-title">Caminata Reserva Ecológica</h2>
+                        <span class="badge">0</span>
+                    </div>
+                    <p class="circuit-description">Caminata intermedia con vistas al río y senderos naturales.</p>
+                    <div class="circuit-details">
+                        <div class="detail-item">
+                            <span class="detail-icon"><i class="bi bi-ruler"></i></span>
+                            <span class="detail-text">Distancia no definida</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-icon"><i class="bi bi-calendar-check"></i></span>
+                            <span class="detail-text">Sábado, Domingo</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-icon"><i class="bi bi-clock"></i></span>
+                            <span class="detail-text">09:00</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-icon"><i class="bi bi-pin-map"></i></span>
+                            <span class="detail-text">Entrada por Av. Tristán Achával Rodríguez</span>
+                        </div>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Circuito 5 -->
+            <article class="circuit-card">
+                <img src="https://via.placeholder.com/600x180/1abc9c/ffffff?text=Caminata+Parque+Saavedra" alt="Caminata Parque Saavedra" class="circuit-image">
+                <div class="circuit-content">
+                    <div class="circuit-header">
+                        <h2 class="circuit-title">Caminata Parque Saavedra</h2>
+                        <span class="badge">0</span>
+                    </div>
+                    <p class="circuit-description">Caminata circular con tramos rápidos y zonas arboladas.</p>
+                    <div class="circuit-details">
+                        <div class="detail-item">
+                            <span class="detail-icon"><i class="bi bi-ruler"></i></span>
+                            <span class="detail-text">Distancia no definida</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-icon"><i class="bi bi-calendar-check"></i></span>
+                            <span class="detail-text">Lunes, Miércoles</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-icon"><i class="bi bi-clock"></i></span>
+                            <span class="detail-text">07:30, 19:00</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-icon"><i class="bi bi-pin-map"></i></span>
+                            <span class="detail-text">Rotonda central del parque</span>
+                        </div>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Circuito 6 -->
+            <article class="circuit-card">
+                <img src="https://via.placeholder.com/600x180/2c3e50/ffffff?text=Caminata+Parque+Centenario" alt="Caminata Parque Centenario" class="circuit-image">
+                <div class="circuit-content">
+                    <div class="circuit-header">
+                        <h2 class="circuit-title">Caminata Parque Centenario</h2>
+                        <span class="badge">0</span>
+                    </div>
+                    <p class="circuit-description">Caminata suave alrededor del lago y senderos internos.</p>
+                    <div class="circuit-details">
+                        <div class="detail-item">
+                            <span class="detail-icon"><i class="bi bi-ruler"></i></span>
+                            <span class="detail-text">Distancia no definida</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-icon"><i class="bi bi-calendar-check"></i></span>
+                            <span class="detail-text">Días no definidos</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-icon"><i class="bi bi-clock"></i></span>
+                            <span class="detail-text">Horarios no definidos</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-icon"><i class="bi bi-pin-map"></i></span>
+                            <span class="detail-text">Entrada principal por Av. Díaz Vélez</span>
+                        </div>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Circuito 7 -->
+            <article class="circuit-card">
+                <img src="https://via.placeholder.com/600x180/e74c3c/ffffff?text=Caminata+Parque+Rivadavia" alt="Caminata Parque Rivadavia" class="circuit-image">
+                <div class="circuit-content">
+                    <div class="circuit-header">
+                        <h2 class="circuit-title">Caminata Parque Rivadavia</h2>
+                        <span class="badge">0</span>
+                    </div>
+                    <p class="circuit-description">Circuito ideal para principiantes, con sombra y terreno plano.</p>
+                    <div class="circuit-details">
+                        <div class="detail-item">
+                            <span class="detail-icon"><i class="bi bi-ruler"></i></span>
+                            <span class="detail-text">Distancia no definida</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-icon"><i class="bi bi-calendar-check"></i></span>
+                            <span class="detail-text">Días no definidos</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-icon"><i class="bi bi-clock"></i></span>
+                            <span class="detail-text">Horarios no definidos</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-icon"><i class="bi bi-pin-map"></i></span>
+                            <span class="detail-text">Monumento central del parque</span>
+                        </div>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Circuito 8 -->
+            <article class="circuit-card">
+                <img src="https://via.placeholder.com/600x180/9b59b6/ffffff?text=Caminata+Reserva+Ecológica" alt="Caminata Reserva Ecológica" class="circuit-image">
+                <div class="circuit-content">
+                    <div class="circuit-header">
+                        <h2 class="circuit-title">Caminata Reserva Ecológica</h2>
+                        <span class="badge">0</span>
+                    </div>
+                    <p class="circuit-description">Caminata intermedia con vistas al río y senderos naturales.</p>
+                    <div class="circuit-details">
+                        <div class="detail-item">
+                            <span class="detail-icon"><i class="bi bi-ruler"></i></span>
+                            <span class="detail-text">Distancia no definida</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-icon"><i class="bi bi-calendar-check"></i></span>
+                            <span class="detail-text">Días no definidos</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-icon"><i class="bi bi-clock"></i></span>
+                            <span class="detail-text">Horarios no definidos</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-icon"><i class="bi bi-pin-map"></i></span>
+                            <span class="detail-text">Entrada por Av. Tristán Achával Rodríguez</span>
+                        </div>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Circuito 9 -->
+            <article class="circuit-card">
+                <img src="https://via.placeholder.com/600x180/1abc9c/ffffff?text=Caminata+Parque+Saavedra" alt="Caminata Parque Saavedra" class="circuit-image">
+                <div class="circuit-content">
+                    <div class="circuit-header">
+                        <h2 class="circuit-title">Caminata Parque Saavedra</h2>
+                        <span class="badge">0</span>
+                    </div>
+                    <p class="circuit-description">Caminata circular con tramos rápidos y zonas arboladas.</p>
+                    <div class="circuit-details">
+                        <div class="detail-item">
+                            <span class="detail-icon"><i class="bi bi-ruler"></i></span>
+                            <span class="detail-text">Distancia no definida</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-icon"><i class="bi bi-calendar-check"></i></span>
+                            <span class="detail-text">Días no definidos</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-icon"><i class="bi bi-clock"></i></span>
+                            <span class="detail-text">Horarios no definidos</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-icon"><i class="bi bi-pin-map"></i></span>
+                            <span class="detail-text">Rotonda central del parque</span>
+                        </div>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Circuito 10 -->
+            <article class="circuit-card">
+                <img src="https://via.placeholder.com/600x180/2c3e50/ffffff?text=Caminata+Plaza+Irlanda" alt="Caminata Plaza Irlanda" class="circuit-image">
+                <div class="circuit-content">
+                    <div class="circuit-header">
+                        <h2 class="circuit-title">Caminata Plaza Irlanda</h2>
+                        <span class="badge">0</span>
+                    </div>
+                    <p class="circuit-description">Caminata suave ideal para adultos mayores.</p>
+                    <div class="circuit-details">
+                        <div class="detail-item">
+                            <span class="detail-icon"><i class="bi bi-ruler"></i></span>
+                            <span class="detail-text">Distancia no definida</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-icon"><i class="bi bi-calendar-check"></i></span>
+                            <span class="detail-text">Días no definidos</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-icon"><i class="bi bi-clock"></i></span>
+                            <span class="detail-text">Horarios no definidos</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-icon"><i class="bi bi-pin-map"></i></span>
+                            <span class="detail-text">Fuente central</span>
+                        </div>
+                    </div>
+                </div>
+            </article>
+        </section>
+    </div>
+</body>
+</html>
