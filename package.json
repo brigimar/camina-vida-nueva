@@ -21,7 +21,7 @@
     "@supabase/ssr": "^0.8.0",
     "@supabase/supabase-js": "^2.87.1",
     "@tailwindcss/line-clamp": "^0.4.4",
-    "antd": "^5.29.1",
+    "antd": "^5.29.3",
     "chart.js": "^4.5.1",
     "csv-parse": "^6.1.0",
     "dotenv": "^16.4.5",
